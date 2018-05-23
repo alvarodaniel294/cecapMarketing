@@ -54,6 +54,12 @@ import { InscriptionComponent } from './event/inscription/inscription.component'
 
 
 
+/////////nuevo marketig////////
+import { ImportWhatsNumbersComponent } from "./import-whats-numbers/import-whats-numbers.component";
+import { ImportFromExcelComponent  } from "./import-from-excel/import-from-excel.component";
+
+
+
 
 const appRoutes: Routes = [
    { path: '', component: HomeComponent },//ruta basica
@@ -106,6 +112,8 @@ const appRoutes: Routes = [
          { path: 'pendientes/info/:id', component: InfoPendingCashComponent },
          { path: 'officesCash', component: OfficesCashComponent },
          { path: 'inscription/:id', component: InscriptionComponent },
+         { path: 'importWhatsapp',component:ImportWhatsNumbersComponent},
+         { path: 'importFromExcel',component:ImportFromExcelComponent},
 
       ]
    },

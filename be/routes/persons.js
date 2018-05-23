@@ -2,6 +2,47 @@ var express = require('express');
 var db = require('../models/db');
 var router = express.Router();
 
+////////////////////////////////
+var multipart = require('connect-multiparty');
+var multipartMiddleware = multipart();
+
+var multer = require('multer');
+var xlstojson = require("xls-to-json-lc");
+var xlsxtojson = require("xlsx-to-json-lc");
+
+
+var storage = multer.diskStorage({ //multers disk storage settings
+    destination: function (req, file, cb) {
+        cb(null, './uploads/')
+    },
+    filename: function (req, file, cb) {
+        var datetimestamp = Date.now();
+        cb(null, file.fieldname + '-' + datetimestamp + '.' + file.originalFilename.split('.')[file.originalFilename.split('.').length -1])
+    }
+});
+var upload = multer({ //multer settings
+                storage: storage,
+                fileFilter : function(req, file, callback) { //file filter
+                    if (['xls', 'xlsx'].indexOf(file.originalFilename.split('.')[file.originalFilename.split('.').length-1]) === -1) {
+                        return callback(new Error('Wrong extension type'));
+                    }
+                    callback(null, true);
+                }
+            }).single('file');
+
+
+
+////////////////////////////////
+
+
+
+///////////other//////////
+
+var XLSX = require('xlsx')
+
+///////////////////////////
+
+
 router
    .get('/', function (req, res) {
       db.persons.find({}, function (err, persons) {
@@ -19,6 +60,133 @@ router
          return res.status(200).send(person);
       });
    })
+
+   .post('/upload', multipartMiddleware, function (req, res) {
+
+
+            console.log(req.body, req.files);
+            console.log(req.files.fileKey.path);
+            var workbook = XLSX.readFile(req.files.fileKey.path);
+            var sheet_name_list = workbook.SheetNames;
+            var xlData = XLSX.utils.sheet_to_json(workbook.Sheets[sheet_name_list[0]]);
+            console.log(xlData);
+
+            
+            for(let contact of xlData){
+                let newPerson=new db.persons(req.body);
+
+                if(contact.Mobile!=undefined){
+                    let numero='s'+contact.Mobile;
+                    if(numero.length==9){
+                        newPerson.cellphone=numero.substring(1,9);
+                    }else{
+                        newPerson.cellphone=numero.substring(6,numero.length);
+                    }
+                    newPerson.first_name=contact.Firstname;
+                    if(contact.Lastname!=null){
+                        newPerson.last_name=contact.Lastname;
+                    }
+                    newPerson.whatsapp_group='Importados del celular';
+                    newPerson.save(function(err,person){
+                        if (err) return res.status(400).send(err);
+                        return res.status(200).send();
+
+
+                    })
+
+                }
+               
+
+
+
+            }
+
+
+
+   })        
+
+
+//    .post('/upload', multipartMiddleware, function (req, res) {
+
+
+//         console.log(req.body, req.files);
+//         console.log(req.file);
+
+//         var exceltojson;
+//         upload(req,res,function(err){
+//             if(err){
+//                  res.json({error_code:1,err_desc:err});
+//                  return;
+//             }
+//             /** Multer gives us file info in req.file object */
+//             if(!req.files){
+//                 res.json({error_code:1,err_desc:"No file passed"});
+//                 return;
+//             }
+//             /** Check the extension of the incoming file and 
+//              *  use the appropriate module
+//              */
+//             // if(req.files.originalFilename.split('.')[req.file.originalFilename.split('.').length-1] === 'xlsx'){
+//                 // exceltojson = xlsxtojson;
+//             // } else {
+//                 exceltojson = xlstojson;
+//             // }
+//             try {
+//                 exceltojson({
+//                     input: req.files.path,
+//                     output: null, //since we don't need output.json
+//                     lowerCaseHeaders:true
+//                 }, function(err,result){
+//                     if(err) {
+//                         return res.json({error_code:1,err_desc:err, data: null});
+//                     } 
+//                     console.log('probando desde aqui');
+//                     console.log(result);
+//                     console.log('antes de json acaba');
+//                     res.json({error_code:0,err_desc:null, data: result});
+
+//                     console.log('despues del jason');
+//                     console.log(result);
+//                 });
+//             } catch (e){
+//                 res.json({error_code:1,err_desc:"Corupted excel file"});
+//             }
+//         })
+//     })
+
+
+   .post('/addFromWhatsapp',function(req,res){
+        var person=new db.persons(req.body);
+        db.persons.findOne({cellphone:person.cellphone},function(err,existe){
+
+            if(err){
+                    return res.status(400).send(err);
+
+            }else{
+                    if(existe==null){
+                        console.log(existe);
+                        person.save(function(err,persona){
+                                if (err){
+                                    console.log(err);
+                                    return res.status(400).send(err);
+                    
+                                }else{
+                                    return res.status(200).send(persona);
+                                    console.log(person);
+
+                    
+                                }                  
+                        })
+
+                    }else{
+                        if (err) return res.status(400).send(err);
+                        console.log('el celular ya existe')      
+
+                    }
+            }
+        })
+   
+    })
 
    .post('/', function (req, res, next) {
       db.persons.findOne({ ci: req.body.persona.ci }, function (err, ciExist) {

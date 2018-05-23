@@ -1,0 +1,75 @@
+<div class="content-wrapper">
+  <br>
+  <div class="">
+
+
+ 
+        <div class="box box-primary">
+
+          <div class="container">
+            
+            <h2>Impotar Numeros de WhatsApp</h2>
+
+
+            <form (ngSubmit)="onSubmit()" #WhatsNumber="ngForm" >
+                <div class="form-group">
+                  <label for="name">Nombre del Grupo</label>
+                  <input type="text"  class="form-control" id="name"
+                         required
+                         [(ngModel)]="whatsGroupName" name="name"
+                         #groupname="ngModel"
+                         >
+                  <div [hidden]="groupname?.valid || groupname?.pristine"
+                       class="text-alert">
+                    Nombre es invalido
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="departament">Departamento</label>
+                  <select class="form-control" id="departament" [(ngModel)]="departamento" 
+                     name="departament" #departament="ngModel" required>
+                    <option value="Cochabamba">Cochabamba</option>
+                    <option value="La Paz">La Paz</option>
+                    <option value="Santa Cruz">Santa Cruz</option>                     
+                  </select>    
+                  <!-- <input type="text" class="form-control" id="departament" required
+                      [(ngModel)]="office.departament" name="departament" #departament="ngModel" > -->
+                      <span *ngIf="!departament.valid && departament.touched" class="text-alert">
+                              *Departamento de Sucursal requerido.
+                      </span>
+                  <!--<div [hidden]="departament?.valid || departament?.pristine" class="">
+                     *Departamento requeridos
+                  </div>-->
+                </div>
+
+                <div class="form-group">
+                    <label for="numbers">Pega los numeros aqui</label>
+                    
+                    <textarea cols="30" rows="10" class="form-control" id="numbers"
+                            required
+                            [(ngModel)]="whatsNumbers" name="numbers" 
+                            #numbers="ngModel"
+                    
+                       
+                    
+                        >pega aqui
+
+
+
+
+                    </textarea>
+                    <div [hidden]="numbers?.valid || numbers?.pristine"
+                         class="text-alert">
+                      Nombre es invalido
+                    </div>
+                  </div>
+                      
+           
+                <button type="submit" class="btn btn-success" [disabled]="!WhatsNumber.form.valid" >Registrar</button>
+                <button type="button" class="btn btn-danger" (click)="cancel()">Cancelar</button>
+              </form>
+           </div>
+
+          </div>
+    </div>
+</div>

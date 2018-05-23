@@ -7,6 +7,8 @@ export class Person {
       public ci: number,
       public phone: number,
       public cellphone:number,
+      public whatsapp_group:string,
+      public city:string,
       public email:string,
       public ocupation: string,  //1 = universitario, 2=Profecional, 3=particular
       public descOcupation: DescOcupation,

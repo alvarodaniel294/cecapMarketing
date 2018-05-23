@@ -86,6 +86,8 @@ import { ConfirmPendingCashComponent } from './pending-cash/confirm-pending-cash
 import { OfficesCashComponent } from './offices-cash/offices-cash.component';
 import { AsistenciaComponent } from './event/asistencia/asistencia.component';
 import { InscriptionComponent } from './event/inscription/inscription.component';
+import { ImportWhatsNumbersComponent } from './import-whats-numbers/import-whats-numbers.component';
+import { ImportFromExcelComponent } from './import-from-excel/import-from-excel.component';
 
 @NgModule({
   declarations: [
@@ -158,7 +160,9 @@ import { InscriptionComponent } from './event/inscription/inscription.component'
     ConfirmPendingCashComponent,
     OfficesCashComponent,
     AsistenciaComponent,
-    InscriptionComponent
+    InscriptionComponent,
+    ImportWhatsNumbersComponent,
+    ImportFromExcelComponent
 
   ],
   imports: [

@@ -11,7 +11,7 @@
                   <div class="form-group col-sm-4">
                      <label for="ci" class="control-label" style="text-align: left">Cedula de Identidad</label>
                      <input type="number" pattern="[1-9][0-9]{6}[a-z]{0,1}" class="form-control" id="ci" [(ngModel)]="person.ci" name="ci" #ci="ngModel"
-                        (keydown)="onKeydown($event)" required/>
+                         required/>
                      <span *ngIf="!ci.valid && ci.touched" class="text-alert">
                         *CI de persona requerido o es invalido.
                      </span>
