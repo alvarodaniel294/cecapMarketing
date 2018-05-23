@@ -38,7 +38,7 @@ export class InscriptionComponent implements OnInit {
       private route: ActivatedRoute,
       private router: Router
    ) {
-      this.person = new Person('', '', null, null, null, '', '', null, '');
+      this.person = new Person('', '', null, null, null,'','', '', '', null, '');
       //first_name,last_name,ci,phone,cellphone,email,ocupation,descOcupation:{ },carteras
       this.inscription = new Inscription(null, null, null, null, 0, 0, '0', '');
       //this.identy=Identity._id;
@@ -63,20 +63,7 @@ export class InscriptionComponent implements OnInit {
          // console.log(this.eventId)
       });
    }
-   onKeydown(event) {
-      if (event.key === "Enter") {
-         // console.log(this.person.ci > 999999);
-         if (this.person.ci > 999999) {
-            this._peticionesService.getCi(this.person.ci).subscribe(result => {
-               // console.log(result);
-               this.person.first_name = result.first_name;     
-               this.person.last_name = result.last_name;          
-
-            })
-         }
-
-      }
-   }
+   
    guardar() {
       /////registrar inscripcion
       /////primero tiene q crearce el pago en ingreso a caja chica

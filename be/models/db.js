@@ -109,6 +109,8 @@ module.exports = {
       ci: Number,
       phone: Number,
       cellphone: Number,
+      whatsapp_group: String,
+      city: String,
       email: String,
       ocupation: String,//1 = universitario, 2=Profesional, 3=particular
       descOcupation: {
@@ -304,7 +306,7 @@ module.exports = {
 
    //Connection
    connection: function () {
-      var db = mongoose.connect('mongodb://localhost:27017/CecapImports',
+      var db = mongoose.connect('mongodb://localhost:27017/CecapMarketing',
          function (err) {
             if (err) return console.log(err);
             console.log("MongoDB: connection to database succesful!");

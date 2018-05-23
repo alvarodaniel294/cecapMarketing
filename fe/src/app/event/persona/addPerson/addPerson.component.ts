@@ -38,8 +38,21 @@ export class AddPersonComponent implements OnInit {
         private route: ActivatedRoute,
         private router: Router
     ) {
-        this.person = new Person('', '', null, null, null,'','', null, '');
-        //first_name,last_name,ci,phone,cellphone,email,ocupation,descOcupation:{ },carteras
+        this.person = new Person('', '', null, null, null,'','','','', null, '');
+       ///////////////////////////
+       ///new Person(f
+       //irst_name: string, 
+       //last_name: string, 
+       //ci: number, 
+       //phone: number, 
+       //cellphone: number, 
+       //whatsapp_group: string, 
+       //city: string, 
+       //email: string, 
+       //ocupation: string, 
+       //descOcupation: DescOcupation, 
+       //carteras: string)
+       ////////////////////////////////
         this.inscription = new Inscription(null, null, null,null,0,0,'0','');
         //this.identy=Identity._id;
         this.descOcupation = new DescOcupation('','','','','','','');
