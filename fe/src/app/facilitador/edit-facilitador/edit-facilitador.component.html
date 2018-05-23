@@ -1,0 +1,22 @@
+<div class="content-wrapper">
+    <section class="content">
+       <!-- test -->
+       <div style="text-align:center; margin:auto; width:40%;">
+          EDITAR FACILITADOR
+             <div><label><h1>{{ facilitador?.name }}</h1></label></div>
+          
+         <div class="jumbotron">
+         <div> 
+             <input type="text" name="t" [(ngModel)]="facilitadorName" class="form-control" required />
+             <label>Descripcion</label>
+          
+         </div>
+          <div>
+             <input type="submit" value="GUARDAR" class="btn btn-success" (click)="saveInscription()"/>
+             <input type="submit" value="CANCELAR" class="btn btn-success" (click)="cancelar(eventId)"/>
+          </div>
+         </div>
+     </div>
+   </section>
+     
+ </div>

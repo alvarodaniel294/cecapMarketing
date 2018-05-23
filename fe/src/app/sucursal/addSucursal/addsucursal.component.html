@@ -1,0 +1,78 @@
+ <div class="content-wrapper">
+   <br>
+    <div class="">
+      <div class="box box-primary">
+      
+        <div class="container ">
+            <div [hidden]="submitted">
+                <h1>Registrar Sucursal</h1>
+                <br>
+                <form (ngSubmit)="onSubmit()" #addEjecutivo="ngForm" class="jumbotron">
+                    <div class="form-group col-sm-8">
+                        <label for="name" class="control-label" >Nombre Sucursal</label>
+                            <input type="text" pattern="[a-zA-Z]{3,10}[ ]{0,1}[a-zA-Z]{0,10}" class="form-control" id="name" 
+                            [(ngModel)]="office.name" name="name" #name="ngModel" required />
+                            <span *ngIf="!name.valid && name.touched" class="text-alert">
+                                    *Nombre de Sucursal requerido.
+                            </span>
+                        <!--<div [hidden]="name?.valid || name?.pristine" class="text-alert">
+                            kjkn
+                        </div>-->
+                    </div>
+                    <div class="form-group col-sm-8">
+                        <label for="ubicacion" class=" control-label">Ubicacion</label>
+                                <input type="text" pattern="[a-zA-Z0-1# ]{4,40}" class="form-control" id="ubicacion" 
+                                    [(ngModel)]="office.ubicacion" name="ubicacion" #ubicacion="ngModel" required >
+                                <span *ngIf="!ubicacion.valid && ubicacion.touched" class="text-alert">
+                                            *Ubicacion de Sucursal invalido.
+                                </span>
+                            <!--<div [hidden]="ubicacion?.valid || ubicacion?.pristine" class="">
+                                Ubicacion requerida
+                            </div>-->
+                    </div>
+                    <div class="form-group col-sm-8">
+                        <label for="caja">Saldo Caja</label>
+                        <input type="number" pattern="[0-9]{0,5}" class="form-control" id="caja" 
+                            [(ngModel)]="office.caja" name="caja" #caja="ngModel" required >
+                            <span *ngIf="!caja.valid && caja.touched" class="text-alert">
+                                    *Caja de Sucursal requerido.
+                                </span>
+                        <!--<div [hidden]="caja?.valid || caja?.pristine" class="">
+                                Monto inicial Requerido
+                        </div>-->
+                    </div>
+                    <div class="form-group col-sm-8">
+                            <label for="departament">Departamento</label>
+                            <select class="form-control" id="departament" [(ngModel)]="office.departament" 
+                               name="departament" #departament="ngModel" required>
+                              <option value="Cochabamba">Cochabamba</option>
+                              <option value="La Paz">La Paz</option>
+                              <option value="Santa Cruz">Santa Cruz</option>                     
+                          </select>    
+                            <!-- <input type="text" class="form-control" id="departament" required
+                                [(ngModel)]="office.departament" name="departament" #departament="ngModel" > -->
+                                <span *ngIf="!departament.valid && departament.touched" class="text-alert">
+                                        *Departamento de Sucursal requerido.
+                                </span>
+                            <!--<div [hidden]="departament?.valid || departament?.pristine" class="">
+                               *Departamento requeridos
+                            </div>-->
+                    </div>
+                    <div class="form-group col-sm-8">
+                        <label for="nomCompany">Compañia</label>
+                        <select class="form-control" id="nomCompany" required
+                                [(ngModel)]="office.company_id" name="nomCompany"
+                                #nomCompany="ngModel">
+                          <option *ngFor="let company of companys" [value]="company._id">{{company.name}}</option>
+                        </select>
+                    </div>
+                    <div class="form-group col-sm-8" style="text-align:center ">
+                        <button type="submit" class="btn btn-success" [disabled]="!addEjecutivo.form.valid">Registrar</button>
+                        <button type="button" class="btn btn-danger" (click)="cancelar()">Cancelar</button>
+                     </div>
+                </form>
+            </div>
+        </div>
+      </div> 
+    </div>
+</div>

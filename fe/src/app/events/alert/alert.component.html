@@ -1,0 +1,26 @@
+<div class="modal fade" style="border: rosybrown" id="modalAlert" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+     <div class="modal-content">
+          <div class="modal-header text-center">
+            <h4 class="modal-title w-100 font-weight-bold">Alert</h4>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close" #close>
+                <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body mx-3 ">
+            <li *ngFor="let programa of programs"><strong> * {{programa.name}}</strong></li>
+            <div style="background: plum"><h5>Estos son los programas que tiene para añadir al nuevo Evento, si usted quiere crear o registrar un nuevo programa elija la opcion 
+                <strong >CREAR PROGRAMA</strong> y si no 
+                <strong >CREAR EVENTO</strong></h5>
+            </div>
+          </div>
+          <div class="modal-footer d-flex justify-content-center" >
+               <button type="button" class="btn btn-success" (click)="continuar()">CREAR EVENTO</button>
+                <button type="submit" class="btn btn-warning"(click)="craerProgram()">CREAR PROGRAMA</button>
+          </div>
+     </div>
+  </div>
+</div>
+<div class="text-center">
+  <li><a class="btn btn-primary" data-toggle="modal" data-target="#modalAlert"><i class="fa fa-book"></i> Registrar Evento</a></li>
+</div>

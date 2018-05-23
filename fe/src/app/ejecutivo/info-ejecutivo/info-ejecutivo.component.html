@@ -1,0 +1,90 @@
+<div class="content-wrapper">
+  
+   <section class="content">
+
+      <section>
+       <div class="row user-infos cyruxx">
+           <div class="col-xs-12 col-sm-12 col-md-10 col-lg-10 col-xs-offset-0 col-sm-offset-0 col-md-offset-1 col-lg-offset-1">
+               <div class="panel panel-primary">
+                   <div class="panel-heading">
+                       <h3 class="panel-title">Informacion de {{ejecutivo?.name}}</h3>
+                   </div>
+                   <div class="panel-body">
+                       <div class="row">
+                          
+                           <div class="col-xs-10 col-sm-10 hidden-md hidden-lg">
+                               <strong>{{ejecutivo?.name}}</strong><br>
+                               <dl>
+                                  
+                                   <dt>Nombres</dt>
+                                   <dd>{{ejecutivo?.name}}</dd>
+                                   <dt>Apellidos:</dt>
+                                   <dd>{{ejecutivo?.lastname }}</dd>
+                                   <dt>Celular</dt>
+                                   <dd>{{ejecutivo?.cell}}</dd>
+                                   <dt>Correo</dt>
+                                   <dd>{{ejecutivo?.correo}}</dd>
+                                   <dt>rol</dt>
+                                   <dd>{{rolUser?.name}}</dd>
+                                   <dt>Sucursal</dt>
+                                   <dd>{{sucursalReturned?.name}}</dd>
+                                   <dt>cartera</dt>
+                                   <dd>{{carteraReturned?.name}}</dd>
+                                   
+                               </dl>
+                           </div>
+                           <div class=" col-md-9 col-lg-9 hidden-xs hidden-sm">
+                               <strong>{{ejecutivo?.name}}</strong><br>
+                               <table class="table table-user-information">
+                                   <tbody>
+                                 
+                                   <tr>
+                                       <td>Nombres</td>
+                                       <td>{{ejecutivo?.name}}</td>
+                                   </tr>
+                                   <tr>
+                                    <td>Apellidos</td>
+                                    <td>{{ejecutivo?.lastname}}</td>
+                                </tr>
+                                <tr>
+                                    <td>Celular</td>
+                                    <td>{{ejecutivo?.cell}}</td>
+                                </tr>
+                                <tr>
+                                    <td>Correo</td>
+                                    <td>{{ejecutivo?.correo}}</td>
+                                </tr>
+                                <tr>
+                                    <td>rol</td>
+                                    <td>{{rolUser?.name}}</td>
+                                </tr>
+                                <tr>
+                                    <td>Sucursal</td>
+                                    <td>{{sucursalReturned?.name}}</td>
+                                </tr>
+                                <tr>
+                                    <td>cartera</td>
+                                    <td>{{carteraReturned?.name}}</td>
+                                </tr>
+
+                                  
+                                   </tbody>
+                               </table>
+                           </div>
+                       </div>
+                   </div>
+                   
+               </div>
+           </div>
+       </div>
+      </section>
+     
+      
+   </section>
+
+   <div class="" style="text-align: center">
+    <button class="btn btn-primary" (click)="goEjecutivoList()" > Aceptar</button>
+
+   </div>
+   <!-- <router-outlet></router-outlet> -->
+</div>

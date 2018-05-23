@@ -1,0 +1,104 @@
+<div class="content-wrapper">
+   <br>
+   <div class="content">
+      <div class="box box-primary">
+         <div class="container ">
+            <div [hidden]="submitted">
+               <h1>Inscribir Persona</h1>
+               <!-- <form (ngSubmit)="guardar()" #addPerson="ngForm" class="jumbotron"> -->
+
+               <div class="form-group col-sm-8">
+                  <div class="form-group col-sm-4">
+                     <label for="ci" class="control-label" style="text-align: left">Cedula de Identidad</label>
+                     <input type="number" pattern="[1-9][0-9]{6}[a-z]{0,1}" class="form-control" id="ci" [(ngModel)]="person.ci" name="ci" #ci="ngModel"
+                        (keydown)="onKeydown($event)" required/>
+                     <span *ngIf="!ci.valid && ci.touched" class="text-alert">
+                        *CI de persona requerido o es invalido.
+                     </span>
+                     <span *ngIf="ci?.pattern && ci.touched" class="text-alert">
+                        *CI de persona es invalido.
+                     </span>
+                  </div>
+               </div>
+               <div class="form-group col-sm-8">
+                  <div class="form-group col-sm-6" style="text-align: center">
+                     <label for="first_name" class="control-label">Nombre</label>
+                     <input type="text" pattern="[a-zA-Z]{3,10}[ ]{0,1}[a-zA-Z]{0,10}" class="form-control" id="first_name" [(ngModel)]="person.first_name"
+                        name="first_name" #firstname="ngModel" disabled required />
+                     <span *ngIf="!firstname.valid && firstname.touched" class="text-alert">
+                        *Nombre de persona requerido.
+                     </span>
+                     <span *ngIf=" firstname?.pattern && firstname.touched" class="text-alert">
+                        *Nombre invalido
+                     </span>
+                     <!-- <div [hidden]="first_name?.valid || first_name?.pristine" class="text-alert">
+                                        kjknkasdkjhjask
+                                    </div> -->
+                  </div>
+                  <div class="form-group col-sm-6" style="text-align: center">
+                     <label for="last_name" class="control-label">Apellidos</label>
+                     <input type="text" pattern="[a-zA-Z]{3,20}[ ]{0,1}[a-zA-Z]{0,20}" class="form-control" id="last_name" [(ngModel)]="person.last_name"
+                        name="last_name" #lastname="ngModel" disabled required />
+                     <span *ngIf="!lastname.valid && lastname.touched && lastname?.pattern" class="text-alert">
+                        *Apellido de persona requerido.
+                     </span>
+                     <span *ngIf="lastname?.pattern && lastname.touched" class="text-alert">
+                        *Apellido invalido.
+                     </span>
+                     <!--<div [hidden]="name?.valid || name?.pristine" class="text-alert">
+                                       kjkn
+                                   </div>-->
+                  </div>
+               </div>
+               <div class="form-group col-sm-8">
+                  <div class="form-group col-sm-3">
+                     <label for="difinePrice" class="control-label" style="text-align:right">Precio Definido</label>
+                     <input type="number" pattern="[0-9]{0,5}" class="form-control" id="difinePrice" [(ngModel)]="inscription.price_event" name="definePrice"
+                        #definePrice="ngModel" />
+                     <span *ngIf="!definePrice.valid && definePrice.touched" class="text-alert">
+                        *Precio de definido invalido.
+                     </span>
+                     <span *ngIf="definePrice?.pattern" class="text-alert">
+                        *Invalido Cobro.
+                     </span>
+                  </div>
+                  <div class="form-group col-sm-3">
+                     <label for="monto" class="control-label" style="text-align:right">Pago Inicial</label>
+                     <input type="number" pattern="[0-9]{0,5}" class="form-control" id="monto" [(ngModel)]="inscription.canceled_price" name="monto"
+                        #monto="ngModel" />
+                     <span *ngIf="!monto.valid && monto.touched" class="text-alert">
+                        *Monto Inicial invalido.
+                     </span>
+                     <span *ngIf="monto?.pattern" class="text-alert">
+                        *monto invalido
+                     </span>
+                  </div>
+                  <div class="form-group col-sm-3">
+                     <label for="receipt" class="control-label" style="text-align:right">Nro Recibo</label>
+                     <input type="text" pattern="[0-9]{0,15}[a-zA-Z]{0,5}" class="form-control" id="receipt" [(ngModel)]="inscription.receipt"
+                        name="receipt" #receipt="ngModel" required />
+                     <span *ngIf="!receipt.valid && receipt.touched" class="text-alert">
+                        *Numero de Recibo invalido.
+                     </span>
+                  </div>
+                  <div class="form-group col-sm-3">
+                    <label for="modulo">Modulo del Evento de Hoy</label>
+                    <select class="form-control" id="modulo" [(ngModel)]="lists.modulars"
+                            name="modulo" #modulo="ngModel" required >
+                      <option *ngFor="let i of modulos" [value]="i._id">{{i.name}}</option>
+                    </select>
+                 </div>
+               </div>
+               <div class="form-group col-sm-8" style="text-align:center ">
+                  <!-- <button type="button" class="btn btn-info" (click)="addPerson.reset()">Limpiar</button> -->
+                  <button class="btn btn-success" (click)="guardar()">Registrar</button>
+                  <button type="button" class="btn btn-danger" (click)="cancel()">Cancelar</button>
+                  <!-- <button type="button" class="btn btn-danger" (click)="addPerson.reset()">Cancelar</button> -->
+               </div>
+               <!-- </form> -->
+            </div>
+         </div>
+      </div>
+   </div>
+
+</div>

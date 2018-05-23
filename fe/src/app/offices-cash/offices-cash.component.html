@@ -1,0 +1,86 @@
+<div class="content-wrapper">
+  <section class="content-header">
+      <h1>
+         cajas de sucursales
+         <small></small>
+      </h1>
+   </section>
+<section class="content">
+      
+   <table class="table table-hover" >
+      <thead>
+         <tr>
+            <th>Usuario</th>
+            <th>sucursal</th>
+            <th>Fecha de Inicio</th>
+            <th>Fecha de Cierre</th>
+            <th>Monto</th>
+            <th>Monto entregado</th>
+            <!-- <th>ver</th> -->
+            <th>Confirmar</th>
+            
+               
+            
+         </tr>
+      </thead>
+      <tbody> 
+         <tr *ngFor="let office of nuevasCajasOffices" [ngSwitch]="office.estado">
+
+
+                <td class="">{{office.usuario}}</td>
+                <td>{{office.nameSucursal}}</td>
+                <td class="">{{office.fechaInicio|date}}</td>
+                <td class="">{{office.fechaFin|date}}</td>
+                <td class="">{{office.monto}}</td>
+                <td>{{office.montoEntregado}}</td>
+                <!-- <td class=""> <a class="btn btn-warning" >Ver Detalle y confirmar</a></td> -->
+                <td class="" *ngSwitchCase="-1">
+                    Caja sin Confirmar
+                </td>
+                <td class="" *ngSwitchCase="0">
+                   
+                    <button class="btn btn-danger" [disabled]="btnInactive">caja por confirmar </button>
+
+                </td>
+                <td class="" *ngSwitchCase="1">
+                   
+                    <button class="btn btn-success" [disabled]="btnInactive">caja confirmada </button>
+
+                </td>
+                <ng-template #vacio class="">
+                  ---
+    
+                </ng-template>
+                <td class=""></td>
+           
+
+
+         </tr>
+      </tbody>
+      <tfoot>
+        <tr>
+
+          <td></td>   
+          <td></td>          
+
+          <td></td>          
+          <td><strong>TOTAL</strong></td>   
+          <td></td>       
+          <td></td>          
+          <td></td>          
+          <!-- <td></td>           -->
+          <td></td>          
+
+        </tr>
+      </tfoot>
+
+
+   </table>
+
+   
+      <a class="btn btn-danger a" >Confirmar</a>
+
+   
+</section>
+<!-- <router-outlet></router-outlet> -->
+</div>

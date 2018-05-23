@@ -1,0 +1,45 @@
+<div class="content-wrapper">
+  <!-- Content Header (Page header) -->
+  
+  <section class="content-header">
+     <h1>
+       Sucursales
+        <small> Cecap</small>
+     </h1>
+     <div>     
+      <ol class="breadcrumb">
+          <li><a class="btn btn-primary" [routerLink]="['/home/sucursal/add']"><i class="fa fa-book"></i>Add Sucursal</a></li>
+         
+      </ol>
+    </div> 
+  </section>
+  <section class="content h">
+     <table class="table table-hover">
+        <thead>
+           <tr class="text-info cabecera hover">
+
+              <th><h4 class="text-center font-family-serif"><strong>Nombre Sucursal</strong> </h4></th>
+              <th><h4 class="text-center"><strong>Departamento</strong></h4></th>
+              <th><h4 class="text-center"><strong>Direccion</strong></h4></th>
+              <th><h4 class="text-center"><strong>Caja</strong></h4></th>
+              <!-- <th colspan="2"><h4 class="text-center"><strong>Opciones</strong></h4></th> -->
+              
+           </tr>
+        </thead>
+
+        <tbody>
+
+           <tr *ngFor="let i of sucursales" class="bg-info text-center">
+              <td> {{i.name}}</td>
+              <td>{{i.departament}}</td>
+              <td>{{i.ubicacion}}</td>
+              <td>{{i.caja}}</td>
+              <!-- <td>
+                 <a class="btn btn-primary" (click)="verSucursal(i._id)">Ver</a>
+                 <a class="btn btn-warning" (click)="sendEdit(i._id)">Editar</a>
+              </td> -->
+           </tr>
+        </tbody>
+     </table>
+  </section>
+</div>

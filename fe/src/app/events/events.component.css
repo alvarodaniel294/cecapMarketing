@@ -1,0 +1,12 @@
+.h{
+    padding-top: 50px ;
+}
+.cabecera{
+    background-color: #367fa9; 
+    color: #fff; 
+    border-color: #2e6da4;
+    border-top-color: rgb(32, 77, 116);
+    border-right-color: rgb(32, 77, 116);
+    border-bottom-color: rgb(32, 77, 116);
+    border-left-color: rgb(32, 77, 116);
+}

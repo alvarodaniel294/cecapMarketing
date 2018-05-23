@@ -1,0 +1,46 @@
+<div class="content-wrapper">
+  <br>
+  <div class="">
+
+
+ 
+  <div class="box box-primary">
+
+<div class="container">
+    <div [hidden]="submitted">
+      <h1>Registrar Cartera</h1>
+      <form (ngSubmit)="onSubmit()" #addCartera="ngForm" >
+          <!-- <form #addCartera="ngForm" > -->
+        <div class="form-group">
+          <label for="name">Nombre Cartera</label>
+          <input type="text" pattern="[a-zA-Z0-9]{3,20}[ ]{0,1}[a-zA-Z0-9]{0,20}" class="form-control" id="name"
+                 required
+                 [(ngModel)]="carteraName" name="name"
+                #name="ngModel"
+                 >
+                 <!-- <span *ngIf="name?.pattern || name.touched">
+                    Nombre invalido
+                 </span> -->
+          <div [hidden]="name?.valid || name?.pristine"
+               class="text-alert">
+            *El Nombre de Cartera es OBLIGATORIO
+          </div>
+          <!-- <input type="text" id="name" class="form-control validate" value="{{carteraName}}" #name> -->
+        </div>
+        <button  type="submit" class="btn btn-success"  [disabled]="!addCartera.form.valid" (click)="guardar()">Registrar</button>
+        <button type="button" class="btn btn-danger" (click)="cancel()">Cancelar</button>
+      </form>
+    </div>
+   
+  </div>
+
+  </div>
+
+</div>
+</div>
+
+
+
+
+
+

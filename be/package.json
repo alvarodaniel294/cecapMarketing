@@ -1,0 +1,24 @@
+{
+   "name": "glass",
+   "version": "0.0.0",
+   "private": true,
+   "scripts": {
+      "start": "node ./bin/www",
+      "dev": "nodemon app.js"
+   },
+   "dependencies": {
+      "body-parser": "*",
+      "compression": "*",
+      "content-filter": "*",
+      "cookie-parser": "*",
+      "cors": "^2.8.4",
+      "debug": "*",
+      "express": "*",
+      "jade": "*",
+      "jsonwebtoken": "*",
+      "mongoose": "*",
+      "morgan": "*",
+      "nodemon": "^1.17.3",
+      "serve-favicon": "*"
+   }
+}

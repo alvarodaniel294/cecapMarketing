@@ -1,0 +1,43 @@
+<div class="content-wrapper">
+   <!-- Content Header (Page header) -->
+   <section class="content-header">
+      <h1>
+         Reportes
+         <small>Eventos e Inscritos</small>
+      </h1>
+      <ol class="breadcrumb">
+         <li>
+            <button [routerLink]="['/home/trimestral']" class="btn btn-primary">Ver trimestral</button>
+         </li>
+      </ol>
+   </section>
+   <section class="content">
+      <div>
+         <table class="table table-hover">
+            <thead>
+               <tr>
+                  <th>Nombre</th>
+                  <th>Estado</th>
+                  <th>Incritos</th>
+                  <th>Grafica del Evento</th>
+               </tr>
+            </thead>
+            <tbody>
+               <tr *ngFor="let i of events">
+                  <td>{{ i.name }}</td>
+                  <td>{{ i.state }}</td>
+                  <td>{{ i.inscriptions.length}}</td>
+                  <td>
+                     <button [routerLink]="['/home/reportEvent/'+ i._id + '-' + i.name]" class="btn btn-primary">VER GRAFICO</button>
+                  </td>
+
+               </tr>
+            </tbody>
+         </table>
+      </div>
+
+      <!-- <app-barra></app-barra> -->
+      <!--<app-linea></app-linea>
+    <app-torta></app-torta>-->
+   </section>
+</div>

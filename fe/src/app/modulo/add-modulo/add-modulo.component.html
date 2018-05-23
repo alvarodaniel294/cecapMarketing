@@ -1,0 +1,58 @@
+<div class="content-wrapper">
+   <br>
+   <div class="">
+      <div class="box box-primary">
+
+         <div class="container ">
+            <div [hidden]="submitted">
+               <h1>Registrar Modulo</h1>
+               <span>{{program.name}}</span>
+               <br>
+               <form (ngSubmit)="onSubmit()" #addModulo="ngForm" class="jumbotron">
+                  <div class="form-group col-sm-8">
+                     <label for="number">Numero del Modulo</label>
+                     <input type="number" class="form-control" id="number" [(ngModel)]="modulo.number" name="number" #number="ngModel" required>
+                     <span *ngIf="!number.valid && number.touched" class="text-alert">
+                        *Numero del Modulo requerido.
+                     </span>
+                     <!--<div [hidden]="number?.valid || number?.pristine" class="">
+                              Numero Requerido
+                      </div>-->
+                  </div>
+                  <div class="form-group col-sm-8">
+                     <label for="name" class="control-label">Nombre del Modulo</label>
+                     <input type="text" class="form-control" id="name" [(ngModel)]="modulo.name" name="name" #name="ngModel" required />
+                     <span *ngIf="!name.valid && name.touched" class="text-alert">
+                        *Nombre del Modulo requerido.
+                     </span>
+                     <!--<div [hidden]="name?.valid || name?.pristine" class="text-alert">
+                           kjkn
+                       </div>-->
+                  </div>
+                  <div class="form-group col-sm-8">
+                     <label for="content" class=" control-label">Contenido</label>
+                     <input type="text" class="form-control" id="content" [(ngModel)]="modulo.content" name="content" #content="ngModel" required>
+                     <span *ngIf="!content.valid && content.touched" class="text-alert">
+                        *Contenido del Modulo requerido.
+                     </span>
+                  </div>
+                  <!-- <div class="form-group col-sm-8">
+                     <label for="content" class=" control-label">Programa</label>
+                     <input type="text" class="form-control" id="content" [(ngModel)]="program._id" name="content" #content="ngModel" required>
+                  </div> -->
+                  <!-- <div class="form-group col-sm-8">
+                     <label for="program">Programa</label>
+                     <select class="form-control" id="program" required [(ngModel)]="modulo.programs" name="program" #program="ngModel">
+                        <option *ngFor="let program of programs" [value]="program._id">{{program.name}}</option>
+                     </select>
+                  </div> -->
+                  <div class="form-group col-sm-8" style="text-align:center ">
+                     <button type="submit" class="btn btn-success" [disabled]="!addModulo.form.valid">Registrar</button>
+                     <button type="button" class="btn btn-danger" (click)="cancel()">Cancelar</button>
+                  </div>
+               </form>
+            </div>
+         </div>
+      </div>
+   </div>
+</div>

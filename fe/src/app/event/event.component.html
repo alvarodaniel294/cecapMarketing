@@ -1,0 +1,78 @@
+<div class="content-wrapper">
+   <section class="content">
+      <!-- <app-addPerson (messageEvent)="receiveMessage()"></app-addPerson> -->
+      <!-- <a class="btn btn-primary" (click)="addPerson()">Registrar Persona</a> -->
+      <!-- <app-persona></app-persona> -->
+      <div>
+         <ol class="breadcrumb">
+            <!-- <br> -->
+            <li>
+               <a class="btn btn-primary" [routerLink]="['/home/inscription/'+event._id]">
+                  <i class="fa fa-book"></i>Inscribir Persona</a>
+            </li>
+            <!-- <li><app-control-asistance></app-control-asistance></li> -->
+         </ol>
+      </div>
+      <div>
+         <h1>{{event.name}}</h1>
+      </div>
+      <div class="btn-group" data-toggle="buttons">
+
+         <label *ngFor="let m of modules" class="btn btn-default form-check-label" (click)="filter(m._id)">
+            <input class="form-check-input" type="radio" autocomplete="off"> {{m.name}}
+         </label>
+
+         <!-- <label class="btn btn-default form-check-label">
+            <input class="form-check-input" type="radio" autocomplete="off"> radio 2
+         </label>
+
+         <label class="btn btn-default form-check-label">
+            <input class="form-check-input" type="radio" autocomplete="off"> radio 3
+         </label> -->
+
+      </div>
+
+      <table class="table table-hover">
+         <thead>
+            <tr>
+               <th>Nombre</th>
+               <th>CI</th>
+               <th>Celular</th>
+               <th>Monto Cancelado</th>
+               <th>Perfil</th>
+               <th>Asistencia</th>
+               <th colspan="2">Opciones</th>
+            </tr>
+         </thead>
+         <tbody>
+            <!--<tr *ngFor="let i of inscriptions | buscarPersona: busqueda">-->
+            <tr *ngFor="let i of states">
+               <td>{{ i.name }}</td>
+               <td>{{ i.ci }}</td>
+               <td>{{ i.cellphone }}</td>
+               <td>{{ i.canceled_price }}</td>
+               <td>
+                  <a class="btn btn-info" (click)="viewProfile(i.persons)">VER</a>
+               </td>
+               <td>
+                  <!-- <p *ngIf="list.assist == 'true'"> -->
+                  <p *ngIf="list != null ">
+                     <!-- <a class=" btn btn-success" (click)="butonv(i._id)">ok</a> -->
+                     <a class=" btn btn-danger">OK</a>
+                  </p>
+                  <p *ngIf="list == null ">
+                     <a class=" btn btn-danger">NOT</a>
+                  </p>
+               </td>
+               <td>
+                  <!-- <app-editPerson [editPerson]="event"></app-editPerson> -->
+                  <a class="btn btn-warning" (click)="edit(i.persons)">EDITAR</a>
+                  <a class="btn btn-success" (click)="asistence(i.persons)">Asistand</a>
+               </td>
+            </tr>
+         </tbody>
+      </table>
+
+   </section>
+   <router-outlet></router-outlet>
+</div>

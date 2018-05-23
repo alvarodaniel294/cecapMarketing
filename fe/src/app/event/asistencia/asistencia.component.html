@@ -1,0 +1,65 @@
+<div class="content-wrapper">
+    <br>
+     <div class="content">
+       <div class="box box-primary">
+         <div class="container ">
+             <div [hidden]="submitted">
+                 <h1>Asistencia y cobro</h1>
+                 <form (ngSubmit)="guardar()" #addAsistance="ngForm" class="jumbotron">
+                     <div class="form-group col-sm-8">
+                            
+                        <!-- <fieldset>
+                            <legend>Elige el Modulo del evento de hoy</legend>
+                            <label *ngFor="let i of modulos"><input type="radio" name="numero" [(ngModel)]="select" value=0>{{modulos.name}}</label>
+                             <label>
+                                <input type="radio" name="numero" [(ngModel)]="select" value=0> En duda</label>
+                             <label>
+                                <input type="radio" name="numero" [(ngModel)]="select" value=1> Inscrito</label>
+                             <label>
+                                <input type="radio" name="numero" [(ngModel)]="select" value=2> Interesado</label>
+                             
+                        </fieldset> -->
+                          <br>
+                          <div class="form-group col-sm-6" style="text-align: center">
+                                  <label for="monto" class="control-label" >Monto Cancelado</label>
+                                      <input type="text" class="form-control" id="monto" 
+                                      [(ngModel)]="lists.bolivianos" name="monto" #monto="ngModel" required />
+                                      <span *ngIf="!monto.valid && monto.touched" class="text-alert">
+                                              *Monto requerido.
+                                      </span>
+                                  <!-- <div [hidden]="first_name?.valid || first_name?.pristine" class="text-alert">
+                                      kjknkasdkjhjask
+                                  </div> -->
+                              </div>
+                              <div class="form-group col-sm-6" style="text-align: center">
+                                 <label for="receipt" class="control-label" >Recibo de factura</label>
+                                     <input type="text" class="form-control" id="receipt" 
+                                     [(ngModel)]="lists.receipt" name="receipt" #receipt="ngModel" required />
+                                     <span *ngIf="!receipt.valid && receipt.touched" class="text-alert">
+                                             *Recivo requerido.
+                                     </span>
+                                 <!--<div [hidden]="name?.valid || name?.pristine" class="text-alert">
+                                     kjkn
+                                 </div>-->
+                             </div>
+                             <br>
+                             <div class="form-group col-sm-8">
+                                    <label for="modulo">Modulo del Evento de Hoy</label>
+                                    <select class="form-control" id="modulo" [(ngModel)]="lists.modulars"
+                                            name="modulo" #modulo="ngModel" required >
+                                      <option *ngFor="let i of modulos" [value]="i._id">{{i.name}}</option>
+                                    </select>
+                            </div>
+                     </div>
+                     <div class="form-group col-sm-8" style="text-align:center ">
+                        <button type="submit" class="btn btn-success" [disabled]="!addAsistance.form.valid" >Marcar Asistencia</button>
+                        <button type="button" class="btn btn-danger" (click)="cancel()">Cancelar</button>
+                        <!-- <button type="button" class="btn btn-danger" (click)="addPerson.reset()">Cancelar</button> -->
+                    </div>
+                 </form>
+             </div>
+         </div>
+       </div> 
+     </div>
+
+ </div>

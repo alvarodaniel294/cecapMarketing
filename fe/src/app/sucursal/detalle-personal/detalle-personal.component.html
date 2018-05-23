@@ -1,0 +1,57 @@
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    
+    <section class="content-header">
+       <h1>
+          Detalle Sucursal
+          <small>Sucursal Cochabamba</small>
+       </h1>
+       <div>     
+        <ol class="breadcrumb">
+              <!--<li *ngIf='role?.name == "Admin"'><app-add-ejecutivo></app-add-ejecutivo></li>-->
+              <!--<li><a class="btn btn-primary" [routerLink]="['/home/sucursal/personal']">
+                <i class="fa fa-book"></i><span>Presonal</span></a></li>-->
+  
+        </ol>
+      </div> 
+    </section>
+    <section class="content h">
+       <table class="table table-hover">
+          <thead>
+             <tr class="text-info cabecera hover">
+  
+                <th><h4 class="text-center font-family-serif">Nombre Persona</h4></th>
+                <th><h4 class="text-center">Cargo</h4></th>
+                <th><h4 class="text-center">Estado</h4></th>
+                <th colspan="2"><h4 class="text-center">Opciones</h4></th>
+                
+             </tr>
+          </thead>
+  
+          <tbody>
+              <!-- name: String,
+              lastname:String,
+              cell:Number,
+              correo:String,
+              
+              active: Boolean,
+              password_hash: String,
+        
+              // token: String,
+              rol: ObjectId,
+              offices: ObjectId,
+              amount: Number, -->
+        
+             <tr *ngFor="let i of users" class="bg-info text-center">
+                <td>{{i.name}}</td>
+                <td>{{i.rol}}</td>
+                <td>{{i.active}}</td>
+                <td>
+                   <a class="btn btn-primary" (click)="send()">Editar</a>
+                   <a class="btn btn-primary" (click)="send()">Cambiar Sucursal</a>
+                </td>
+             </tr>
+          </tbody>
+       </table>
+    </section>
+  </div>

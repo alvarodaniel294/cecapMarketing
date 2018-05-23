@@ -1,0 +1,59 @@
+<div class="content-wrapper">
+  <!-- Content Header (Page header) -->
+  <section class="content-header">
+     <h1>
+        Cartera
+        <small>Vigentes</small>
+     </h1>
+     <!--<ol class="breadcrumb">   
+        <li>
+
+        </li>
+        <li>
+           <!-- <app-addEvent (messageEvent)="receiveMessage()"></app-addEvent>
+        </li>
+        <li>
+           <a href="#">
+              <i class="fa fa-dashboard"></i> Home</a>
+        </li>
+        <li class="active">carteras</li>
+     </ol>-->
+     <!-- <li  *ngIf='role?.name == "Admin"'>
+      <app-add-cartera></app-add-cartera>
+     </li> -->
+  </section>
+  <section class="content">
+      <a class="btn btn-primary a" (click)="addCartera()">registrar cartera</a>
+     <table class="table table-hover">
+        <thead>
+           <tr>
+              <th>Nombre de carteras</th>
+              <th>Informacion</th>
+              <th *ngIf='role?.name == "Admin"'>Editar Cartera</th>
+              <!-- <th colspan="2">estado</th> -->
+           </tr>
+        </thead>
+
+        <tbody>
+
+           <tr *ngFor="let cartera of carteras">
+              <td>{{ cartera?.name }}</td>
+              <!-- <td>{{ eventcd fedate_start | date }}</td> -->
+              <td *ngIf="cartera?.active==true; else inactivo "> Activa</td>
+              <!-- <td>{{ event.date_start | date }}</td> -->
+              <td>  
+                <a class="btn btn-primary a" (click)="send(cartera._id)">INFORMACION</a>
+              </td>
+              <td *ngIf='role?.name == "Admin"'>
+                 <button class="btn btn-warning" (click)="editCartera(cartera._id)">EDITAR</button>
+                
+              </td>
+
+              <ng-template #inactivo>
+                  Sin Asignar
+              </ng-template>
+           </tr>
+        </tbody>
+     </table>
+  </section>
+</div>
