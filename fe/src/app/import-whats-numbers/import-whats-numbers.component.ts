@@ -4,6 +4,8 @@ import { Identity } from './../services/global';
 import { Person } from './../modelo/person';
 import { Router,ActivatedRoute } from "@angular/router";
 import { forEach } from '@angular/router/src/utils/collection';
+import { DescOcupation } from './../modelo/descOcupation';
+
 
 
 
@@ -22,6 +24,7 @@ export class ImportWhatsNumbersComponent implements OnInit {
   public nuevaPersona;
   public cartera;
   public departamento;
+  public descOcupation;
 
 
   public newPersons=[];
@@ -32,7 +35,10 @@ export class ImportWhatsNumbersComponent implements OnInit {
     private route: ActivatedRoute,
 
   ) { 
-    this.nuevaPersona=new Person('','',null,null,null,'','','','',null,'');
+
+    this.descOcupation = new DescOcupation('','','','','','','');
+
+    this.nuevaPersona=new Person('','',null,null,null,'','','','',this.descOcupation,'');
 
    ///////////////////////////
        ///new Person(f

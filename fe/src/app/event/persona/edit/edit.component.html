@@ -66,8 +66,8 @@
                         </div>
                         <div class="form-group col-sm-4">
                             <label for="phone" class="control-label" style="text-align: right">Telefono</label>
-                                <input type="number" patter="[4][0-9]{6}" class="form-control" id="phone" 
-                                [(ngModel)]="person.phone" name="phone" #phone="ngModel" required />
+                                <input type="number" pattern="[4][0-9]{6}" class="form-control" id="phone" 
+                                [(ngModel)]="person.phone" name="phone" #phone="ngModel"  />
                                 <span *ngIf="!phone.valid && phone.touched" class="text-alert">
                                         *Telefono de persona requerido.
                                 </span>

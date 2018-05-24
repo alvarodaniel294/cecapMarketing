@@ -87,13 +87,13 @@ captOcupation(){
 }
  saveEdition(){
 
-  this.person.first_name=this.personfirstname;
-  this.person.last_name=this.last_name;
-  this.person.ci=this.ci;
-  this.person.cellphone=this.cellphone;
-  this.person.phone=this.phone;
-  this.person.email=this.email;
-  this.person.ocupation=this.ocupacion;
+  // this.person.first_name=this.personfirstname;
+  // this.person.last_name=this.last_name;
+  // this.person.ci=this.ci;
+  // this.person.cellphone=this.cellphone;
+  // this.person.phone=this.phone;
+  // this.person.email=this.email;
+  this.person.ocupation=this.ocupSelected;
   this.person.descOcupation=this.descOcupation;
 
   console.log(this.person);
