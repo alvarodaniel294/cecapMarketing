@@ -72,21 +72,38 @@ router
             console.log(xlData);
 
             
+            
             for(let contact of xlData){
                 let newPerson=new db.persons(req.body);
 
                 if(contact.Mobile!=undefined){
+                    newPerson.first_name=contact.Firstname;
+                    if(contact.Lastname!=null){
+                        newPerson.last_name=contact.Lastname;
+                    }else{
+                        newPerson.last_name='';
+                    }
+                    newPerson.ci=0;
+                    newPerson.phone=0;
                     let numero='s'+contact.Mobile;
                     if(numero.length==9){
                         newPerson.cellphone=numero.substring(1,9);
                     }else{
                         newPerson.cellphone=numero.substring(6,numero.length);
                     }
-                    newPerson.first_name=contact.Firstname;
-                    if(contact.Lastname!=null){
-                        newPerson.last_name=contact.Lastname;
-                    }
                     newPerson.whatsapp_group='Importados del celular';
+                    newPerson.city='';
+                    newPerson.email='';
+                    newPerson.ocupation='Particular';
+                    newPerson.descOcupation={carrera:'',
+                                            universidad:'',
+                                            semestre:'',
+                                            areaTrabajo:'Otro',
+                                            profesion:'',
+                                            empresa:'',
+                                            cargao:''};
+
+                   
                     newPerson.save(function(err,person){
                         if (err) return res.status(400).send(err);
                         return res.status(200).send();
