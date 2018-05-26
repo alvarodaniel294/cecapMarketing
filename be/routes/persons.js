@@ -85,6 +85,14 @@ router
         })
 
     })
+    .post('/getInteres',function(req,res){
+
+        let personId=req.body.personId;
+        let eventId=req.body.eventId;
+        
+
+
+    })
     .post('/setInteres',function(req,res){
 
         console.log(req.body);

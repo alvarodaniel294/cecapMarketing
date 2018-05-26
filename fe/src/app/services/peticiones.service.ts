@@ -396,6 +396,14 @@ export class PeticionesService {
   
 
      }
+     getInteresOfPersonaWithInteres(ObjId){
+        let body = JSON.stringify(ObjId);
+        //console.log(body);
+        var headers = new HttpHeaders().set('Content-Type', 'application/json; charset=utf-8');
+        return this._http.post(this.url + 'persons/getInteres/', body, { headers: headers }).map((res: Response) => res);
+  
+
+     }
    ///////////////////////////////////////////////////////////////////////////////////////////
 
 }

@@ -26,9 +26,9 @@
               <th>Nombre</th>
               <th>Apellido</th>
               <th>Telefono</th>
-              <th>Whatsapp Group</th>
+              <th>Interes</th>
               <th>Ciudad</th>
-              <th>Ocupacion</th>
+              <!-- <th>Ocupacion</th> -->
               <th colspan="2">Opciones</th>
            </tr>
         </thead>
@@ -37,9 +37,9 @@
               <td>{{ i.first_name }}</td>
               <th>{{i.last_name}}</th>
               <td>{{ i.cellphone }}</td>
-              <td>{{i.whatsapp_group}}</td>
+              <td>{{i.stateName}}</td>
               <td>{{i.city}}</td>
-              <td>{{ i.ocupation }}</td>
+              <!-- <td>{{ i.ocupation }}</td> -->
              
               <td>
                  <a class="btn btn-primary" (click)="edit(i._id)">EDITAR</a>

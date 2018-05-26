@@ -51,7 +51,36 @@ export class PersonsOfEventsComponent implements OnInit {
       for(let i of this.listaInteres){
         this._peticionesService.getPerson(i.persons).subscribe(result=>{
           this.persona=result;
-          this.lista_personas.push(this.persona);
+          let personaItem={} as PersonItem;
+          personaItem._id=this.persona._id;
+          personaItem.first_name=this.persona.first_name;
+          personaItem.last_name=this.persona.last_name;
+          personaItem.cellphone=this.persona.cellphone;
+          personaItem.city=this.persona.city;
+          for(let int of this.event.interes){
+            if(int.persons==this.persona._id){
+              personaItem.state=int.state;
+               ////////////
+                 //  0 interesados
+                 //  1 en duda
+                 //  2 confirmados
+                 //  3 isncritos
+                 //  4 enlinea
+                 //  5 proximo evento 
+                 //  6 sin interes
+                 //////// 
+              if(personaItem.state==0)personaItem.stateName='Interesado';
+              if(personaItem.state==1)personaItem.stateName='En Duda';
+              if(personaItem.state==2)personaItem.stateName='Confirmado';
+              if(personaItem.state==3)personaItem.stateName='Inscrito';
+              if(personaItem.state==4)personaItem.stateName='En Linea';
+              if(personaItem.state==5)personaItem.stateName='Proximo Evento';
+              if(personaItem.state==6)personaItem.stateName='Sin Interes';
+
+            }
+          }
+          this.lista_personas.push(personaItem);
+          // this.lista_personas.push(this.persona);
         })
         
 
@@ -69,9 +98,25 @@ export class PersonsOfEventsComponent implements OnInit {
 
 
 }
+export interface EventIdPersonId{
+  eventId:string,
+  personId:string,
+}
 
 export interface EventPerson{
   _id:string,
   person:Object,
   state:number,
+}
+export interface PersonItem{
+
+  _id:string,
+  first_name:string,
+  last_name:string,
+  cellphone:number,
+  city:string,
+  state:number,
+  stateName:string,
+
+
 }
