@@ -65,6 +65,7 @@ export class EditPersonaInteresComponent implements OnInit {
 
   }
   cancel(){
+    window.history.back();
 
   }
 
