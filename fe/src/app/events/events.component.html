@@ -21,6 +21,7 @@
                <th><h4 class="text-center font-family-serif">Nombre</h4></th>
                <th><h4 class="text-center">Fecha de Inicio</h4></th>
                <th><h4 class="text-center">Cupos</h4></th>
+               <th><h4 class="text-center">Programa</h4></th>
                <th colspan="2"><h4 class="text-center">Estado</h4></th>
                
             </tr>
@@ -28,12 +29,13 @@
 
          <tbody>
 
-            <tr *ngFor="let event of events" class="bg-info text-center">
+            <tr *ngFor="let event of lista_eventos" class="bg-info text-center">
                <td>{{ event.name }}</td>
                <td>{{ event.date_start | date }}</td>
-               <td>{{ event.total }}</td>
+               <td>{{ event.cupos }}</td>
+               <td>{{event.programa}}</td>
                <td>
-                  <a class="btn btn-primary" (click)="send(event._id)">INFORMACION</a>
+                  <a class="btn btn-primary" (click)="personsOfEvents(event._id)">Personas</a>
                </td>
             </tr>
          </tbody>

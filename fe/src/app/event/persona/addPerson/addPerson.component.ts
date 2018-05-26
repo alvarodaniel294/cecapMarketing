@@ -38,7 +38,7 @@ export class AddPersonComponent implements OnInit {
         private route: ActivatedRoute,
         private router: Router
     ) {
-        this.person = new Person('', '', null, null, null,'','','','', null, '');
+        this.person = new Person('', '', null, null, null,'','','','', null, '',null);
        ///////////////////////////
        ///new Person(f
        //irst_name: string, 

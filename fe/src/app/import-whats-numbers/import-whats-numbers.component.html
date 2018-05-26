@@ -24,6 +24,31 @@
                     Nombre es invalido
                   </div>
                 </div>
+
+                <div class="form-group">
+                  <label for="programs">Intereses</label>
+                  <!-- <input type="text"  class="form-control" id="programs"
+                         required
+                         [(ngModel)]="whatsGroupName" name="programs"
+                         #programs="ngModel"
+                         > -->
+
+                            <br>
+                           
+                            <label>
+                            <div *ngFor="let program of programasListCheckbox; let i = index" >
+                              <input type="checkbox" name="program{{i}}" #categories="ngModel" value="{{program.programName}}" [(ngModel)]="program.checked" /> {{program.programName}}
+                            </div>
+                            </label>
+                            
+                         
+                  <div [hidden]="programs?.valid || programs?.pristine"
+                       class="text-alert">
+                    
+                  </div>
+                </div>
+
+
                 <div class="form-group">
                   <label for="departament">Departamento</label>
                   <select class="form-control" id="departament" [(ngModel)]="departamento" 

@@ -159,6 +159,31 @@ module.exports = {
             print_diploma: Boolean
          }]
       },
+      /////////////////para interes en programas////
+      interes:[
+            {
+               programId:ObjectId,
+               programName:String,
+               checked:Boolean,
+               state:Number,
+                  ////////////
+                  //  0 interesados
+                  //  1 en duda
+                  //  2 confirmados
+                  //  3 isncritos
+                  //  4 enlinea
+                  //  5 proximo evento 
+                  //  6 sin interes
+                  //////// 
+  
+            }
+      ],
+
+      /////////////////////////////////////////////////
+
+
+
+
       // user: ObjectId,
       _id: { type: ObjectId, default: function () { return new mongoose.Types.ObjectId } },
       record_date: { type: Date, default: function () { return new Date() } },
@@ -207,6 +232,23 @@ module.exports = {
       }],
       total: Number,
       programs: ObjectId,
+      interes:[
+            {
+                  persons:ObjectId,
+                  state:Number,
+                  ////////////
+                  //  0 interesados
+                  //  1 en duda
+                  //  2 confirmados
+                  //  3 isncritos
+                  //  4 enlinea
+                  //  5 proximo evento 
+                  //  6 sin interes
+                  //////// 
+
+            }
+      
+      ],
       //modulo: [ObjectId],
 
       _id: { type: ObjectId, default: function () { return new mongoose.Types.ObjectId } },

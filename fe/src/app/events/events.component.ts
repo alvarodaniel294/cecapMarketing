@@ -12,8 +12,10 @@ import { ActivatedRoute, Router } from "@angular/router";
 })
 export class EventsComponent implements OnInit {
    
+    public lista_eventos=[];
    public events;
    public role;
+   public program;
    
    constructor(
       private router: Router,
@@ -32,10 +34,15 @@ export class EventsComponent implements OnInit {
    send(_id: string) {
       this.router.navigate(['home/event', _id]);
    }
+
+   personsOfEvents(_id: string) {
+    this.router.navigate(['home/events/persons', _id]);
+ }
    
    queryEvents() {
-      this._peticionesService.getEvents().subscribe(
+      this._peticionesService.getAllEvents().subscribe(
          result => {
+             console.log('hola')
             this.events = result;
            console.log(this.events)
             this.events.map(event => {
@@ -45,6 +52,26 @@ export class EventsComponent implements OnInit {
                });
                event.cupos = event.total - sum;
             });
+
+
+            for(let e of this.events){
+                let eventoItem={}as EventoItem;
+
+                eventoItem.name=e.name;
+                eventoItem.date_start=e.date_start;
+                eventoItem.cupos=e.total;
+                eventoItem._id=e._id;
+                eventoItem.programaId=e.programs;
+                this._peticionesService.getProgram(e.programs).subscribe(result=>{
+                    this.program=result;
+                    eventoItem.programa=this.program.name;
+                    this.lista_eventos.push(eventoItem);
+
+                });
+
+            }
+
+
          },
          error => {
             var errorMessage = <any>error;
@@ -66,4 +93,13 @@ export class EventsComponent implements OnInit {
 //     }
 }
 
+
+export interface EventoItem{
+    _id:string,
+    name:string,
+    date_start:Date,
+    cupos:number,
+    programa:string,
+    programaId:string,
+}
 

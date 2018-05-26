@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from "@angular/router";
+import { Identity } from './../services/global';
 
 import { PeticionesService } from '../services/peticiones.service';
 
@@ -18,6 +19,7 @@ export class ImportFromExcelComponent implements OnInit {
 
   public fileToUpload;
   public file;
+  public cartera;
 
   constructor(
 
@@ -27,6 +29,7 @@ export class ImportFromExcelComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.queryCartera();
   }
 
   incomingfile(event) 
@@ -39,7 +42,7 @@ export class ImportFromExcelComponent implements OnInit {
   }
 
   uploadFileToActivity() {
-    this._peticionesService.postFile(this.fileToUpload).subscribe(data => {
+    this._peticionesService.postFile(this.fileToUpload,this.cartera).subscribe(data => {
       console.log(data, 'si se puede, si se puede')
 
       this.router.navigate(['home/persons']);
@@ -49,6 +52,20 @@ export class ImportFromExcelComponent implements OnInit {
       console.log(error);
     });
   }
+
+  queryCartera() {
+    //console.log(Identity._id)
+    this._peticionesService.getCarteraFromUserId(Identity._id).subscribe(
+        result => {
+            this.cartera = result;
+            
+        },
+        error => {
+            var errorMessage = <any>error;
+            console.log(errorMessage);
+        }
+    );
+}
 
 
 

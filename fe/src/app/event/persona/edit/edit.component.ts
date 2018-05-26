@@ -93,7 +93,7 @@ captOcupation(){
   // this.person.cellphone=this.cellphone;
   // this.person.phone=this.phone;
   // this.person.email=this.email;
-  this.person.ocupation=this.ocupSelected;
+  this.person.ocupation=this.ocupacion;
   this.person.descOcupation=this.descOcupation;
 
   console.log(this.person);

@@ -350,14 +350,16 @@ export class PeticionesService {
     return this._http.post(this.url + 'persons/addFromWhatsapp', body, { headers: headers }).map((res: Response) => res);
      }
 
-     postFile(fileToUpload: File): Observable<boolean> {
+     postFile(fileToUpload: File,cartera): Observable<boolean> {
         const endpoint = this.url + 'persons/upload';
         const formData: FormData = new FormData();
         formData.append('fileKey', fileToUpload, fileToUpload.name);
+        formData.append('body',JSON.stringify(cartera));
         let headers = new HttpHeaders();
         /** In Angular 5, including the header Content-Type can invalidate your request */
         headers.append('Content-Type', 'multipart/form-data');
         headers.append('Accept', 'application/json');
+        // var body={formData:formData,test:'aaaaaaaaaaa'};
         // let options = new RequestOptions({ headers: headers });
         return this._http
             .post(endpoint, formData, { headers: headers })
@@ -365,6 +367,35 @@ export class PeticionesService {
         // .catch((e) => Observable.throw(e))
         // .subscribe();
     }
+
+    getPersonsOfCartera(cartera) {
+
+        var headers = new HttpHeaders().set('Content-Type', 'application/json; charset=utf-8');
+        return this._http.get(this.url + 'persons/personsOfCartera/' + cartera, { headers: headers }).map((res: Response) => res);
+  
+     }
+
+   
+     getPersonsOfProgramByUser(ObjID) {
+
+        let body = JSON.stringify(ObjID);
+        //console.log(body);
+        var headers = new HttpHeaders().set('Content-Type', 'application/json; charset=utf-8');
+        return this._http.post(this.url + 'persons/personsOfProgramByUserId/', body, { headers: headers }).map((res: Response) => res);
+  
+     }
+     getAllEvents() {
+        return this._http.get(this.url + 'events/all').map((res: Response) => res);
+     }
+
+     setInteresOfPersonFromEvent(ObjId){
+        let body = JSON.stringify(ObjId);
+        //console.log(body);
+        var headers = new HttpHeaders().set('Content-Type', 'application/json; charset=utf-8');
+        return this._http.post(this.url + 'persons/setInteres/', body, { headers: headers }).map((res: Response) => res);
+  
+
+     }
    ///////////////////////////////////////////////////////////////////////////////////////////
 
 }

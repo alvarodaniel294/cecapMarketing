@@ -38,7 +38,7 @@ export class InscriptionComponent implements OnInit {
       private route: ActivatedRoute,
       private router: Router
    ) {
-      this.person = new Person('', '', null, null, null,'','', '', '', null, '');
+      this.person = new Person('', '', null, null, null,'','', '', '', null, '',null);
       //first_name,last_name,ci,phone,cellphone,email,ocupation,descOcupation:{ },carteras
       this.inscription = new Inscription(null, null, null, null, 0, 0, '0', '');
       //this.identy=Identity._id;

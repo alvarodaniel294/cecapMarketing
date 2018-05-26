@@ -1,39 +1,12 @@
 var express = require('express');
+var mongoose = require('mongoose');
+
 var db = require('../models/db');
 var router = express.Router();
 
 ////////////////////////////////
 var multipart = require('connect-multiparty');
 var multipartMiddleware = multipart();
-
-var multer = require('multer');
-var xlstojson = require("xls-to-json-lc");
-var xlsxtojson = require("xlsx-to-json-lc");
-
-
-var storage = multer.diskStorage({ //multers disk storage settings
-    destination: function (req, file, cb) {
-        cb(null, './uploads/')
-    },
-    filename: function (req, file, cb) {
-        var datetimestamp = Date.now();
-        cb(null, file.fieldname + '-' + datetimestamp + '.' + file.originalFilename.split('.')[file.originalFilename.split('.').length -1])
-    }
-});
-var upload = multer({ //multer settings
-                storage: storage,
-                fileFilter : function(req, file, callback) { //file filter
-                    if (['xls', 'xlsx'].indexOf(file.originalFilename.split('.')[file.originalFilename.split('.').length-1]) === -1) {
-                        return callback(new Error('Wrong extension type'));
-                    }
-                    callback(null, true);
-                }
-            }).single('file');
-
-
-
-////////////////////////////////
-
 
 
 ///////////other//////////
@@ -60,22 +33,123 @@ router
          return res.status(200).send(person);
       });
    })
+   .get('/personsOfCartera/:cartera',function(req,res){
+        var cartera=req.params.cartera;
+        db.persons.find({carteras:cartera},function(err,listaPersonas){
+            if (err) return res.status(400).send(err);
+            
+            return res.status(200).send(listaPersonas);
+
+
+        })
+
+    })
+    // .get('/personsOfProgramByUserId/:userId',function(req,res){
+
+
+    //     var ver=req.params.body.body;
+    //     console.log(ver);
+    //     // var userId=req.params.userId;
+    //     // db.carteras.findOne({user:userId},function(err,cartera){
+    //     //     if (err) return res.status(400).send(err);
+    //     //     db.persons.find({carteras})
+
+
+    //     // })
+    // })
+    .post('/personsOfProgramByUserId',function(req,res){
+
+
+        console.log(req.body);
+        let userId=req.body.userId;
+        let programId=req.body.programId;
+        let interesState=req.body.state;
+        let personasIntersadasPorPrograma=[];
+        db.carteras.findOne({user:userId},function(err,cartera){
+            if (err) return res.status(400).send(err);
+            db.persons.find({carteras:cartera},function(err,personas){
+                if (err) return res.status(400).send(err);
+                for(let p of personas){
+                    let interes=p.interes;
+                    for(let int of interes){
+                        if(int.programId==programId && int.state==interesState){
+
+                            personasIntersadasPorPrograma.push(p);
+                        }
+                    }
+                }
+                return res.status(200).send(personasIntersadasPorPrograma);
+
+            })
+
+        })
+
+    })
+    .post('/setInteres',function(req,res){
+
+        console.log(req.body);
+        let state=req.body.state;
+        let personId=req.body.personId;
+        let eventId=req.body.eventId;
+        let programId;
+        db.events.findOne({_id:eventId},function(err,event){
+            if(err)return res.status(400).send(err);
+             programId=event.programs;
+            for(let inter of event.interes){
+                if(inter.persons==personId){
+                    console.log('entra a persona')
+                    inter.state=state;
+                    // console.log(event);
+                }
+            }
+            // console.log(event.interes);
+            event.save();
+
+            db.persons.findOne({_id:personId},function(err,person){
+                if(err)return res.status(400).send(err);
+                
+                for(let i of person.interes){
+                    console.log(i.programId);
+                    console.log(programId+"  de evente")
+                    if(i.programId.equals(programId)){
+                        console.log("wntra aqui")
+                        console.log(i.state);
+                        i.state=state;
+                       
+                    }
+
+                }
+                console.log(person.interes);
+                person.save(function(err,person){
+
+                    if(err)return res.status(400).send(err);
+                    return res.status(200).send(person);
+                })
+
+            })
+        })
+    })
 
    .post('/upload', multipartMiddleware, function (req, res) {
-
-
-            console.log(req.body, req.files);
-            console.log(req.files.fileKey.path);
+            // console.log(req.body, req.files);
+            // console.log(req.files.fileKey.path);
+            console.log(typeof req.body);
+            console.log(typeof req.body.body);
+            console.log((req.body.body.split(',')[1]).split(':')[1]);
+            let carteraId=(req.body.body.split(',')[1]).split(':')[1];
+            
+            console.log(req.files);
             var workbook = XLSX.readFile(req.files.fileKey.path);
             var sheet_name_list = workbook.SheetNames;
             var xlData = XLSX.utils.sheet_to_json(workbook.Sheets[sheet_name_list[0]]);
-            console.log(xlData);
 
-            
+            let carteraIdMongoose=carteraId.substring(1,carteraId.length-1);
+            console.log(carteraIdMongoose);
+            let newId = new mongoose.mongo.ObjectId(carteraIdMongoose);
             
             for(let contact of xlData){
                 let newPerson=new db.persons(req.body);
-
+                newPerson.carteras=carteraId;
                 if(contact.Mobile!=undefined){
                     newPerson.first_name=contact.Firstname;
                     if(contact.Lastname!=null){
@@ -103,77 +177,24 @@ router
                                             empresa:'',
                                             cargao:''};
 
-                   
+                    newPerson.carteras=newId;
                     newPerson.save(function(err,person){
                         if (err) return res.status(400).send(err);
+
+
                         return res.status(200).send();
-
-
                     })
 
-                }
-               
-
-
-
-            }
-
-
-
-   })        
-
-
-//    .post('/upload', multipartMiddleware, function (req, res) {
-
-
-//         console.log(req.body, req.files);
-//         console.log(req.file);
-
-//         var exceltojson;
-//         upload(req,res,function(err){
-//             if(err){
-//                  res.json({error_code:1,err_desc:err});
-//                  return;
-//             }
-//             /** Multer gives us file info in req.file object */
-//             if(!req.files){
-//                 res.json({error_code:1,err_desc:"No file passed"});
-//                 return;
-//             }
-//             /** Check the extension of the incoming file and 
-//              *  use the appropriate module
-//              */
-//             // if(req.files.originalFilename.split('.')[req.file.originalFilename.split('.').length-1] === 'xlsx'){
-//                 // exceltojson = xlsxtojson;
-//             // } else {
-//                 exceltojson = xlstojson;
-//             // }
-//             try {
-//                 exceltojson({
-//                     input: req.files.path,
-//                     output: null, //since we don't need output.json
-//                     lowerCaseHeaders:true
-//                 }, function(err,result){
-//                     if(err) {
-//                         return res.json({error_code:1,err_desc:err, data: null});
-//                     } 
-//                     console.log('probando desde aqui');
-//                     console.log(result);
-//                     console.log('antes de json acaba');
-//                     res.json({error_code:0,err_desc:null, data: result});
-
-//                     console.log('despues del jason');
-//                     console.log(result);
-//                 });
-//             } catch (e){
-//                 res.json({error_code:1,err_desc:"Corupted excel file"});
-//             }
-//         })
-//     })
+                }        
+           }
+   })  
+   
+  
 
 
    .post('/addFromWhatsapp',function(req,res){
         var person=new db.persons(req.body);
+        console.log(person);
         db.persons.findOne({cellphone:person.cellphone},function(err,existe){
 
             if(err){
@@ -188,6 +209,33 @@ router
                                     return res.status(400).send(err);
                     
                                 }else{
+
+                                    let interesPersona=persona.interes;
+                                    for(let pi of interesPersona){
+
+                                        db.events.find({programs:pi.programId},function(err,eventos){
+                                            if(err)return res.status(400).send(err);
+                                            for(let e of eventos){
+                                                let int={
+                                                    persons:persona,
+                                                    state:0,
+                                                     ////////////
+                                                    //  0 interesados
+                                                    //  1 en duda
+                                                    //  2 confirmados
+                                                    //  3 isncritos
+                                                    //  4 enlinea
+                                                    //  5 proximo evento 
+                                                    //  6 sin interes
+                                                    //////// 
+                                                };
+                                                e.interes.push(int);
+                                                e.save();
+                                            }    
+
+                                        })
+                                    }
+
                                     return res.status(200).send(persona);
                                     console.log(person);
 

@@ -88,6 +88,11 @@ import { AsistenciaComponent } from './event/asistencia/asistencia.component';
 import { InscriptionComponent } from './event/inscription/inscription.component';
 import { ImportWhatsNumbersComponent } from './import-whats-numbers/import-whats-numbers.component';
 import { ImportFromExcelComponent } from './import-from-excel/import-from-excel.component';
+import { PersonsOfEjecutivoComponent } from './ejecutivo/persons-of-ejecutivo/persons-of-ejecutivo.component';
+import { SegmentationComponent } from './segmentation/segmentation.component';
+import { ListPersonProgramUserComponent } from './segmentation/list-person-program-user/list-person-program-user.component';
+import { PersonsOfEventsComponent } from './events/persons-of-events/persons-of-events.component';
+import { EditPersonaInteresComponent } from './event/persona/edit-persona-interes/edit-persona-interes.component';
 
 @NgModule({
   declarations: [
@@ -162,7 +167,12 @@ import { ImportFromExcelComponent } from './import-from-excel/import-from-excel.
     AsistenciaComponent,
     InscriptionComponent,
     ImportWhatsNumbersComponent,
-    ImportFromExcelComponent
+    ImportFromExcelComponent,
+    PersonsOfEjecutivoComponent,
+    SegmentationComponent,
+    ListPersonProgramUserComponent,
+    PersonsOfEventsComponent,
+    EditPersonaInteresComponent
 
   ],
   imports: [
