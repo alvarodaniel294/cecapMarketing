@@ -1,0 +1,52 @@
+<div class="content-wrapper">
+  <section class="content">
+      <div>     
+          <ol class="breadcrumb">
+              <!-- <li><a class="btn btn-primary" [routerLink]="['/home/persons/add']"><i class="fa fa-book"></i>Registrar Persona</a></li>
+              <li><app-control-asistance></app-control-asistance></li> -->
+          </ol>
+      </div> 
+     
+     <table class="table">
+           <th>Filtros Personas</th> 
+     </table>
+    
+       <div>
+      <!-- <div class="filter-wrap">
+        <div class="col-lg-1">Buscar:</div>
+        <input [(ngModel)]="searchText" placeholder="Nombre Persona" class="filter-input">
+        <span class="filter-clear" *ngIf="searchText.length>0" (click)="clearFilter()">X</span>
+      </div> -->
+
+
+    </div>
+     <table class="table table-hover" >
+        <thead >
+           <tr>
+              <th>Nombre</th>
+              <th>Apellido</th>
+              <th>Telefono</th>
+              <th>Whatsapp Group</th>
+              <th>Ciudad</th>
+              <th>Ocupacion</th>
+              <th colspan="2">Opciones</th>
+           </tr>
+        </thead>
+        <tbody> 
+           <tr *ngFor="let i of lista_personas">
+              <td>{{ i.first_name }}</td>
+              <th>{{i.last_name}}</th>
+              <td>{{ i.cellphone }}</td>
+              <td>{{i.whatsapp_group}}</td>
+              <td>{{i.city}}</td>
+              <td>{{ i.ocupation }}</td>
+             
+              <td>
+                 <a class="btn btn-primary" (click)="edit(i._id)">EDITAR</a>
+                   </td>
+           </tr>
+        </tbody>
+     </table>
+     
+  </section>
+</div>

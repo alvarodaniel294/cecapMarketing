@@ -25,6 +25,11 @@ export class ImportWhatsNumbersComponent implements OnInit {
   public cartera;
   public departamento;
   public descOcupation;
+  public programs;
+  
+  public programasListCheckbox=[];
+
+  public programasConInteres=[];
 
 
   public newPersons=[];
@@ -38,7 +43,7 @@ export class ImportWhatsNumbersComponent implements OnInit {
 
     this.descOcupation = new DescOcupation('','','','','','','');
 
-    this.nuevaPersona=new Person('','',null,null,null,'','','','',this.descOcupation,'');
+    this.nuevaPersona=new Person('','',null,null,null,'','','','',this.descOcupation,'',null);
 
    ///////////////////////////
        ///new Person(f
@@ -58,6 +63,7 @@ export class ImportWhatsNumbersComponent implements OnInit {
 
   ngOnInit() {
     this.queryCartera();
+    this.queryPrograms();
   }
 
   onSubmit(){
@@ -81,8 +87,22 @@ export class ImportWhatsNumbersComponent implements OnInit {
      }
     });
     console.log(this.numbers);
+    this.llenarProgramasConInteres();
+    
+  }
+  llenarProgramasConInteres(){
+
+    for(let i of this.programasListCheckbox){
+      if(i.checked){
+
+        this.programasConInteres.push(i);
+      }
+      
+
+    }
+    console.log(this.programasConInteres);
     this.saveOnDB();
-    // this.router.navigate(['home/persons']);
+
   }
   saveOnDB(){
 
@@ -93,6 +113,7 @@ export class ImportWhatsNumbersComponent implements OnInit {
       this.nuevaPersona.cellphone=num;
       this.nuevaPersona.carteras=this.cartera._id;
       this.nuevaPersona.city=this.departamento;
+      this.nuevaPersona.interes=this.programasConInteres;
       console.log(this.nuevaPersona);
       this._peticionesService.addPersonFromWhatsapp(this.nuevaPersona).subscribe(res=>{
         this.newPersons.push(res);
@@ -121,10 +142,59 @@ export class ImportWhatsNumbersComponent implements OnInit {
     );
 }
   
+
+  
+  queryPrograms(){
+    this._peticionesService.getPrograms().subscribe(response => {
+        this.programs = response;
+      console.log(this.programs);
+        this.llenarProgramsCheckbox();
+       },
+       error=>{
+        var errorMessage = <any>error;
+        console.log(errorMessage);
+       }
+      );
+   }
+
+
+   llenarProgramsCheckbox(){
+    for(let pro of this.programs){
+
+      let oneProgramCheck={} as ProgramasCheckbox;
+      oneProgramCheck.programId=pro._id;
+      oneProgramCheck.programName=pro.name;
+      oneProgramCheck.checked=true;
+      oneProgramCheck.state=0;
+      this.programasListCheckbox.push(oneProgramCheck);
+
+    }
+  }
+
   cancel(){
     this
 
 
   }
 
+
 }
+
+export interface ProgramasCheckbox{
+  programId:string,
+  programName:string,
+  checked:boolean,
+  state:number,
+
+}
+
+
+////////////
+//  0 interesados
+//  1 en duda
+//  2 confirmados
+//  3 isncritos
+//  4 enlinea
+//  5 proximo evento 
+//  6 sin interes
+//////// 

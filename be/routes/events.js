@@ -46,6 +46,15 @@ router
       //    return res.status(200).send(events);
       // });
    })
+   .get('/all',function(req,res){
+
+      db.events.find({},function(err,events){
+            if (err) return res.status(400).send(err);
+            return res.status(200).send(events);
+
+
+      })
+   })
    .get('/lists', function (req, res) {
       db.lists.find({}, function (err, lists) {
          return res.status(200).send(lists);

@@ -13,6 +13,8 @@ export class Person {
       public ocupation: string,  //1 = universitario, 2=Profecional, 3=particular
       public descOcupation: DescOcupation,
      // public user: string,
-      public carteras:string
+      public carteras:string,
+      public interes:{},
+
    ) { }
 }

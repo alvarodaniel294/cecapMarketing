@@ -43,6 +43,10 @@ export class EjecutivoComponent implements OnInit {
     // console.log(_id);
     this.router.navigate(['/home/ejecutivo',_id]);
   }
+  personsOfEjecutivo(_id:string){
+
+    this.router.navigate(['/home/personsOfEjecutivo',_id]);
+  }
   // deleteEjecutivo(_id:string){
   //   this._peticionesService.deleteUser().subscribe(
   //     result => {
