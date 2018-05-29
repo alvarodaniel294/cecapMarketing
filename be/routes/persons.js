@@ -89,6 +89,13 @@ router
 
         let personId=req.body.personId;
         let eventId=req.body.eventId;
+        db.events.findOne({_id:eventId},function(err,event){
+            for(let i of event.interes){
+                if(i.persons==personId){
+                    return res.status(200).send(i);
+                }
+            }
+        })
         
 
 

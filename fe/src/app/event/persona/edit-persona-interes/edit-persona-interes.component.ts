@@ -19,6 +19,8 @@ export class EditPersonaInteresComponent implements OnInit {
   public personId;
   public person;
   public interesOfPerson;
+  public currentInteres;
+  public interes;
 
   constructor(
 
@@ -45,6 +47,18 @@ export class EditPersonaInteresComponent implements OnInit {
 
       this.person=result;
       console.log(this.person);
+      this.getIntersOfPerson();
+    })
+
+  }
+  getIntersOfPerson(){
+    let interesItem ={} as Interes;
+    interesItem.state=0;
+    interesItem.eventId=this.eventId;
+    interesItem.personId=this.personId;
+    this._peticionesService.getInteresOfPersonaWithInteres(interesItem).subscribe(res=>{
+      this.interes=res;
+      this.interesOfPerson=this.interes.state;
     })
 
   }

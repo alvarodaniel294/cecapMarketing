@@ -14,7 +14,7 @@
                   <select style="width: 50%" class="form-control" id="interes" [(ngModel)]="interesOfPerson" 
                      name="interes" #interes="ngModel" required>
                      <option value="0">Interesado</option>
-                     <option value="1">En Duda</option>
+                     <!-- <option value="1">En Duda</option> -->
                      <option value="2">Confirmado</option> 
                      <option value="3">Inscrito</option>
                      <option value="4">En Linea</option> 
@@ -22,7 +22,7 @@
                      <option value="6">Sin Interes</option>                    
                   </select>    
                    <span *ngIf="!interes.valid && interes.touched" class="text-alert">
-                              *intereo de Sucursal requerido.
+                              *interea de persona requerido.
                       </span>
                   <!--<div [hidden]="intere?.valid || intere?.pristine" class="">
                      *intereo requeridos
