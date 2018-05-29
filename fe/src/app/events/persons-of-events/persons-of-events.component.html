@@ -10,7 +10,17 @@
      <table class="table">
            <th>Filtros Personas</th> 
      </table>
-    
+     <div>
+
+      <button class="btn btn-primary margin-left" (click)="loadPersonsInteres(0)">Interesados</button>
+      <button class="btn btn-primary margin-left" (click)="loadPersonsInteres(2)">Confirmados</button>
+      <button class="btn btn-primary margin-left" (click)="loadPersonsInteres(3)">Inscrito</button>
+      <button class="btn btn-primary margin-left" (click)="loadPersonsInteres(4)">On Line</button>
+      <button class="btn btn-primary margin-left" (click)="loadPersonsInteres(5)">Proximo Evento</button>
+      <button class="btn btn-primary margin-left" (click)="loadPersonsInteres(6)">Sin Interes</button>
+      <button class="btn btn-primary margin-left" (click)="loadPersons()">Todos</button>
+      
+     </div>
        <div>
       <!-- <div class="filter-wrap">
         <div class="col-lg-1">Buscar:</div>
@@ -33,7 +43,7 @@
            </tr>
         </thead>
         <tbody> 
-           <tr *ngFor="let i of lista_personas">
+           <tr *ngFor="let i of lista_personasPorInteres">
               <td>{{ i.first_name }}</td>
               <th>{{i.last_name}}</th>
               <td>{{ i.cellphone }}</td>
