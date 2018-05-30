@@ -61,6 +61,68 @@ router
       })
    })
 
+   .post('/addInteresToEvents',function(req,res){
+      console.log(req.body);
+      let personId=req.body.personId;
+      let programId=req.body.programId;
+
+            db.events.find({programs:programId},function(err,events){
+                  if(err)return res.status(400).send(err);
+                  for(let event of events){
+                        db.events.findOne({_id:event._id},function(err,ev){
+                              if(err)return res.status(400).send(err);
+                              // console.log('11111111111111111111')
+                              console.log(ev.interes);
+                              if(ev.interes.length==0){
+                                    let inter={}
+                                    inter.persons=personId;
+                                    inter.state=0;
+                                    ev.interes.push(inter);
+                                    // console.log('entra estando vacio')
+
+                              }else{
+                                   let existe=false;
+                                   for(let iItem of ev.interes){
+                                         console.log(iItem);
+                                         if(iItem.persons==personId){
+                                          //      console.log('entra cuando asdfasdfasdflkasdlfjal')
+                                               existe=true;
+                                         }
+                                   }
+                                   if(existe==false){
+                                    let inter={}
+                                    inter.persons=personId;
+                                    inter.state=0;
+                                    ev.interes.push(inter); 
+
+                                    // console.log('yeah')
+
+                                   }
+                              }
+                              
+                              //  console.log("asdfasdfasdfasd")
+                               console.log(ev.interes);
+                               ev.save(function(err,ev){
+                                    if(err)return res.status(400).send(err);
+
+                               });
+
+                        })
+                       
+                  }
+                  return res.status(200).send(events);
+
+                  
+
+            })
+
+      
+
+
+
+   })
+
+
    .get('/trimestral', function (req, res) {
       var d = new Date();
       var d1 = new Date(d.getFullYear(), d.getMonth() - 3, d.getDate()); //menos 3 meses
