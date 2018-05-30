@@ -35,6 +35,8 @@ export class EditComponent implements OnInit {
 
     public registro: Registro;
 
+    public newProgramsCheck=[];
+    public newInteres=[];
     public inscription;
     submitted= false;
 
@@ -47,16 +49,57 @@ export class EditComponent implements OnInit {
    }
 
   ngOnInit() {
+    this.queryPrograms();
+
     this.queryPersonId();
-    this.findPerson();
+
     
 
 }
 queryPersonId(){
   this.route.params.subscribe(params => {
     this.personId = params.id;
+    this.findPerson();
+
   })
 }
+llenarProgramsCheckbox(){
+ for(let p of this.programs){
+  let programItem={}as ProgramCheckBox;
+  programItem.checked=false;
+  programItem.programId=p._id;
+  programItem.programName=p.name;
+  programItem.state=0;
+  this.newProgramsCheck.push(programItem);
+
+ }
+ this.fixProgramCheckbox()
+
+}
+fixProgramCheckbox(){
+  for(let p of this.person.interes){
+    for(let npc of this.newProgramsCheck){
+      if(npc.programId==p.programId){
+        npc.checked=true;
+        console.log(this.newProgramsCheck);
+      }
+    }
+  }
+  
+}
+
+queryPrograms(){
+  this._peticionesService.getPrograms().subscribe(response => {
+      this.programs = response;
+    console.log(this.programs);
+      console.log("hi")
+     },
+     error=>{
+      var errorMessage = <any>error;
+      console.log(errorMessage);
+     }
+    );
+ }
 findPerson(){
   this._peticionesService.getPerson(this.personId).subscribe(
     result => {
@@ -71,6 +114,8 @@ findPerson(){
       this.ocupacion = this.person.ocupation;
       this.descOcupation = this.person.descOcupation;
       console.log(this.descOcupation+ "hola");
+      this.llenarProgramsCheckbox();
+
     }, error => {
       var errorMessage = <any>error;
           console.log(errorMessage);
@@ -95,6 +140,13 @@ captOcupation(){
   // this.person.email=this.email;
   this.person.ocupation=this.ocupacion;
   this.person.descOcupation=this.descOcupation;
+  for(let npc of this.newProgramsCheck){
+    if(npc.checked){
+      this.newInteres.push(npc);
+    }
+  }
+  this.person.interes=this.newInteres;
+
 
   console.log(this.person);
   this._peticionesService.updatePerson(this.person).subscribe(
@@ -114,4 +166,11 @@ captOcupation(){
  cancel() {
   this.router.navigate(['/home/persons']);
  }
+}
+
+export interface ProgramCheckBox{
+  programId:string,
+  programName:string,
+  checked:boolean,
+  state:number,
 }

@@ -21,12 +21,12 @@
     <br>
      <div class="content">
         <h4>Editar Persona</h4>
-       <div class="box box-primary">
+       <div class="box box-primary" style="width: 90%" >
          <div class="container ">
              <label><h3>{{ person.first_name }} {{person.last_name}}</h3></label>
               <div [hidden]="submitted">
                  <form (ngSubmit)="saveEdition()" #addPerson="ngForm" class="">
-                     <div class="form-group col-sm-8" style="text-align: center">
+                     <div class="form-group" style="text-align: center" style="width: 50%">
                          <label for="first_name" class="control-label" >Nombre</label>
                              <input type="text" pattern="[a-zA-Z]{3,10}[ ]{0,1}[a-zA-Z]{0,10}" class="form-control" id="first_name" 
                              [(ngModel)]="person.first_name" name="first_name" #firstname="ngModel" required />
@@ -35,7 +35,7 @@
                              </span>
                      
                      </div>
-                     <div class="form-group col-sm-8" style="text-align: center">
+                     <div class="form-group " style="text-align: center" style="width: 50%">
                         <label for="last_name" class="control-label" >Apellidos</label>
                             <input type="text" pattern="[a-zA-Z]{3,20}[ ]{0,1}[a-zA-Z]{0,20}" class="form-control" id="last_name" 
                             [(ngModel)]="person.last_name" name="last_name" #lastname="ngModel" required />
@@ -47,8 +47,8 @@
                         </div>-->
                     </div>
                     
-                    <div class="form-group col-sm-8">
-                        <div class="form-group col-sm-4">
+                    <div class="form-group" style="width: 50%">
+                        <div class="form-group" style="width: 50%">
                             <label for="ci" class="control-label" style="text-align: left" >Cedula de Identidad</label>
                                 <input type="number" pattern="[1-9][0-9]{6}[a-z]{0,1}" class="form-control" id="ci" 
                                 [(ngModel)]="person.ci" name="ci" #ci="ngModel" required />
@@ -56,7 +56,7 @@
                                         *CI de persona requerido.
                                 </span>
                         </div>
-                        <div class="form-group col-sm-4">
+                        <div class="form-group" style="width: 50%">
                             <label for="cellphone" class="control-label" style="text-align: center">Celular</label>
                                 <input type="number" pattern="[6-7][0-9]{7}" class="form-control" id="cellphone" 
                                 [(ngModel)]="person.cellphone" name="cellphone" #cellphone="ngModel" required />
@@ -64,7 +64,7 @@
                                         *Celular de persona requerido.
                                 </span>
                         </div>
-                        <div class="form-group col-sm-4">
+                        <div class="form-group " style="width: 50%">
                             <label for="phone" class="control-label" style="text-align: right">Telefono</label>
                                 <input type="number" pattern="[4][0-9]{6}" class="form-control" id="phone" 
                                 [(ngModel)]="person.phone" name="phone" #phone="ngModel"  />
@@ -73,8 +73,8 @@
                                 </span>
                         </div>
                     </div>
-                    <div class="form-group col-sm-8" >
-                        <div class="form-group col-sm-6">
+                    <div class="form-group" style="width: 50%" >
+                        <div class="form-group "style="width: 50%">
                             <label for="email" pattern="[a-zA-Z.0-9]*[@][a-z]{3,15}[.][a-z]{3,15}" class="control-label" style="text-align: left">Correo</label>
                                 <input type="email" class="form-control" id="email" 
                                 [(ngModel)]="person.email" name="email" #email="ngModel" required />
@@ -84,7 +84,7 @@
                         </div>
                         <!-- observed-->
                     </div>
-                    <div class="form-group col-sm-8">
+                    <div class="form-group " style="width: 50%">
                         <label for="ocupSelect">
                           <i class="fa fa-tag prefix grey-text"></i>Ocupacion</label>
                         <select class="form-control" id="ocupSelect" [(ngModel)]="ocupacion" (change)="captOcupation()"
@@ -93,7 +93,7 @@
                             <option value="Profesional">Profesional</option>
                             <option value="Particular">Particular</option>                     
                         </select>
-                        <div class="form-group col-sm-6">
+                        <div class="form-group" style="width: 50%">
                           <br>
                           <p *ngIf="ocupacion == 'Estudiante'">
                             <input type="text" pattern="[a-zA-Z]{0,20}" placeholder="Universidad" name="universidad" #universidad="ngModel" 
@@ -146,6 +146,33 @@
                             </p>
                           </div>
                     </div>
+
+
+                    <div class="form-group" style="width: 50%">
+                        <label for="programs">Intereses</label>
+                     
+                                  <br>
+                                 
+                                  <label>
+                                  <div *ngFor="let program of newProgramsCheck; let i = index" >
+                                    <input type="checkbox" name="program{{i}}" #categories="ngModel" value="{{program.programName}}" [(ngModel)]="program.checked" /> {{program.programName}}
+                                  </div>
+                                  </label>
+                                  
+                               
+                        <div [hidden]="programs?.valid || programs?.pristine"
+                             class="text-alert">
+                          
+                        </div>
+                      </div>
+
+
+
+
+
+
+
+
                     <!-- <div class="form-group col-sm-8">
                             <label for="evento">Evento</label>
                             <select class="form-control" id="evento" [(ngModel)]="IdEvent"
