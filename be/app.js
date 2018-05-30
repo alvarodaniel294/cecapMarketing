@@ -22,6 +22,7 @@ app
       var token = typeof req.headers["authorization"] != 'undefined' ? req.headers["authorization"] : null;
       req.body.token = token;
       next();
+      
    });
 
 

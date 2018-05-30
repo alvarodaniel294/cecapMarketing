@@ -49,7 +49,6 @@ export class EditComponent implements OnInit {
    }
 
   ngOnInit() {
-    this.queryPrograms();
 
     this.queryPersonId();
 
@@ -57,6 +56,8 @@ export class EditComponent implements OnInit {
 
 }
 queryPersonId(){
+  this.queryPrograms();
+
   this.route.params.subscribe(params => {
     this.personId = params.id;
     this.findPerson();
@@ -153,8 +154,20 @@ captOcupation(){
       result =>{
         var res = result;
         console.log(res);
-        this.router.navigate(['home/persons']);
-        alert('Se Guardo correctamente la edicion');
+        for(let pro of this.person.interes){
+
+          let programPerson={}as ProgramIdPersonId;
+          programPerson.personId=this.person._id;
+          programPerson.programId=pro.programId;
+          this._peticionesService.addInteresToEvents(programPerson).subscribe(res=>{
+ 
+            this.router.navigate(['home/persons']);
+            alert('Se Guardo correctamente la edicion');
+  
+          })
+
+        }
+       
       },
       error=>{
         var errorMessage = <any>error;
@@ -173,4 +186,8 @@ export interface ProgramCheckBox{
   programName:string,
   checked:boolean,
   state:number,
+}
+export interface ProgramIdPersonId{
+  programId:string,
+  personId:string,
 }

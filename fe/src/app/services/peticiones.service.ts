@@ -411,6 +411,13 @@ export class PeticionesService {
         return this._http.post(this.url + 'persons/getInteres/', body, { headers: headers }).map((res: Response) => res);
   
      }
+     addInteresToEvents(ObjID){
+        let body = JSON.stringify(ObjID);
+        //console.log(body);
+        var headers = new HttpHeaders().set('Content-Type', 'application/json; charset=utf-8');
+        return this._http.post(this.url + 'events/addInteresToEvents/', body, { headers: headers }).map((res: Response) => res);
+  
+     }
    ///////////////////////////////////////////////////////////////////////////////////////////
 
 }

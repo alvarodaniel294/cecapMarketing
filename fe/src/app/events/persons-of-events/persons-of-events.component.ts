@@ -44,7 +44,8 @@ export class PersonsOfEventsComponent implements OnInit {
   }
   loadPersons(){
 
-
+    this.lista_personasPorInteres=[];
+    
     this._peticionesService.getEvent(this.eventId).subscribe(result=>{
       this.event=result;
       console.log(this.event.interes);
@@ -92,8 +93,8 @@ export class PersonsOfEventsComponent implements OnInit {
   }
   loadPersonsInteres(numInteres){
     this.lista_personasPorInteres=[];
-    this.lista_personasPorInteres=[];
-    this.lista_personasPorInteres=[];
+    // this.lista_personasPorInteres=[];
+    // this.lista_personasPorInteres=[];
     
 
     this._peticionesService.getEvent(this.eventId).subscribe(result=>{
