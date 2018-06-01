@@ -46,6 +46,91 @@ router
       //    return res.status(200).send(events);
       // });
    })
+   .post('/getPersonasInteresWithEvent',function(req,res){
+            let event=req.body;
+            console.log(event);
+            let lista=[];
+            let nuevaLista=[];
+            
+            for(let p of event.interes){
+                  lista.push(p.persons);
+
+            }
+            db.persons.find({_id:{$in: lista}},function(err,persons){
+                  for(let personItem of persons){
+                        let newPerson={};
+                        newPerson._id=personItem._id;
+                        newPerson.first_name=personItem.first_name;
+                        newPerson.last_name=personItem.last_name;
+                        newPerson.cellphone=personItem.cellphone;
+                        newPerson.city=personItem.city;
+
+                        for(let pid of event.interes){
+                              if(pid.persons==personItem._id){
+                                    newPerson.state=pid.state;
+                                    if(newPerson.state==0)newPerson.stateName='Interesado';
+                                    if(newPerson.state==1)newPerson.stateName='En Duda';
+                                    if(newPerson.state==2)newPerson.stateName='Confirmado';
+                                    if(newPerson.state==3)newPerson.stateName='Inscrito';
+                                    if(newPerson.state==4)newPerson.stateName='En Linea';
+                                    if(newPerson.state==5)newPerson.stateName='Proximo Evento';
+                                    if(newPerson.state==6)newPerson.stateName='Sin Interes';
+                                    // event.interes.pop(pid);
+                                    nuevaLista.push(newPerson);
+                              }
+                        }                             
+                  }
+                  console.log(nuevaLista);
+                  return res.status(200).send(nuevaLista);
+            })
+   })
+   .post('/getPersonFilterInteresWithEvent',function(req,res){
+            let event=req.body.event;
+            let interesnumber=req.body.interes;
+            console.log(event);
+            let lista=[];
+            let nuevaLista=[];
+            
+            for(let p of event.interes){
+                  lista.push(p.persons);
+
+            }
+            db.persons.find({_id:{$in: lista}},function(err,persons){
+                  for(let personItem of persons){
+                        let newPerson={};
+                        newPerson._id=personItem._id;
+                        newPerson.first_name=personItem.first_name;
+                        newPerson.last_name=personItem.last_name;
+                        newPerson.cellphone=personItem.cellphone;
+                        newPerson.city=personItem.city;
+
+                        for(let pid of event.interes){
+                              if(pid.persons==personItem._id){
+                                    newPerson.state=pid.state;
+                                    if(newPerson.state==0)newPerson.stateName='Interesado';
+                                    if(newPerson.state==1)newPerson.stateName='En Duda';
+                                    if(newPerson.state==2)newPerson.stateName='Confirmado';
+                                    if(newPerson.state==3)newPerson.stateName='Inscrito';
+                                    if(newPerson.state==4)newPerson.stateName='En Linea';
+                                    if(newPerson.state==5)newPerson.stateName='Proximo Evento';
+                                    if(newPerson.state==6)newPerson.stateName='Sin Interes';
+                                    if(newPerson.state==interesnumber){
+                                          nuevaLista.push(newPerson);
+
+                                    }
+                              }
+                        }                             
+                  }
+                  console.log(nuevaLista);
+                  return res.status(200).send(nuevaLista);
+            })
+
+
+
+   })
+
+
+
    .get('/all',function(req,res){
 
       db.events.find({},function(err,events){
