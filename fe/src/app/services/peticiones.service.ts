@@ -427,6 +427,24 @@ export class PeticionesService {
   
 
      }
+     getPersonasInteresWithEvent(idEvent){
+        let body = JSON.stringify(idEvent);
+        //console.log(body);
+        var headers = new HttpHeaders().set('Content-Type', 'application/json; charset=utf-8');
+        return this._http.post(this.url + 'events/getPersonasInteresWithEvent/', body, { headers: headers }).map((res: Response) => res);
+  
+
+     }
+     getPersonFilterInteresWithEvent(eventInteres){
+        let body = JSON.stringify(eventInteres);
+        //console.log(body);
+        var headers = new HttpHeaders().set('Content-Type', 'application/json; charset=utf-8');
+        return this._http.post(this.url + 'events/getPersonFilterInteresWithEvent/', body, { headers: headers }).map((res: Response) => res);
+  
+
+
+     }
+
    ///////////////////////////////////////////////////////////////////////////////////////////
 
 }

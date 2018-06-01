@@ -24,6 +24,7 @@ export class PersonsOfEventsComponent implements OnInit {
   public lista_personasPorInteres=[];
   public listaInteres;
   public persona;
+  public listaReturned;
   constructor(
     private router: Router,
     private route: ActivatedRoute,
@@ -37,114 +38,37 @@ export class PersonsOfEventsComponent implements OnInit {
   ngOnInit() {
     this.route.params.subscribe(params=>{
         this.eventId=params.id;
-        this.loadPersons();
+        this.loadPersons2();
     })
     
 
   }
-  loadPersons(){
-
+  loadPersons2(){
     this.lista_personasPorInteres=[];
-    
-    this._peticionesService.getEvent(this.eventId).subscribe(result=>{
-      this.event=result;
-      console.log(this.event.interes);
-      this.listaInteres=this.event.interes;
-      for(let i of this.listaInteres){
-        this._peticionesService.getPerson(i.persons).subscribe(result=>{
-          this.persona=result;
-          let personaItem={} as PersonItem;
-          personaItem._id=this.persona._id;
-          personaItem.first_name=this.persona.first_name;
-          personaItem.last_name=this.persona.last_name;
-          personaItem.cellphone=this.persona.cellphone;
-          personaItem.city=this.persona.city;
-          for(let int of this.event.interes){
-            if(int.persons==this.persona._id){
-              personaItem.state=int.state;
-               ////////////
-                 //  0 interesados
-                 //  1 en duda
-                 //  2 confirmados
-                 //  3 isncritos
-                 //  4 enlinea
-                 //  5 proximo evento 
-                 //  6 sin interes
-                 //////// 
-              if(personaItem.state==0)personaItem.stateName='Interesado';
-              if(personaItem.state==1)personaItem.stateName='En Duda';
-              if(personaItem.state==2)personaItem.stateName='Confirmado';
-              if(personaItem.state==3)personaItem.stateName='Inscrito';
-              if(personaItem.state==4)personaItem.stateName='En Linea';
-              if(personaItem.state==5)personaItem.stateName='Proximo Evento';
-              if(personaItem.state==6)personaItem.stateName='Sin Interes';
-
-            }
-          }
-          this.lista_personasPorInteres.push(personaItem);
-          // this.lista_personas.push(this.persona);
-        })
-        
-
-      }
-      // console.log(this.lista_personas);
-
+    this._peticionesService.getEvent(this.eventId).subscribe(response=>{
+          this.event=response;
+          this._peticionesService.getPersonasInteresWithEvent(this.event).subscribe(res=>{
+            this.listaReturned=res;
+            this.lista_personasPorInteres=this.listaReturned;
+          })
     })
+    
   }
-  loadPersonsInteres(numInteres){
+ 
+  loadPersonsInteres2(numInteres){
     this.lista_personasPorInteres=[];
-    // this.lista_personasPorInteres=[];
-    // this.lista_personasPorInteres=[];
-    
-
-    this._peticionesService.getEvent(this.eventId).subscribe(result=>{
-      this.event=result;
-      console.log(this.event.interes);
-      this.listaInteres=this.event.interes;
-      for(let i of this.listaInteres){
-        this._peticionesService.getPerson(i.persons).subscribe(result=>{
-          this.persona=result;
-          let personaItem={} as PersonItem;
-          personaItem._id=this.persona._id;
-          personaItem.first_name=this.persona.first_name;
-          personaItem.last_name=this.persona.last_name;
-          personaItem.cellphone=this.persona.cellphone;
-          personaItem.city=this.persona.city;
-          for(let int of this.event.interes){
-            if(int.persons==this.persona._id){
-              personaItem.state=int.state;
-               ////////////
-                 //  0 interesados
-                 //  1 en duda
-                 //  2 confirmados
-                 //  3 isncritos
-                 //  4 enlinea
-                 //  5 proximo evento 
-                 //  6 sin interes
-                 //////// 
-              if(personaItem.state==0)personaItem.stateName='Interesado';
-              if(personaItem.state==1)personaItem.stateName='En Duda';
-              if(personaItem.state==2)personaItem.stateName='Confirmado';
-              if(personaItem.state==3)personaItem.stateName='Inscrito';
-              if(personaItem.state==4)personaItem.stateName='En Linea';
-              if(personaItem.state==5)personaItem.stateName='Proximo Evento';
-              if(personaItem.state==6)personaItem.stateName='Sin Interes';
-             
-            }
-          }
-          if(personaItem.state==numInteres){
-            this.lista_personasPorInteres.push(personaItem);
-          }
-          
-          // this.lista_personas.push(personaItem);
-        })
-        
-
-      }
-      console.log(this.lista_personas);
-
+    let eventinteres={}as EventInteres;
+    eventinteres.event=this.event;
+    eventinteres.interes=numInteres;
+    this._peticionesService.getPersonFilterInteresWithEvent(eventinteres).subscribe(response=>{
+      this.listaReturned=response;
+      this.lista_personasPorInteres=this.listaReturned;
     })
+
+
+
   }
+  
   edit(_id:string){
     var personIdEventId=_id+'-'+this.eventId;
     this.router.navigate(['home/events/persons/edit',personIdEventId]);
@@ -153,6 +77,10 @@ export class PersonsOfEventsComponent implements OnInit {
    
 
 
+}
+export interface EventInteres{
+  event:Object,
+  interes:number;
 }
 export interface EventIdPersonId{
   eventId:string,
