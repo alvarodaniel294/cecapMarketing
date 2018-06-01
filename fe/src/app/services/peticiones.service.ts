@@ -418,6 +418,15 @@ export class PeticionesService {
         return this._http.post(this.url + 'events/addInteresToEvents/', body, { headers: headers }).map((res: Response) => res);
   
      }
+     saveBatchWhatsappNumbers(Obj){
+
+        let body = JSON.stringify(Obj);
+        //console.log(body);
+        var headers = new HttpHeaders().set('Content-Type', 'application/json; charset=utf-8');
+        return this._http.post(this.url + 'persons/BatchWhatsappNumbers/', body, { headers: headers }).map((res: Response) => res);
+  
+
+     }
    ///////////////////////////////////////////////////////////////////////////////////////////
 
 }
