@@ -148,64 +148,127 @@ router
    .post('/upload', multipartMiddleware, function (req, res) {
             // console.log(req.body, req.files);
             // console.log(req.files.fileKey.path);
-            console.log(typeof req.body);
-            console.log(typeof req.body.body);
-            console.log((req.body.body.split(',')[1]).split(':')[1]);
-            let carteraId=(req.body.body.split(',')[1]).split(':')[1];
+            // console.log(typeof req.body);
+            // console.log(typeof req.body.body);
+            // console.log(req.body.body);
+            // console.log((req.body.body.split(',')[0]).split(':')[1]);
+            let carteraId=(req.body.body.split(',')[0]).split(':')[1];
             
-            console.log(req.files);
+            // console.log(req.files);
             var workbook = XLSX.readFile(req.files.fileKey.path);
             var sheet_name_list = workbook.SheetNames;
             var xlData = XLSX.utils.sheet_to_json(workbook.Sheets[sheet_name_list[0]]);
-
-            let carteraIdMongoose=carteraId.substring(1,carteraId.length-1);
-            console.log(carteraIdMongoose);
-            let newId = new mongoose.mongo.ObjectId(carteraIdMongoose);
+            // console.log('xlData');
             
+            // console.log(xlData);
+            // console.log('xlData');
+            
+            let carteraIdMongoose=carteraId.substring(1,carteraId.length-1);
+            // console.log(carteraIdMongoose);
+            let newId = new mongoose.mongo.ObjectId(carteraIdMongoose);
+            let respuestaVacia={};   
+
+            try{
+
+            
+
             for(let contact of xlData){
                 let newPerson=new db.persons(req.body);
                 newPerson.carteras=carteraId;
-                if(contact.Mobile!=undefined){
-                    newPerson.first_name=contact.Firstname;
-                    if(contact.Lastname!=null){
-                        newPerson.last_name=contact.Lastname;
+                newPerson.whatsapp_group='Importados del Celular';
+                newPerson.city='';
+                newPerson.email='';
+                newPerson.ocupation='Particular';
+                newPerson.descOcupation={carrera:'',
+                                         universidad:'',
+                                         semestre:'',
+                                         areaTrabajo:'Otro',
+                                         profesion:'',
+                                         empresa:'',
+                                         cargao:''};
+
+                newPerson.carteras=newId;
+                console.log('/////////////////////////////////////////////////');
+
+                console.log(contact);
+                console.log(contact['Móvil']);
+                // console.log(contact['Móvil'].split(' ')[1]);
+
+                console.log(contact.Nombre);
+
+                console.log(contact.Apellidos);
+
+                console.log(contact.Mobile);
+                console.log(contact.first_name);
+
+                
+               
+                if(contact['Móvil']!=undefined){
+
+                    if(contact['Móvil'].split(' ')[1]!=null){
+                        newPerson.cellphone=contact['Móvil'].split(' ')[1];
                     }else{
-                        newPerson.last_name='';
+                        newPerson.cellphone=contact['Móvil'];
+
                     }
-                    newPerson.ci=0;
-                    newPerson.phone=0;
-                    let numero='s'+contact.Mobile;
-                    if(numero.length==9){
-                        newPerson.cellphone=numero.substring(1,9);
+                    if(contact.Nombre!=undefined){
+                        newPerson.first_name=contact.Nombre;
+
+                    }else{newPerson.last_name='';}
+                    if(contact.Apellidos!=undefined){
+                        newPerson.last_name=contact.Apellido;
+                    }else{newPerson.last_name='';}
+                   console.log('se guardo la posrsonaaaaaaaaaaaaaaaaaaaaaa')
+                   db.persons.findOne({cellphone:newPerson.cellphone},function(err,person){
+                       if(person==null){
+                        newPerson.save();
+                        console.log(newPerson);
+                        console.log('se guardarala persoana');
+                       }
+                   })
+                   
+                
+                }else{
+                    if(contact.Mobile!=undefined){
+                        if(contact.Mobile.split(' ')[1]!=null){
+                            newPerson.cellphone=contact.Mobile.split(' ')[1];
+                        }else{
+                            newPerson.cellphone=contact.Mobile;
+
+                        }
+                        if(contact.first_name!=undefined){
+                            newPerson.first_name=contact.Firstname;
+                        }else{newPerson.first_name='';}
+                        if(contact.last_name!=undefined){
+                            newPerson.last_name=contact.Lastname;
+                        }else{newPerson.last_name='';}
+
+                        db.persons.findOne({cellphone:newPerson.cellphone},function(err,person){
+                            if(person==null){
+                             newPerson.save();
+                             console.log(newPerson);
+                             console.log('se guardarala persoana');
+                            }
+                        })
+                      
                     }else{
-                        newPerson.cellphone=numero.substring(6,numero.length);
                     }
-                    newPerson.whatsapp_group='Importados del celular';
-                    newPerson.city='';
-                    newPerson.email='';
-                    newPerson.ocupation='Particular';
-                    newPerson.descOcupation={carrera:'',
-                                            universidad:'',
-                                            semestre:'',
-                                            areaTrabajo:'Otro',
-                                            profesion:'',
-                                            empresa:'',
-                                            cargao:''};
-
-                    newPerson.carteras=newId;
-                    newPerson.save(function(err,person){
-                        if (err) return res.status(400).send(err);
-
-
-                        return res.status(200).send();
-                    })
-
-                }        
+                }
+                
+                  
            }
+
+        }catch(error){
+            return res.status(400).send(respuestaVacia);
+        }finally{
+            return res.status(200).send(respuestaVacia);
+        }
+        
    })  
    
   
 
+   
 
    .post('/addFromWhatsapp',function(req,res){
         var person=new db.persons(req.body);
@@ -266,6 +329,63 @@ router
             }
         })
    
+    })
+
+    .post('/BatchWhatsappNumbers',function(req,res){
+        console.log(req.body);
+        let listaNumeros=req.body.listaNumeros;
+        let whatsapp_group=req.body.whatsapp_group;
+        let cellphone=req.body.cellphone;
+        let city=req.body.city;
+        let interes=req.body.interes;
+        let carteras=req.body.carteras;
+        for(let num of listaNumeros){
+            db.persons.findOne({cellphone:num},function(err,person){
+                if (err) return res.status(400).send(err);
+                if(person==null){
+                    let newPerson= new db.persons(req.body);
+                    newPerson.descOcupation={};
+                    newPerson.first_name='';
+                    newPerson.last_name='';
+                    newPerson.ci='';
+                    newPerson.carteras=carteras;
+                    newPerson.phone=0;
+                    newPerson.cellphone=num;
+                    newPerson.email='';
+                    newPerson.interes=interes;
+                    newPerson.ocupation='Particular';
+                    newPerson.descOcupation={carrera:'',
+                                            universidad:'',
+                                            semestre:'',
+                                            areaTrabajo:'Otro',
+                                            profesion:'',
+                                            empresa:'',
+                                            cargao:''};
+                    console.log(newPerson);
+                    newPerson.save(function(err,np){
+                        if (err) console.log(err);
+                        for(let program of interes){
+                            // console.log(program);
+                            db.events.find({programs:program.programId},function(err,eventos){
+                                for(let e of eventos){
+                                    let inte={};
+                                    inte.persons=np;
+                                    inte.state=0;
+                                    e.interes.push(inte);
+                                    e.save();
+                                }
+                            })
+                        }
+
+                    });
+                }
+            })
+
+
+        }
+        return res.status(200).send(req.body);
+        
+
     })
 
    .post('/', function (req, res, next) {

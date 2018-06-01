@@ -106,27 +106,22 @@ export class ImportWhatsNumbersComponent implements OnInit {
   }
   saveOnDB(){
 
-    for(let num of this.numbers){
 
+    let objWhats={}as ObjetcWhatsappToSend;
+    objWhats.listaNumeros=this.numbers;
+    objWhats.whatsapp_group=this.whatsGroupName;
+    objWhats.cellphone=0;
+    objWhats.carteras=this.cartera;
+    objWhats.city=this.departamento;
+    objWhats.interes=this.programasConInteres;
+    this._peticionesService.saveBatchWhatsappNumbers(objWhats).subscribe(response=>{
 
-      this.nuevaPersona.whatsapp_group=this.whatsGroupName;
-      this.nuevaPersona.cellphone=num;
-      this.nuevaPersona.carteras=this.cartera._id;
-      this.nuevaPersona.city=this.departamento;
-      this.nuevaPersona.interes=this.programasConInteres;
-      console.log(this.nuevaPersona);
-      this._peticionesService.addPersonFromWhatsapp(this.nuevaPersona).subscribe(res=>{
-        this.newPersons.push(res);
-
-        this.router.navigate(['home/persons']);
-      },err=>{
-
-        console.log(err);
-      })
-    }
+      // console.log(response);
+    })
     
     
   }
+
 
   queryCartera() {
     //console.log(Identity._id)
@@ -185,6 +180,17 @@ export interface ProgramasCheckbox{
   programName:string,
   checked:boolean,
   state:number,
+
+}
+export interface ObjetcWhatsappToSend{
+
+  listaNumeros:{},
+  whatsapp_group:string,
+  cellphone:number,
+  carteras:string,
+  city:string,
+  interes:{},
+
 
 }
 
