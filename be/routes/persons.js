@@ -362,22 +362,28 @@ router
                                             empresa:'',
                                             cargao:''};
                     console.log(newPerson);
-                    newPerson.save(function(err,np){
-                        if (err) console.log(err);
-                        for(let program of interes){
-                            // console.log(program);
-                            db.events.find({programs:program.programId},function(err,eventos){
-                                for(let e of eventos){
-                                    let inte={};
-                                    inte.persons=np;
-                                    inte.state=0;
-                                    e.interes.push(inte);
-                                    e.save();
-                                }
-                            })
-                        }
+                    db.persons.findOne({cellphone:newPerson.cellphone},function(err,person){
 
-                    });
+                        if(person==null){
+                            newPerson.save(function(err,np){
+                                if (err) console.log(err);
+                                for(let program of interes){
+                                    // console.log(program);
+                                    db.events.find({programs:program.programId},function(err,eventos){
+                                        for(let e of eventos){
+                                            let inte={};
+                                            inte.persons=np;
+                                            inte.state=0;
+                                            e.interes.push(inte);
+                                            e.save();
+                                        }
+                                    })
+                                }
+        
+                            });
+                        }
+                    })
+                   
                 }
             })
 
