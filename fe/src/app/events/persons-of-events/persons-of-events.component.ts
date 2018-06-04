@@ -5,6 +5,7 @@ import { ActivatedRoute, Router } from "@angular/router";
 import { Pipe, PipeTransform } from '@angular/core';
 import { Identity } from '../../services/global';
 
+import { Angular5Csv } from 'angular5-csv/Angular5-csv';
 
 
 @Component({
@@ -25,6 +26,8 @@ export class PersonsOfEventsComponent implements OnInit {
   public listaInteres;
   public persona;
   public listaReturned;
+  // public listaToExport=[];
+  public toExport;
   constructor(
     private router: Router,
     private route: ActivatedRoute,
@@ -74,6 +77,34 @@ export class PersonsOfEventsComponent implements OnInit {
     this.router.navigate(['home/events/persons/edit',personIdEventId]);
 
   }
+
+
+
+  exportarExcel(){
+    let listaToExport=[];
+    let personToExport={} as PersonToExport;
+    for(let p of this.lista_personasPorInteres){
+      personToExport.first_name=p.first_name;
+      personToExport.last_name=p.last_name;
+      personToExport.city=p.city;
+      personToExport.cellphone=p.cellphone;
+      personToExport.interes=p.stateName;
+      listaToExport.push(personToExport);
+    }
+    let options = { 
+      fieldSeparator: ',',
+      quoteStrings: '"',
+      decimalseparator: '.',
+      showLabels: true, 
+      showTitle: true,
+      useBom: true,
+      // noDownload: true,
+      headers: ["NOMBRES", "APELLIDOS", "CIUDAD","CELULAR","INTERES"]
+    };
+   
+
+    this.toExport=new Angular5Csv(listaToExport,"Nuevo Reporte",options);
+  }
    
 
 
@@ -102,5 +133,13 @@ export interface PersonItem{
   state:number,
   stateName:string,
 
+
+}
+export interface PersonToExport{
+  first_name:string,
+  last_name:string,
+  cellphone:number,
+  city:string,
+  interes:string
 
 }
