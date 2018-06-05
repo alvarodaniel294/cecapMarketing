@@ -10,7 +10,7 @@
     <table class="table">
       <th>Filtros Personas</th>
     </table>
-    <div>
+    <div *ngIf='rol?.name=="Admin"'>
 
       <button class="btn btn-primary margin-left" (click)="loadPersonsInteres2(0)">Interesados</button>
       <button class="btn btn-primary margin-left" (click)="loadPersonsInteres2(2)">Confirmados</button>
@@ -19,6 +19,17 @@
       <button class="btn btn-primary margin-left" (click)="loadPersonsInteres2(5)">Proximo Evento</button>
       <button class="btn btn-primary margin-left" (click)="loadPersonsInteres2(6)">Sin Interes</button>
       <button class="btn btn-primary margin-left" (click)="loadPersons2()">Todos</button>
+
+    </div>
+    <div *ngIf='rol?.name!="Admin"'>
+
+      <button class="btn btn-primary margin-left" (click)="loadPersonsInteresByCartera(0)">Interesados</button>
+      <button class="btn btn-primary margin-left" (click)="loadPersonsInteresByCartera(2)">Confirmados</button>
+      <button class="btn btn-primary margin-left" (click)="loadPersonsInteresByCartera(3)">Inscrito</button>
+      <button class="btn btn-primary margin-left" (click)="loadPersonsInteresByCartera(4)">On Line</button>
+      <button class="btn btn-primary margin-left" (click)="loadPersonsInteresByCartera(5)">Proximo Evento</button>
+      <button class="btn btn-primary margin-left" (click)="loadPersonsInteresByCartera(6)">Sin Interes</button>
+      <button class="btn btn-primary margin-left" (click)="loadPersonsInteresByCartera()">Todos</button>
 
     </div>
     <div>

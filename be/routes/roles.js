@@ -22,6 +22,16 @@ router
          return res.status(200).send(rol);
       });
    })
+
+   .post('/current',function(req,res){
+    console.log(req.body.rol)
+    db.roles.findOne({_id:req.body.rol},function(err,rol){
+      if (err) return res.status(400).send(err);
+      return res.status(200).send(rol)
+
+    })
+
+   })
 //    .post('/add', function(req, res){
 //       console.log(req.body);
 //       var office = new db.offices(req.body);

@@ -27,6 +27,7 @@ export class PersonsOfEventsComponent implements OnInit {
   public persona;
   public listaReturned;
   private listaToExport = [];
+  public rol;
 
   // public listaToExport=[];
   public toExport;
@@ -41,9 +42,11 @@ export class PersonsOfEventsComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.queryRol();
     this.route.params.subscribe(params => {
       this.eventId = params.id;
-      this.loadPersons2();
+      // this.loadPersons2();
+      this.loadPersonsByCartera();
     })
 
 
@@ -51,9 +54,24 @@ export class PersonsOfEventsComponent implements OnInit {
 
   loadPersonsByCartera(){
 
-    let eventIdPersonId={}as EventIdPersonId;
-    eventIdPersonId.eventId=this.eventId;
-    eventIdPersonId.personId=Identity._id;
+    this.lista_personasPorInteres=[];
+    this._peticionesService.getEvent(this.eventId).subscribe(res=>{
+      this.event=res;
+
+      let eventIdPersonId={}as EventIdPersonId;
+      eventIdPersonId.event=this.event;
+      eventIdPersonId.identity=Identity;
+      this._peticionesService.getPersonasInteresWithEventByCartera(eventIdPersonId).subscribe(res=>{
+        this.listaReturned=res;
+        this.lista_personasPorInteres=this.listaReturned;
+
+      })
+      
+    })
+
+    
+
+
   }
 
   loadPersons2() {
@@ -81,6 +99,20 @@ export class PersonsOfEventsComponent implements OnInit {
 
 
   }
+  loadPersonsInteresByCartera(numInteres) {
+    this.lista_personasPorInteres = [];
+    let eventinteres = {} as EventInteres;
+    eventinteres.event = this.event;
+    eventinteres.interes = numInteres;
+    eventinteres.identity=Identity;
+    this._peticionesService.getPersonFilterInteresWithEventByCartera(eventinteres).subscribe(response => {
+      this.listaReturned = response;
+      this.lista_personasPorInteres = this.listaReturned;
+    })
+
+
+
+  }
 
   edit(_id: string) {
     var personIdEventId = _id + '-' + this.eventId;
@@ -88,6 +120,11 @@ export class PersonsOfEventsComponent implements OnInit {
 
   }
 
+  queryRol(){
+    this._peticionesService.getCurrentRol(Identity).subscribe(res=>{
+      this.rol=res;
+    })
+  }
 
 
   exportarExcel() {
@@ -134,11 +171,12 @@ function nPersons(i, lista_personasPorInteres, listaToExport, name) {
 // }
 export interface EventInteres {
   event: Object,
-  interes: number;
+  interes: number,
+  identity:{},
 }
 export interface EventIdPersonId {
-  eventId: string,
-  personId: string,
+  event: {},
+  identity: {},
 }
 
 export interface EventPerson {
