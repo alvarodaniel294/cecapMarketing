@@ -7,7 +7,9 @@
               <!-- <li><app-control-asistance></app-control-asistance></li> -->
           </ol>
       </div> 
-     
+     <div *ngIf='rol?.name=="Admin"'>
+       <label for="text">{{this.textoAdmin}}</label>
+     </div>
      <!-- <app-persona></app-persona> -->
      <table class="table">
            <th>Filtros Personas</th> 

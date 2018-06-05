@@ -177,6 +177,8 @@ router
                 newPerson.carteras=carteraId;
                 newPerson.whatsapp_group='Importados del Celular';
                 newPerson.city='';
+                newPerson.first_name='';
+                newPerson.last_name='';
                 newPerson.email='';
                 newPerson.ocupation='Particular';
                 newPerson.descOcupation={carrera:'',
