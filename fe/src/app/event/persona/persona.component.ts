@@ -5,6 +5,7 @@ import { PeticionesService} from '../../services/peticiones.service';
 import { ActivatedRoute, Router } from "@angular/router";
 import { Pipe, PipeTransform } from '@angular/core';
 import { FilterPipe } from "./filter.pipe";
+import { Identity } from "../../services/global";
 
 @Component({
   selector: 'app-persona',
@@ -19,6 +20,9 @@ export class PersonaComponent implements OnInit {
    public name: string;
    public searchText: string = "";
   public color='rojo';
+  public cartera;
+  public rol;
+  public textoAdmin="Usted es Administrador y se muestran TODAS las personas"
   constructor(
      private router: Router,
      private route: ActivatedRoute,
@@ -30,7 +34,19 @@ export class PersonaComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.query();    
+    // console.log(Identity)
+    this.getRol();
+    this.getCartera();
+    
+    
+  }
+  listarPersonasPorRol(){
+
+    this._peticionesService.getPersonsOfCartera(this.cartera._id).subscribe(response=>{
+      
+      this.listado_personas=response;
+      console.log(this.listado_personas)
+    })
   }
   query() {
     
@@ -66,6 +82,28 @@ export class PersonaComponent implements OnInit {
   clearFilter() {
     this.searchText = "";
   }
+
+  getCartera(){
+    this._peticionesService.getCarteraFromUserId(Identity._id).subscribe(response=>{
+
+      this.cartera=response;
+
+      if(this.rol.name=="Admin"){
+        this.query();
+      }else{
+        this.listarPersonasPorRol();
+      }
+    })
+  }
   
+  getRol(){
+    this._peticionesService.getRole(Identity.rol).subscribe(response=>{
+      this.rol=response;
+
+
+     
+      // console.log(this.rol)
+    })
+  }
 }
 

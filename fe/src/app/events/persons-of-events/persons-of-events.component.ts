@@ -48,6 +48,14 @@ export class PersonsOfEventsComponent implements OnInit {
 
 
   }
+
+  loadPersonsByCartera(){
+
+    let eventIdPersonId={}as EventIdPersonId;
+    eventIdPersonId.eventId=this.eventId;
+    eventIdPersonId.personId=Identity._id;
+  }
+
   loadPersons2() {
     this.lista_personasPorInteres = [];
     this._peticionesService.getEvent(this.eventId).subscribe(response => {
