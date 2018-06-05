@@ -445,6 +445,39 @@ export class PeticionesService {
 
      }
 
+
+     getPersonasInteresWithEventByCartera(eventInteres){
+        let body = JSON.stringify(eventInteres);
+        //console.log(body);
+        var headers = new HttpHeaders().set('Content-Type', 'application/json; charset=utf-8');
+        return this._http.post(this.url + 'events/getPersonasInteresWithEventByCartera/', body, { headers: headers }).map((res: Response) => res);
+  
+
+
+     }
+     getPersonFilterInteresWithEventByCartera(eventInteres){
+        let body = JSON.stringify(eventInteres);
+        //console.log(body);
+        var headers = new HttpHeaders().set('Content-Type', 'application/json; charset=utf-8');
+        return this._http.post(this.url + 'events/getPersonFilterInteresWithEventByCartera/', body, { headers: headers }).map((res: Response) => res);
+  
+
+
+     }
+
+     getCurrentRol(idendity){
+
+        let body = JSON.stringify(idendity);
+        //console.log(body);
+        var headers = new HttpHeaders().set('Content-Type', 'application/json; charset=utf-8');
+        return this._http.post(this.url + 'roles/current/', body, { headers: headers }).map((res: Response) => res);
+  
+
+     }
+
+
+
+
    ///////////////////////////////////////////////////////////////////////////////////////////
 
 }
