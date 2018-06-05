@@ -1,16 +1,16 @@
 <div class="content-wrapper">
   <section class="content">
-      <div>     
-          <ol class="breadcrumb">
-              <!-- <li><a class="btn btn-primary" [routerLink]="['/home/persons/add']"><i class="fa fa-book"></i>Registrar Persona</a></li>
+    <div>
+      <ol class="breadcrumb">
+        <!-- <li><a class="btn btn-primary" [routerLink]="['/home/persons/add']"><i class="fa fa-book"></i>Registrar Persona</a></li>
               <li><app-control-asistance></app-control-asistance></li> -->
-          </ol>
-      </div> 
-     
-     <table class="table">
-           <th>Filtros Personas</th> 
-     </table>
-     <div>
+      </ol>
+    </div>
+
+    <table class="table">
+      <th>Filtros Personas</th>
+    </table>
+    <div>
 
       <button class="btn btn-primary margin-left" (click)="loadPersonsInteres2(0)">Interesados</button>
       <button class="btn btn-primary margin-left" (click)="loadPersonsInteres2(2)">Confirmados</button>
@@ -19,9 +19,9 @@
       <button class="btn btn-primary margin-left" (click)="loadPersonsInteres2(5)">Proximo Evento</button>
       <button class="btn btn-primary margin-left" (click)="loadPersonsInteres2(6)">Sin Interes</button>
       <button class="btn btn-primary margin-left" (click)="loadPersons2()">Todos</button>
-      
-     </div>
-       <div>
+
+    </div>
+    <div>
       <!-- <div class="filter-wrap">
         <div class="col-lg-1">Buscar:</div>
         <input [(ngModel)]="searchText" placeholder="Nombre Persona" class="filter-input">
@@ -30,37 +30,42 @@
 
 
     </div>
-     <table class="table table-hover" >
-        <thead >
-           <tr>
-              <th>Nombre</th>
-              <th>Apellido</th>
-              <th>Telefono</th>
-              <th>Interes</th>
-              <th>Ciudad</th>
-              <!-- <th>Ocupacion</th> -->
-              <th colspan="2">Opciones</th>
-           </tr>
-        </thead>
-        <tbody> 
-           <tr *ngFor="let i of lista_personasPorInteres">
-              <td>{{ i.first_name }}</td>
-              <th>{{i.last_name}}</th>
-              <td>{{ i.cellphone }}</td>
-              <td>{{i.stateName}}</td>
-              <td>{{i.city}}</td>
-              <!-- <td>{{ i.ocupation }}</td> -->
-             
-              <td>
-                 <a class="btn btn-primary" (click)="edit(i._id)">EDITAR</a>
-                   </td>
-           </tr>
-        </tbody>
-     </table>
-     <br>
-     <div align="center">
-        <button class="btn btn-primary" (click)="exportarExcel()">Exportar Excel</button>
-     </div>
-     
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th>Nombre</th>
+          <th>Apellido</th>
+          <th>Telefono</th>
+          <th>Interes</th>
+          <th>Ciudad</th>
+          <!-- <th>Ocupacion</th> -->
+          <th colspan="2">Opciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let i of lista_personasPorInteres">
+          <td>{{ i.first_name }}</td>
+          <th>{{i.last_name}}</th>
+          <td>{{ i.cellphone }}</td>
+          <td>{{i.stateName}}</td>
+          <td>{{i.city}}</td>
+          <!-- <td>{{ i.ocupation }}</td> -->
+
+          <td>
+            <a class="btn btn-primary" (click)="edit(i._id)">EDITAR</a>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <br>
+    <div align="center">
+      <input type="text" id="grupo" placeholder="Grupo">
+      <input type="text" id="PrimerNombre" placeholder="Primer Nombre">
+      <input type="text" id="SegundoNombre" placeholder="Segundo Nombre">
+      <input type="text" id="Apellido" placeholder="Apellidos">
+      <input type="text" id="Celular" placeholder="Celular">
+      <button class="btn btn-primary" (click)="exportarExcel()">Exportar Excel</button>
+    </div>
+
   </section>
 </div>
