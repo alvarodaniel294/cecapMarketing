@@ -328,6 +328,8 @@ router
         let city = req.body.city;
         let interes = req.body.interes;
         let carteras = req.body.carteras;
+        let universida =req.body.universidad;
+        let carrer = req.body.carrera;
         var i = 0;
         for (let num of listaNumeros) {
 
@@ -345,8 +347,8 @@ router
                     newPerson.interes = interes;
                     newPerson.ocupation = 'Particular';
                     newPerson.descOcupation = {
-                        carrera: '',
-                        universidad: '',
+                        carrera: carrer,
+                        universidad: universida,
                         semestre: '',
                         areaTrabajo: 'Otro',
                         profesion: '',
