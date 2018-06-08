@@ -18,7 +18,7 @@ import { Cashflowusers } from "../../../modelo/cashflowusers";
 export class AddPersonComponent implements OnInit {
     @ViewChild("close", { read: ElementRef }) close: ElementRef;
     @Output() messageEvent = new EventEmitter();
-    
+
     public person: Person;//colection
     public descOcupation: DescOcupation;//collection
     public inscription: Inscription;//collection
@@ -29,51 +29,88 @@ export class AddPersonComponent implements OnInit {
     public cartera;
     public ingresoPorInscripcion;
 
+    public newProgramsCheck = [];
     public registro: Registro;
 
-    submitted= false;
+    submitted = false;
 
     constructor(
         private _peticionesService: PeticionesService,
         private route: ActivatedRoute,
         private router: Router
     ) {
-        this.person = new Person('', '', null, null, null,'','','','', null, '',null);
-       ///////////////////////////
-       ///new Person(f
-       //irst_name: string, 
-       //last_name: string, 
-       //ci: number, 
-       //phone: number, 
-       //cellphone: number, 
-       //whatsapp_group: string, 
-       //city: string, 
-       //email: string, 
-       //ocupation: string, 
-       //descOcupation: DescOcupation, 
-       //carteras: string)
-       ////////////////////////////////
-        this.inscription = new Inscription(null, null, null,null,0,0,'0','');
+        this.person = new Person('', '', null, null, null, '', '', '', '', null, '', null, '');
+        ///////////////////////////
+        ///new Person(f
+        //irst_name: string, 
+        //last_name: string, 
+        //ci: number, 
+        //phone: number, 
+        //cellphone: number, 
+        //whatsapp_group: string, 
+        //city: string, 
+        //email: string, 
+        //ocupation: string, 
+        //descOcupation: DescOcupation, 
+        //carteras: string)
+        ////////////////////////////////
+        this.inscription = new Inscription(null, null, null, null, 0, 0, '0', '');
         //this.identy=Identity._id;
-        this.descOcupation = new DescOcupation('','','','','','','');
-        this.registro = new Registro(null,null,'');//idEvent,idUser,persona:{}, montCancel
-        
-        this.ingresoPorInscripcion=new Cashflowusers(new Date(),new Date(),0,0,0,"","","","","");
+        this.descOcupation = new DescOcupation('', '', '', '', '', '', '');
+        this.registro = new Registro(null, null, '');//idEvent,idUser,persona:{}, montCancel
+
+        this.ingresoPorInscripcion = new Cashflowusers(new Date(), new Date(), 0, 0, 0, "", "", "", "", "");
     }
-    onSubmit() { 
+    onSubmit() {
     }
     ngOnInit() {
         console.log(Identity._id);
         //this.queryPrograms();
         this.queryEvents();
         this.queryCartera();
+        this.queryPrograms();
+
+    }
+    llenarProgramsCheckbox() {
+        for (let p of this.programs) {
+            let programItem = {} as ProgramCheckBox;
+            programItem.checked = false;
+            programItem.programId = p._id;
+            programItem.programName = p.name;
+            programItem.state = 0;
+            this.newProgramsCheck.push(programItem);
+
         }
-    guardar(){
+        // this.fixProgramCheckbox()
+
+    }
+    queryPrograms() {
+        this._peticionesService.getPrograms().subscribe(response => {
+            this.programs = response;
+            this.llenarProgramsCheckbox();
+            console.log(this.programs);
+            console.log("hi")
+        },
+            error => {
+                var errorMessage = <any>error;
+                console.log(errorMessage);
+            }
+        );
+    }
+    guardar() {
         // console.log(this.IdEvent);
         // console.log(this.montoCan);
 
         // console.log(this.descOcupation);
         // console.log(this.inscription);
+        var newInteres = [];
+        for (let npc of this.newProgramsCheck) {
+            if (npc.checked) {
+                newInteres.push(npc);
+            }
+        }
+        console.log(this.person);
+        this.person.interes = newInteres;
         this.person.descOcupation = this.descOcupation;
         this.inscription.users = Identity._id;
         this.registro.inscription = this.inscription;
@@ -81,53 +118,53 @@ export class AddPersonComponent implements OnInit {
         this.registro.persona = this.person;
         console.log(this.registro);
         this._peticionesService.addPerson(this.registro).subscribe(
-          result => {
-            var esperado = result;
-            console.log(esperado);
+            result => {
+                var esperado = result;
+                console.log(esperado);
 
-        /////////////   Ingreso por inscripcin a caja Chica////////////////
+                /////////////   Ingreso por inscripcin a caja Chica////////////////
 
-            // this.ingresoPorInscripcion.receipt=this.inscription.receipt;
-            // this.ingresoPorInscripcion.title='Inscripcion';
-            // this.ingresoPorInscripcion.description=this.person.first_name+' '+this.person.last_name;
-            // this.ingresoPorInscripcion.detail_amount=this.inscription.canceled_price;
-            // this.ingresoPorInscripcion.user=Identity._id;
-            // this.ingresoPorInscripcion.events=this.IdEvent;
-            // ////////////////////////////////////
-            // this._peticionesService.addCashFlowUserIngreso(this.ingresoPorInscripcion).subscribe(
-            //     result => {
-            //       var returned = result;
-            //     },
-            //     error => {
-            //       var errorMessage = <any>error;
-            //       console.log(errorMessage);
-            //       alert('Error al Crear cashflowuseringreso');
-            //     }
-            //   );
+                // this.ingresoPorInscripcion.receipt=this.inscription.receipt;
+                // this.ingresoPorInscripcion.title='Inscripcion';
+                // this.ingresoPorInscripcion.description=this.person.first_name+' '+this.person.last_name;
+                // this.ingresoPorInscripcion.detail_amount=this.inscription.canceled_price;
+                // this.ingresoPorInscripcion.user=Identity._id;
+                // this.ingresoPorInscripcion.events=this.IdEvent;
+                // ////////////////////////////////////
+                // this._peticionesService.addCashFlowUserIngreso(this.ingresoPorInscripcion).subscribe(
+                //     result => {
+                //       var returned = result;
+                //     },
+                //     error => {
+                //       var errorMessage = <any>error;
+                //       console.log(errorMessage);
+                //       alert('Error al Crear cashflowuseringreso');
+                //     }
+                //   );
 
-        ///////////////////////////////////////////////////////////////////
+                ///////////////////////////////////////////////////////////////////
 
 
 
-           this.router.navigate(['home/events']);
-            alert('Se Registro a la persona de manera correcta');
-            //this.router.navigate(['home/persons']);
-            
-          },
-          error => {
-            var errorMessage = <any>error;
-            console.log(errorMessage);
-            alert('Error al registrar, Persona existente');
-          }
+                this.router.navigate(['home/events']);
+                alert('Se Registro a la persona de manera correcta');
+                //this.router.navigate(['home/persons']);
+
+            },
+            error => {
+                var errorMessage = <any>error;
+                console.log(errorMessage);
+                alert('Error al registrar, Persona existente');
+            }
         );
     }
-    captOcupation(){ 
+    captOcupation() {
         console.log(this.ocupSelected);
-        this.descOcupation.universidad = '';this.descOcupation.carrera = '';
-        this.descOcupation.semestre = '';this.descOcupation.areaTrabajo = '';
-        this.descOcupation.profesion = '';this.descOcupation.cargo = '';
+        this.descOcupation.universidad = ''; this.descOcupation.carrera = '';
+        this.descOcupation.semestre = ''; this.descOcupation.areaTrabajo = '';
+        this.descOcupation.profesion = ''; this.descOcupation.cargo = '';
         this.descOcupation.empresa = '';
-        this.person.ocupation = this.ocupSelected; 
+        this.person.ocupation = this.ocupSelected;
     }
     queryCartera() {
         //console.log(Identity._id)
@@ -144,7 +181,7 @@ export class AddPersonComponent implements OnInit {
             }
         );
     }
-    queryEvents(){
+    queryEvents() {
         this._peticionesService.getEvents().subscribe(
             result => {
                 this.eventos = result;
@@ -155,8 +192,14 @@ export class AddPersonComponent implements OnInit {
                 console.log(errorMessage);
             });
     }
-    cancel(){
+    cancel() {
         // this.router.navigate(['home/events']);
         window.history.back();
     }
+}
+export interface ProgramCheckBox {
+    programId: string,
+    programName: string,
+    checked: boolean,
+    state: number,
 }

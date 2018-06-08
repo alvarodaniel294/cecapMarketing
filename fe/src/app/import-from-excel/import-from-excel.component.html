@@ -3,22 +3,32 @@
   <div class="">
 
 
- 
-        <div class="box box-primary">
+    <div class="box box-primary">
 
-          <div class="container">
-            
+      <div class="container">
 
-            <h2>Impotar Numeros de excel</h2>
 
-            <div class="form-group">
-              <label for="file">Elegir Archivo</label>
-              <input type="file" id="file" (change)="handleFileInput($event.target.files)">
-              <button type="button" class="btn btn-info" (click)="uploadFileToActivity()">Upload</button>
+        <h2>Impotar Numeros de excel</h2>
+        <div class="form-group" style="width: 50%">
+          <label for="programs">Intereses</label>
+          <br>
+          <label>
+            <div *ngFor="let program of newProgramsCheck; let i = index">
+              <input type="checkbox" name="program{{i}}" #categories="ngModel" value="{{program.programName}}" [(ngModel)]="program.checked"
+              /> {{program.programName}}
             </div>
-           
-           </div>
-
+          </label>
+          <div [hidden]="programs?.valid || programs?.pristine" class="text-alert">
           </div>
+        </div>
+        <div class="form-group">
+          <label for="file">Elegir Archivo</label>
+          <input type="file" id="file" (change)="handleFileInput($event.target.files)">
+          <button type="button" class="btn btn-info" (click)="uploadFileToActivity()">Upload</button>
+        </div>
+
+      </div>
+
     </div>
+  </div>
 </div>

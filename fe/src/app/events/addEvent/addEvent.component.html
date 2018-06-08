@@ -23,7 +23,7 @@
                   <div class="form-group col-sm-8">
                      <label for="descripcion" class=" control-label">Descripcion</label>
                      <input type="text" pattern="[a-zA-Z ]{3,150}" class="form-control" id="descripcion" [(ngModel)]="model.description" name="descripcion"
-                        #descripcion="ngModel" required>
+                        #descripcion="ngModel">
                      <span *ngIf="!descripcion.valid && descripcion.touched" class="text-alert">
                         *descripcion de Evento requerido.
                      </span>
@@ -38,8 +38,7 @@
                   </div>
                   <div class="form-group col-sm-8">
                      <label for="total">Total cupos</label>
-                     <input type="number" pattern="[0-9]{0,3}" class="form-control" id="total" [(ngModel)]="model.total" name="total" #total="ngModel"
-                        required>
+                     <input type="number" pattern="[0-9]{0,3}" class="form-control" id="total" [(ngModel)]="model.total" name="total" #total="ngModel">
                      <span *ngIf="!total.valid && total.touched" class="text-alert">
                         *total cupo de evento invalido.
                      </span>

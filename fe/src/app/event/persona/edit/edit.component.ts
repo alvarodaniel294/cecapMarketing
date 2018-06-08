@@ -9,185 +9,186 @@ import { DescOcupation } from '../../../modelo/descOcupation';
   selector: 'app-edit',
   templateUrl: './edit.component.html',
   styleUrls: ['./edit.component.css'],
-  providers: [ PeticionesService]
+  providers: [PeticionesService]
 })
 export class EditComponent implements OnInit {
   @ViewChild("close", { read: ElementRef }) close: ElementRef;
-    @Output() messageEvent = new EventEmitter();
-    
-    public personId;
-    public person;//colection
-    public personfirstname;
-    public last_name;
-    public ci;
-    public cellphone;
-    public phone;
-    public email;
-    public ocupacion;
-    public AreaTrabajo;
+  @Output() messageEvent = new EventEmitter();
 
-    public ocupSelected;
-    public descOcupation: DescOcupation;
-    public eventos;//colection
-    public programs;//colection
-    public montoCan;
-    public IdEvent;
+  public personId;
+  public person;//colection
+  public personfirstname;
+  public last_name;
+  public ci;
+  public cellphone;
+  public phone;
+  public email;
+  public ocupacion;
+  public AreaTrabajo;
+  public medium;
+  
+  public ocupSelected;
+  public descOcupation: DescOcupation;
+  public eventos;//colection
+  public programs;//colection
+  public montoCan;
+  public IdEvent;
 
-    public registro: Registro;
+  public registro: Registro;
 
-    public newProgramsCheck=[];
-    public newInteres=[];
-    public inscription;
-    submitted= false;
+  public newProgramsCheck = [];
+  public newInteres = [];
+  public inscription;
+  submitted = false;
 
   constructor(
-     private _peticionesService: PeticionesService,
-      private route: ActivatedRoute,
-      private router: Router
+    private _peticionesService: PeticionesService,
+    private route: ActivatedRoute,
+    private router: Router
   ) {
-    
-   }
+
+  }
 
   ngOnInit() {
 
     this.queryPersonId();
 
-    
 
-}
-queryPersonId(){
-  this.queryPrograms();
 
-  this.route.params.subscribe(params => {
-    this.personId = params.id;
-    this.findPerson();
+  }
+  queryPersonId() {
+    this.queryPrograms();
 
-  })
-}
-llenarProgramsCheckbox(){
- for(let p of this.programs){
-  let programItem={}as ProgramCheckBox;
-  programItem.checked=false;
-  programItem.programId=p._id;
-  programItem.programName=p.name;
-  programItem.state=0;
-  this.newProgramsCheck.push(programItem);
+    this.route.params.subscribe(params => {
+      this.personId = params.id;
+      this.findPerson();
 
- }
- this.fixProgramCheckbox()
+    })
+  }
+  llenarProgramsCheckbox() {
+    for (let p of this.programs) {
+      let programItem = {} as ProgramCheckBox;
+      programItem.checked = false;
+      programItem.programId = p._id;
+      programItem.programName = p.name;
+      programItem.state = 0;
+      this.newProgramsCheck.push(programItem);
 
-}
-fixProgramCheckbox(){
-  for(let p of this.person.interes){
-    for(let npc of this.newProgramsCheck){
-      if(npc.programId==p.programId){
-        npc.checked=true;
-        console.log(this.newProgramsCheck);
+    }
+    this.fixProgramCheckbox()
+
+  }
+  fixProgramCheckbox() {
+    for (let p of this.person.interes) {
+      for (let npc of this.newProgramsCheck) {
+        if (npc.programId == p.programId) {
+          npc.checked = true;
+          console.log(this.newProgramsCheck);
+        }
       }
     }
   }
-  
-}
 
-queryPrograms(){
-  this._peticionesService.getPrograms().subscribe(response => {
+  queryPrograms() {
+    this._peticionesService.getPrograms().subscribe(response => {
       this.programs = response;
-    console.log(this.programs);
+      console.log(this.programs);
       console.log("hi")
-     },
-     error=>{
-      var errorMessage = <any>error;
-      console.log(errorMessage);
-     }
+    },
+      error => {
+        var errorMessage = <any>error;
+        console.log(errorMessage);
+      }
     );
- }
-findPerson(){
-  this._peticionesService.getPerson(this.personId).subscribe(
-    result => {
-      this.person = result;
-      console.log(this.person);
-      this.personfirstname = this.person.first_name;
-      this.last_name= this.person.last_name;
-      this.ci = this.person.ci;
-      this.cellphone = this.person.cellphone;
-      this.phone = this.person.phone;
-      this.email = this.person.email;
-      this.ocupacion = this.person.ocupation;
-      this.descOcupation = this.person.descOcupation;
-      console.log(this.descOcupation+ "hola");
-      this.llenarProgramsCheckbox();
-
-    }, error => {
-      var errorMessage = <any>error;
-          console.log(errorMessage);
-    }
-  )
-}
-captOcupation(){ 
-  console.log(this.ocupSelected);
-  this.descOcupation.universidad = '';this.descOcupation.carrera = '';
-  this.descOcupation.semestre = '';this.descOcupation.areaTrabajo = '';
-  this.descOcupation.profesion = '';this.descOcupation.cargo = '';
-  this.descOcupation.empresa = '';
-  this.person.ocupation = this.ocupSelected; 
-}
- saveEdition(){
-
-  // this.person.first_name=this.personfirstname;
-  // this.person.last_name=this.last_name;
-  // this.person.ci=this.ci;
-  // this.person.cellphone=this.cellphone;
-  // this.person.phone=this.phone;
-  // this.person.email=this.email;
-  this.person.ocupation=this.ocupacion;
-  this.person.descOcupation=this.descOcupation;
-  for(let npc of this.newProgramsCheck){
-    if(npc.checked){
-      this.newInteres.push(npc);
-    }
   }
-  this.person.interes=this.newInteres;
+  findPerson() {
+    this._peticionesService.getPerson(this.personId).subscribe(
+      result => {
+        this.person = result;
+        console.log(this.person);
+        this.personfirstname = this.person.first_name;
+        this.last_name = this.person.last_name;
+        this.ci = this.person.ci;
+        this.cellphone = this.person.cellphone;
+        this.phone = this.person.phone;
+        this.email = this.person.email;
+        this.ocupacion = this.person.ocupation;
+        this.descOcupation = this.person.descOcupation;
+        this.medium = this.person.contact_medium;
+        console.log(this.descOcupation + "hola");
+        this.llenarProgramsCheckbox();
+
+      }, error => {
+        var errorMessage = <any>error;
+        console.log(errorMessage);
+      }
+    )
+  }
+  captOcupation() {
+    console.log(this.ocupSelected);
+    this.descOcupation.universidad = ''; this.descOcupation.carrera = '';
+    this.descOcupation.semestre = ''; this.descOcupation.areaTrabajo = '';
+    this.descOcupation.profesion = ''; this.descOcupation.cargo = '';
+    this.descOcupation.empresa = '';
+    this.person.ocupation = this.ocupSelected;
+  }
+  saveEdition() {
+
+    // this.person.first_name=this.personfirstname;
+    // this.person.last_name=this.last_name;
+    // this.person.ci=this.ci;
+    // this.person.cellphone=this.cellphone;
+    // this.person.phone=this.phone;
+    // this.person.email=this.email;
+    this.person.ocupation = this.ocupacion;
+    this.person.descOcupation = this.descOcupation;
+    for (let npc of this.newProgramsCheck) {
+      if (npc.checked) {
+        this.newInteres.push(npc);
+      }
+    }
+    this.person.interes = this.newInteres;
 
 
-  console.log(this.person);
-  this._peticionesService.updatePerson(this.person).subscribe(
-      result =>{
+    console.log(this.person);
+    this._peticionesService.updatePerson(this.person).subscribe(
+      result => {
         var res = result;
         console.log(res);
-        for(let pro of this.person.interes){
+        for (let pro of this.person.interes) {
 
-          let programPerson={}as ProgramIdPersonId;
-          programPerson.personId=this.person._id;
-          programPerson.programId=pro.programId;
-          this._peticionesService.addInteresToEvents(programPerson).subscribe(res=>{
- 
+          let programPerson = {} as ProgramIdPersonId;
+          programPerson.personId = this.person._id;
+          programPerson.programId = pro.programId;
+          this._peticionesService.addInteresToEvents(programPerson).subscribe(res => {
+
             this.router.navigate(['home/persons']);
             alert('Se Guardo correctamente la edicion');
-  
+
           })
 
         }
-       
+
       },
-      error=>{
+      error => {
         var errorMessage = <any>error;
-          console.log(errorMessage + "Error al editar");
-          alert("no se edito");
+        console.log(errorMessage + "Error al editar");
+        alert("no se edito");
       }
-  );
- }
- cancel() {
-  this.router.navigate(['/home/persons']);
- }
+    );
+  }
+  cancel() {
+    this.router.navigate(['/home/persons']);
+  }
 }
 
-export interface ProgramCheckBox{
-  programId:string,
-  programName:string,
-  checked:boolean,
-  state:number,
+export interface ProgramCheckBox {
+  programId: string,
+  programName: string,
+  checked: boolean,
+  state: number,
 }
-export interface ProgramIdPersonId{
-  programId:string,
-  personId:string,
+export interface ProgramIdPersonId {
+  programId: string,
+  personId: string,
 }

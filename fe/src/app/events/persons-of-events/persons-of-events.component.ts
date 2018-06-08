@@ -52,24 +52,24 @@ export class PersonsOfEventsComponent implements OnInit {
 
   }
 
-  loadPersonsByCartera(){
+  loadPersonsByCartera() {
 
-    this.lista_personasPorInteres=[];
-    this._peticionesService.getEvent(this.eventId).subscribe(res=>{
-      this.event=res;
+    this.lista_personasPorInteres = [];
+    this._peticionesService.getEvent(this.eventId).subscribe(res => {
+      this.event = res;
 
-      let eventIdPersonId={}as EventIdPersonId;
-      eventIdPersonId.event=this.event;
-      eventIdPersonId.identity=Identity;
-      this._peticionesService.getPersonasInteresWithEventByCartera(eventIdPersonId).subscribe(res=>{
-        this.listaReturned=res;
-        this.lista_personasPorInteres=this.listaReturned;
+      let eventIdPersonId = {} as EventIdPersonId;
+      eventIdPersonId.event = this.event;
+      eventIdPersonId.identity = Identity;
+      this._peticionesService.getPersonasInteresWithEventByCartera(eventIdPersonId).subscribe(res => {
+        this.listaReturned = res;
+        this.lista_personasPorInteres = this.listaReturned;
 
       })
-      
+
     })
 
-    
+
 
 
   }
@@ -104,7 +104,7 @@ export class PersonsOfEventsComponent implements OnInit {
     let eventinteres = {} as EventInteres;
     eventinteres.event = this.event;
     eventinteres.interes = numInteres;
-    eventinteres.identity=Identity;
+    eventinteres.identity = Identity;
     this._peticionesService.getPersonFilterInteresWithEventByCartera(eventinteres).subscribe(response => {
       this.listaReturned = response;
       this.lista_personasPorInteres = this.listaReturned;
@@ -120,9 +120,9 @@ export class PersonsOfEventsComponent implements OnInit {
 
   }
 
-  queryRol(){
-    this._peticionesService.getCurrentRol(Identity).subscribe(res=>{
-      this.rol=res;
+  queryRol() {
+    this._peticionesService.getCurrentRol(Identity).subscribe(res => {
+      this.rol = res;
     })
   }
 
@@ -139,11 +139,12 @@ export class PersonsOfEventsComponent implements OnInit {
       // noDownload: true,
       // headers: ["NOMBRES", "APELLIDOS", "CIUDAD", "CELULAR", "Móvil"]
       headers: [
-        document.getElementById('grupo').value,
-        document.getElementById('PrimerNombre').value,
-        document.getElementById('SegundoNombre').value,
-        document.getElementById('Apellido').value,
-        document.getElementById('Celular').value,
+        // (<HTMLInputElement>document.getElementById(elementId)).value,
+        (<HTMLInputElement>document.getElementById('grupo')).value,
+        (<HTMLInputElement>document.getElementById('PrimerNombre')).value,
+        (<HTMLInputElement>document.getElementById('SegundoNombre')).value,
+        (<HTMLInputElement>document.getElementById('Apellido')).value,
+        (<HTMLInputElement>document.getElementById('Celular')).value,
       ]
     };
     // console.log(this.listaToExport);
@@ -172,7 +173,7 @@ function nPersons(i, lista_personasPorInteres, listaToExport, name) {
 export interface EventInteres {
   event: Object,
   interes: number,
-  identity:{},
+  identity: {},
 }
 export interface EventIdPersonId {
   event: {},
