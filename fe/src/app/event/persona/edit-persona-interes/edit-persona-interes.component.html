@@ -1,43 +1,57 @@
-
-  
 <div class="content-wrapper">
   <br>
-   <div class="content">
-      <h4>Editar Persona</h4>
-     <div class="box box-primary">
-       <div class="container ">
-           <label><h3>Edicion del Interes de la persona</h3></label>
-            <div >
-              <form (ngSubmit)="onSubmit()" #interesForm="ngForm" >
-                <div class="form-group">
-                  <label for="interes">Interes de la persona</label>
-                  <select style="width: 50%" class="form-control" id="interes" [(ngModel)]="interesOfPerson" 
-                     name="interes" #interes="ngModel" required>
-                     <option value="0">Interesado</option>
-                     <!-- <option value="1">En Duda</option> -->
-                     <option value="2">Confirmado</option> 
-                     <option value="3">Inscrito</option>
-                     <option value="4">En Linea</option> 
-                     <option value="5">Proximo Evento</option>
-                     <option value="6">Sin Interes</option>                    
-                  </select>    
-                   <span *ngIf="!interes.valid && interes.touched" class="text-alert">
-                              *interea de persona requerido.
-                      </span>
-                  <!--<div [hidden]="intere?.valid || intere?.pristine" class="">
+  <div class="content">
+    <h4>Editar Persona</h4>
+    <div class="box box-primary">
+      <div class="container ">
+        <label>
+          <h3>Edicion del Interes de la persona</h3>
+        </label>
+        <div>
+          <form (ngSubmit)="onSubmit()" #interesForm="ngForm">
+            <div class="form-group col-sm-8">
+              <div class="form-group col-sm-6" style="text-align: center">
+                <label for="detail" class="control-label">Descripcion</label>
+                <input type="text" pattern="[a-zA-Z .0-9]{3,150}" class="form-control" id="detail" [(ngModel)]="person.detail"
+                name="detail" #detail="ngModel" />                
+                <!-- <input type="text" class="form-control" id="detail" [(ngModel)]="detail" name="detail" #detail="ngModel" /> -->
+                <!-- <span *ngIf="!detail.valid && detail.touched && detail?.pattern" class="text-alert">
+                  *Detalle requerido.
+                </span>
+                <span *ngIf="detail?.pattern && detail.touched" class="text-alert">
+                  *Detalle invalido.
+                </span> -->
+              </div>
+              <div class="form-group">
+                <label for="interes">Interes de la persona</label>
+                <select style="width: 50%" class="form-control" id="interes" [(ngModel)]="interesOfPerson" name="interes" #interes="ngModel"
+                  required>
+                  <option value="0">Interesado</option>
+                  <!-- <option value="1">En Duda</option> -->
+                  <option value="2">Confirmado</option>
+                  <option value="3">Inscrito</option>
+                  <option value="4">En Linea</option>
+                  <option value="5">Proximo Evento</option>
+                  <option value="6">Sin Interes</option>
+                </select>
+                <span *ngIf="!interes.valid && interes.touched" class="text-alert">
+                  *interea de persona requerido.
+                </span>
+                <!--<div [hidden]="intere?.valid || intere?.pristine" class="">
                      *intereo requeridos
                   </div>-->
-                </div>
+              </div>
 
-                <button type="submit" class="btn btn-success" [disabled]="!interesForm.form.valid" >Registrar</button>
-                <button type="button" class="btn btn-danger" (click)="cancel()">Cancelar</button>
-             <br>
-             <br>
-              </form>
+              <button type="submit" class="btn btn-success" [disabled]="!interesForm.form.valid">Registrar</button>
+              <button type="button" class="btn btn-danger" (click)="cancel()">Cancelar</button>
+              <br>
+              <br>
+            </div>
+          </form>
 
-           </div>
-       </div>
-     </div> 
-   </div>
+        </div>
+      </div>
+    </div>
+  </div>
 
 </div>
