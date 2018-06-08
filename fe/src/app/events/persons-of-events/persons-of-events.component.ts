@@ -138,13 +138,13 @@ export class PersonsOfEventsComponent implements OnInit {
       useBom: true,
       // noDownload: true,
       // headers: ["NOMBRES", "APELLIDOS", "CIUDAD", "CELULAR", "Móvil"]
-      headers: [
-        document.getElementById('grupo').value,
-        document.getElementById('PrimerNombre').value,
-        document.getElementById('SegundoNombre').value,
-        document.getElementById('Apellido').value,
-        document.getElementById('Celular').value,
-      ]
+      // headers: [
+      //   document.getElementById('grupo').value,
+      //   document.getElementById('PrimerNombre').value,
+      //   document.getElementById('SegundoNombre').value,
+      //   document.getElementById('Apellido').value,
+      //   document.getElementById('Celular').value,
+      // ]
     };
     // console.log(this.listaToExport);
     this.toExport = new Angular5Csv(this.listaToExport, "Nuevo Reporte", options);
