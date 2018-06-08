@@ -259,7 +259,7 @@ router
 
 
 
-    .post('/addFromWhatsapp', function (req, res) {
+    .post('/addFromWhatsapp', function (req, res) {/////////////////////////////NO SE ESETA USANDO///////////////////
         var person = new db.persons(req.body);
         console.log(person);
         db.persons.findOne({ cellphone: person.cellphone }, function (err, existe) {

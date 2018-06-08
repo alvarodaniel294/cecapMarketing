@@ -1,0 +1,152 @@
+<div class="content-wrapper">
+  <br>
+  <div class="content">
+      <div class="box box-primary">
+          <div class="container ">
+             
+            <h5>Filtro de Personas </h5>
+
+
+
+            <div>
+              <form (ngSubmit)="onSubmit()" #filtroForm="ngForm">
+                <div class="form-group col-sm-8">
+                 
+                  <!-- <div class="form-group">
+                    <label for="universidad">Universidad</label>
+                    <select style="width: 50%" class="form-control" id="interes" [(ngModel)]="universidadFilter" name="universidad" #universidad="ngModel"
+                      required>
+                      <option value="0">Universidad Mayor de San Simon</option>
+                      <option value="1">En Duda</option>
+                      <option value="2">Confirmado</option>
+                      <option value="3">Inscrito</option>
+                      <option value="4">En Linea</option>
+                      <option value="5">Proximo Evento</option>
+                      <option value="6">Sin Interes</option>
+                    </select>
+                    <span *ngIf="!universidad.valid && universidad.touched" class="text-alert">
+                      *Seleccion de Universiad Requerida.
+                    </span>
+                  
+                  </div> -->
+
+
+
+
+
+                  
+                  <!-- <div class="form-group">
+                    <label for="interes">Interes de la persona</label>
+                    <select style="width: 50%" class="form-control" id="interes" [(ngModel)]="interesOfPerson" name="interes" #interes="ngModel"
+                      required>
+                      <option value="0">Interesado</option>
+                      <option value="2">Confirmado</option>
+                      <option value="3">Inscrito</option>
+                      <option value="4">En Linea</option>
+                      <option value="5">Proximo Evento</option>
+                      <option value="6">Sin Interes</option>
+                    </select>
+                    <span *ngIf="!interes.valid && interes.touched" class="text-alert">
+                      *interea de persona requerido.
+                    </span>
+                   
+                  </div> -->
+
+
+
+                   <div class="form-group">
+                  <label for="programs">Intereses</label>
+                  <!-- <input type="text"  class="form-control" id="programs"
+                         required
+                         [(ngModel)]="whatsGroupName" name="programs"
+                         #programs="ngModel"
+                         > -->
+
+                            <br>
+                           
+                            <label>
+                            <div *ngFor="let uni of listaUniversidades; let i = index" >
+                              <input type="checkbox" name="uni{{i}}" #univer="ngModel" value="{{uni.id}}" [(ngModel)]="uni.checked" /> {{uni.name}}
+                            </div>
+                            </label>
+                            
+                         
+                  <div [hidden]="univer?.valid || univer?.pristine"
+                       class="text-alert">
+                    
+                  </div>
+                </div>
+
+
+
+
+                <div class="form-group">
+                  <label for="programs">Medios de Contacto</label>
+                  <!-- <input type="text"  class="form-control" id="programs"
+                         required
+                         [(ngModel)]="whatsGroupName" name="programs"
+                         #programs="ngModel"
+                         > -->
+
+                            <br>
+                           
+                            <label>
+                            <div *ngFor="let mc of listaMediosContacto; let i = index" >
+                              <input type="checkbox" name="mc{{i}}" #mediosC="ngModel" value="{{mc.id}}" [(ngModel)]="mc.checked" /> {{mc.name}}
+                            </div>
+                            </label>
+                            
+                         
+                  <div [hidden]="mediosC?.valid || mediosC?.pristine"
+                       class="text-alert">
+                    
+                  </div>
+                </div>
+    
+                  <button type="submit" class="btn btn-success" [disabled]="!filtroForm.form.valid">Buscar</button>
+                  <button type="button" class="btn btn-danger" (click)="cancel()">Cancelar</button>
+                  <br>
+                  <br>
+                </div>
+              </form>
+
+
+
+
+              <table class="table table-hover" >
+                <thead >
+                   <tr>
+                      <th>Nombre</th>
+                      <th>Apellido</th>
+                      <th>Telefono</th>
+                      <th>Whatsapp Group</th>
+                      <th>Ciudad</th>
+                      <th>Ocupacion</th>
+                      <th colspan="2">Opciones</th>
+                   </tr>
+                </thead>
+                <tbody> 
+                   <tr *ngFor="let i of listado_personas">
+                      <td>{{ i.first_name }}</td>
+                      <th>{{i.last_name}}</th>
+                      <td>{{ i.cellphone }}</td>
+                      <td>{{i.whatsapp_group}}</td>
+                      <td>{{i.city}}</td>
+                      <td>{{ i.ocupation }}</td>
+                     
+                      <td>
+                         <!-- <a class="btn btn-primary" (click)="edit(i._id)">EDITAR</a> -->
+                        
+                      </td>
+                   </tr>
+                </tbody>
+                <h6>asdfasdfasf</h6>
+             </table>
+    
+            </div>
+
+          </div>
+      </div>
+  </div>
+
+</div>

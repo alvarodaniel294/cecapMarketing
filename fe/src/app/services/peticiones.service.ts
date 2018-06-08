@@ -479,5 +479,18 @@ export class PeticionesService {
 
 
     ///////////////////////////////////////////////////////////////////////////////////////////
+    filterUniversidadMedio(obj){
+        let body = JSON.stringify(obj);
+        //console.log(body);
+        var headers = new HttpHeaders().set('Content-Type', 'application/json; charset=utf-8');
+        return this._http.post(this.url + 'persons/filterUniversidadMedio/', body, { headers: headers }).map((res: Response) => res);
+
+
+
+
+    }
+
+
+    
 
 }

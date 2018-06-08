@@ -93,6 +93,7 @@ import { SegmentationComponent } from './segmentation/segmentation.component';
 import { ListPersonProgramUserComponent } from './segmentation/list-person-program-user/list-person-program-user.component';
 import { PersonsOfEventsComponent } from './events/persons-of-events/persons-of-events.component';
 import { EditPersonaInteresComponent } from './event/persona/edit-persona-interes/edit-persona-interes.component';
+import { FiltroUniversidadMedioComponent } from './event/persona/filtro-universidad-medio/filtro-universidad-medio.component';
 
 @NgModule({
   declarations: [
@@ -172,7 +173,8 @@ import { EditPersonaInteresComponent } from './event/persona/edit-persona-intere
     SegmentationComponent,
     ListPersonProgramUserComponent,
     PersonsOfEventsComponent,
-    EditPersonaInteresComponent
+    EditPersonaInteresComponent,
+    FiltroUniversidadMedioComponent
 
   ],
   imports: [
