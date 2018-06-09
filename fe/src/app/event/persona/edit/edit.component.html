@@ -99,7 +99,7 @@
                             <div class="form-group col-sm-6">
                               <br>
                               <p *ngIf="ocupacion == 'estudiante'">
-                                <input type="text" pattern="[a-zA-Z]{0,20}" placeholder="Universidad" name="universidad" #universidad="ngModel" 
+                                <input type="text" pattern="[a-zA-Z ]{0,30}" placeholder="Universidad" name="universidad" #universidad="ngModel" 
                                 [(ngModel)]="descOcupation.universidad" class="form-control" required />
                                 <span *ngIf="!universidad.valid && universidad.touched" class="text-alert">
                                     <h6>*Nombre de Universidad requerido.</h6> 

@@ -39,6 +39,9 @@ export class FiltroUniversidadMedioComponent implements OnInit {
 
 
   onSubmit(){
+    this.listado_personas=[];
+    this.listaUniversidadesChecked=[];
+    this.listaMediosContactoChecked=[];
     for(let u of this.listaUniversidades){
         if(u.checked){
         this.listaUniversidadesChecked.push(u);
@@ -87,12 +90,12 @@ export class FiltroUniversidadMedioComponent implements OnInit {
     this.listaUniversidades.push(umss);
     let umss2={}as ItemUniversidad;
     umss2.checked=false;
-    umss2.id=1;
+    umss2.id=2;
     umss2.name='U. Catolica';
     this.listaUniversidades.push(umss2);
     let umss3={}as ItemUniversidad;
     umss3.checked=false;
-    umss3.id=1;
+    umss3.id=3;
     umss3.name='U. Latinoamericana';
     this.listaUniversidades.push(umss3);
   }
@@ -100,23 +103,42 @@ export class FiltroUniversidadMedioComponent implements OnInit {
 
   llenarMediosContacto(){
 
-    let afiche={} as ItemMedioContacto;
-    afiche.name='afiche';
-    afiche.id=1;
-    afiche.checked=false;
-    this.listaMediosContacto.push(afiche);
+    let WhatsApp={} as ItemMedioContacto;
+    WhatsApp.name='WhatsApp';
+    WhatsApp.id=1;
+    WhatsApp.checked=false;
+    this.listaMediosContacto.push(WhatsApp);
 
-    let afiche2={} as ItemMedioContacto;
-    afiche2.name='afiche2';
-    afiche2.id=1;
-    afiche2.checked=false;
-    this.listaMediosContacto.push(afiche2);
+    let Afiches={} as ItemMedioContacto;
+    Afiches.name='Afiches';
+    Afiches.id=2;
+    Afiches.checked=false;
+    this.listaMediosContacto.push(Afiches);
 
-    let afiche3={} as ItemMedioContacto;
-    afiche3.name='afiche3';
-    afiche3.id=1;
-    afiche3.checked=false;
-    this.listaMediosContacto.push(afiche3);
+    let Facebook={} as ItemMedioContacto;
+    Facebook.name='Facebook';
+    Facebook.id=3;
+    Facebook.checked=false;
+    this.listaMediosContacto.push(Facebook);
+
+    let Recomendacion={} as ItemMedioContacto;
+    Recomendacion.name='Recomendacion';
+    Recomendacion.id=4;
+    Recomendacion.checked=false;
+    this.listaMediosContacto.push(Recomendacion);
+
+    let VisitasA={} as ItemMedioContacto;
+    VisitasA.name='Visitas Aulas';
+    VisitasA.id=5;
+    VisitasA.checked=false;
+    this.listaMediosContacto.push(VisitasA);
+
+    let VisitasE={} as ItemMedioContacto;
+    VisitasE.name='Visita Empresa';
+    VisitasE.id=6;
+    VisitasE.checked=false;
+    this.listaMediosContacto.push(VisitasE);
+
 
   }
 
