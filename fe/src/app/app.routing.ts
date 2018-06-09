@@ -6,6 +6,7 @@ import { HomeComponent } from './home/home.component';
 import { EventsComponent } from './events/events.component';
 import { EventComponent } from './event/event.component';
 import { ProfilePersonComponent } from './event/profile-person/profile-person.component';
+import { TracingComponent } from './event/profile-person/tracing/tracing.component';
 import { ReportsComponent } from './graphicReports/reports/reports.component';
 import { ReportTrimestralComponent } from './graphicReports/report-trimestral/report-trimestral.component';
 import { ReportEventComponent } from './graphicReports/report-event/report-event.component';
@@ -81,6 +82,7 @@ const appRoutes: Routes = [
          { path: 'event/:id', component: EventComponent },
          { path: 'event/asistencia/:id', component: AsistenciaComponent },
          { path: 'profilePerson/:id', component: ProfilePersonComponent },
+         { path: 'tracing/add/:id', component: TracingComponent },
          { path: 'reports', component: ReportsComponent },
          { path: 'trimestral', component: ReportTrimestralComponent },
          { path: 'reportEvent/:id', component: ReportEventComponent },

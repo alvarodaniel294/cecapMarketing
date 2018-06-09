@@ -474,11 +474,15 @@ export class PeticionesService {
 
 
     }
-
-
-
-
     ///////////////////////////////////////////////////////////////////////////////////////////
+    addTracing(personId, trac) {
+        
+        let body = JSON.stringify(trac);
+        var headers = new HttpHeaders().set('Content-Type', 'application/json; charset=utf-8');
+        return this._http.put(this.url + 'persons/tracing/' + personId, body, { headers: headers }).map((res: Response) => res);
+      
+    }
+
     filterUniversidadMedio(obj){
         let body = JSON.stringify(obj);
         //console.log(body);
@@ -500,7 +504,5 @@ export class PeticionesService {
 
     }
 
-
-    
 
 }
