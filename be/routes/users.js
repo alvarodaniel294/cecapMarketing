@@ -18,6 +18,42 @@ router
       });
    })
 
+   .post('/getAllEjecutivosOfSucursal',function(req,res){
+       let identity=req.body;
+       let listToSend=[];
+       db.users.findOne({_id:identity._id},function(err,user){
+            if(err) return res.status(200).send(err)            
+            db.users.find({offices:user.offices},function(err,users){
+                db.carteras.find({user:{$in :users}},function(err,carteraslist){
+                        if(err) return res.status(200).send(err)
+                        for(let u of users){
+                            for(let c of carteraslist){
+                               
+                                if(u._id.equals(c.user)){
+                                    let item={};                        
+                                    item.userId=u._id;
+                                    item.carteraUser=c.user;
+                                    item.userName=u.name;
+                                    item.carteraName=c.name;
+                                    item.checked=false;
+                                    console.log(item)
+                                    listToSend.push(item);
+                                    
+                                }
+                            }
+                        }
+                        console.log(listToSend);
+                        return res.status(200).send(listToSend);
+
+                 })                
+            })
+    })
+    
+    
+
+
+   })
+
    .get('/roles', function (req, res) {
       db.roles.find({}, function (err, users) {
          if (err) return res.status(400).send(err);
