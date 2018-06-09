@@ -418,8 +418,7 @@ var _person_1 = {
    //////////////
    carteras: _cartera_user_2,
    /////////////
-   profile: {
-      programs: [{
+   profile: [{
          programs: _program_rrhh,
          modulars: [{
             amount: {
@@ -448,11 +447,10 @@ var _person_1 = {
          payed: 1000, //cancelado
          debt: 200,  // deuda
          print_diploma: false
-      }]
-   },
+      }],
    _id: new mongoose.Types.ObjectId,
    record_date: new Date()
-}
+};
 var _person_2 = {
    first_name: 'laura',
    last_name: 'estrada',
@@ -510,7 +508,7 @@ var _person_2 = {
    },
    _id: new mongoose.Types.ObjectId,
    record_date: new Date()
-}
+};
 var _person_3 = {
    first_name: 'juan',
    last_name: 'perez',

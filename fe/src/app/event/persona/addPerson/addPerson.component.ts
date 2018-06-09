@@ -31,7 +31,8 @@ export class AddPersonComponent implements OnInit {
 
     public newProgramsCheck = [];
     public registro: Registro;
-
+    public selectMedio:Number;
+    public otro;
     submitted = false;
 
     constructor(
@@ -39,7 +40,7 @@ export class AddPersonComponent implements OnInit {
         private route: ActivatedRoute,
         private router: Router
     ) {
-        this.person = new Person('', '', null, null, null, '', '', '', '', null, '', null, '');
+        this.person = new Person('', '', null, null, null, '', '', '', '', null, '', null, null);
         ///////////////////////////
         ///new Person(f
         //irst_name: string, 
@@ -157,6 +158,9 @@ export class AddPersonComponent implements OnInit {
                 alert('Error al registrar, Persona existente');
             }
         );
+    }
+    selectMed(){
+        console.log(this.person.contact_medium);
     }
     captOcupation() {
         console.log(this.ocupSelected);
