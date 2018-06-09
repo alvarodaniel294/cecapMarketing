@@ -5,6 +5,7 @@ import { Person } from './../modelo/person';
 import { Router, ActivatedRoute } from "@angular/router";
 import { forEach } from '@angular/router/src/utils/collection';
 import { DescOcupation } from './../modelo/descOcupation';
+import { Cartera } from '../modelo/cartera';
 
 
 
@@ -26,6 +27,8 @@ export class ImportWhatsNumbersComponent implements OnInit {
   public departamento;
   public descOcupation;
   public programs;
+  public nameCarrera;
+  public Universidad;
 
   public programasListCheckbox = [];
 
@@ -43,7 +46,7 @@ export class ImportWhatsNumbersComponent implements OnInit {
 
     this.descOcupation = new DescOcupation('', '', '', '', '', '', '');
 
-    this.nuevaPersona = new Person('', '', null, null, null, '', '', '', '', this.descOcupation, '', null, '');
+    this.nuevaPersona = new Person('', '', null, null, null, '', '', '', '', this.descOcupation, '', null, null);
 
     ///////////////////////////
     ///new Person(f
@@ -73,6 +76,9 @@ export class ImportWhatsNumbersComponent implements OnInit {
     console.log(this.whatsNumbers);
 
 
+
+  }
+  captUnive(){
 
   }
   fixText() {
@@ -105,8 +111,6 @@ export class ImportWhatsNumbersComponent implements OnInit {
 
   }
   saveOnDB() {
-
-
     let objWhats = {} as ObjetcWhatsappToSend;
     objWhats.listaNumeros = this.numbers;
     objWhats.whatsapp_group = this.whatsGroupName;
@@ -114,11 +118,19 @@ export class ImportWhatsNumbersComponent implements OnInit {
     objWhats.carteras = this.cartera;
     objWhats.city = this.departamento;
     objWhats.interes = this.programasConInteres;
+    objWhats.universidad = this.Universidad;
+    objWhats.carrera = this.nameCarrera;
+    console.log(this.Universidad);
     this._peticionesService.saveBatchWhatsappNumbers(objWhats).subscribe(response => {
       this.router.navigate(['home/persons']);
       // console.log(response);
     })
+    this._peticionesService.getPersons().subscribe(response => {
+      let prueba = response;
+      console.log(prueba);
+    }
 
+    )
 
   }
 
@@ -190,6 +202,8 @@ export interface ObjetcWhatsappToSend {
   carteras: string,
   city: string,
   interes: {},
+  carrera: string,
+  universidad: string
 
 
 }

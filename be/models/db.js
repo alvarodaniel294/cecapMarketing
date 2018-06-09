@@ -110,7 +110,11 @@ module.exports = {
             phone: Number,
             cellphone: Number,
             whatsapp_group: String,
-            contact_medium: String,
+            contact_medium: Number,
+            //////////////
+            //  1:wathsapp 2:afiches 3:faceb 4:recomend 
+            //  5:vistasAula 6:visitasEmpresa
+            ///////////
             city: String,
             email: String,
             ocupation: String,//1 = universitario, 2=Profesional, 3=particular
