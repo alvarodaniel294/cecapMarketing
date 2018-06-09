@@ -396,6 +396,7 @@ router
         let identity=req.body.identity;
         let listaCarteras=[];
         let personasFiltradas=[];
+        let personasFiltroSelectivo=[];
         
 
         console.log('aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa')
@@ -414,21 +415,29 @@ router
                                         personasFiltradas.push(p);
                                         // console.log(p);
                                     }
-
-
-
                                 }
-                                // for(let ItemMedio of listaMedios){
-                                //     if(p.)
+                                for(let ItemMedio of listaMedios){
+                                    console.log(ItemMedio.id ,p.contact_medium);
 
-                                // }
-
-
-
+                                    if(p.contact_medium==ItemMedio.id){
+                                        // console.log(p)
+                                        if(personasFiltradas.includes(p)){
+                                            personasFiltroSelectivo.push(p);
+                                        }
+                                        else{
+                                            personasFiltradas.push(p)   
+                                        }
+                                    }
+                                }
                             }
                             console.log(personasFiltradas);
-                            return res.status(200).send(personasFiltradas);
-
+                            console.log(listaMedios.length , listaUniversidades.length)
+                            if((listaMedios.length>0) && (listaUniversidades.length>0)){
+                                console.log("imprime filetro selectivo")
+                                return res.status(200).send(personasFiltroSelectivo)
+                            }else{
+                                return res.status(200).send(personasFiltradas);
+                            }
                         })                    
                 })                
             })
