@@ -93,7 +93,12 @@ import { SegmentationComponent } from './segmentation/segmentation.component';
 import { ListPersonProgramUserComponent } from './segmentation/list-person-program-user/list-person-program-user.component';
 import { PersonsOfEventsComponent } from './events/persons-of-events/persons-of-events.component';
 import { EditPersonaInteresComponent } from './event/persona/edit-persona-interes/edit-persona-interes.component';
+<<<<<<< HEAD
 import { TracingComponent } from './event/profile-person/tracing/tracing.component';
+=======
+import { FiltroUniversidadMedioComponent } from './event/persona/filtro-universidad-medio/filtro-universidad-medio.component';
+import { DividirCarteraComponent } from './cartera/dividir-cartera/dividir-cartera.component';
+>>>>>>> 6c4fa1b838e0b89d1cf8015d12796825ddc48c18
 
 @NgModule({
   declarations: [
@@ -174,7 +179,12 @@ import { TracingComponent } from './event/profile-person/tracing/tracing.compone
     ListPersonProgramUserComponent,
     PersonsOfEventsComponent,
     EditPersonaInteresComponent,
+<<<<<<< HEAD
     TracingComponent
+=======
+    FiltroUniversidadMedioComponent,
+    DividirCarteraComponent
+>>>>>>> 6c4fa1b838e0b89d1cf8015d12796825ddc48c18
 
   ],
   imports: [

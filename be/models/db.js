@@ -110,7 +110,11 @@ module.exports = {
             phone: Number,
             cellphone: Number,
             whatsapp_group: String,
-            contact_medium: String,
+            contact_medium: Number,
+            //////////////
+            //  1:wathsapp 2:afiches 3:faceb 4:recomend 
+            //  5:vistasAula 6:visitasEmpresa
+            ///////////
             city: String,
             email: String,
             ocupation: String,//1 = universitario, 2=Profesional, 3=particular
@@ -129,7 +133,11 @@ module.exports = {
             //////////////
             carteras: ObjectId,
             /////////////
+<<<<<<< HEAD
             profile: {
+=======
+            profile: [{
+>>>>>>> 6c4fa1b838e0b89d1cf8015d12796825ddc48c18
                         programs: ObjectId,
                         // modulars: [{
                         //       amount: {  // observation
@@ -162,8 +170,14 @@ module.exports = {
                         total_price: Number,
                         payed: Number, //cancelado
                         debt: Number,  // deuda
+<<<<<<< HEAD
                         print_diploma: Boolean
             },
+=======
+                        print_diploma: Boolean,
+                        
+            }],
+>>>>>>> 6c4fa1b838e0b89d1cf8015d12796825ddc48c18
             /////////////////para interes en programas////
             interes: [
                   {

@@ -50,11 +50,10 @@ export class EditComponent implements OnInit {
   }
 
   ngOnInit() {
-
     this.queryPersonId();
-
-
-
+  }
+  selectMed(){
+    console.log(this.person.contact_medium);
   }
   queryPersonId() {
     this.queryPrograms();

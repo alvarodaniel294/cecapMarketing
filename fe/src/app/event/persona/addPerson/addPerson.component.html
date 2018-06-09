@@ -82,15 +82,27 @@
                                     *Email de persona requerido.
                                 </span>
                             </div>
-                            <div class="form-group col-sm-6">
-                                <label for="email" class="control-label" style="text-align: left">Medio de Contacto</label>
-                                <input type="text" class="form-control" id="medium" [(ngModel)]="person.contact_medium" name="medium" #medium="ngModel" />
-                                <!-- <span *ngIf="!email.valid && email.touched" class="text-alert">
-                                          *Email de persona requerido.
-                                  </span>
-                                  <span *ngIf="email?.pattern && email.touched" class="text-alert">
-                                    *Email de persona requerido.
-                                  </span> -->
+                            <div class="form-group col-sm-4">
+                                <label for="selectMedio">Medios Conectado</label>
+                                <select class="form-control" id="selectMedios" [(ngModel)]="person.contact_medium" (change)="selectMed()" name="selectMedios" #selectMedios="ngModel">
+                                    <option value=1>WhatsApp</option>
+                                    <option value=2>Afiches</option>
+                                    <option value=3>Facebook</option>
+                                    <option value=4>Recomendacion</option>
+                                    <option value=5>Visitas Aulas</option>
+                                    <option value=6>Visita Empresa</option>
+                                    <!-- <option value=7>Otros</option> -->
+                                </select>
+                                <!-- <div class="form-group col-sm-4">
+                                    <br>
+                                    <p *ngIf="selectMedio == 7">
+                                        <input type="text" pattern="[a-zA-Z]{0,20}" placeholder="Otros" name="otros" #otros="ngModel" [(ngModel)]="otro"
+                                            class="form-control" />
+                                        <span *ngIf="!otros.valid && otros.touched" class="text-alert">
+                                            <h6>*Especificacion Requerida.</h6>
+                                        </span>
+                                    </p>
+                                </div> -->
                             </div>
                         </div>
                         <!-- <div class="form-group col-sm-8" >
@@ -185,23 +197,21 @@
                                     </span>
                                 </p>
                             </div>
-                            <div class="form-group" style="width: 50%">
+                        </div>
+                        <div class="form-group col-sm-8">
+                            <div class="form-group col-sm-4" style="width: 50%">
                                 <label for="programs">Intereses</label>
-
                                 <br>
-
                                 <label>
                                     <div *ngFor="let program of newProgramsCheck; let i = index">
                                         <input type="checkbox" name="program{{i}}" #categories="ngModel" value="{{program.programName}}" [(ngModel)]="program.checked"
                                         /> {{program.programName}}
                                     </div>
                                 </label>
-
-
                                 <div [hidden]="programs?.valid || programs?.pristine" class="text-alert">
-
                                 </div>
                             </div>
+                            
                         </div>
                         <!-- <div class="form-group col-sm-8">
                               <label for="evento">Evento</label>

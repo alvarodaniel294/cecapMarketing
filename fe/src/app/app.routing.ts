@@ -63,6 +63,10 @@ import { SegmentationComponent } from "./segmentation/segmentation.component";
 import { ListPersonProgramUserComponent } from "./segmentation/list-person-program-user/list-person-program-user.component";
 import { PersonsOfEventsComponent } from "./events/persons-of-events/persons-of-events.component";
 import { EditPersonaInteresComponent } from "./event/persona/edit-persona-interes/edit-persona-interes.component";
+//////////////////////////////////////////////////////////////////////////
+
+import { FiltroUniversidadMedioComponent } from "./event/persona/filtro-universidad-medio/filtro-universidad-medio.component";
+import { DividirCarteraComponent } from "./cartera/dividir-cartera/dividir-cartera.component";
 
 
 const appRoutes: Routes = [
@@ -124,6 +128,8 @@ const appRoutes: Routes = [
          { path: 'segmentacion/list/:id',component:ListPersonProgramUserComponent},
          { path: 'events/persons/:id',component:PersonsOfEventsComponent},
          { path: 'events/persons/edit/:id',component:EditPersonaInteresComponent},
+         { path: 'filtros', component:FiltroUniversidadMedioComponent},
+         { path: 'divideCartera', component:DividirCarteraComponent},
 
       ]
    },
