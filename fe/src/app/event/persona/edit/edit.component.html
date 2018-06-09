@@ -1,22 +1,3 @@
-<!-- <div class="content-wrapper">
-  <section class="content">
-     <div style="text-align:center; margin:auto; width:40%;">
-        EDITAR INSCRIPCION
-        
-           <div><label><h1>{{ person.first_name }} {{person.last_name}}</h1></label></div>
-           
-       <div class="jumbotron">
-       
-        <div>
-           <input type="submit" value="GUARDAR" class="btn btn-success" (click)="saveEdition()"/>
-           <input type="submit" value="CANCELAR" class="btn btn-success" (click)="cancelar()"/>
-        </div>
-       </div>
-   </div>
- </section>
-   
-</div> -->
-
 <div class="content-wrapper">
     <br>
     <div class="content">
@@ -28,29 +9,27 @@
                 </label>
                 <div [hidden]="submitted">
                     <form (ngSubmit)="saveEdition()" #addPerson="ngForm" class="">
-                        <div class="form-group" style="text-align: center" style="width: 50%">
-                            <label for="first_name" class="control-label">Nombre</label>
-                            <input type="text" pattern="[a-zA-Z]{3,10}[ ]{0,1}[a-zA-Z]{0,10}" class="form-control" id="first_name" [(ngModel)]="person.first_name"
-                                name="first_name" #firstname="ngModel" />
-                            <span *ngIf="!firstname.valid && firstname.touched" class="text-alert">
-                                *Nombre de persona requerido.
-                            </span>
+                        <div class="form-group col-sm-8">
+                            <div class="form-group col-sm-6" style="text-align: center" >
+                                <label for="first_name" class="control-label">Nombre</label>
+                                <input type="text" pattern="[a-zA-Z]{3,10}[ ]{0,1}[a-zA-Z]{0,10}" class="form-control" id="first_name" [(ngModel)]="person.first_name"
+                                    name="first_name" #firstname="ngModel" />
+                                <span *ngIf="!firstname.valid && firstname.touched" class="text-alert">
+                                    *Nombre de persona requerido.
+                                </span>
 
+                            </div>
+                            <div class="form-group col-sm-6" style="text-align: center" >
+                                <label for="last_name" class="control-label">Apellidos</label>
+                                <input type="text" pattern="[a-zA-Z]{3,20}[ ]{0,1}[a-zA-Z]{0,20}" class="form-control" id="last_name" [(ngModel)]="person.last_name"
+                                    name="last_name" #lastname="ngModel" />
+                                <span *ngIf="!lastname.valid && lastname.touched" class="text-alert">
+                                    *Apellido de persona requerido.
+                                </span>
+                            </div>
                         </div>
-                        <div class="form-group " style="text-align: center" style="width: 50%">
-                            <label for="last_name" class="control-label">Apellidos</label>
-                            <input type="text" pattern="[a-zA-Z]{3,20}[ ]{0,1}[a-zA-Z]{0,20}" class="form-control" id="last_name" [(ngModel)]="person.last_name"
-                                name="last_name" #lastname="ngModel" />
-                            <span *ngIf="!lastname.valid && lastname.touched" class="text-alert">
-                                *Apellido de persona requerido.
-                            </span>
-                            <!--<div [hidden]="name?.valid || name?.pristine" class="text-alert">
-                            kjkn
-                        </div>-->
-                        </div>
-
-                        <div class="form-group" style="width: 50%">
-                            <div class="form-group" style="width: 50%">
+                        <div class="form-group col-sm-8" >
+                            <div class="form-group col-sm-4" >
                                 <label for="ci" class="control-label" style="text-align: left">Cedula de Identidad</label>
                                 <input type="number" pattern="[1-9][0-9]{6}[a-z]{0,1}" class="form-control" id="ci" [(ngModel)]="person.ci" name="ci" #ci="ngModel"
                                     />
@@ -58,7 +37,7 @@
                                     *CI de persona requerido.
                                 </span>
                             </div>
-                            <div class="form-group" style="width: 50%">
+                            <div class="form-group col-sm-4" >
                                 <label for="cellphone" class="control-label" style="text-align: center">Celular</label>
                                 <input type="number" pattern="[6-7][0-9]{7}" class="form-control" id="cellphone" [(ngModel)]="person.cellphone" name="cellphone"
                                     #cellphone="ngModel" />
@@ -66,7 +45,7 @@
                                     *Celular de persona requerido.
                                 </span>
                             </div>
-                            <div class="form-group " style="width: 50%">
+                            <div class="form-group col-sm-4" >
                                 <label for="phone" class="control-label" style="text-align: right">Telefono</label>
                                 <input type="number" pattern="[4][0-9]{6}" class="form-control" id="phone" [(ngModel)]="person.phone" name="phone" #phone="ngModel"
                                 />
@@ -75,104 +54,111 @@
                                 </span>
                             </div>
                         </div>
-                        <div class="form-group" style="width: 50%">
-                            <div class="form-group " style="width: 50%">
-                                <label for="email" pattern="[a-zA-Z.0-9]*[@][a-z]{3,15}[.][a-z]{3,15}" class="control-label" style="text-align: left">Correo</label>
-                                <input type="email" class="form-control" id="email" [(ngModel)]="person.email" name="email" #email="ngModel" />
-                                <span *ngIf="!email.valid && email.touched" class="text-alert">
-                                    *Email de persona requerido.
-                                </span>
+
+                        <div class="form-group col-sm-8">
+                            <div class="form-group col-sm-6" >
+                                    <label for="email" pattern="[a-zA-Z.0-9]*[@][a-z]{3,15}[.][a-z]{3,15}" class="control-label" style="text-align: left">Correo</label>
+                                    <input type="email" class="form-control" id="email" [(ngModel)]="person.email" name="email" #email="ngModel" />
+                                    <span *ngIf="!email.valid && email.touched" class="text-alert">
+                                        *Email de persona requerido.
+                                    </span>
                             </div>
-                            <!-- observed-->
-                        </div>
-                        <div class="form-group" style="width: 50%">
-                            <div class="form-group col-sm-6">
-                                <label for="email" class="control-label" style="text-align: left">Medio de Contacto</label>
-                                <input type="text" class="form-control" id="medium" [(ngModel)]="person.contact_medium" name="medium" #medium="ngModel" />
-                                <br>
+                            <div class="form-group col-sm-4">
+                                <label for="selectMedio">Medios de Contacto</label>
+                                <select class="form-control" id="selectMedios" [(ngModel)]="person.contact_medium" 
+                                            (change)="selectMed()" name="selectMedios" #selectMedios="ngModel" required >
+                                    <option value=1>WhatsApp</option>
+                                    <option value=2>Afiches</option>
+                                    <option value=3>Facebook</option>
+                                    <option value=4>Recomendacion</option>
+                                    <option value=5>Visitas Aulas</option>
+                                    <option value=6>Visita Empresa</option>
+                                    <!-- <option value=7>Otros</option> -->
+                                </select>
+                                <!-- <div class="form-group col-sm-4">
+                                    <br>
+                                    <p *ngIf="selectMedio == 7">
+                                        <input type="text" pattern="[a-zA-Z]{0,20}" placeholder="Otros" name="otros" #otros="ngModel" [(ngModel)]="otro"
+                                            class="form-control" />
+                                        <span *ngIf="!otros.valid && otros.touched" class="text-alert">
+                                            <h6>*Especificacion Requerida.</h6>
+                                        </span>
+                                    </p>
+                                </div> -->
                             </div>
-                            <!-- observed-->
                         </div>
-                        <div class="form-group " style="width: 50%">
+                        <div class="form-group col-sm-8">
                             <label for="ocupSelect">
-                                <i class="fa fa-tag prefix grey-text"></i>Ocupacion</label>
-                            <select class="form-control" id="ocupSelect" [(ngModel)]="ocupacion" (change)="captOcupation()" name="ocupSelect" #ocupSelect="ngModel">
-                                <option value="Estudiante">Estudiante</option>
-                                <option value="Profesional">Profesional</option>
-                                <option value="Particular">Particular</option>
+                              <i class="fa fa-tag prefix grey-text"></i>Ocupación</label>
+                            <select class="form-control" id="ocupSelect" [(ngModel)]="ocupacion" (change)="captOcupation()"
+                                 name="ocupSelect" #ocupSelect="ngModel" required >
+                                <option value="estudiante">Estudiante</option>
+                                <option value="profesional">Profesional</option>
+                                <option value="particular">Particular</option>                     
                             </select>
-                            <div class="form-group" style="width: 50%">
-                                <br>
-                                <p *ngIf="ocupacion == 'Estudiante'">
-                                    <input type="text" pattern="[a-zA-Z]{0,20}" placeholder="Universidad" name="universidad" #universidad="ngModel" [(ngModel)]="descOcupation.universidad"
-                                        class="form-control" required />
-                                    <span *ngIf="!universidad.valid && universidad.touched" class="text-alert">
-                                        <h6>*Nombre de Universidad requerido.</h6>
-                                    </span>
+                            <div class="form-group col-sm-6">
+                              <br>
+                              <p *ngIf="ocupacion == 'estudiante'">
+                                <input type="text" pattern="[a-zA-Z]{0,20}" placeholder="Universidad" name="universidad" #universidad="ngModel" 
+                                [(ngModel)]="descOcupation.universidad" class="form-control" required />
+                                <span *ngIf="!universidad.valid && universidad.touched" class="text-alert">
+                                    <h6>*Nombre de Universidad requerido.</h6> 
+                                </span>
+                              </p>
+                              <p *ngIf="ocupacion == 'estudiante'">
+                                  <input type="text" pattern="[a-zA-Z ]{0,20}" placeholder="Carrera" name="carrera" #carrera="ngModel"
+                                   [(ngModel)]="descOcupation.carrera" class="form-control" required  />
+                                   <span *ngIf="!carrera.valid && carrera.touched" class="text-alert">
+                                      <h6>*Carrera de persona requerido.</h6>
+                                   </span> 
+                                </p> 
+                                <p *ngIf="ocupacion == 'estudiante'">
+                                  <input type="text" pattern="[a-zA-Z0-9]{0,20}" name="semestre" #semestre="ngModel" 
+                                  [(ngModel)]="descOcupation.semestre" class="form-control" required /> 
+                                  <span *ngIf="!semestre.valid && semestre.touched" class="text-alert">
+                                      <h6>*Semestre de persona requerido.</h6>
+                                  </span>
                                 </p>
-                                <p *ngIf="ocupacion == 'Estudiante'">
-                                    <input type="text" pattern="[a-zA-Z ]{0,20}" placeholder="Carrera" name="carrera" #carrera="ngModel" [(ngModel)]="descOcupation.carrera"
-                                        class="form-control" required />
-                                    <span *ngIf="!carrera.valid && carrera.touched" class="text-alert">
-                                        <h6>*carrera de persona requerido.</h6>
-                                    </span>
+                                <p *ngIf="ocupacion == 'particular'">
+                                  <input type="text" pattern="[a-zA-Z]{0,20}[ ]{0,1}[a-zA-Z]{0,20}" placeholder="Area de Trabajo" name="areaTrabajo" #areaTrabajo="ngModel" 
+                                  [(ngModel)]="descOcupation.areaTrabajo" class="form-control" required /> 
+                                  <span *ngIf="!areaTrabajo.valid && areaTrabajo.touched" class="text-alert">
+                                      <h6>*Área de trabajo de persona requerido.</h6>
+                                  </span>
+                                </p> 
+                                <p *ngIf="ocupacion == 'profesional'">
+                                  <input type="text" pattern="[a-zA-Z]{0,20}[ ]{0,1}[a-zA-Z]{0,20}[ ]{0,1}[a-zA-Z]{0,20}" placeholder="Profesion" name="profesion" #profesion="ngModel"
+                                   [(ngModel)]="descOcupation.profesion" class="form-control" required /> 
+                                   <span *ngIf="!profesion.valid && profesion.touched" class="text-alert">
+                                      <h6>*Profesión de persona requerido.</h6>
+                                 </span>
+                                </p> 
+                                <p *ngIf="ocupacion == 'profesional'">
+                                  <input type="text" pattern="[a-zA-Z]{0,20}[ ]{0,1}[a-zA-Z]{0,20}[ ]{0,1}[a-zA-Z]{0,20}" placeholder="Empresa" name="empresa" #empresa="ngModel"
+                                   [(ngModel)]="descOcupation.empresa" class="form-control"  required /> 
+                                   <span *ngIf="!empresa.valid && empresa.touched" class="text-alert">
+                                      <h6>*Nombre de Empresa requerido.</h6>
+                                  </span>
+                                </p> 
+                                <p *ngIf="ocupacion == 'profesional'">
+                                  <input type="text" pattern="[a-zA-Z]{0,20}[ ]{0,1}[a-zA-Z]{0,20}[ ]{0,1}[a-zA-Z]{0,20}" placeholder="Cargo" name="cargo" #cargo="ngModel" 
+                                  [(ngModel)]="descOcupation.cargo" class="form-control" required />
+                                  <span *ngIf="!cargo.valid && cargo.touched" class="text-alert">
+                                      <h6>*Cargo de persona requerido.</h6>
+                                  </span> 
                                 </p>
-                                <p *ngIf="ocupacion == 'Estudiante'">
-                                    <input type="text" pattern="[a-zA-Z0-9]{0,20}" name="semestre" #semestre="ngModel" [(ngModel)]="descOcupation.semestre" class="form-control"
-                                        required />
-                                    <span *ngIf="!semestre.valid && semestre.touched" class="text-alert">
-                                        <h6>*semestre de persona requerido.</h6>
-                                    </span>
-                                </p>
-                                <p *ngIf="ocupacion == 'Particular'">
-                                    <input type="text" pattern="[a-zA-Z]{0,20}[ ]{0,1}[a-zA-Z]{0,20}" placeholder="Area de Trabajo" name="areaTrabajo" #areaTrabajo="ngModel"
-                                        [(ngModel)]="descOcupation.areaTrabajo" class="form-control" required />
-                                    <span *ngIf="!areaTrabajo.valid && areaTrabajo.touched" class="text-alert">
-                                        <h6>*Area de trabajo de persona requerido.</h6>
-                                    </span>
-                                </p>
-                                <p *ngIf="ocupacion == 'Profesional'">
-                                    <input type="text" pattern="[a-zA-Z]{0,20}[ ]{0,1}[a-zA-Z]{0,20}[ ]{0,1}[a-zA-Z]{0,20}" placeholder="Profesion" name="profesion"
-                                        #profesion="ngModel" [(ngModel)]="descOcupation.profesion" class="form-control" required
-                                    />
-                                    <span *ngIf="!profesion.valid && profesion.touched" class="text-alert">
-                                        <h6>*Profecion de persona requerido.</h6>
-                                    </span>
-                                </p>
-                                <p *ngIf="ocupacion == 'Profesional'">
-                                    <input type="text" pattern="[a-zA-Z]{0,20}[ ]{0,1}[a-zA-Z]{0,20}[ ]{0,1}[a-zA-Z]{0,20}" placeholder="Empresa" name="empresa"
-                                        #empresa="ngModel" [(ngModel)]="descOcupation.empresa" class="form-control" required
-                                    />
-                                    <span *ngIf="!empresa.valid && empresa.touched" class="text-alert">
-                                        <h6>*Nombre de Empresa requerido.</h6>
-                                    </span>
-                                </p>
-                                <p *ngIf="ocupacion == 'Profesional'">
-                                    <input type="text" pattern="[a-zA-Z]{0,20}[ ]{0,1}[a-zA-Z]{0,20}[ ]{0,1}[a-zA-Z]{0,20}" placeholder="Cargo" name="cargo"
-                                        #cargo="ngModel" [(ngModel)]="descOcupation.cargo" class="form-control" required />
-                                    <span *ngIf="!cargo.valid && cargo.touched" class="text-alert">
-                                        <h6>*Cargo de persona requerido.</h6>
-                                    </span>
-                                </p>
-                            </div>
+                              </div>
                         </div>
-
-
                         <div class="form-group" style="width: 50%">
                             <label for="programs">Intereses</label>
-
                             <br>
-
                             <label>
                                 <div *ngFor="let program of newProgramsCheck; let i = index">
                                     <input type="checkbox" name="program{{i}}" #categories="ngModel" value="{{program.programName}}" [(ngModel)]="program.checked"
                                     /> {{program.programName}}
                                 </div>
                             </label>
-
-
                             <div [hidden]="programs?.valid || programs?.pristine" class="text-alert">
-
                             </div>
                         </div>
 

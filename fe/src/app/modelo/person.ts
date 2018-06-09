@@ -15,7 +15,7 @@ export class Person {
      // public user: string,
       public carteras:string,
       public interes:{},
-      public contact_medium: String
+      public contact_medium: number
 
    ) { }
 }
