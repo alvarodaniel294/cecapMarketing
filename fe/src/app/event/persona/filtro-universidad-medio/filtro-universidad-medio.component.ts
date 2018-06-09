@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from "@angular/router";
 import { PeticionesService } from '../../../services/peticiones.service';
+import { Identity } from '../../../services/global';
+
 
 @Component({
   selector: 'app-filtro-universidad-medio',
@@ -15,6 +17,9 @@ export class FiltroUniversidadMedioComponent implements OnInit {
   public listaUniversidades=[];
   public listaMediosContacto=[];
   public listado_personas=[];
+  public listaUniversidadesChecked=[];
+  public listaMediosContactoChecked=[];
+  public listaPersonas;
 
   constructor(
 
@@ -24,6 +29,8 @@ export class FiltroUniversidadMedioComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+
+    this.filterPerson();
     this.llenarUniversidades();
     this.llenarMediosContacto();
 
@@ -32,6 +39,24 @@ export class FiltroUniversidadMedioComponent implements OnInit {
 
 
   onSubmit(){
+    for(let u of this.listaUniversidades){
+        if(u.checked){
+        this.listaUniversidadesChecked.push(u);
+        }  
+
+
+    }
+    // console.log(this.listaUniversidadesChecked)
+    
+    for(let m of this.listaMediosContacto){
+        if(m.checked){
+          this.listaMediosContactoChecked.push(m);
+        }
+    }
+    // console.log(this.listaMediosContactoChecked)
+
+    this.filterPerson();
+    
 
 
   }
@@ -39,11 +64,18 @@ export class FiltroUniversidadMedioComponent implements OnInit {
   filterPerson(){
 
     let u={}as ObjeSearch;
-    u.uni='Universiad Mayor de San Simon';
+    u.uni='Universidad Mayor de San Simon';
 
-    this._peticionesService.filterUniversidadMedio(u).subscribe(response=>{
+    let ots={}as ObjectToSearch;
+    ots.listaUniChecked=this.listaUniversidadesChecked;
+    ots.listaMedChecked=this.listaMediosContactoChecked;
+    ots.identity=Identity;
 
-      let personas=response;
+    this._peticionesService.filterUniversidadMedio(ots).subscribe(response=>{
+
+      this.listaPersonas=response;
+      this.listado_personas=this.listaPersonas;
+      console.log(this.listado_personas);
     })
   }
   llenarUniversidades(){
@@ -56,12 +88,12 @@ export class FiltroUniversidadMedioComponent implements OnInit {
     let umss2={}as ItemUniversidad;
     umss2.checked=false;
     umss2.id=1;
-    umss2.name='Universidad Mayor de San Simon2';
+    umss2.name='U. Catolica';
     this.listaUniversidades.push(umss2);
     let umss3={}as ItemUniversidad;
     umss3.checked=false;
     umss3.id=1;
-    umss3.name='Universidad Mayor de San Simon3';
+    umss3.name='U. Latinoamericana';
     this.listaUniversidades.push(umss3);
   }
 
@@ -90,7 +122,15 @@ export class FiltroUniversidadMedioComponent implements OnInit {
 
   cancel(){
 
-
+    for(let itemU of this.listaUniversidades){
+      itemU.checked=false;
+    }
+    this.listaUniversidadesChecked=[];
+    for(let itemM of this.listaMediosContacto){
+      itemM.checked=false;
+    }
+    this.listaMediosContactoChecked=[];
+    this.listado_personas=[];
   }
 
 
@@ -100,6 +140,12 @@ export interface ObjeSearch{
 
   uni:string;
 
+}
+export interface ObjectToSearch{
+
+  listaUniChecked:{},
+  listaMedChecked:{},
+  identity:{},
 }
 
 

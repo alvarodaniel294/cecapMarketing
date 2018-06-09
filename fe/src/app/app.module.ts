@@ -94,6 +94,7 @@ import { ListPersonProgramUserComponent } from './segmentation/list-person-progr
 import { PersonsOfEventsComponent } from './events/persons-of-events/persons-of-events.component';
 import { EditPersonaInteresComponent } from './event/persona/edit-persona-interes/edit-persona-interes.component';
 import { FiltroUniversidadMedioComponent } from './event/persona/filtro-universidad-medio/filtro-universidad-medio.component';
+import { DividirCarteraComponent } from './cartera/dividir-cartera/dividir-cartera.component';
 
 @NgModule({
   declarations: [
@@ -174,7 +175,8 @@ import { FiltroUniversidadMedioComponent } from './event/persona/filtro-universi
     ListPersonProgramUserComponent,
     PersonsOfEventsComponent,
     EditPersonaInteresComponent,
-    FiltroUniversidadMedioComponent
+    FiltroUniversidadMedioComponent,
+    DividirCarteraComponent
 
   ],
   imports: [

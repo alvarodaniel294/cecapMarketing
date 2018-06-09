@@ -490,6 +490,16 @@ export class PeticionesService {
 
     }
 
+    getAllEjecutivosOfSucursal(identity){
+
+        let body = JSON.stringify(identity);
+        //console.log(body);
+        var headers = new HttpHeaders().set('Content-Type', 'application/json; charset=utf-8');
+        return this._http.post(this.url + 'users/getAllEjecutivosOfSucursal/', body, { headers: headers }).map((res: Response) => res);
+
+
+    }
+
 
     
 

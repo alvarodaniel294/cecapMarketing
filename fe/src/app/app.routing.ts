@@ -65,6 +65,7 @@ import { EditPersonaInteresComponent } from "./event/persona/edit-persona-intere
 //////////////////////////////////////////////////////////////////////////
 
 import { FiltroUniversidadMedioComponent } from "./event/persona/filtro-universidad-medio/filtro-universidad-medio.component";
+import { DividirCarteraComponent } from "./cartera/dividir-cartera/dividir-cartera.component";
 
 
 const appRoutes: Routes = [
@@ -125,7 +126,8 @@ const appRoutes: Routes = [
          { path: 'segmentacion/list/:id',component:ListPersonProgramUserComponent},
          { path: 'events/persons/:id',component:PersonsOfEventsComponent},
          { path: 'events/persons/edit/:id',component:EditPersonaInteresComponent},
-         { path: 'filtros', component:FiltroUniversidadMedioComponent}
+         { path: 'filtros', component:FiltroUniversidadMedioComponent},
+         { path: 'divideCartera', component:DividirCarteraComponent},
 
       ]
    },

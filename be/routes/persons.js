@@ -387,6 +387,59 @@ router
 
     })
 
+
+    .post('/filterUniversidadMedio',function(req,res){
+
+        console.log(req.body);
+        let listaUniversidades=req.body.listaUniChecked;
+        let listaMedios=req.body.listaMedChecked;
+        let identity=req.body.identity;
+        let listaCarteras=[];
+        let personasFiltradas=[];
+        
+
+        console.log('aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa')
+        db.users.findOne({_id:identity._id},function(err,user){
+            if(err) return res.status(200).send(err)            
+            db.users.find({offices:user.offices},{_id:1},function(err,users){
+                // console.log(users);
+                db.carteras.find({user:{$in :users}},{_id:1},function(err,carteraslist){
+                        if(err) return res.status(200).send(err)
+                        listaCarteras=carteraslist;   
+                        db.persons.find({carteras:{$in:carteraslist}},function(err,personas){
+                            // console.log(personas)
+                            for(let p of personas){
+                                for(let ItemUnivers of listaUniversidades){
+                                    if(p.descOcupation.universidad==ItemUnivers.name){
+                                        personasFiltradas.push(p);
+                                        // console.log(p);
+                                    }
+
+
+
+                                }
+                                // for(let ItemMedio of listaMedios){
+                                //     if(p.)
+
+                                // }
+
+
+
+                            }
+                            console.log(personasFiltradas);
+                            return res.status(200).send(personasFiltradas);
+
+                        })                    
+                })                
+            })
+        })
+        
+
+       
+
+
+    })
+
     .post('/', function (req, res, next) {
         db.persons.findOne({ ci: req.body.persona.ci }, function (err, ciExist) {
             if (err) return res.status(400).send(err);
