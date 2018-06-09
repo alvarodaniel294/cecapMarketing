@@ -130,22 +130,21 @@ module.exports = {
             carteras: ObjectId,
             /////////////
             profile: {
-                  programs: [{
                         programs: ObjectId,
-                        modulars: [{
-                              amount: {  // observation
-                                    detail: String,
-                                    receipt: String,// nro factura
-                                    date: Date,
-                                    amount: Number,
-                              },
-                              assist: Boolean, //cambio
-                              events: ObjectId,
-                              //    inscription: ObjectId,
-                              modules: ObjectId,
-                              print_certificate: Boolean,
-                        }],
-                        final_work: {
+                        // modulars: [{
+                        //       amount: {  // observation
+                        //             detail: String,
+                        //             receipt: String,// nro factura
+                        //             date: Date,
+                        //             amount: Number,
+                        //       },
+                        //       assist: Boolean, //cambio
+                        //       events: ObjectId,
+                        //       //    inscription: ObjectId,
+                        //       modules: ObjectId,
+                        //       print_certificate: Boolean,
+                        // }],
+                        final_work: { 
                               stade: Number, // entregado=1, no entrego=2
                               observations: String,
                         },
@@ -154,11 +153,16 @@ module.exports = {
                               photocopy_ci: Boolean,
                               photocopy_titule: Boolean
                         },
+                        tracing: [{
+                              date_tracing: Date,
+                              state: Number, // posibles estados
+                              details: String,
+                              _id: { type: ObjectId, default: function () { return new mongoose.Types.ObjectId } },
+                        }],
                         total_price: Number,
                         payed: Number, //cancelado
                         debt: Number,  // deuda
                         print_diploma: Boolean
-                  }]
             },
             /////////////////para interes en programas////
             interes: [

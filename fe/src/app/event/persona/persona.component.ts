@@ -95,7 +95,6 @@ export class PersonaComponent implements OnInit {
       }
     })
   }
-  
   getRol(){
     this._peticionesService.getRole(Identity.rol).subscribe(response=>{
       this.rol=response;
@@ -104,6 +103,9 @@ export class PersonaComponent implements OnInit {
      
       // console.log(this.rol)
     })
+  }
+  viewProfile(_id) {
+    this.router.navigate(['home/profilePerson', _id]);
   }
 }
 

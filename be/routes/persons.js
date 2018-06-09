@@ -44,6 +44,7 @@ router
         })
 
     })
+    
     // .get('/personsOfProgramByUserId/:userId',function(req,res){
 
 
@@ -542,6 +543,23 @@ router
         //       //	if (off.nModified == 0) return res.status(406).send();
         //    });
     })
+
+    ////////////////////////////////////////////////////////////////////////////////
+
+    .put('/tracing/:id', function (req, res) {
+        db.persons.update({ _id: req.params.id},
+          {
+            $push: {
+              'profile.tracing': req.body,
+           }
+        }).exec(function (err, off) {
+            if (err) return res.status(400).send(err);
+            console.log(off)                
+            return res.status(200).send(off)
+        });
+    })
+      
+    ///////////////////////////////////////////////////////////////////////////////////
 
     .delete('/:id', function (req, res) {
         db.persons.remove({ _id: req.params.id }, function (err, person) {

@@ -30,7 +30,12 @@
                     <td>{{person?.last_name}}</td>
                   </tr>
                   <tr>
-                    <td>Telefono</td>
+                      <td>Cédula de Identidad</td>
+                      <td>{{person?.ci}}</td>
+                  </tr>
+                  <tr>
+                    <td>Teléfono</td>
+                    <td *ngIf="person?.phone==null">-----</td>
                     <td>{{person?.phone}}</td>
                   </tr>
                   <tr>
@@ -38,7 +43,7 @@
                     <td>{{person?.cellphone}}</td>
                   </tr>
                   <tr>
-                    <td>Correo Electronico</td>
+                    <td>Correo Electrónico</td>
                     <td><a href="mailto:email">{{person?.email}}</a></td>
                   </tr>
                   <tr>
@@ -51,96 +56,65 @@
               <table class="table table-user-information">
                 <tbody>
                   <tr>
-                    <td>Ocupacion</td>
+                    <td>Ocupación</td>
                     <td>{{person?.ocupation}}</td>                                                                                        
                   </tr>
-                <!--Universitario-->
-                  <tr *ngIf="ocupation=='universitario'">
+                <!--Estudiante-->
+                  <tr *ngIf="ocupation=='estudiante'">
                       <td>Carrera</td>                                        
                       <td>{{ocupations?.carrera}}</td>                                      
                   </tr>
-                  <tr *ngIf="ocupation=='universitario'"> 
+                  <tr *ngIf="ocupation=='estudiante'"> 
                       <td>Universidad</td>                                        
                       <td>{{ocupations?.universidad}}</td>                                   
                   </tr>
-                  <tr *ngIf="ocupation=='universitario'">
+                  <tr *ngIf="ocupation=='estudiante'">
                       <td>Semestre</td>                                        
                       <td>{{ocupations?.semestre}}</td>                                     
                   </tr>
                 <!--Particular-->
                   <tr *ngIf="ocupation=='particular'">
-                      <td>Area de Trabajo</td>                                        
+                      <td>Área de Trabajo</td>                                        
                       <td>{{ocupations?.areaTrabajo}}</td>                                     
                   </tr>
                   <tr>
                 <!--Profesional-->
                   <tr *ngIf="ocupation=='profesional'">
-                    <td>Profesion</td>                                        
+                    <td>Profesión</td>                                        
                     <td>{{ocupations?.profesion}}</td>                                     
                   </tr>
                   <tr *ngIf="ocupation=='profesional'">
                     <td>Empresa</td>                                        
                     <td>{{ocupations?.empresa}}</td>                                     
                   </tr>
-                  <tr *ngIf=
-                  "ocupation=='profesional'">
+                  <tr *ngIf="ocupation=='profesional'">
                     <td>Cargo</td>                                        
-                      <td>{{ocupations?.cargo}}</td>                                     
+                    <td>{{ocupations?.cargo}}</td>                                     
                   </tr>
                 </tbody>
               </table>
-            <strong>Programas Cursados:</strong>
+            <strong>Programas de Interés:</strong>
               <table class="table table-user-information">
                 <tbody>
-                  <tr>
-                    <td>Nombre del programa</td>
-                    <td>{{program.name}}</td>
-                  </tr>
-                  <!--<tr>
-                    <td>Asistencias por modulos</td>
-                    <td>{{i.assists}}</td>
-                  </tr>-->
-                  <tr *ngFor="let i of programs">
-                    <td>Costo total</td>
-                    <td>{{i.total_price}}</td>
-                  </tr>
-                  <tr *ngFor="let i of programs">
-                    <td>Monto cancelado</td>
-                    <td>{{i.payed}}</td>
-                  </tr><tr *ngFor="let i of programs">
-                    <td>Deuda</td>
-                    <td>{{i.debt}}</td>
+                  <tr *ngFor="let i of person?.interes">
+                    <td><li>{{i.programName}}</li></td>
                   </tr>
                 </tbody>
               </table>
-            <strong>Entrega de requisitos:</strong>
+              <strong>Seguimiento:</strong>
               <table class="table table-user-information">
                 <tbody>
                   <tr>
-                    <td>Fotografias</td>
-                    <td></td>
+                    <td>
+                      <a class="btn btn-primary fa fa-plus" (click)="addTracing(personId)"> Añadir Seguimiento</a>
+                    </td> 
                   </tr>
-                  <tr>
-                    <td>Fotocopia de carnet de identidad</td>
-                    <td></td>
-                  </tr>
-                  <tr>
-                    <td>Fotocopia de titulo profesional</td>
-                    <td></td>
-                  </tr>
-                </tbody>
-              </table>
-            <strong>Solicitud de diploma y presentacion de proyecto:</strong>
-              <table class="table table-user-information">
-                <tbody>
-                  <tr *ngFor="let i of programs">
-                    <td>Trabajo Final</td>
-                    <td>{{i.final_work["stade"]}</td>
-                    <td>{{i.final_work["observations"]}</td>
-                  </tr>
-                  <tr *ngFor="let i of programs">
-                    <td>Diploma impreso</td>
-                    <td>{{i.print_diploma}}</td>
+                  <tr *ngFor="let i of tracing">
+                    <td>{{ i.date_tracing | date}}</td>
+                    <td *ngIf="i.state==1">Programar llamada</td>
+                    <td *ngIf="i.state==2">No le contestó llamada</td>
+                    <td *ngIf="i.state==3">Contestó pero no confirmó</td>
+                    <td>{{ i.details }}</td>
                   </tr>
                 </tbody>
               </table>
@@ -148,6 +122,9 @@
           </div>
         </div>  
       </div>
+      <div align="center">
+          <button class="btn btn-primary" (click)="cancelar()">Volver</button>
+      </div> 
     </div>
   </div>
 </div>
