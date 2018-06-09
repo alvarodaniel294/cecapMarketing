@@ -46,7 +46,7 @@ export class ImportWhatsNumbersComponent implements OnInit {
 
     this.descOcupation = new DescOcupation('', '', '', '', '', '', '');
 
-    this.nuevaPersona = new Person('', '', null, null, null, '', '', '', '', this.descOcupation, '', null, '');
+    this.nuevaPersona = new Person('', '', null, null, null, '', '', '', '', this.descOcupation, '', null, null);
 
     ///////////////////////////
     ///new Person(f
