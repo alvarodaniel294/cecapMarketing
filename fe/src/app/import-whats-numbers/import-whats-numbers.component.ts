@@ -203,7 +203,7 @@ export interface ObjetcWhatsappToSend {
   city: string,
   interes: {},
   carrera: string,
-  universidad: string
+  universidad: number
 
 
 }

@@ -148,11 +148,22 @@
                             <div class="form-group col-sm-6">
                                 <br>
                                 <p *ngIf="ocupSelected == 'estudiante'">
-                                    <input type="text" pattern="[a-zA-Z]{0,20}" placeholder="Universidad" name="universidad" #universidad="ngModel" [(ngModel)]="descOcupation.universidad"
+                                    <!-- <input type="text" pattern="[a-zA-Z]{0,20}" placeholder="Universidad" name="universidad" #universidad="ngModel" [(ngModel)]="descOcupation.universidad"
                                         class="form-control" />
                                     <span *ngIf="!universidad.valid && universidad.touched" class="text-alert">
                                         <h6>*Nombre de Universidad requerido.</h6>
-                                    </span>
+                                    </span> -->
+
+
+                                    <select class="form-control" id="univer" [(ngModel)]="descOcupation.universidad" 
+                                        name="univer" #ocupSelect="ngModel">
+                                        <option value="" hidden>Seleccionar...</option>                               
+                                        <option value=1>Universidad Mayor de San Simon</option>
+                                        <option value=2>U. Catolica</option>
+                                        <option value=3>U. Latinoamericana</option>                     
+                                    </select>
+
+
                                 </p>
                                 <p *ngIf="ocupSelected == 'estudiante'">
                                     <input type="text" pattern="[a-zA-Z]{0,20}" placeholder="Carrera" name="carrera" #carrera="ngModel" [(ngModel)]="descOcupation.carrera"
