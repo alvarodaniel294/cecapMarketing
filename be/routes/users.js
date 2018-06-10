@@ -33,16 +33,17 @@ router
                                     let item={};                        
                                     item.userId=u._id;
                                     item.carteraUser=c.user;
+                                    item.carteraId=c._id;
                                     item.userName=u.name;
                                     item.carteraName=c.name;
                                     item.checked=false;
-                                    console.log(item)
+                                    // console.log(item)
                                     listToSend.push(item);
                                     
                                 }
                             }
                         }
-                        console.log(listToSend);
+                        // console.log(listToSend);
                         return res.status(200).send(listToSend);
 
                  })                

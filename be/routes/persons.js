@@ -391,7 +391,7 @@ router
 
     .post('/filterUniversidadMedio',function(req,res){
 
-        console.log(req.body);
+        // console.log(req.body);
         let listaUniversidades=req.body.listaUniChecked;
         let listaMedios=req.body.listaMedChecked;
         let identity=req.body.identity;
@@ -418,7 +418,7 @@ router
                                     }
                                 }
                                 for(let ItemMedio of listaMedios){
-                                    console.log(ItemMedio.id ,p.contact_medium);
+                                    // console.log(ItemMedio.id ,p.contact_medium);
 
                                     if(p.contact_medium==ItemMedio.id){
                                         // console.log(p)
@@ -431,10 +431,10 @@ router
                                     }
                                 }
                             }
-                            console.log(personasFiltradas);
-                            console.log(listaMedios.length , listaUniversidades.length)
+                            // console.log(personasFiltradas);
+                            // console.log(listaMedios.length , listaUniversidades.length)
                             if((listaMedios.length>0) && (listaUniversidades.length>0)){
-                                console.log("imprime filetro selectivo")
+                                // console.log("imprime filetro selectivo")
                                 return res.status(200).send(personasFiltroSelectivo)
                             }else{
                                 return res.status(200).send(personasFiltradas);
@@ -446,6 +446,59 @@ router
         
 
        
+
+
+    })
+
+    .post('/getPersonsShareCarteraEvent',function(req,res){
+        // console.log(req.body);
+
+        let listaEjecutivos=req.body.lista_ejecutivos;
+        let listaEventos=req.body.lista_eventos;
+
+        let listaPersonasDeEventos=[];
+        let listaCarteras=[];
+        for(let i of listaEventos){
+            // console.log(i.listaInteres);
+            for(let ip of i.listaInteres){
+                if(!listaPersonasDeEventos.includes(ip.persons)){
+                    listaPersonasDeEventos.push(ip.persons);
+
+                }
+            }
+
+        }
+        for(let ejecutivo of listaEjecutivos){
+            listaCarteras.push(ejecutivo.carteraId)
+
+        }
+        console.log(listaPersonasDeEventos)
+        console.log(listaCarteras);
+       
+
+        if((listaEjecutivos.length>0)&&(listaEventos.length>0)){
+
+            db.persons.find({_id:{$in:listaPersonasDeEventos},carteras:{$in:listaCarteras}},function(err,personas){
+                if (err) return res.status(400).send(err);
+                return res.status(200).send(personas);
+            })
+        }else{
+            if((listaEjecutivos.length>0)&&(listaEventos.length==0)){
+                db.persons.find({carteras:{$in:listaCarteras}},function(err,personas){
+                    if (err) return res.status(400).send(err);
+                    return res.status(200).send(personas);
+                }) 
+            }else{
+                if((listaEjecutivos.length==0)&&(listaEventos.length>0)){
+
+                    db.persons.find({_id:{$in:listaPersonasDeEventos}},function(err,personas){
+                        if (err) return res.status(400).send(err);
+                        return res.status(200).send(personas);
+                    })
+                }
+            }
+        }
+
 
 
     })

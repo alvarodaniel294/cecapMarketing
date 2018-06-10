@@ -23,19 +23,19 @@
                                     class="text-alert"> 
                                 </div>
                          </div>
-                    <!-- <div class="form-group">
-                        <label for="programs">Medios de Contacto</label>
+                    <div class="form-group">
+                        <label for="eventos">Eventos</label>
                            <br>        
                              <label>
-                                <div *ngFor="let mc of listaMediosContacto; let i = index" >
-                                    <input type="checkbox" name="mc{{i}}" #mediosC="ngModel" value="{{mc.id}}" [(ngModel)]="mc.checked" /> {{mc.name}}
+                                <div *ngFor="let evento of lista_eventos; let i = index" >
+                                    <input type="checkbox" name="evento{{i}}" #eventosItem="ngModel" value="{{evento._id}}" [(ngModel)]="evento.checked" /> {{evento.name}}
                                 </div>
                               </label>                        
-                        <div [hidden]="mediosC?.valid || mediosC?.pristine"
+                        <div [hidden]="eventosItem?.valid || eventosItem?.pristine"
                             class="text-alert">
     
                         </div>
-                    </div> -->
+                    </div>
         
                       <button type="submit" class="btn btn-success" [disabled]="!compartirCarterasForm.form.valid">Buscar</button>
                       <button type="button" class="btn btn-danger" (click)="cancel()">Cancelar</button>
