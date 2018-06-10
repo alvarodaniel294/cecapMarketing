@@ -132,12 +132,8 @@ module.exports = {
             },
             //////////////
             carteras: ObjectId,
-            /////////////
-<<<<<<< HEAD
+            /////////////<<<<<< HEAD
             profile: {
-=======
-            profile: [{
->>>>>>> 6c4fa1b838e0b89d1cf8015d12796825ddc48c18
                         programs: ObjectId,
                         // modulars: [{
                         //       amount: {  // observation
@@ -170,14 +166,8 @@ module.exports = {
                         total_price: Number,
                         payed: Number, //cancelado
                         debt: Number,  // deuda
-<<<<<<< HEAD
                         print_diploma: Boolean
             },
-=======
-                        print_diploma: Boolean,
-                        
-            }],
->>>>>>> 6c4fa1b838e0b89d1cf8015d12796825ddc48c18
             /////////////////para interes en programas////
             interes: [
                   {

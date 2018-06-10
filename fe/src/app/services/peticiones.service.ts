@@ -475,7 +475,7 @@ export class PeticionesService {
 
     }
     ///////////////////////////////////////////////////////////////////////////////////////////
-<<<<<<< HEAD
+
     addTracing(personId, trac) {
         
         let body = JSON.stringify(trac);
@@ -483,7 +483,7 @@ export class PeticionesService {
         return this._http.put(this.url + 'persons/tracing/' + personId, body, { headers: headers }).map((res: Response) => res);
       
     }
-=======
+
     filterUniversidadMedio(obj){
         let body = JSON.stringify(obj);
         //console.log(body);
@@ -506,7 +506,4 @@ export class PeticionesService {
     }
 
 
-    
-
->>>>>>> 6c4fa1b838e0b89d1cf8015d12796825ddc48c18
 }
