@@ -132,7 +132,7 @@ module.exports = {
             },
             //////////////
             carteras: ObjectId,
-            /////////////
+            /////////////<<<<<< HEAD
             profile: {
                         programs: ObjectId,
                         // modulars: [{

@@ -176,7 +176,7 @@ import { DividirCarteraComponent } from './cartera/dividir-cartera/dividir-carte
     ListPersonProgramUserComponent,
     PersonsOfEventsComponent,
     EditPersonaInteresComponent,
-    TracingComponent
+    TracingComponent,
     FiltroUniversidadMedioComponent,
     DividirCarteraComponent
 
