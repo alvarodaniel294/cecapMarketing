@@ -504,6 +504,15 @@ export class PeticionesService {
 
 
     }
+    getPersonsShareCarteraEvent(objt){
+        let body = JSON.stringify(objt);
+        //console.log(body);
+        var headers = new HttpHeaders().set('Content-Type', 'application/json; charset=utf-8');
+        return this._http.post(this.url + 'persons/getPersonsShareCarteraEvent/', body, { headers: headers }).map((res: Response) => res);
+
+
+
+    }
 
 
 }
