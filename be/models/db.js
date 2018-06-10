@@ -121,7 +121,12 @@ module.exports = {
             descOcupation: {
                   //universitario
                   carrera: String,
-                  universidad: String,
+                  universidad: Number,
+                  ///////
+                  /// 1 Universidad Mayor de San Simon
+                  /// 2 U. Catolica
+                  /// 3 U.latinoamericana
+                  //////
                   semestre: String,
                   //Particular
                   areaTrabajo: String,

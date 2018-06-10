@@ -346,7 +346,7 @@ router
                     newPerson.cellphone = num;
                     newPerson.email = '';
                     newPerson.interes = interes;
-                    newPerson.ocupation = 'Particular';
+                    newPerson.ocupation = 'estudiante';
                     newPerson.descOcupation = {
                         carrera: carrer,
                         universidad: universida,
@@ -412,7 +412,7 @@ router
                             // console.log(personas)
                             for(let p of personas){
                                 for(let ItemUnivers of listaUniversidades){
-                                    if(p.descOcupation.universidad==ItemUnivers.name){
+                                    if(p.descOcupation.universidad==ItemUnivers.id){
                                         personasFiltradas.push(p);
                                         // console.log(p);
                                     }
