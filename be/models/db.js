@@ -192,6 +192,13 @@ module.exports = {
 
                   }
             ],
+            tracing: [{
+                  programId: ObjectId,
+                  date_tracing: Date,
+                  state: Number, // posibles estados
+                  details: String,
+                  // _id: { type: ObjectId, default: function () { return new mongoose.Types.ObjectId } },
+            }],
 
             /////////////////////////////////////////////////
 
@@ -264,6 +271,14 @@ module.exports = {
                   }
 
             ],
+            tracing: [{
+                  persons: ObjectId,                  
+                  date_tracing: Date,
+                  state: Number, // posibles estados
+                  details: String,
+                  // _id: { type: ObjectId, default: function () { return new mongoose.Types.ObjectId } },
+            }],
+
             //modulo: [ObjectId],
 
             _id: { type: ObjectId, default: function () { return new mongoose.Types.ObjectId } },
