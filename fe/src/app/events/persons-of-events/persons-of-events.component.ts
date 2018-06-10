@@ -64,7 +64,7 @@ export class PersonsOfEventsComponent implements OnInit {
       this._peticionesService.getPersonasInteresWithEventByCartera(eventIdPersonId).subscribe(res => {
         this.listaReturned = res;
         this.lista_personasPorInteres = this.listaReturned;
-
+        console.log(this.lista_personasPorInteres)
       })
 
     })
