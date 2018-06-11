@@ -41,6 +41,10 @@
                      *intereo requeridos
                   </div>-->
               </div>
+              <div class="form-group">
+                  <label>Añadir Seguimiento</label>
+                  <a class="btn btn-primary fa fa-plus" (click)="addTracing(personId)"></a>                  
+              </div>
 
               <button type="submit" class="btn btn-success" [disabled]="!interesForm.form.valid">Registrar</button>
               <button type="button" class="btn btn-danger" (click)="cancel()">Cancelar</button>

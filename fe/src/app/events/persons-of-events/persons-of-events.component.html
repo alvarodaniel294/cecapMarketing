@@ -44,23 +44,50 @@
     <table class="table table-hover">
       <thead>
         <tr>
-          <th>Nombre</th>
-          <th>Apellido</th>
+          <th>Nombre Completo</th>
+          <!-- <th>Apellido</th> -->
           <th>Telefono</th>
           <th>Interes</th>
-          <th>Ciudad</th>
-          <!-- <th>Ocupacion</th> -->
+          <!-- <th>Ciudad</th> -->
+          <th>Medio de Contacto</th>
+          <th>Ocupacion</th>
+          <th>Detalles de Ocupacion</th>
+          <th>Seguimiento</th>
           <th colspan="2">Opciones</th>
         </tr>
       </thead>
       <tbody>
         <tr *ngFor="let i of lista_personasPorInteres">
-          <td>{{ i.first_name }}</td>
-          <th>{{i.last_name}}</th>
+          <td>{{ i.first_name }} {{i.last_name}}</td>
+          <!-- <th>{{i.last_name}}</th> -->
           <td>{{ i.cellphone }}</td>
           <td>{{i.stateName}}</td>
-          <td>{{i.city}}</td>
-          <!-- <td>{{ i.ocupation }}</td> -->
+          <!-- <td>{{i.city}}</td> -->
+
+          <td *ngIf="i.contact_medium==1">WhatsApp</td>
+          <td *ngIf="i.contact_medium==2">Afiches</td>
+          <td *ngIf="i.contact_medium==3">Facebook</td>
+          <td *ngIf="i.contact_medium==4">Recomendacion</td>
+          <td *ngIf="i.contact_medium==5">Visitas Aulas</td>
+          <td *ngIf="i.contact_medium==6">Visitas Empresa</td>
+ 
+          <td>{{ i.ocupation }}</td>
+          
+          <td *ngIf="i.ocupation=='estudiante'">
+            Carrera: {{i.descOcupation?.carrera}}<br> 
+            Universidad: {{i.descOcupation?.universidad}}<br>
+            Semestre:{{i.descOcupation?.semestre}}
+          </td>          
+          <td *ngIf="i.ocupation=='particular'">
+            Área: {{i.descOcupation?.areaTrabajo}}<br> 
+          </td>          
+          <td *ngIf="i.ocupation=='profesional'">
+              Profesión: {{i.descOcupation?.profesion}}<br>             
+              Empresa: {{i.descOcupation?.empresa}}<br>             
+              Cargo: {{i.descOcupation?.cargo}}<br>             
+          </td>
+          
+          <td>{{i.tracingName}}</td>
 
           <td>
             <a class="btn btn-primary" (click)="edit(i._id)">EDITAR</a>

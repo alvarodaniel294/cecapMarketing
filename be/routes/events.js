@@ -203,7 +203,10 @@ router
                               newPerson.first_name = personItem.first_name;
                               newPerson.last_name = personItem.last_name;
                               newPerson.cellphone = personItem.cellphone;
-                              newPerson.city = personItem.city;
+                              // newPerson.city = personItem.city;
+                              newPerson.contact_medium = personItem.contact_medium;
+                              newPerson.ocupation = personItem.ocupation;
+                              newPerson.descOcupation = personItem.descOcupation;
                               for (let pid of event.interes) {
                                     if (pid.persons == personItem._id) {
                                           newPerson.state = pid.state;
@@ -215,6 +218,16 @@ router
                                           // if (_id.state == 2) newPerson.stateName = 'Confirmado';
                                           if (newPerson.state == 5) newPerson.stateName = 'Proximo Evento';
                                           if (newPerson.state == 6) newPerson.stateName = 'Sin Interes';
+                                          // event.interes.pop(pid);
+                                          nuevaLista.push(newPerson);
+                                    }
+                              }
+                              for (let pid of event.tracing) {
+                                    if (pid.persons == personItem._id) {
+                                          newPerson.state = pid.state;
+                                          if (newPerson.tracing == 0) newPerson.tracingName = 'Programar llamada';
+                                          if (newPerson.tracing == 1) newPerson.tracingName = 'No contesto llamada';
+                                          if (newPerson.tracing == 2) newPerson.tracingName = 'Contesto llamada';
                                           // event.interes.pop(pid);
                                           nuevaLista.push(newPerson);
                                     }

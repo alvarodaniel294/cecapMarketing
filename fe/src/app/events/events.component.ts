@@ -42,7 +42,6 @@ export class EventsComponent implements OnInit {
    queryEvents() {
       this._peticionesService.getAllEvents().subscribe(
          result => {
-             console.log('hola')
             this.events = result;
            console.log(this.events)
             this.events.map(event => {
