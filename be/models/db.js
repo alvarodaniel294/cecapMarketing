@@ -139,39 +139,33 @@ module.exports = {
             carteras: ObjectId,
             /////////////<<<<<< HEAD
             profile: {
-                        programs: ObjectId,
-                        // modulars: [{
-                        //       amount: {  // observation
-                        //             detail: String,
-                        //             receipt: String,// nro factura
-                        //             date: Date,
-                        //             amount: Number,
-                        //       },
-                        //       assist: Boolean, //cambio
-                        //       events: ObjectId,
-                        //       //    inscription: ObjectId,
-                        //       modules: ObjectId,
-                        //       print_certificate: Boolean,
-                        // }],
-                        final_work: { 
-                              stade: Number, // entregado=1, no entrego=2
-                              observations: String,
-                        },
-                        requirements: { // true=entrego, false=no entrego
-                              photograpy: Boolean,
-                              photocopy_ci: Boolean,
-                              photocopy_titule: Boolean
-                        },
-                        tracing: [{
-                              date_tracing: Date,
-                              state: Number, // posibles estados
-                              details: String,
-                              _id: { type: ObjectId, default: function () { return new mongoose.Types.ObjectId } },
-                        }],
-                        total_price: Number,
-                        payed: Number, //cancelado
-                        debt: Number,  // deuda
-                        print_diploma: Boolean
+                  programs: ObjectId,
+                  // modulars: [{
+                  //       amount: {  // observation
+                  //             detail: String,
+                  //             receipt: String,// nro factura
+                  //             date: Date,
+                  //             amount: Number,
+                  //       },
+                  //       assist: Boolean, //cambio
+                  //       events: ObjectId,
+                  //       //    inscription: ObjectId,
+                  //       modules: ObjectId,
+                  //       print_certificate: Boolean,
+                  // }],
+                  final_work: {
+                        stade: Number, // entregado=1, no entrego=2
+                        observations: String,
+                  },
+                  requirements: { // true=entrego, false=no entrego
+                        photograpy: Boolean,
+                        photocopy_ci: Boolean,
+                        photocopy_titule: Boolean
+                  },
+                  total_price: Number,
+                  payed: Number, //cancelado
+                  debt: Number,  // deuda
+                  print_diploma: Boolean
             },
             /////////////////para interes en programas////
             interes: [
@@ -189,15 +183,19 @@ module.exports = {
                         //  5 proximo evento 
                         //  6 sin interes
                         //////// 
-
+                        tracing: [{
+                              details: String,
+                              state: Number, // posibles estados
+                              ////////////////
+                              /// 0 programar llamada
+                              /// 1 no contesto llamada
+                              /// 2 contesto llamada
+                              ////////////////
+                              _id: { type: ObjectId, default: function () { return new mongoose.Types.ObjectId } },
+                              record_date: { type: Date, default: function () { return new Date() } },
+                        }]
                   }
             ],
-            tracing: [{
-                  programId: ObjectId,
-                  date_tracing: Date,
-                  state: Number, // posibles estados
-                  details: String,
-            }],
 
             /////////////////////////////////////////////////
 
@@ -266,16 +264,21 @@ module.exports = {
                         //  5 proximo evento 
                         //  6 sin interes
                         //////// 
+                        tracing: [{
+                              details: String,
+                              state: Number,
+                              ////////////////
+                              /// 0 programar llamada
+                              /// 1 no contesto llamada
+                              /// 2 contesto llamada
+                              ////////////////
+                              _id: { type: ObjectId, default: function () { return new mongoose.Types.ObjectId } },
+                              record_date: { type: Date, default: function () { return new Date() } },
+                        }]
 
                   }
 
             ],
-            tracing: [{
-                  persons: ObjectId,                  
-                  date_tracing: Date,
-                  state: Number, // posibles estados
-                  details: String,
-            }],
 
             //modulo: [ObjectId],
 

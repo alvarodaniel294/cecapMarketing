@@ -44,7 +44,7 @@ router
         })
 
     })
-    
+
     // .get('/personsOfProgramByUserId/:userId',function(req,res){
 
 
@@ -112,6 +112,9 @@ router
             $set: {
                 'interes.$.state': state,
                 'interes.$.details': details,
+            },
+            $push: {
+                'interes.$.tracing': req.body.tracing
             }
         }).exec(function (err, event) {
             // console.log(programId);
@@ -122,6 +125,9 @@ router
                 }, {
                         $set: {
                             'interes.$.state': state
+                        },
+                        $push: {
+                            'interes.$.tracing': req.body.tracing
                         }
                     }, function (err, person) {
                         if (err) return res.status(400).send(err);
@@ -328,7 +334,7 @@ router
         let city = req.body.city;
         let interes = req.body.interes;
         let carteras = req.body.carteras;
-        let universida =req.body.universidad;
+        let universida = req.body.universidad;
         let carrer = req.body.carrera;
         var i = 0;
         for (let num of listaNumeros) {
@@ -340,7 +346,7 @@ router
                     newPerson.first_name = whatsapp_group + ' ' + i;
                     newPerson.last_name = '';
                     newPerson.ci = '';
-                    newPerson.contact_medium=1;
+                    newPerson.contact_medium = 1;
                     newPerson.carteras = carteras;
                     newPerson.phone = 0;
                     newPerson.cellphone = num;
@@ -389,109 +395,109 @@ router
     })
 
 
-    .post('/filterUniversidadMedio',function(req,res){
+    .post('/filterUniversidadMedio', function (req, res) {
 
         // console.log(req.body);
-        let listaUniversidades=req.body.listaUniChecked;
-        let listaMedios=req.body.listaMedChecked;
-        let identity=req.body.identity;
-        let listaCarteras=[];
-        let personasFiltradas=[];
-        let personasFiltroSelectivo=[];
-        
+        let listaUniversidades = req.body.listaUniChecked;
+        let listaMedios = req.body.listaMedChecked;
+        let identity = req.body.identity;
+        let listaCarteras = [];
+        let personasFiltradas = [];
+        let personasFiltroSelectivo = [];
+
 
         console.log('aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa')
-        db.users.findOne({_id:identity._id},function(err,user){
-            if(err) return res.status(200).send(err)            
-            db.users.find({offices:user.offices},{_id:1},function(err,users){
+        db.users.findOne({ _id: identity._id }, function (err, user) {
+            if (err) return res.status(200).send(err)
+            db.users.find({ offices: user.offices }, { _id: 1 }, function (err, users) {
                 // console.log(users);
-                db.carteras.find({user:{$in :users}},{_id:1},function(err,carteraslist){
-                        if(err) return res.status(200).send(err)
-                        listaCarteras=carteraslist;   
-                        db.persons.find({carteras:{$in:carteraslist}},function(err,personas){
-                            // console.log(personas)
-                            for(let p of personas){
-                                for(let ItemUnivers of listaUniversidades){
-                                    if(p.descOcupation.universidad==ItemUnivers.id){
-                                        personasFiltradas.push(p);
-                                        // console.log(p);
-                                    }
+                db.carteras.find({ user: { $in: users } }, { _id: 1 }, function (err, carteraslist) {
+                    if (err) return res.status(200).send(err)
+                    listaCarteras = carteraslist;
+                    db.persons.find({ carteras: { $in: carteraslist } }, function (err, personas) {
+                        // console.log(personas)
+                        for (let p of personas) {
+                            for (let ItemUnivers of listaUniversidades) {
+                                if (p.descOcupation.universidad == ItemUnivers.id) {
+                                    personasFiltradas.push(p);
+                                    // console.log(p);
                                 }
-                                for(let ItemMedio of listaMedios){
-                                    // console.log(ItemMedio.id ,p.contact_medium);
+                            }
+                            for (let ItemMedio of listaMedios) {
+                                // console.log(ItemMedio.id ,p.contact_medium);
 
-                                    if(p.contact_medium==ItemMedio.id){
-                                        // console.log(p)
-                                        if(personasFiltradas.includes(p)){
-                                            personasFiltroSelectivo.push(p);
-                                        }
-                                        else{
-                                            personasFiltradas.push(p)   
-                                        }
+                                if (p.contact_medium == ItemMedio.id) {
+                                    // console.log(p)
+                                    if (personasFiltradas.includes(p)) {
+                                        personasFiltroSelectivo.push(p);
+                                    }
+                                    else {
+                                        personasFiltradas.push(p)
                                     }
                                 }
                             }
-                            // console.log(personasFiltradas);
-                            // console.log(listaMedios.length , listaUniversidades.length)
-                            if((listaMedios.length>0) && (listaUniversidades.length>0)){
-                                // console.log("imprime filetro selectivo")
-                                return res.status(200).send(personasFiltroSelectivo)
-                            }else{
-                                return res.status(200).send(personasFiltradas);
-                            }
-                        })                    
-                })                
+                        }
+                        // console.log(personasFiltradas);
+                        // console.log(listaMedios.length , listaUniversidades.length)
+                        if ((listaMedios.length > 0) && (listaUniversidades.length > 0)) {
+                            // console.log("imprime filetro selectivo")
+                            return res.status(200).send(personasFiltroSelectivo)
+                        } else {
+                            return res.status(200).send(personasFiltradas);
+                        }
+                    })
+                })
             })
         })
-        
 
-       
+
+
 
 
     })
 
-    .post('/getPersonsShareCarteraEvent',function(req,res){
+    .post('/getPersonsShareCarteraEvent', function (req, res) {
         // console.log(req.body);
 
-        let listaEjecutivos=req.body.lista_ejecutivos;
-        let listaEventos=req.body.lista_eventos;
+        let listaEjecutivos = req.body.lista_ejecutivos;
+        let listaEventos = req.body.lista_eventos;
 
-        let listaPersonasDeEventos=[];
-        let listaCarteras=[];
-        for(let i of listaEventos){
+        let listaPersonasDeEventos = [];
+        let listaCarteras = [];
+        for (let i of listaEventos) {
             // console.log(i.listaInteres);
-            for(let ip of i.listaInteres){
-                if(!listaPersonasDeEventos.includes(ip.persons)){
+            for (let ip of i.listaInteres) {
+                if (!listaPersonasDeEventos.includes(ip.persons)) {
                     listaPersonasDeEventos.push(ip.persons);
 
                 }
             }
 
         }
-        for(let ejecutivo of listaEjecutivos){
+        for (let ejecutivo of listaEjecutivos) {
             listaCarteras.push(ejecutivo.carteraId)
 
         }
         console.log(listaPersonasDeEventos)
         console.log(listaCarteras);
-       
 
-        if((listaEjecutivos.length>0)&&(listaEventos.length>0)){
 
-            db.persons.find({_id:{$in:listaPersonasDeEventos},carteras:{$in:listaCarteras}},function(err,personas){
+        if ((listaEjecutivos.length > 0) && (listaEventos.length > 0)) {
+
+            db.persons.find({ _id: { $in: listaPersonasDeEventos }, carteras: { $in: listaCarteras } }, function (err, personas) {
                 if (err) return res.status(400).send(err);
                 return res.status(200).send(personas);
             })
-        }else{
-            if((listaEjecutivos.length>0)&&(listaEventos.length==0)){
-                db.persons.find({carteras:{$in:listaCarteras}},function(err,personas){
+        } else {
+            if ((listaEjecutivos.length > 0) && (listaEventos.length == 0)) {
+                db.persons.find({ carteras: { $in: listaCarteras } }, function (err, personas) {
                     if (err) return res.status(400).send(err);
                     return res.status(200).send(personas);
-                }) 
-            }else{
-                if((listaEjecutivos.length==0)&&(listaEventos.length>0)){
+                })
+            } else {
+                if ((listaEjecutivos.length == 0) && (listaEventos.length > 0)) {
 
-                    db.persons.find({_id:{$in:listaPersonasDeEventos}},function(err,personas){
+                    db.persons.find({ _id: { $in: listaPersonasDeEventos } }, function (err, personas) {
                         if (err) return res.status(400).send(err);
                         return res.status(200).send(personas);
                     })
@@ -675,36 +681,36 @@ router
     //         return res.status(200).send(off)
     //     });
     // })
-      
 
-    .put('/newTracing/:id', function (req, res) {
-        
-        console.log(req.body);
 
-        let eventId = req.body.eventId;
-        let programId;
-        db.events.update({ _id: eventId, 'tracing.persons': req.params.id }, {
-            $push: {
-                'tracing': req.body,
-            }
-        }).exec(function (err, event) {
-            // console.log(programId);
-            db.events.findOne({ _id: eventId }, { programs: 1 }, function (err, event) {
-                db.persons.update({
-                    _id: req.params.id,
-                    'tracing.programId': event.programs
-                }, {
-                        $push: {
-                            'tracing': req.body,
-                        }
-                    }, function (err, off) {
-                        if (err) return res.status(400).send(err);
-                        console.log(off)
-                        return res.status(200).send(off);
-                    })
-            });
-        })
-    })
+    // .put('/newTracing/:id', function (req, res) {
+
+    //     console.log(req.body);
+
+    //     let eventId = req.body.eventId;
+    //     let programId;
+    //     // db.events.update({ _id: eventId, 'tracing.persons': req.params.id }, {
+    //     //     $push: {
+    //     //         'tracing': req.body,
+    //     //     }
+    //     // }).exec(function (err, event) {
+    //         // console.log(programId);
+    //         db.events.findOne({ _id: eventId }, { programs: 1 }, function (err, event) {
+    //             db.persons.update({
+    //                 _id: req.params.id,
+    //                 'tracing.programId': event.programs
+    //             }, {
+    //                     $push: {
+    //                         'tracing': req.body,
+    //                     }
+    //                 }, function (err, off) {
+    //                     if (err) return res.status(400).send(err);
+    //                     console.log(off)
+    //                     return res.status(200).send(off);
+    //                 })
+    //         });
+    //     // })
+    // })
 
     ///////////////////////////////////////////////////////////////////////////////////
 

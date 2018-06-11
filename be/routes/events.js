@@ -219,19 +219,27 @@ router
                                           if (newPerson.state == 5) newPerson.stateName = 'Proximo Evento';
                                           if (newPerson.state == 6) newPerson.stateName = 'Sin Interes';
                                           // event.interes.pop(pid);
+                                          if (pid.tracing != undefined) {
+                                                t = pid.tracing.length;
+                                                if (t != 0) {
+                                                      if (pid.tracing[t - 1].state == 0) newPerson.tracingName = 'Programar Llamada';
+                                                      if (pid.tracing[t - 1].state == 1) newPerson.tracingName = 'No Contesto Llamada';
+                                                      if (pid.tracing[t - 1].state == 2) newPerson.tracingName = 'Llamada contestada';
+                                                } else newPerson.tracingName = 'Sin Seguimiento';
+                                          }
                                           nuevaLista.push(newPerson);
                                     }
                               }
-                              for (let pid of event.tracing) {
-                                    if (pid.persons == personItem._id) {
-                                          newPerson.state = pid.state;
-                                          if (newPerson.tracing == 0) newPerson.tracingName = 'Programar llamada';
-                                          if (newPerson.tracing == 1) newPerson.tracingName = 'No contesto llamada';
-                                          if (newPerson.tracing == 2) newPerson.tracingName = 'Contesto llamada';
-                                          // event.interes.pop(pid);
-                                          nuevaLista.push(newPerson);
-                                    }
-                              }
+                              // for (let pid of event.tracing) {
+                              //       if (pid.persons == personItem._id) {
+                              //             newPerson.state = pid.state;
+                              //             if (newPerson.tracing == 0) newPerson.tracingName = 'Programar llamada';
+                              //             if (newPerson.tracing == 1) newPerson.tracingName = 'No contesto llamada';
+                              //             if (newPerson.tracing == 2) newPerson.tracingName = 'Contesto llamada';
+                              //             // event.interes.pop(pid);
+                              //             nuevaLista.push(newPerson);
+                              //       }
+                              // }
                         }
                         return res.status(200).send(nuevaLista);
                   })

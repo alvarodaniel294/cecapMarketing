@@ -19,7 +19,7 @@ export class TracingComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router
   ) {
-    this.model = new Tracing(new Date(), null, "", "");
+    this.model = new Tracing(null, "", "");
   }
   ngOnInit() {
     this.route.params.subscribe(params => {

@@ -35,7 +35,7 @@ export class EditPersonaInteresComponent implements OnInit {
     private _peticionesService: PeticionesService
 
   ) {
-    this.model = new Tracing(new Date(), null, "", "");    
+    this.model = new Tracing( null, "", "");    
   }
 
   ngOnInit() {
@@ -81,20 +81,21 @@ export class EditPersonaInteresComponent implements OnInit {
     interesItem.state = this.interesOfPerson;
     interesItem.eventId = this.eventId;
     interesItem.personId = this.personId;
+    interesItem.tracing = this.model;
     this._peticionesService.setInteresOfPersonFromEvent(interesItem).subscribe(response => {
 
       // console.log(response);
 
       console.log(this.model);
-      this._peticionesService.addNewTracing(this.personId, this.model).subscribe(response => {
-        var esperado = response;
-        console.log(esperado);
+      // this._peticionesService.addNewTracing(this.personId, this.model).subscribe(response => {
+      //   var esperado = response;
+      //   console.log(esperado);
 
-        this.router.navigate(['home/events/persons/', this.eventId]);
+      //   this.router.navigate(['home/events/persons/', this.eventId]);
           
-      });
+      // });
       
-      // this.router.navigate(['home/events/persons/', this.eventId]);
+      this.router.navigate(['home/events/persons/', this.eventId]);
     })
 
   }
@@ -107,7 +108,7 @@ export class EditPersonaInteresComponent implements OnInit {
 }
 
 export interface Interes {
-
+  tracing: {},
   state: number,
   eventId: string,
   personId: string,
