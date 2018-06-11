@@ -340,6 +340,7 @@ router
                     newPerson.first_name = whatsapp_group + ' ' + i;
                     newPerson.last_name = '';
                     newPerson.ci = '';
+                    newPerson.contact_medium=1;
                     newPerson.carteras = carteras;
                     newPerson.phone = 0;
                     newPerson.cellphone = num;
