@@ -25,7 +25,7 @@ export class TracingComponent implements OnInit {
     this.route.params.subscribe(params => {
       this.personId = params.id;
 
-      this.model.personId = this.personId;
+      // this.model.personId = this.personId;
     });
   }
   onSubmit() {
@@ -36,15 +36,15 @@ export class TracingComponent implements OnInit {
       window.alert("Asegúrese de llenar todos los campos")
     } else {
         console.log(this.model);
-        this._peticionesService.addTracing(this.personId, this.model).subscribe(response => {
-            var esperado = response;
-            console.log(esperado);
-            alert("El seguimiento se creó correctamente");
-            window.history.back()
-            },
-            error => {
-              console.log(<any>error);
-        });
+        // this._peticionesService.addTracing(this.personId, this.model).subscribe(response => {
+        //     var esperado = response;
+        //     console.log(esperado);
+        //     alert("El seguimiento se creó correctamente");
+        //     window.history.back()
+        //     },
+        //     error => {
+        //       console.log(<any>error);
+        // });
       }
   }
   cancel() {
