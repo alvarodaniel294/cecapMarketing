@@ -36,46 +36,126 @@
     
                         </div>
                     </div>
+
+
+                    <div class="form-group">
+                        <label for="numToDivide">Cantidad en la que se dividira</label>
+                        <input type="number" pattern="[1-9]" class="form-control" id="numToDivide"
+                               required
+                               [(ngModel)]="numeroParaDividir" name="cell"
+                               #numToDivide="ngModel">
+                        <div [hidden]="numToDivide?.valid || numToDivide?.pristine"
+                        class="text-alert">
+                        *Numero es invalido
+                        </div>
+                      </div>
+
         
                       <button type="submit" class="btn btn-success" [disabled]="!compartirCarterasForm.form.valid">Buscar</button>
                       <button type="button" class="btn btn-danger" (click)="cancel()">Cancelar</button>
                       <br>
                       <br>
+
+
+                      <div class="form-group" *ngIf='numeroParaDividir!=undefined'>
+                            <label for="">
+                                <h5>La lista se dividira en {{numeroParaDividir}} partes  
+                                    <button class="btn btn-primary margin-left" (click)="dividir()">Dividir</button>
+                                    <button class="btn btn-primary margin-left" (click)="deshacerDividir()">Deshacer Dividir</button></h5>
+                            </label>
                     </div>
+
+                    </div>
+
+                   
                   </form>
 
+                  <br>
 
+                 
 
+                  <div *ngIf='listaGeneral'>
+                        <table class="table table-hover" >
+                                <thead >
+                                   <tr>
+                                       <th>Numero</th>
+                                      <th>Nombre</th>
+                                      <th>Apellido</th>
+                                      <th>Telefono</th>
+                                      <th>Whatsapp Group</th>
+                                      <th>Ciudad</th>
+                                      <th>Ocupacion</th>
+                                      <!-- <th colspan="2">Opciones</th> -->
+                                   </tr>
+                                </thead>
+                                <tbody> 
+                                   <tr *ngFor="let i of listadepersonasReturned; let num = index" >
+                                      <td>{{num+1}}</td>
+                                      <td>{{ i.first_name }}</td>
+                                      <th>{{i.last_name}}</th>
+                                      <td>{{ i.cellphone }}</td>
+                                      <td>{{i.whatsapp_group}}</td>
+                                      <td>{{i.city}}</td>
+                                      <td>{{ i.ocupation }}</td>
+                                   </tr>
+                                </tbody>      
+                             </table>
+                             <div align="center" *ngIf='enablePrint'>
+                                    <input type="text" id="PrimerNombre" placeholder="Primer Nombre">
+                                    <input type="text" id="Apellido" placeholder="Apellidos">
+                                    <input type="text" id="Celular" placeholder="Celular">
+                                    <input type="text" id="email" placeholder="email">
+                                    <input type="text" id="Telefono" placeholder="Telefono">
+                                    <input type="text" id="Ciudad" placeholder="Ciudad">
+                                    <input type="text" id="whatsapp_group" placeholder="whatsapp_group">  
+                                <button class="btn btn-primary" (click)="imprimir(listadepersonasReturned)">Imprimir</button>
+                            </div>
 
-              <table class="table table-hover" >
-                <thead >
-                   <tr>
-                      <th>Nombre</th>
-                      <th>Apellido</th>
-                      <th>Telefono</th>
-                      <th>Whatsapp Group</th>
-                      <th>Ciudad</th>
-                      <th>Ocupacion</th>
-                      <th colspan="2">Opciones</th>
-                   </tr>
-                </thead>
-                <tbody> 
-                   <tr *ngFor="let i of listado_personas">
-                      <td>{{ i.first_name }}</td>
-                      <th>{{i.last_name}}</th>
-                      <td>{{ i.cellphone }}</td>
-                      <td>{{i.whatsapp_group}}</td>
-                      <td>{{i.city}}</td>
-                      <td>{{ i.ocupation }}</td>
-                     
-                      <td>
-                         <!-- <a class="btn btn-primary" (click)="edit(i._id)">EDITAR</a> -->
-                        
-                      </td>
-                   </tr>
-                </tbody>
-                <h6>asdfasdfasf</h6>
-             </table>
+                  </div>
+
+                  <div *ngIf='!listaGeneral'>
+                        <div *ngFor="let unaLista of lista_lista_personas">
+                                <table class="table table-hover" >
+                                        <thead >
+                                           <tr>
+                                               <th>Numero</th>
+                                              <th>Nombre</th>
+                                              <th>Apellido</th>
+                                              <th>Telefono</th>
+                                              <th>Whatsapp Group</th>
+                                              <th>Ciudad</th>
+                                              <th>Ocupacion</th>
+                                              <!-- <th colspan="2">Opciones</th> -->
+                                           </tr>
+                                        </thead>
+                                        <tbody> 
+                                           <tr *ngFor="let i of unaLista; let num = index" >
+                                              <td>{{num+1}}</td>
+                                              <td>{{ i.first_name }}</td>
+                                              <th>{{i.last_name}}</th>
+                                              <td>{{ i.cellphone }}</td>
+                                              <td>{{i.whatsapp_group}}</td>
+                                              <td>{{i.city}}</td>
+                                              <td>{{ i.ocupation }}</td>
+                                           </tr>
+                                        </tbody>      
+                                     </table>
+                                     <div align="center" *ngIf='enablePrint'>
+                                            <input type="text" id="PrimerNombre" placeholder="Primer Nombre">
+                                            <input type="text" id="Apellido" placeholder="Apellidos">
+                                            <input type="text" id="Celular" placeholder="Celular">
+                                            <input type="text" id="email" placeholder="email">
+                                            <input type="text" id="Telefono" placeholder="Telefono">
+                                            <input type="text" id="Ciudad" placeholder="Ciudad">
+                                            <input type="text" id="whatsapp_group" placeholder="whatsapp_group">  
+                                        <button class="btn btn-primary" (click)="imprimir(unaLista)">Imprimir</button>
+                                    </div>
+            
+                        </div>
+
+                  </div>
+           
+             
     
             </div>
 

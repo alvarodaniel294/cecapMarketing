@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {PeticionesService } from '../../services/peticiones.service';
 import { Identity } from "../../services/global";
 import { ActivatedRoute,Router,Route } from "@angular/router";
+import { Angular5Csv } from 'angular5-csv/Angular5-csv';
 
 
 @Component({
@@ -14,14 +15,19 @@ import { ActivatedRoute,Router,Route } from "@angular/router";
 export class DividirCarteraComponent implements OnInit {
 
   public listaEjecutivos;
-  public listado_personas;
+  public listado_personas=[];
   public events;
   public program;
   public lista_eventos=[];
-
-
+  public numeroParaDividir;
+  public enablePrint=false;
+  public lista_lista_personas=[];
+  public listadepersonasReturned;
   public listaEjecutivosChecked=[];
   public listaEventosChecked=[];
+  
+  public listaGeneral=true;
+  public numTotal;
 
   constructor(
 
@@ -38,6 +44,8 @@ export class DividirCarteraComponent implements OnInit {
   }
 
   onSubmit(){
+
+   
     this.listaEjecutivosChecked=[];
     this.listaEventosChecked=[];
     this.listado_personas=[];
@@ -56,13 +64,58 @@ export class DividirCarteraComponent implements OnInit {
     objtsend.lista_ejecutivos=this.listaEjecutivosChecked;
     objtsend.lista_eventos=this.listaEventosChecked;
     this._peticionesService.getPersonsShareCarteraEvent(objtsend).subscribe(response=>{
-      this.listado_personas=response;
+      this.listadepersonasReturned=response
+      this.listado_personas=this.listadepersonasReturned;
+      this.numTotal=this.listado_personas.length;
+
+
+
+      this.enablePrint=true;
+     
+       
+
+        
+      // console.log(this.lista_lista_personas)
     })
 
+   
 
 
 
   }
+  dividir(){
+
+
+    if(this.numeroParaDividir>this.numTotal){
+      window.alert("El numero debe ser menor o igual a "+ this.numTotal)
+
+    }else{
+      
+      this.lista_lista_personas=[];
+      this.listaGeneral=false;
+      this.enablePrint=true;
+      
+      let dividido=Math.floor(this.lista_lista_personas.length/this.numeroParaDividir)
+      let numDeListas=this.numeroParaDividir;
+
+      for(let i=0 ;i<numDeListas;i++){
+        let lista=[];
+        this.lista_lista_personas.push(lista);
+      }
+      console.log(this.lista_lista_personas);
+      let res=llenado(this.listado_personas,this.lista_lista_personas);
+      console.log(this.lista_lista_personas);
+    }
+    
+
+
+  }
+  deshacerDividir(){
+    this.listaGeneral=true;
+  }
+
+ 
+  
   cancel(){
 
     for(let a of this.listaEjecutivos){
@@ -74,6 +127,12 @@ export class DividirCarteraComponent implements OnInit {
     }
     this.listaEventosChecked=[];
     this.listado_personas=[];
+    this.listadepersonasReturned=[];
+    this.lista_lista_personas=[];
+    this.listaGeneral=true;
+    this.numeroParaDividir=undefined;
+    this.enablePrint=false;
+
     
   }
   queryEvents() {
@@ -118,9 +177,69 @@ export class DividirCarteraComponent implements OnInit {
        }
     );
  }
+ imprimir(listaToExport){
+
+  console.log(listaToExport);
+  let lista=[];
+  for(let i of listaToExport){
+    let newPerson={}as PersonToExport;
+    newPerson.first_name=i.first_name;
+    newPerson.last_name=i.last_name;    
+    newPerson.celular=i.cellphone;
+    newPerson.email=i.email;
+    newPerson.telefono=i.phone;
+    newPerson.city=i.city;
+    newPerson.whatsapp_group=i.whatsapp_group
+    lista.push(newPerson);
+  }
+
+  let options = {
+    fieldSeparator: ',',
+    quoteStrings: '"',
+    decimalseparator: '.',
+    showLabels: false,
+    showTitle: false,
+    useBom: true,
+    // noDownload: true,
+    // headers: ["NOMBRES", "APELLIDOS", "CIUDAD", "CELULAR", "Móvil"]
+    headers: [
+      // (<HTMLInputElement>document.getElementById(elementId)).value,
+      (<HTMLInputElement>document.getElementById('PrimerNombre')).value,
+      (<HTMLInputElement>document.getElementById('Apellido')).value,
+      (<HTMLInputElement>document.getElementById('Celular')).value,
+      (<HTMLInputElement>document.getElementById('email')).value,
+      (<HTMLInputElement>document.getElementById('Telefono')).value,
+      (<HTMLInputElement>document.getElementById('Ciudad')).value,
+      (<HTMLInputElement>document.getElementById('whatsapp_group')).value,
+      
+    ]
+  };
+
+   let toExportCarteraShared=new Angular5Csv(lista,"carteraToExport",options)
+
+ }
 
 }
 
+
+function llenado(listaP,listaParaLlenar){
+
+  if(listaP.length==0){
+    return listaParaLlenar;
+  }
+  else{
+    for(let i of listaParaLlenar){
+      if(listaP.length==0){
+        return listaParaLlenar
+      }else{
+        i.push(listaP.pop());
+
+      }
+    }
+    llenado(listaP,listaParaLlenar);
+  }
+  // console.log(listaParaLlenar);
+}
 
 
 export interface EventoItem{
@@ -139,4 +258,17 @@ export interface ObjToSend{
 
   lista_ejecutivos:{},
   lista_eventos:{}
+}
+export interface PersonToExport{
+
+  first_name:string,
+  last_name:string,
+  celular:number,
+  telefono:number,
+  email:string,  
+  whatsapp_group:string,
+  city:string,
+
+
+
 }
