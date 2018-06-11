@@ -663,19 +663,49 @@ router
 
     ////////////////////////////////////////////////////////////////////////////////
 
-    .put('/tracing/:id', function (req, res) {
-        db.persons.update({ _id: req.params.id},
-          {
-            $push: {
-              'profile.tracing': req.body,
-           }
-        }).exec(function (err, off) {
-            if (err) return res.status(400).send(err);
-            console.log(off)                
-            return res.status(200).send(off)
-        });
-    })
+    // .put('/tracing/:id', function (req, res) {
+    //     db.persons.update({ _id: req.params.id},
+    //       {
+    //         $push: {
+    //           'profile.tracing': req.body,
+    //         }
+    //     }).exec(function (err, off) {
+    //         if (err) return res.status(400).send(err);
+    //         console.log(off)                
+    //         return res.status(200).send(off)
+    //     });
+    // })
       
+
+    .put('/newTracing/:id', function (req, res) {
+        
+        console.log(req.body);
+
+        let eventId = req.body.eventId;
+        let programId;
+        db.events.update({ _id: eventId, 'tracing.persons': req.params.id }, {
+            $push: {
+                'tracing': req.body,
+            }
+        }).exec(function (err, event) {
+            // console.log(programId);
+            db.events.findOne({ _id: eventId }, { programs: 1 }, function (err, event) {
+                db.persons.update({
+                    _id: req.params.id,
+                    'tracing.programId': event.programs
+                }, {
+                        $push: {
+                            'tracing': req.body,
+                        }
+                    }, function (err, off) {
+                        if (err) return res.status(400).send(err);
+                        console.log(off)
+                        return res.status(200).send(off);
+                    })
+            });
+        })
+    })
+
     ///////////////////////////////////////////////////////////////////////////////////
 
     .delete('/:id', function (req, res) {

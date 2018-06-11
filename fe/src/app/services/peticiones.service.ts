@@ -476,13 +476,23 @@ export class PeticionesService {
     }
     ///////////////////////////////////////////////////////////////////////////////////////////
 
-    addTracing(personId, trac) {
+    // addTracing(personId, trac) {
         
-        let body = JSON.stringify(trac);
-        var headers = new HttpHeaders().set('Content-Type', 'application/json; charset=utf-8');
-        return this._http.put(this.url + 'persons/tracing/' + personId, body, { headers: headers }).map((res: Response) => res);
+    //     let body = JSON.stringify(trac);
+    //     var headers = new HttpHeaders().set('Content-Type', 'application/json; charset=utf-8');
+    //     return this._http.put(this.url + 'persons/tracing/' + personId, body, { headers: headers }).map((res: Response) => res);
       
+    // }
+
+    addNewTracing(personId, trac) {
+        let body = JSON.stringify(trac);
+        //console.log(body);
+        var headers = new HttpHeaders().set('Content-Type', 'application/json; charset=utf-8');
+        return this._http.put(this.url + 'persons/newTracing/' + personId, body, { headers: headers }).map((res: Response) => res);
+
+
     }
+    ///////////////////////////////////////////////////////////////////////////////
 
     filterUniversidadMedio(obj){
         let body = JSON.stringify(obj);

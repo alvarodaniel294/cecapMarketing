@@ -41,9 +41,39 @@
                      *intereo requeridos
                   </div>-->
               </div>
+
+              <div>
+                <label>
+                  <h3>Añadir Seguimiento</h3>
+                </label>
+              </div>
+              
+              <div class="form-group col-sm-6" style="text-align: center">
+                <label for="details" class="control-label">Detalles</label>
+                <input type="text" pattern="[a-zA-Z .0-9]{3,150}" class="form-control" id="details" [(ngModel)]="model.details"
+                  name="details" #details="ngModel" />                
+                <!-- <input type="text" class="form-control" id="detail" [(ngModel)]="detail" name="detail" #detail="ngModel" /> -->
+                <!-- <span *ngIf="!detail.valid && detail.touched && detail?.pattern" class="text-alert">
+                  *Detalle requerido.
+                </span>
+                <span *ngIf="detail?.pattern && detail.touched" class="text-alert">
+                  *Detalle invalido.
+                </span> -->
+              </div>
               <div class="form-group">
-                  <label>Añadir Seguimiento</label>
-                  <a class="btn btn-primary fa fa-plus" (click)="addTracing(personId)"></a>                  
+                <label for="state">Estado</label>
+                <select style="width: 50%" class="form-control" id="state" [(ngModel)]="model.state" 
+                  name="state" #state="ngModel" required>
+                    <option value="0">Programar llamada</option>
+                    <option value="1">No contestó llamada</option>
+                    <option value="2">Contestó llamada</option>
+                </select>
+                <span *ngIf="!interes.valid && interes.touched" class="text-alert">
+                  *Seguimiento de persona requerido.
+                </span>
+                <!--<div [hidden]="intere?.valid || intere?.pristine" class="">
+                     *intereo requeridos
+                  </div>-->
               </div>
 
               <button type="submit" class="btn btn-success" [disabled]="!interesForm.form.valid">Registrar</button>

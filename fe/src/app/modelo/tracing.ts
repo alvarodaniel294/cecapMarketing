@@ -3,6 +3,6 @@ export class Tracing {
         public date_tracing: Date,
         public state: Number,
         public details: String,
-        public personId: String,                
+        public eventId: String,                
     ){}
 }

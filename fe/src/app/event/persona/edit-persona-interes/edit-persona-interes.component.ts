@@ -4,6 +4,8 @@ import { PeticionesService } from '../../../services/peticiones.service';
 import { ActivatedRoute, Router } from "@angular/router";
 import { Pipe, PipeTransform } from '@angular/core';
 import { Identity } from '../../../services/global';
+import { Tracing} from '../../../modelo/tracing';
+
 
 
 @Component({
@@ -22,6 +24,8 @@ export class EditPersonaInteresComponent implements OnInit {
   public currentInteres;
   public interes;
   public detail;
+  public model: Tracing;
+  
 
   constructor(
 
@@ -30,7 +34,9 @@ export class EditPersonaInteresComponent implements OnInit {
     private _personaService: PersonaService,
     private _peticionesService: PeticionesService
 
-  ) { }
+  ) {
+    this.model = new Tracing(new Date(), null, "", "");    
+  }
 
   ngOnInit() {
     this.route.params.subscribe(params => {
@@ -38,6 +44,8 @@ export class EditPersonaInteresComponent implements OnInit {
       this.personId = personIdEventId.split('-')[0];
       this.eventId = personIdEventId.split('-')[1];
       this.findPerson();
+
+      this.model.eventId = this.eventId;      
 
     })
 
@@ -75,13 +83,22 @@ export class EditPersonaInteresComponent implements OnInit {
     interesItem.personId = this.personId;
     this._peticionesService.setInteresOfPersonFromEvent(interesItem).subscribe(response => {
 
-      console.log(response);
-      this.router.navigate(['home/events/persons/', this.eventId]);
+      // console.log(response);
+
+      console.log(this.model);
+      this._peticionesService.addNewTracing(this.personId, this.model).subscribe(response => {
+        var esperado = response;
+        console.log(esperado);
+
+        this.router.navigate(['home/events/persons/', this.eventId]);
+          
+      });
+      
+      // this.router.navigate(['home/events/persons/', this.eventId]);
     })
 
-
-
   }
+
   cancel() {
     window.history.back();
 
