@@ -118,7 +118,8 @@ export class AddPersonComponent implements OnInit {
         this.registro.eventId = this.IdEvent;
         this.registro.persona = this.person;
         console.log(this.registro);
-        this._peticionesService.addPerson(this.registro).subscribe(
+        // this._peticionesService.addPerson(this.registro).subscribe(
+        this._peticionesService.addNewPerson(this.registro).subscribe(
             result => {
                 var esperado = result;
                 console.log(esperado);

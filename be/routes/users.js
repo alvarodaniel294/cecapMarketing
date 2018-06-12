@@ -55,6 +55,90 @@ router
 
    })
 
+
+   .post('/reporteTrimestralEjecutivos',function(req,res){
+        // console.log(req.body);
+
+        // let user=req.body.ejecutivo;
+        let fechaFin=new Date();
+        let fechaInicio=new Date(fechaFin.getFullYear(),fechaFin.getMonth()-3,fechaFin.getDay());
+        let listaPersonasToReport=[];
+        db.persons.find({carteras:req.body.carteraId},{_id:1},function(err,personsOfCartera){
+             if (err) return res.status(400).send(err); 
+            //  console.log(personsOfCartera)       
+            let personasDeEjecutivo=personsOfCartera;
+            db.events.find({},function(err,listaEventos){
+                if (err) return res.status(400).send(err);
+                // console.log(listaEventos)
+                for(let event of listaEventos){
+                    // console.log('aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa')
+                    // console.log(event.interes);
+
+                    for(let itemInteres of event.interes){
+                        for(let p of personsOfCartera){
+                            // console.log(typeof(p._id));
+                            // console.log(typeof(itemInteres.persons))
+                            // console.log(new String(p._id).valueOf())
+                            
+                            if( new String(p._id).valueOf()==new String(itemInteres.persons).valueOf()){
+                                if((itemInteres.date_state<fechaFin)&&(itemInteres.date_state>fechaInicio)){
+                                    listaPersonasToReport.push(p);
+                                    // console.log("estaes la lista para eportar", listaPersonasToReport)
+                                }
+                            }
+                        }
+                    }
+
+
+                  
+                }
+                return res.status(200).send(listaPersonasToReport);
+
+            })
+        })
+   })
+
+   .post('/reporteTrimestralInscritosEjecutivos',function(req,res){
+    // console.log(req.body);
+
+    let fechaFin=new Date();
+    let fechaInicio=new Date(fechaFin.getFullYear(),fechaFin.getMonth()-3,fechaFin.getDay());
+    let listaPersonasToReport=[];
+    db.persons.find({carteras:req.body.carteraId},{_id:1},function(err,personsOfCartera){
+         if (err) return res.status(400).send(err); 
+        //  console.log(personsOfCartera)       
+        let personasDeEjecutivo=personsOfCartera;
+        db.events.find({},function(err,listaEventos){
+            if (err) return res.status(400).send(err);
+            // console.log(listaEventos)
+            for(let event of listaEventos){
+                // console.log('aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa')
+                // console.log(event.interes);
+
+                for(let itemInteres of event.interes){
+                    for(let p of personsOfCartera){
+                        // console.log(typeof(p._id));
+                        // console.log(typeof(itemInteres.persons))
+                        // console.log(new String(p._id).valueOf())
+                        
+                        if( new String(p._id).valueOf()==new String(itemInteres.persons).valueOf()){
+                            if((itemInteres.date_state<fechaFin)&&(itemInteres.date_state>fechaInicio)&&(itemInteres.state==3)){
+                                listaPersonasToReport.push(p);
+                                // console.log("estaes la lista para eportar", listaPersonasToReport)
+                            }
+                        }
+                    }
+                }
+
+
+              
+            }
+            return res.status(200).send(listaPersonasToReport);
+
+        })
+    })
+})
+
    .get('/roles', function (req, res) {
       db.roles.find({}, function (err, users) {
          if (err) return res.status(400).send(err);

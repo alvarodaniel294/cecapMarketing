@@ -121,10 +121,12 @@ router
             db.events.findOne({ _id: eventId }, { programs: 1 }, function (err, event) {
                 db.persons.update({
                     _id: personId,
-                    'interes.programId': event.programs
+                    'interes.programId': event.programs,
+                    date_state:new Date(),
                 }, {
                         $set: {
-                            'interes.$.state': state
+                            'interes.$.state': state,
+                            'interes.$.date_state':new Date(),
                         },
                         $push: {
                             'interes.$.tracing': req.body.tracing
@@ -375,6 +377,7 @@ router
                                     let inte = {};
                                     inte.persons = np;
                                     inte.state = 0;
+                                    inte.date_state=new Date();
                                     e.interes.push(inte);
                                     e.save();
                                 }
@@ -507,6 +510,40 @@ router
 
 
 
+    })
+
+    .post('/addNewPerson',function(req,res){
+        console.log(req.body);
+        let interes=req.body.persona.interes;
+        db.persons.findOne({cellphone:req.body.persona.cellphone},function(err,celExist){
+            if (err) return res.status(400).send(err);
+            if(celExist==null){
+                var person=new db.persons(req.body.persona);
+                person.save(function(err,pers){
+                    if (err){
+                        return res.status(200).send(err)
+                    }else{
+                        for (let program of interes) {
+                            // console.log(program);
+                            db.events.find({ programs: program.programId }, function (err, eventos) {
+                                for (let e of eventos) {
+                                    let inte = {};
+                                    inte.persons = pers;
+                                    inte.state = 0;
+                                    inte.date_state=new Date();
+                                    
+                                    e.interes.push(inte);
+                                    e.save();
+                                }
+                            })
+                        }
+                        return res.status(200).send(pers);
+                    }
+                        
+                })
+            }
+
+        })
     })
 
     .post('/', function (req, res, next) {
