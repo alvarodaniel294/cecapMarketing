@@ -139,6 +139,32 @@ router
     })
 })
 
+.get('/getEjecutivoToEdit/:id', function (req, res) {
+    db.users.findOne({ _id: req.params.id }, function (err, user) {
+       if (err) return res.status(400).send(err);
+       if (user == null) return res.status(404).send();
+          let eje={};
+          eje._id=user._id;
+          eje.name=user.name;
+          eje.lastname=user.lastname;
+          eje.password_hash=user.password_hash;
+          eje.active=user.active;
+          eje.cell=user.cell;
+          eje.correo=user.correo;
+          eje.rol=user.rol;
+          eje.offices=user.offices;
+          db.carteras.findOne({user:user._id},function(err,cart){
+              if (err) return res.status(400).send(err);
+              eje.cartera=cart;
+              console.log(cart);
+              return res.status(200).send(eje);
+              
+          })
+         
+
+    });
+ })
+
    .get('/roles', function (req, res) {
       db.roles.find({}, function (err, users) {
          if (err) return res.status(400).send(err);
