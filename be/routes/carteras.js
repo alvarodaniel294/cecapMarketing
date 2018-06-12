@@ -42,6 +42,38 @@ router
 //     }
 
 
+.post('/reasignarCartera',function(req,res){
+    console.log(req.body)
+    db.carteras.findOne({_id:req.body.cartera},function(err,cart){
+        if (err) return res.status(400).send(err);
+
+        if(req.body.cartera!=req.body.carteraAntigua){
+        
+            cart.user=req.body.ejecutivo;
+            cart.active=true;
+            cart.save();
+                
+            db.carteras.findOne({_id:req.body.carteraAntigua},function(err,carter){
+                if (err) return res.status(400).send(err);
+                carter.user=undefined;
+                carter.active=false;
+                carter.save(function(err,ca){
+                    if (err) return res.status(400).send(err);
+                    return res.status(200).send(cart);
+                });
+
+
+
+            })
+        }else{
+            return res.status(200).send(cart);
+            
+        }
+       
+    })
+    
+})
+
 
 .get('/persons/:_id', function (req, res) {
     
