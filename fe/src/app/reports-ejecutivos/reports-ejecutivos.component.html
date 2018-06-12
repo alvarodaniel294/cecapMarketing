@@ -1,0 +1,78 @@
+<div class="content-wrapper">
+  <br>
+  <div class="content">
+      <div class="box box-primary">
+          <div class="container ">
+             
+            <h3>Reporte Trimestral</h3>
+            <br>
+            <h4>Desde {{fechaInicio|date}} hasta {{fechaFin|date}}</h4>
+
+
+            <div>
+              <!-- <form (ngSubmit)="onSubmit()" #reporteEjecutivoForm="ngForm">
+                <div class="form-group col-sm-8">
+                    <div class="form-group">
+                        <label for="programs">Universidades</label>
+                          <br>           
+                          <label>
+                            <div *ngFor="let uni of listaUniversidades; let i = index" >
+                                  <input type="checkbox" name="uni{{i}}" #univer="ngModel" value="{{uni.id}}" [(ngModel)]="uni.checked" /> {{uni.name}}
+                            </div>
+                           </label>                                 
+                            <div [hidden]="univer?.valid || univer?.pristine"
+                                class="text-alert"> 
+                            </div>
+                     </div>
+                    <div class="form-group">
+                        <label for="programs">Medios de Contacto</label>
+                          <br>        
+                            <label>
+                                <div *ngFor="let mc of listaMediosContacto; let i = index" >
+                                    <input type="checkbox" name="mc{{i}}" #mediosC="ngModel" value="{{mc.id}}" [(ngModel)]="mc.checked" /> {{mc.name}}
+                                </div>
+                              </label>                        
+                        <div [hidden]="mediosC?.valid || mediosC?.pristine"
+                            class="text-alert">
+
+                        </div>
+                    </div>
+    
+                  <button type="submit" class="btn btn-success" [disabled]="!reporteEjecutivoForm.form.valid">Buscar</button>
+                  <button type="button" class="btn btn-danger" (click)="cancel()">Cancelar</button>
+                  <br>
+                  <br>
+                </div>
+              </form> -->
+
+
+
+
+              <table class="table table-hover" >
+                <thead >
+                   <tr>
+                      <th>Nombre</th>
+                      <th>Cartera</th>
+                      <th>Total Registrados</th>
+                      <th>Total Inscritos</th>
+                     
+                   </tr>
+                </thead>
+                <tbody> 
+                   <tr *ngFor="let i of listaReporteUsuarios">
+                      <th>{{ i.user }}</th>
+                      <th>{{i.cartera}}</th>
+                      <td>{{ i.cantidadRegistrados }}</td>
+                      <td>{{i.cantidadInscritos}}</td>
+                     
+                   </tr>
+                </tbody>
+             </table>
+    
+            </div>
+
+          </div>
+      </div>
+  </div>
+
+</div>

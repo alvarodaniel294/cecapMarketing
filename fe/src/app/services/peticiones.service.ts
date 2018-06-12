@@ -522,5 +522,29 @@ export class PeticionesService {
 
     }
 
+    addNewPerson(registro){
+        let body = JSON.stringify(registro);
+        //console.log(body);
+        var headers = new HttpHeaders().set('Content-Type', 'application/json; charset=utf-8');
+        return this._http.post(this.url + 'persons/addNewPerson/', body, { headers: headers }).map((res: Response) => res);
+
+    }
+
+    reporteTrimestralEjecutivos(objt){
+        let body = JSON.stringify(objt);
+        //console.log(body);
+        var headers = new HttpHeaders().set('Content-Type', 'application/json; charset=utf-8');
+        return this._http.post(this.url + 'users/reporteTrimestralEjecutivos/', body, { headers: headers }).map((res: Response) => res);
+
+    }
+
+    reporteTrimestralInscritosEjecutivos(objt){
+        let body = JSON.stringify(objt);
+        //console.log(body);
+        var headers = new HttpHeaders().set('Content-Type', 'application/json; charset=utf-8');
+        return this._http.post(this.url + 'users/reporteTrimestralInscritosEjecutivos/', body, { headers: headers }).map((res: Response) => res);
+
+
+    }
 
 }

@@ -96,6 +96,7 @@ import { EditPersonaInteresComponent } from './event/persona/edit-persona-intere
 import { TracingComponent } from './event/profile-person/tracing/tracing.component';
 import { FiltroUniversidadMedioComponent } from './event/persona/filtro-universidad-medio/filtro-universidad-medio.component';
 import { DividirCarteraComponent } from './cartera/dividir-cartera/dividir-cartera.component';
+import { ReportsEjecutivosComponent } from './reports-ejecutivos/reports-ejecutivos.component';
 
 @NgModule({
   declarations: [
@@ -178,7 +179,8 @@ import { DividirCarteraComponent } from './cartera/dividir-cartera/dividir-carte
     EditPersonaInteresComponent,
     TracingComponent,
     FiltroUniversidadMedioComponent,
-    DividirCarteraComponent
+    DividirCarteraComponent,
+    ReportsEjecutivosComponent
 
   ],
   imports: [
