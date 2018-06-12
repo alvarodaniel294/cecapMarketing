@@ -174,9 +174,10 @@ module.exports = {
                         programName: String,
                         checked: Boolean,
                         state: Number,
+                        date_state:Date,
                         ////////////
                         //  0 interesados
-                        //  1 en duda
+                        //  1 en duda     
                         //  2 confirmados
                         //  3 isncritos
                         //  4 enlinea
@@ -255,6 +256,7 @@ module.exports = {
                         persons: ObjectId,
                         details: String,
                         state: Number,
+                        date_state:Date,
                         ////////////
                         //  0 interesados
                         //  1 en duda
