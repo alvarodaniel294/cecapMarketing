@@ -55,7 +55,7 @@ app
 
 //   db.
 //If need initialize db 
-if (false){ 
+if (true){ 
    var init = require('./models/init');
    // init.clearCollections();
    init.initializer();

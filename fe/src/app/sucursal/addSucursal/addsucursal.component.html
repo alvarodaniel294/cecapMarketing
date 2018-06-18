@@ -30,17 +30,15 @@
                                 Ubicacion requerida
                             </div>-->
                     </div>
-                    <div class="form-group col-sm-8">
+                    <!-- <div class="form-group col-sm-8">
                         <label for="caja">Saldo Caja</label>
                         <input type="number" pattern="[0-9]{0,5}" class="form-control" id="caja" 
                             [(ngModel)]="office.caja" name="caja" #caja="ngModel" required >
                             <span *ngIf="!caja.valid && caja.touched" class="text-alert">
                                     *Caja de Sucursal requerido.
                                 </span>
-                        <!--<div [hidden]="caja?.valid || caja?.pristine" class="">
-                                Monto inicial Requerido
-                        </div>-->
-                    </div>
+                     
+                    </div> -->
                     <div class="form-group col-sm-8">
                             <label for="departament">Departamento</label>
                             <select class="form-control" id="departament" [(ngModel)]="office.departament" 

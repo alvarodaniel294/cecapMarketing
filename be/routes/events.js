@@ -64,6 +64,7 @@ router
                         newPerson.last_name = personItem.last_name;
                         newPerson.cellphone = personItem.cellphone;
                         newPerson.city = personItem.city;
+                        newPerson.contact_medium=personItem.contact_medium;
 
                         for (let pid of event.interes) {
                               if (pid.persons == personItem._id) {
@@ -104,6 +105,7 @@ router
                         newPerson.last_name = personItem.last_name;
                         newPerson.cellphone = personItem.cellphone;
                         newPerson.city = personItem.city;
+                        newPerson.contact_medium=personItem.contact_medium;
 
                         for (let pid of event.interes) {
                               if (pid.persons == personItem._id) {
@@ -151,6 +153,7 @@ router
                               newPerson.last_name = personItem.last_name;
                               newPerson.cellphone = personItem.cellphone;
                               newPerson.city = personItem.city;
+                              newPerson.contact_medium=personItem.contact_medium;
 
                               for (let pid of event.interes) {
                                     if (pid.persons == personItem._id) {
@@ -207,6 +210,7 @@ router
                               newPerson.contact_medium = personItem.contact_medium;
                               newPerson.ocupation = personItem.ocupation;
                               newPerson.descOcupation = personItem.descOcupation;
+                              newPerson.contact_medium=personItem.contact_medium;
                               for (let pid of event.interes) {
                                     if (pid.persons == personItem._id) {
                                           newPerson.state = pid.state;
