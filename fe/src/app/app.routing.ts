@@ -68,6 +68,8 @@ import { EditPersonaInteresComponent } from "./event/persona/edit-persona-intere
 import { FiltroUniversidadMedioComponent } from "./event/persona/filtro-universidad-medio/filtro-universidad-medio.component";
 import { DividirCarteraComponent } from "./cartera/dividir-cartera/dividir-cartera.component";
 import { ReportsEjecutivosComponent } from "./reports-ejecutivos/reports-ejecutivos.component";
+import { ListasComponent } from './listas/listas.component';
+import { AddCarreraComponent } from './events/add-carrera/add-carrera.component';
 
 
 const appRoutes: Routes = [
@@ -132,6 +134,8 @@ const appRoutes: Routes = [
          { path: 'filtros', component:FiltroUniversidadMedioComponent},
          { path: 'divideCartera', component:DividirCarteraComponent},
          { path: 'reporteEjecutivo', component:ReportsEjecutivosComponent},
+         { path: 'listas', component:ListasComponent},
+         { path: 'addCarrera', component:AddCarreraComponent}
 
       ]
    },

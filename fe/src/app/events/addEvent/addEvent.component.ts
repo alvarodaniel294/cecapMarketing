@@ -27,7 +27,7 @@ export class AddEventComponent implements OnInit {
    ) {
       this.model = new Event("", "", null, null, "");
    }
-
+   submitted = false;
    ngOnInit() {
       this.queryPrograms();
    }

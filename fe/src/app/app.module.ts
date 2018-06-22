@@ -97,6 +97,8 @@ import { TracingComponent } from './event/profile-person/tracing/tracing.compone
 import { FiltroUniversidadMedioComponent } from './event/persona/filtro-universidad-medio/filtro-universidad-medio.component';
 import { DividirCarteraComponent } from './cartera/dividir-cartera/dividir-cartera.component';
 import { ReportsEjecutivosComponent } from './reports-ejecutivos/reports-ejecutivos.component';
+import { ListasComponent } from './listas/listas.component';
+import { AddCarreraComponent } from './events/add-carrera/add-carrera.component';
 
 @NgModule({
   declarations: [
@@ -180,7 +182,9 @@ import { ReportsEjecutivosComponent } from './reports-ejecutivos/reports-ejecuti
     TracingComponent,
     FiltroUniversidadMedioComponent,
     DividirCarteraComponent,
-    ReportsEjecutivosComponent
+    ReportsEjecutivosComponent,
+    ListasComponent,
+    AddCarreraComponent
 
   ],
   imports: [
