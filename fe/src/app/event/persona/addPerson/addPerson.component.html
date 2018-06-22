@@ -9,28 +9,28 @@
                         <div class="form-group col-sm-8">
                             <div class="form-group col-sm-6" style="text-align: center">
                                 <label for="first_name" class="control-label">Nombre</label>
-                                <input type="text" pattern="[a-zA-Z]{3,10}[ ]{0,1}[a-zA-Z]{0,10}" class="form-control" id="first_name" [(ngModel)]="person.first_name"
-                                    name="first_name" #firstname="ngModel" />
+                                <input type="text" pattern="[a-zA-ZÑ-ñÁ-áÉ-éÍ-íÓ-óÚ-ú]{3,20}[ ]{0,1}[a-zA-ZÑ-ñÁ-áÉ-éÍ-íÓ-óÚ-ú]{0,20}" class="form-control" id="first_name" [(ngModel)]="person.first_name"
+                                    name="first_name" #firstname="ngModel" required/>
                                 <span *ngIf="!firstname.valid && firstname.touched" class="text-alert">
-                                    *Nombre de persona requerido.
+                                    *Nombre de persona requerido o invalido.
                                 </span>
-                                <span *ngIf=" firstname?.pattern && firstname.touched" class="text-alert">
+                                <!-- <span *ngIf=" firstname?.pattern && firstname.touched" class="text-alert">
                                     *Nombre invalido
-                                </span>
+                                </span> -->
                                 <!-- <div [hidden]="first_name?.valid || first_name?.pristine" class="text-alert">
                                         kjknkasdkjhjask
                                     </div> -->
                             </div>
                             <div class="form-group col-sm-6" style="text-align: center">
                                 <label for="last_name" class="control-label">Apellidos</label>
-                                <input type="text" pattern="[a-zA-Z]{3,20}[ ]{0,1}[a-zA-Z]{0,20}" class="form-control" id="last_name" [(ngModel)]="person.last_name"
-                                    name="last_name" #lastname="ngModel" />
+                                <input type="text" pattern="[a-zA-ZÑ-ñÁ-áÉ-éÍ-íÓ-óÚ-ú]{3,20}[ ]{0,1}[a-zA-ZÑ-ñÁ-áÉ-éÍ-íÓ-óÚ-ú]{0,20}" class="form-control" id="last_name" [(ngModel)]="person.last_name"
+                                    name="last_name" #lastname="ngModel" required/>
                                 <span *ngIf="!lastname.valid && lastname.touched && lastname?.pattern" class="text-alert">
-                                    *Apellido de persona requerido.
+                                    *Apellido de persona requerido o invalido.
                                 </span>
-                                <span *ngIf="lastname?.pattern && lastname.touched" class="text-alert">
+                                <!-- <span *ngIf="lastname?.pattern && lastname.touched" class="text-alert">
                                     *Apellido invalido.
-                                </span>
+                                </span> -->
                                 <!--<div [hidden]="name?.valid || name?.pristine" class="text-alert">
                                        kjkn
                                    </div>-->
@@ -39,13 +39,13 @@
                         <div class="form-group col-sm-8">
                             <div class="form-group col-sm-4">
                                 <label for="ci" class="control-label" style="text-align: left">Cedula de Identidad</label>
-                                <input type="number" pattern="[1-9][0-9]{6}[a-z]{0,1}" class="form-control" id="ci" [(ngModel)]="person.ci" name="ci" #ci="ngModel"/>
+                                <input type="number" pattern="[1-9][0-9]{6}" class="form-control" id="ci" [(ngModel)]="person.ci" name="ci" #ci="ngModel"/>
                                 <span *ngIf="!ci.valid && ci.touched" class="text-alert">
                                     *CI de persona requerido o es invalido.
                                 </span>
-                                <span *ngIf="ci?.pattern && ci.touched" class="text-alert">
+                                <!-- <span *ngIf="person.ci<1000000 || person.ci>9999999" class="text-alert">
                                     *CI de persona es invalido.
-                                </span>
+                                </span> -->
                             </div>
                             <div class="form-group col-sm-4">
                                 <label for="cellphone" class="control-label" style="text-align: center">Celular</label>
@@ -54,9 +54,9 @@
                                 <span *ngIf="!cellphone.valid && cellphone.touched" class="text-alert">
                                     *Celular de persona requerido o es invalido.
                                 </span>
-                                <span *ngIf=" cellphone?.pattern && cellphone.touched" class="text-alert">
+                                <!-- <span *ngIf=" cellphone?.pattern && cellphone.touched" class="text-alert">
                                     *Celular de persona invalido.
-                                </span>
+                                </span> -->
                             </div>
                             <div class="form-group col-sm-4">
                                 <label for="phone" class="control-label" style="text-align: right">Telefono</label>
@@ -65,15 +65,15 @@
                                 <span *ngIf="!phone.valid && phone.touched" class="text-alert">
                                     *Telefono de persona requerido o es invalido.
                                 </span>
-                                <span *ngIf="phone?.pattern && phone.touched" class="text-alert">
+                                <!-- <span *ngIf="phone?.pattern && phone.touched" class="text-alert">
                                     *Telefono de persona es invalido.
-                                </span>
+                                </span> -->
                             </div>
                         </div>
                         <div class="form-group col-sm-8">
                             <div class="form-group col-sm-6">
                                 <label for="email" class="control-label" style="text-align: left">Correo</label>
-                                <input type="email" pattern="[a-zA-Z.0-9]*[@][a-z]{3,15}[.][a-z]{3,15}" class="form-control" id="email" [(ngModel)]="person.email"
+                                <input type="email" pattern="[a-zA-Z.0-9-_]*[@][a-z]{3,15}[.][a-z]{3,15}" class="form-control" id="email" [(ngModel)]="person.email"
                                     name="email" #email="ngModel" />
                                 <span *ngIf="!email.valid && email.touched" class="text-alert">
                                     *Email de persona requerido.
@@ -233,7 +233,7 @@
                       </div> -->
                         <div class="form-group col-sm-8" style="text-align:center ">
                             <button type="button" class="btn btn-info" (click)="addPerson.reset()">Limpiar</button>
-                            <button type="submit" class="btn btn-success" [disabled]="!addPerson.form.valid">Registrar</button>
+                            <button type="submit" class="btn btn-success" [disabled]="!addPerson.form.valid">Guardar</button>
                             <button type="button" class="btn btn-danger" (click)="cancel()">Cancelar</button>
                             <!-- <button type="button" class="btn btn-danger" (click)="addPerson.reset()">Cancelar</button> -->
                         </div>
