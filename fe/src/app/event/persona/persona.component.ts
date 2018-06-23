@@ -6,12 +6,14 @@ import { ActivatedRoute, Router } from "@angular/router";
 import { Pipe, PipeTransform } from '@angular/core';
 import { FilterPipe } from "./filter.pipe";
 import { Identity } from "../../services/global";
+// import { NgxPaginationModule } from 'ngx-pagination';
 
 @Component({
   selector: 'app-persona',
   templateUrl: './persona.component.html',
   styleUrls: ['./persona.component.css'],
-  providers:[PersonaService,PeticionesService]
+  providers:[PersonaService,PeticionesService],
+  // | paginate: {itemsPerPage:5, currentPage: p}
 
 })
 export class PersonaComponent implements OnInit {
@@ -22,6 +24,11 @@ export class PersonaComponent implements OnInit {
   public color='rojo';
   public cartera;
   public rol;
+  public page;
+  public total;
+  public totalPag;
+  public mostrar = [];
+  
   public textoAdmin="Usted es Administrador y se muestran TODAS las personas"
   constructor(
      private router: Router,
@@ -45,14 +52,55 @@ export class PersonaComponent implements OnInit {
     this._peticionesService.getPersonsOfCartera(this.cartera._id).subscribe(response=>{
       
       this.listado_personas=response;
+      this.total = this.listado_personas.length;
+      this.mostrarPer();
       console.log(this.listado_personas)
     })
+  }
+  dis(){
+    this.page = this.page-1;
+    var inicio = (8*(this.page-1));
+    var final = (8*(this.page-1))+8;
+    this.mostrar = [];
+    for(var a = inicio  ; a < final ; a++ ){
+      this.mostrar.push(this.listado_personas[a]);
+  }
+  }
+  aum(){
+    this.page = this.page+1;
+    console.log(this.page)
+    var inicio = (8*(this.page-1));
+    console.log(inicio)
+    var final = (8*(this.page-1))+8;
+    if(final > this.total){
+      final = this.total;
+    }
+    console.log(final)
+    this.mostrar = [];
+    for(var a = inicio  ; a < final ; a++ ){
+        this.mostrar.push(this.listado_personas[a]);
+    }
+  }
+  mostrarPer(){
+    this.page = 1;
+    this.total = this.listado_personas.length;
+    this.totalPag = Math.ceil(this.total/8);
+    console.log(this.totalPag)
+    if(this.totalPag > 1){
+      for(var a = 0 ; a < 8 ; a++){
+      this.mostrar.push(this.listado_personas[a]) ;}
+    } else{
+      this.mostrar = this.listado_personas;
+    }
+    
   }
   query() {
     
     this._peticionesService.getPersons().subscribe(
        result => {
           this.listado_personas = result;
+          this.mostrarPer();
+          
           console.log(this.listado_personas);
        },
        error => {

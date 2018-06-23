@@ -4,6 +4,8 @@ import { HttpModule } from '@angular/http';
 import { FormsModule }   from '@angular/forms';
 import{ routing, appRoutingProviders } from './app.routing';
 import { AsyncLocalStorageModule } from 'angular-async-local-storage';
+import { NgxPaginationModule } from 'ngx-pagination';
+
 //modules
 //import { AlertsModule } from 'angular-alert-module';
 //components
@@ -176,6 +178,7 @@ import { AddCarreraComponent } from './events/add-carrera/add-carrera.component'
     FormsModule,
     HttpModule,
     ChartsModule,
+    NgxPaginationModule, 
     // Specify this module as an import
     //AlertsModule.forRoot()
     
