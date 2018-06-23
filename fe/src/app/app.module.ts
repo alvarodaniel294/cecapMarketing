@@ -98,6 +98,8 @@ import { FiltroUniversidadMedioComponent } from './event/persona/filtro-universi
 import { DividirCarteraComponent } from './cartera/dividir-cartera/dividir-cartera.component';
 import { ReportsEjecutivosComponent } from './reports-ejecutivos/reports-ejecutivos.component';
 import { ReporteEventsComponent } from './reporte-events/reporte-events.component';
+import { ListasComponent } from './listas/listas.component';
+import { AddCarreraComponent } from './events/add-carrera/add-carrera.component';
 
 @NgModule({
   declarations: [
@@ -182,7 +184,9 @@ import { ReporteEventsComponent } from './reporte-events/reporte-events.componen
     FiltroUniversidadMedioComponent,
     DividirCarteraComponent,
     ReportsEjecutivosComponent,
-    ReporteEventsComponent
+    ReporteEventsComponent,
+    ListasComponent,
+    AddCarreraComponent,
 
   ],
   imports: [

@@ -553,7 +553,16 @@ export class PeticionesService {
     
       }
 
-      
+      addUniversidad(uni){
+        let body = JSON.stringify(uni);
+        var headers = new HttpHeaders().set('Content-Type', 'application/json; charset=utf-8');
+        return this._http.post(this.url + 'list/add/university', body, { headers: headers }).map((res: Response) => res);
+      } 
+      addCarrera(carr){
+        let body = JSON.stringify(carr);
+        var headers = new HttpHeaders().set('Content-Type', 'application/json; charset=utf-8');
+        return this._http.post(this.url + 'list/add/carrera', body, { headers: headers }).map((res: Response) => res);
+      }  
   reasignarCartera(ObjId){
 
     let body = JSON.stringify(ObjId);	
