@@ -20,13 +20,10 @@ export class EventsComponent implements OnInit {
    constructor(
       private router: Router,
       private _peticionesService: PeticionesService
-      //,private _userService: UserService
    ) { }
    ngOnInit() {
-      // this.queryRol();
-    //    this.queryEvents(); 
+     
        this.queryEvents2();
-       //   console.log(this.role);
     }
     
     addPerson(){
@@ -44,7 +41,7 @@ export class EventsComponent implements OnInit {
         this._peticionesService.getEventsOfSucursal(Identity._id).subscribe(
             result => {
                 this.events = result;
-               console.log(this.events)
+            //    console.log(this.events)
                 this.events.map(event => {
                    var sum = 0;
                    event.inscriptions.forEach(e => {
@@ -119,18 +116,7 @@ export class EventsComponent implements OnInit {
          }
       );
    }
-//    queryRol(){
-//        //console.log(Identity.rol)
-//     this._peticionesService.getRole(Identity.rol).subscribe(
-//         result => {
-//          this.role = result;
-//         },
-//         error=>{
-//          var errorMessage = <any>error;
-//          console.log(errorMessage);
-//         }
-//     );
-//     }
+
 }
 
 

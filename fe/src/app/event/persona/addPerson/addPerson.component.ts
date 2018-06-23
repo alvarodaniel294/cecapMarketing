@@ -6,7 +6,6 @@ import { Person } from '../../../modelo/person';
 import { Inscription } from '../../../modelo/inscription';
 import { Registro } from '../../../modelo/registro';
 import { DescOcupation } from '../../../modelo/descOcupation';
-import { Cashflowusers } from "../../../modelo/cashflowusers";
 
 
 @Component({
@@ -60,12 +59,11 @@ export class AddPersonComponent implements OnInit {
         this.descOcupation = new DescOcupation('', '', '', '', '', '', '');
         this.registro = new Registro(null, null, '');//idEvent,idUser,persona:{}, montCancel
 
-        this.ingresoPorInscripcion = new Cashflowusers(new Date(), new Date(), 0, 0, 0, "", "", "", "", "");
     }
     onSubmit() {
     }
     ngOnInit() {
-        console.log(Identity._id);
+        // console.log(Identity._id);
         //this.queryPrograms();
         this.queryEvents();
         this.queryCartera();
@@ -89,8 +87,8 @@ export class AddPersonComponent implements OnInit {
         this._peticionesService.getPrograms().subscribe(response => {
             this.programs = response;
             this.llenarProgramsCheckbox();
-            console.log(this.programs);
-            console.log("hi")
+            // console.log(this.programs);
+            // console.log("hi")
         },
             error => {
                 var errorMessage = <any>error;
@@ -122,35 +120,12 @@ export class AddPersonComponent implements OnInit {
         this._peticionesService.addNewPerson(this.registro).subscribe(
             result => {
                 var esperado = result;
-                console.log(esperado);
+                // console.log(esperado);
 
-                /////////////   Ingreso por inscripcin a caja Chica////////////////
-
-                // this.ingresoPorInscripcion.receipt=this.inscription.receipt;
-                // this.ingresoPorInscripcion.title='Inscripcion';
-                // this.ingresoPorInscripcion.description=this.person.first_name+' '+this.person.last_name;
-                // this.ingresoPorInscripcion.detail_amount=this.inscription.canceled_price;
-                // this.ingresoPorInscripcion.user=Identity._id;
-                // this.ingresoPorInscripcion.events=this.IdEvent;
-                // ////////////////////////////////////
-                // this._peticionesService.addCashFlowUserIngreso(this.ingresoPorInscripcion).subscribe(
-                //     result => {
-                //       var returned = result;
-                //     },
-                //     error => {
-                //       var errorMessage = <any>error;
-                //       console.log(errorMessage);
-                //       alert('Error al Crear cashflowuseringreso');
-                //     }
-                //   );
-
-                ///////////////////////////////////////////////////////////////////
-
-
+               
 
                 this.router.navigate(['home/events']);
                 alert('Se Registro a la persona de manera correcta');
-                //this.router.navigate(['home/persons']);
 
             },
             error => {

@@ -13,9 +13,6 @@ export class AddProgramComponent implements OnInit {
    @ViewChild('modulesArea') modulesAreaRef: ElementRef;
    @ViewChild('detailsArea') detailsAreaRef: ElementRef;
    @ViewChild("close", {read: ElementRef}) close: ElementRef;
-   // public program: {};
-   // public program.name: String;
-   // public module: String;
    private modules: String;
    constructor(private _peticionesService: PeticionesService) { }
 

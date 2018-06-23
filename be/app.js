@@ -34,7 +34,6 @@ app.get('/', function (req, res) {
 app
    .use('/users', require('./routes/users'))
    .use('/events', require('./routes/events'))
-   // .use('/registers', require('./routes/registers'))
    .use('/carteras', require('./routes/carteras'))
    .use('/facilitators', require('./routes/facilitators'))
    
@@ -43,11 +42,9 @@ app
    .use('/modules', require('./routes/modules'))
    .use('/offices', require('./routes/offices'))
    .use('/roles', require('./routes/roles'))   
-   .use('/cajaUsuario', require('./routes/cajaUsuario'))
    .use('/company', require('./routes/company'))
    .use('/lists', require('./routes/lists'))  
    .use('/correlatives', require('./routes/correlatives'))
-   .use('/cajaSucursal',require('./routes/cajaSucursal'))
    .use(function (err, req, res, next) { 
       console.error(err.stack);
       return res.status(err.status || 500).send('Not Found');
