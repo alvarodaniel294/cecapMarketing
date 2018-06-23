@@ -49,8 +49,7 @@ export class ReportsEjecutivosComponent implements OnInit {
                   this.listaInscritosReturned=reporte;
                   this.listaInscritos=this.listaInscritosReturned
                   item.cantidadInscritos=this.listaInscritos.length;
-                  
-                
+
                   this._peticionesService.reporteTrimestralEjecutivos(u).subscribe(res=>{
                     this.listaRegistradosReturned=res;
                     this.listaRegistrados=this.listaRegistradosReturned;

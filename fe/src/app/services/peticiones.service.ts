@@ -561,4 +561,27 @@ export class PeticionesService {
     return this._http.post(this.url + 'carteras/reasignarCartera/', body, { headers: headers }).map((res: Response) => res);		
 	
   }
+  getEventsOfSucursal(identityId){
+
+    
+    var headers = new HttpHeaders().set('Content-Type', 'application/json; charset=utf-8');
+    return this._http.get(this.url + 'events/getEventsOfSucursal/' + identityId, { headers: headers }).map((res: Response) => res);	
+
+  }
+
+  getEventsFilterByDates(fechas){
+
+    let body = JSON.stringify(fechas);
+    console.log(body);	
+    var headers = new HttpHeaders().set('Content-Type', 'application/json; charset=utf-8');		
+    return this._http.post(this.url + 'events/getEventsFilterByDates/', body, { headers: headers }).map((res: Response) => res);	
+  }
+
+  getReportEvent(eventId){
+
+    var headers = new HttpHeaders().set('Content-Type', 'application/json; charset=utf-8');
+    return this._http.get(this.url + 'events/getReportEvent/' + eventId, { headers: headers }).map((res: Response) => res);
+  }
+
+
 }

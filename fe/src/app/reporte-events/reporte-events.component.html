@@ -1,0 +1,148 @@
+<div class="content-wrapper">
+  <br>
+  <div class="content">
+      <div class="box box-primary">
+          <div class="container ">
+             
+            <h3>Reporte Trimestral</h3>
+            <br>
+              <div>
+                <h1>Reporte Eventos</h1>
+               
+
+                <form (ngSubmit)="onSubmit()" #addCartera="ngForm" >
+                  <!-- <div class="form-group col-sm-8">
+                    <label for="name">Nombre de la Cartera</label>
+                    <input type="text" pattern="[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ]{3,20}([ ]{0,1}[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ]{0,20}){0,2}" class="form-control" id="name"
+                           required
+                           [(ngModel)]="carteraName" name="name"
+                          #name="ngModel"
+                           >
+                          
+                    <div [hidden]="name?.valid || name?.pristine"
+                         class="text-alert">
+                      *El Nombre de la Cartera es obigatorio
+                    </div>
+                  </div> -->
+
+
+                  <div class="form-group col-sm-8">
+                      <label data-error="wrong" data-success="right" for="form8">
+                         <i class="fa fa-calendar prefix grey-text"></i> Inicio</label>
+                      <input type="date" id="form34" class="form-control validate" [(ngModel)]="fechaInicio" name="fecha" required #date>
+                   </div>
+
+                   <div class="form-group col-sm-8">
+                      <label data-error="wrong" data-success="right" for="form8">
+                         <i class="fa fa-calendar prefix grey-text"></i> Fin</label>
+                      <input type="date" id="form34" class="form-control validate" [(ngModel)]="fechaFin" name="fecha" required #date>
+                   </div>
+
+
+                  <div class="form-group col-sm-8" style="text-align:center">
+                      <button  type="submit" class="btn btn-success"  [disabled]="!addCartera.form.valid" >Guardar</button>
+                      <button type="button" class="btn btn-danger" (click)="cancel()">Cancelar</button>
+                  </div>
+                </form>
+
+              </div>
+              
+    
+            
+
+          </div>
+      </div>
+  </div>
+
+
+  <div class="content" *ngIf='lista_eventos.length>0'>
+      <div class="box box-primary">
+          <!-- <div class="container "> -->
+             
+           
+              
+              <section class="content">
+                    
+                  <table class="table table-hover">
+                    <thead>
+                        <tr class="text-info cabecera hover">
+            
+                          <th><h4 class="text-center">Nombre</h4></th>
+                          <th><h4 class="text-center">Fecha de Inicio</h4></th>
+                          <th><h4 class="text-center">Cupos</h4></th>
+                          <th><h4 class="text-center">Programa</h4></th>
+                          <th><h4 class="text-center">Estado</h4></th>
+                          
+                        </tr>
+                    </thead>
+            
+                    <tbody>
+            
+                        <tr *ngFor="let event of lista_eventos" class="bg-info text-center">
+                          <td>{{ event.name }}</td>
+                          <td>{{ event.date_start | date }}</td>
+                          <td>{{ event.cupos }}</td>
+                          <td>{{event.programa}}</td>
+                          <td>
+                              <a class="btn btn-primary" (click)="reporteEvento(event._id)">Personas</a>
+                          </td>
+                        </tr>
+                    </tbody>
+                  </table>
+              </section>
+            
+
+          <!-- </div> -->
+      </div>
+  </div>
+
+
+  <div class="content" *ngIf='showReporteEvento!=null'>
+        <div class="box box-primary">
+            <!-- <div class="container "> -->
+            
+            
+                
+                <section class="content">
+                    
+                    <table class="table table-hover">
+                    <thead>
+                        <tr class="text-info cabecera hover">
+            
+                            <th><h4 class="text-center">Nombre</h4></th>
+                            <th><h4 class="text-center">Programa</h4></th>
+                            <th><h4 class="text-center">Interesado</h4></th>
+                            <th><h4 class="text-center">Confirmado</h4></th>
+                            <th><h4 class="text-center">Inscrito</h4></th>
+                            <th><h4 class="text-center">En Linea</h4></th>
+                            <th><h4 class="text-center">Proximo Evento</h4></th>
+                            <th><h4 class="text-center">Sin Interes</h4></th>                      
+                            
+                        </tr>
+                    </thead>
+            
+                    <tbody>
+            
+                        <tr  class="bg-info text-center">
+                            <td>{{ showReporteEvento.eventName }}</td>
+                            <td>{{ showReporteEvento.programName }}</td>
+                            <td>{{ showReporteEvento.interesados }}</td>
+                            <td>{{showReporteEvento.confirmados}}</td>
+                            <td>{{showReporteEvento.inscritos}}</td>
+                            <td>{{showReporteEvento.enLinea}}</td>
+                            <td>{{showReporteEvento.proximoEvento}}</td>
+                            <td>{{showReporteEvento.sinInteres}}</td>
+                            
+                        </tr>
+                    </tbody>
+                    </table>
+                </section>
+            
+
+            <!-- </div> -->
+        </div>
+    </div>
+
+  
+
+</div>

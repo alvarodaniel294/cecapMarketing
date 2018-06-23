@@ -1,0 +1,23 @@
+.ng-valid[required], .ng-valid.required  {
+    border-left: 5px solid #42A948; /* green */
+  }
+  
+.ng-invalid:not(form)  {
+    border-left: 5px solid #a94442; /* red */
+  }
+.text-alert{
+    color:#dd4b39;
+}
+
+.h{
+    padding-top: 50px ;
+}
+.cabecera{
+    background-color: #367fa9; 
+    color: #fff; 
+    border-color: #2e6da4;
+    border-top-color: rgb(32, 77, 116);
+    border-right-color: rgb(32, 77, 116);
+    border-bottom-color: rgb(32, 77, 116);
+    border-left-color: rgb(32, 77, 116);
+}
