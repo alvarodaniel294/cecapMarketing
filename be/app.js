@@ -48,6 +48,7 @@ app
    .use('/lists', require('./routes/lists'))  
    .use('/correlatives', require('./routes/correlatives'))
    .use('/cajaSucursal',require('./routes/cajaSucursal'))
+   .use('/list',require('./routes/list'))
    .use(function (err, req, res, next) { 
       console.error(err.stack);
       return res.status(err.status || 500).send('Not Found');

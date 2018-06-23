@@ -27,7 +27,7 @@
         <!-- <a class="btn btn-primary filter-clear" *ngIf="searchText.length>0" (clic)="clearFilter()">Cancelar</a> -->
       </div>
     </div>
-     <table class="table table-hover" >
+     <table class="table table-hover table table-striped table-bordered" style="width:100%">
         <thead >
            <tr>
               <th>Nombre</th>
@@ -41,9 +41,9 @@
               <th colspan="2">Opciones</th>
            </tr>
         </thead>
-        <tbody> 
+        <tbody > 
            <!--<tr *ngFor="let i of inscriptions | buscarPersona: busqueda">-->
-           <tr *ngFor="let i of listado_personas  | filter : searchText">
+            <tr *ngFor="let i of mostrar | filter : searchText" >
               <td>{{ i.first_name }}</td>
               <th>{{i.last_name}}</th>
               <td>{{ i.cellphone }}</td>
@@ -76,6 +76,30 @@
               </td>
            </tr>
         </tbody>
+        <tfoot class="">
+         <!-- <pagination-controls id = "foo" maxSize = " 9 "
+         ( pageChange ) = " pageChanged ($ event) "
+         directionLinks = " true "
+         autoHide = " verdadero "
+         previousLabel = " Anterior "
+         nextLabel = " Siguiente "
+         screenReaderPaginationLabel = " Paginación "
+         screenReaderPageLabel = " página "
+         screenReaderCurrentLabel = " Estás en la página ">
+          | paginate: {id: 'foo',
+           itemsPerPage: pageSize,
+           currentPage: p,
+           totalItems: total}  
+         </pagination-controls>  -->
+         <!-- <a class="btn" (click)="dis()" disabled = "page == 1" >
+          anterior
+        </a> -->
+        <button (click)="dis()" [disabled]="page == 1">Anterior</button>
+        <button (click)="aum()" [disabled]="page == 4">Siguiente</button>
+         <!-- <a class="previousLabel" (click)="aum()" disabled=" page == totalPag">
+           siguiente
+         </a> -->
+        </tfoot>
      </table>
      
   </section>

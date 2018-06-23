@@ -723,11 +723,20 @@ var _list_2 = {
    _id: new mongoose.Types.ObjectId,
    record_date: new Date()
 }
+
 var _lists = [_list_1, _list_2];
 _event_seg.modulars[0].lists.push(_list_1);
 _event_seg.modulars[0].lists.push(_list_2);
 ////////////////////////////////////////////////////////////////////////////////
-
+var _listExtra1 = [{
+  university:[{
+    nombre: 'universidad mayor de san simon'
+  }],
+  carrera:[{
+    nombre: 'ing sistemas'
+  }]
+}];
+///////////////////////////////////////////////////////////////////////////////
 function saveData(collection, schema) {
    for (var i = 0; i < collection.length; i++) {
       collection[i].record_date = new Date();
@@ -762,6 +771,7 @@ module.exports = {
      saveData(_persons, db.persons);
      saveData(_lists, db.lists);
      saveData(_cashFlowOffices,db.cashFlowOffices);
+     saveData(_listExtra1, db.listExtra);
 
   },
 
@@ -780,5 +790,6 @@ module.exports = {
      clearCollections(db.correlatives);
      clearCollections(db.lists);
      clearCollections(db.cashFlowOffices);
+     clearCollections(db.listExtra);
   }
 };

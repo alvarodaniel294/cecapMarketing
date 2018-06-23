@@ -218,6 +218,17 @@ module.exports = {
             _id: { type: ObjectId, default: function () { return new mongoose.Types.ObjectId } },
             record_date: { type: Date, default: function () { return new Date() } },
       })),
+      ////////////////////////////////////////////////////////////////////////////
+      listExtra: mongoose.model('listExtra', new Schema({
+            university: [{nombre:String
+                        }],
+            carrera: [{nombre:String}],
+            // job: String,
+
+
+            _id: { type: ObjectId, default: function () { return new mongoose.Types.ObjectId } },
+            record_date: { type: Date, default: function () { return new Date() } },
+      })),
 
       ////////////////////////////////////////////////////////////////////////////
 
