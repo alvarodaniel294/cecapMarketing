@@ -268,16 +268,6 @@ router
          if (err) return console.log(err);
 
 
-         var nuevaCaja = new db.cashFlowUsers();
-         nuevaCaja.date_start = new Date();
-         nuevaCaja.dete_end = '';
-         nuevaCaja.amount = 0;
-         nuevaCaja.amount_delivered = 0;
-         nuevaCaja.active = true;
-         nuevaCaja.state = -1;
-         nuevaCaja.user = user._id;
-
-         nuevaCaja.save();
 
          res.status(201).send(user);
       });

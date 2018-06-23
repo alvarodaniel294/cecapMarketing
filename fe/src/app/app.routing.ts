@@ -21,9 +21,7 @@ import { AddPersonComponent } from './event/persona/addPerson/addPerson.componen
 import { EditComponent } from "./event/persona/edit/edit.component";
 import { SucursalComponent } from './sucursal/sucursal.component';
 import { AddSucursalComponent } from './sucursal/addSucursal/addsucursal.component';
-import { HeroFormComponent } from "./hero-form/hero-form.component";
-import { DetalleCajaComponent } from './sucursal/detalle-caja/detalle-caja.component';
-import { DetallePersonalComponent } from './sucursal/detalle-personal/detalle-personal.component';
+
 import { AddEjecutivoComponent } from "./ejecutivo/add-ejecutivo/add-ejecutivo.component";
 
 import { Programa } from './modelo/programa';
@@ -35,20 +33,14 @@ import { EditModuloComponent } from './modulo/edit-modulo/edit-modulo.component'
 import { AddModuloComponent } from './modulo/add-modulo/add-modulo.component';
 
 import { InfoEjecutivoComponent } from "./ejecutivo/info-ejecutivo/info-ejecutivo.component";
-import { VistaCajaComponent } from "./caja/vista-caja/vista-caja.component";
 
-import { IngresoComponent } from "./caja/ingreso/ingreso.component";
-import { EgresoComponent } from './caja/egreso/egreso.component';
 import { facilitadorComponent } from './facilitador/facilitador.component';
 import { AddFacilitadorComponent } from './facilitador/add-facilitador/add-facilitador.component';
 import { EditFacilitadorComponent } from './facilitador/edit-facilitador/edit-facilitador.component';
 import { AddCorrelativeComponent } from './correlative/add-correlative/add-correlative.component';
 import { AddEventComponent } from './events/addEvent/addEvent.component';
-import { PendingCashComponent } from "./pending-cash/pending-cash.component";
 import { ControlAsistanceComponent } from './event/control-asistance/control-asistance.component';
 
-import { InfoPendingCashComponent } from "./pending-cash/info-pending-cash/info-pending-cash.component";
-import { OfficesCashComponent } from "./offices-cash/offices-cash.component";
 //import { AlertComponent } from './events/alert/alert.component';
 import { AsistenciaComponent } from './event/asistencia/asistencia.component';
 import { InscriptionComponent } from './event/inscription/inscription.component';
@@ -68,6 +60,7 @@ import { EditPersonaInteresComponent } from "./event/persona/edit-persona-intere
 import { FiltroUniversidadMedioComponent } from "./event/persona/filtro-universidad-medio/filtro-universidad-medio.component";
 import { DividirCarteraComponent } from "./cartera/dividir-cartera/dividir-cartera.component";
 import { ReportsEjecutivosComponent } from "./reports-ejecutivos/reports-ejecutivos.component";
+import { ReporteEventsComponent } from "./reporte-events/reporte-events.component";
 import { ListasComponent } from './listas/listas.component';
 import { AddCarreraComponent } from './events/add-carrera/add-carrera.component';
 
@@ -103,26 +96,16 @@ const appRoutes: Routes = [
          { path: 'ejecutivo/edit/:active', component: EditEjecutivoComponent },
          { path: 'sucursal', component: SucursalComponent },
          { path: 'sucursal/add', component: AddSucursalComponent },
-         { path: 'sucursal/detalleCaja', component: DetalleCajaComponent },
-         { path: 'sucursal/detalleCaja/:id', component: DetalleCajaComponent },
-         { path: 'sucursal/personal', component: DetallePersonalComponent },
-         { path: 'formulariobase', component: HeroFormComponent },
          { path: 'programs', component: ProgramaComponent },
          { path: 'program/edit/:id', component: EditProgramaComponent },
          { path: 'program/add', component: AddProgramaComponent },
          { path: 'modulos/:id', component: ModuloComponent },
          { path: 'modulo/edit/:id', component: EditModuloComponent },
          { path: 'modulo/add/:id', component: AddModuloComponent },
-         { path: 'caja/vistacaja', component: VistaCajaComponent },
-         { path: 'caja/ingreso', component: IngresoComponent },
-         { path: 'caja/egreso', component: EgresoComponent },
          { path: 'facilitador', component: facilitadorComponent },
          { path: 'facilitador/add', component: AddFacilitadorComponent },
          { path: 'facilitador/edit/:id', component: EditFacilitadorComponent },
          { path: 'correlative/add', component: AddCorrelativeComponent },
-         { path: 'pendientes', component: PendingCashComponent },
-         { path: 'pendientes/info/:id', component: InfoPendingCashComponent },
-         { path: 'officesCash', component: OfficesCashComponent },
          { path: 'inscription/:id', component: InscriptionComponent },
          { path: 'importWhatsapp',component:ImportWhatsNumbersComponent},
          { path: 'importFromExcel',component:ImportFromExcelComponent},
@@ -134,8 +117,9 @@ const appRoutes: Routes = [
          { path: 'filtros', component:FiltroUniversidadMedioComponent},
          { path: 'divideCartera', component:DividirCarteraComponent},
          { path: 'reporteEjecutivo', component:ReportsEjecutivosComponent},
+         { path: 'reporteEvents', component:ReporteEventsComponent},
          { path: 'listas', component:ListasComponent},
-         { path: 'addCarrera', component:AddCarreraComponent}
+         { path: 'addCarrera', component:AddCarreraComponent},
 
       ]
    },

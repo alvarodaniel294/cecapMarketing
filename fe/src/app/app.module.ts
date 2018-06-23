@@ -59,7 +59,6 @@ import { AddCorrelativeComponent } from './correlative/add-correlative/add-corre
 import { SucursalComponent } from './sucursal/sucursal.component';
 import { AddSucursalComponent } from './sucursal/addSucursal/addsucursal.component';
 import { EditComponent } from './event/persona/edit/edit.component';
-import { HeroFormComponent } from './hero-form/hero-form.component';
 
 import { ProgramaComponent } from './programa/programa.component';
 import { EditProgramaComponent } from './programa/edit-programa/edit-programa.component';
@@ -68,24 +67,15 @@ import { ModuloComponent } from './modulo/modulo.component';
 import { EditModuloComponent } from './modulo/edit-modulo/edit-modulo.component';
 import { AddModuloComponent } from './modulo/add-modulo/add-modulo.component';
 
-import { DetalleCajaComponent } from './sucursal/detalle-caja/detalle-caja.component';
-import { DetallePersonalComponent } from './sucursal/detalle-personal/detalle-personal.component';
+
 
 import { InfoEjecutivoComponent } from './ejecutivo/info-ejecutivo/info-ejecutivo.component';
-import { IngresoComponent } from './caja/ingreso/ingreso.component';
-import { EgresoComponent } from './caja/egreso/egreso.component';
 
 import { facilitadorComponent } from './facilitador/facilitador.component';
-import { VistaCajaComponent } from './caja/vista-caja/vista-caja.component';
 import { AddFacilitadorComponent } from './facilitador/add-facilitador/add-facilitador.component';
 import { EditFacilitadorComponent } from './facilitador/edit-facilitador/edit-facilitador.component';
 import { ProfilePersonComponent } from './event/profile-person/profile-person.component';
-import { PendingCashComponent } from './pending-cash/pending-cash.component';
 import { ControlAsistanceComponent } from './event/control-asistance/control-asistance.component';
-import { InfoPendingCashComponent } from './pending-cash/info-pending-cash/info-pending-cash.component';
-import { ConfirmCloseCashComponent } from './caja/confirm-close-cash/confirm-close-cash.component';
-import { ConfirmPendingCashComponent } from './pending-cash/confirm-pending-cash/confirm-pending-cash.component';
-import { OfficesCashComponent } from './offices-cash/offices-cash.component';
 import { AsistenciaComponent } from './event/asistencia/asistencia.component';
 import { InscriptionComponent } from './event/inscription/inscription.component';
 import { ImportWhatsNumbersComponent } from './import-whats-numbers/import-whats-numbers.component';
@@ -99,6 +89,7 @@ import { TracingComponent } from './event/profile-person/tracing/tracing.compone
 import { FiltroUniversidadMedioComponent } from './event/persona/filtro-universidad-medio/filtro-universidad-medio.component';
 import { DividirCarteraComponent } from './cartera/dividir-cartera/dividir-cartera.component';
 import { ReportsEjecutivosComponent } from './reports-ejecutivos/reports-ejecutivos.component';
+import { ReporteEventsComponent } from './reporte-events/reporte-events.component';
 import { ListasComponent } from './listas/listas.component';
 import { AddCarreraComponent } from './events/add-carrera/add-carrera.component';
 
@@ -139,14 +130,11 @@ import { AddCarreraComponent } from './events/add-carrera/add-carrera.component'
     FilterPipe,
     SucursalComponent,
     AddSucursalComponent,
-    HeroFormComponent,
-    DetalleCajaComponent,
-    DetallePersonalComponent,
+  
 
     InfoEjecutivoComponent,
 
-    IngresoComponent,
-    EgresoComponent,
+   
 
     ProgramaComponent,
     EditProgramaComponent,
@@ -155,23 +143,15 @@ import { AddCarreraComponent } from './events/add-carrera/add-carrera.component'
     EditModuloComponent,
     AddModuloComponent,
 
-    DetalleCajaComponent,
-    DetallePersonalComponent,
     InfoEjecutivoComponent,
-    VistaCajaComponent,
-    IngresoComponent,
+ 
     facilitadorComponent,
     AddFacilitadorComponent,
     AddCorrelativeComponent,
     EditFacilitadorComponent,
     ProfilePersonComponent,
     AlertComponent,
-    PendingCashComponent,
     ControlAsistanceComponent,
-    InfoPendingCashComponent,
-    ConfirmCloseCashComponent,
-    ConfirmPendingCashComponent,
-    OfficesCashComponent,
     AsistenciaComponent,
     InscriptionComponent,
     ImportWhatsNumbersComponent,
@@ -185,8 +165,9 @@ import { AddCarreraComponent } from './events/add-carrera/add-carrera.component'
     FiltroUniversidadMedioComponent,
     DividirCarteraComponent,
     ReportsEjecutivosComponent,
+    ReporteEventsComponent,
     ListasComponent,
-    AddCarreraComponent
+    AddCarreraComponent,
 
   ],
   imports: [
