@@ -97,6 +97,7 @@ import { TracingComponent } from './event/profile-person/tracing/tracing.compone
 import { FiltroUniversidadMedioComponent } from './event/persona/filtro-universidad-medio/filtro-universidad-medio.component';
 import { DividirCarteraComponent } from './cartera/dividir-cartera/dividir-cartera.component';
 import { ReportsEjecutivosComponent } from './reports-ejecutivos/reports-ejecutivos.component';
+import { ReporteEventsComponent } from './reporte-events/reporte-events.component';
 import { ListasComponent } from './listas/listas.component';
 import { AddCarreraComponent } from './events/add-carrera/add-carrera.component';
 
@@ -183,8 +184,9 @@ import { AddCarreraComponent } from './events/add-carrera/add-carrera.component'
     FiltroUniversidadMedioComponent,
     DividirCarteraComponent,
     ReportsEjecutivosComponent,
+    ReporteEventsComponent,
     ListasComponent,
-    AddCarreraComponent
+    AddCarreraComponent,
 
   ],
   imports: [

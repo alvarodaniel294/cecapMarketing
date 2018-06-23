@@ -281,7 +281,7 @@ module.exports = {
                   }
 
             ],
-
+            offices: ObjectId,
             //modulo: [ObjectId],
 
             _id: { type: ObjectId, default: function () { return new mongoose.Types.ObjectId } },

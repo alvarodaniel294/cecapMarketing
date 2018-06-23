@@ -12,6 +12,8 @@ import { ActivatedRoute, Router } from "@angular/router";
 })
 export class AddEventComponent implements OnInit {
    public programs;
+   public sucursales;
+   public sucursal;
    //@ViewChild('description') descriptionRef: ElementRef;
    //@ViewChild('date') dateRef: ElementRef;
    //@ViewChild('total') totalRef: ElementRef;
@@ -25,7 +27,7 @@ export class AddEventComponent implements OnInit {
       private router: Router
       //,private alerts: AlertsService
    ) {
-      this.model = new Event("", "", null, null, "");
+      this.model = new Event("", "", null, null, "","");
    }
    submitted = false;
    ngOnInit() {
@@ -34,6 +36,10 @@ export class AddEventComponent implements OnInit {
    queryPrograms() {
       this._peticionesService.getPrograms().subscribe(response => {
          this.programs = response;
+         this._peticionesService.getSucursales().subscribe(response=>{
+            this.sucursales=response;
+            console.log(this.sucursales)
+          });
          //console.log(this.programs);
       },
          error => {

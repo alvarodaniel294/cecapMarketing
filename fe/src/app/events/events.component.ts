@@ -24,7 +24,8 @@ export class EventsComponent implements OnInit {
    ) { }
    ngOnInit() {
       // this.queryRol();
-       this.queryEvents(); 
+    //    this.queryEvents(); 
+       this.queryEvents2();
        //   console.log(this.role);
     }
     
@@ -38,6 +39,46 @@ export class EventsComponent implements OnInit {
    personsOfEvents(_id: string) {
     this.router.navigate(['home/events/persons', _id]);
  }
+
+    queryEvents2(){
+        this._peticionesService.getEventsOfSucursal(Identity._id).subscribe(
+            result => {
+                this.events = result;
+               console.log(this.events)
+                this.events.map(event => {
+                   var sum = 0;
+                   event.inscriptions.forEach(e => {
+                      if (e.state == 1) sum++;
+                   });
+                   event.cupos = event.total - sum;
+                });
+    
+    
+                for(let e of this.events){
+                    let eventoItem={}as EventoItem;
+    
+                    eventoItem.name=e.name;
+                    eventoItem.date_start=e.date_start;
+                    eventoItem.cupos=e.total;
+                    eventoItem._id=e._id;
+                    eventoItem.programaId=e.programs;
+                    this._peticionesService.getProgram(e.programs).subscribe(result=>{
+                        this.program=result;
+                        eventoItem.programa=this.program.name;
+                        this.lista_eventos.push(eventoItem);
+    
+                    });
+    
+                }
+    
+    
+             },
+             error => {
+                var errorMessage = <any>error;
+                console.log(errorMessage);
+             }
+        )
+    }
    
    queryEvents() {
       this._peticionesService.getAllEvents().subscribe(

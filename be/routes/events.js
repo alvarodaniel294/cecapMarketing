@@ -64,6 +64,7 @@ router
                         newPerson.last_name = personItem.last_name;
                         newPerson.cellphone = personItem.cellphone;
                         newPerson.city = personItem.city;
+                        newPerson.contact_medium=personItem.contact_medium;
 
                         for (let pid of event.interes) {
                               if (pid.persons == personItem._id) {
@@ -104,6 +105,7 @@ router
                         newPerson.last_name = personItem.last_name;
                         newPerson.cellphone = personItem.cellphone;
                         newPerson.city = personItem.city;
+                        newPerson.contact_medium=personItem.contact_medium;
 
                         for (let pid of event.interes) {
                               if (pid.persons == personItem._id) {
@@ -151,6 +153,7 @@ router
                               newPerson.last_name = personItem.last_name;
                               newPerson.cellphone = personItem.cellphone;
                               newPerson.city = personItem.city;
+                              newPerson.contact_medium=personItem.contact_medium;
 
                               for (let pid of event.interes) {
                                     if (pid.persons == personItem._id) {
@@ -207,6 +210,7 @@ router
                               newPerson.contact_medium = personItem.contact_medium;
                               newPerson.ocupation = personItem.ocupation;
                               newPerson.descOcupation = personItem.descOcupation;
+                              newPerson.contact_medium=personItem.contact_medium;
                               for (let pid of event.interes) {
                                     if (pid.persons == personItem._id) {
                                           newPerson.state = pid.state;
@@ -417,6 +421,62 @@ router
                   })
             }
       })
+      ////////////////////reporte de un evento////////////
+      .get('/getReportEvent/:id',function(req,res){
+
+            db.events.findOne({_id:req.params.id},function(err,event){
+                  if(err) return res.status(400).send(err);
+                        ////////////
+                        //  0 interesados
+                        //  1 en duda
+                        //  2 confirmados
+                        //  3 isncritos
+                        //  4 enlinea
+                        //  5 proximo evento 
+                        //  6 sin interes
+                        //////// 
+                  let reporte={};
+                  reporte.eventName=event.name;
+                  reporte.programName='';
+                  reporte.interesados=0;
+                  reporte.enDuda=0;
+                  reporte.confirmados=0;
+                  reporte.inscritos=0;
+                  reporte.enLinea=0;
+                  reporte.proximoEvento=0;
+                  reporte.sinInteres=0;
+
+                  for(let person of event.interes){
+
+                        if(person.state==0)reporte.interesados++;
+                        if(person.state==1)reporte.enDuda++;
+                        if(person.state==2)reporte.confirmados++;
+                        if(person.state==3)reporte.inscritos++;
+                        if(person.state==4)reporte.enLinea++;
+                        if(person.state==5)reporte.proximoEvento++;
+                        if(person.state==6)reporte.sinInteres++;                   
+                  }
+                  db.programs.findOne({_id:event.programs},function(err,program){
+                        if(err) return res.status(400).send(err);
+                        reporte.programName=program.name;
+                        return res.status(200).send(reporte);
+                        
+                  })
+            })
+      })
+      //////////////evetns of suicursal//////
+      .get('/getEventsOfSucursal/:id',function(req,res){
+
+            db.users.findOne({_id:req.params.id},function(err,user){
+                  if (err) return res.status(400).send(err);                  
+                  let userOffice=user.offices;
+                  db.events.find({offices:userOffice},function(err,eventos){
+                        if (err) return res.status(400).send(err);
+                        return res.status(200).send(eventos);                  
+                  })
+            })
+      })
+
       //////////get personas por evento
       .get('/inscriptions/:id', function (req, res) {
             db.events.findOne({ _id: req.params.id }, function (err, event) {
@@ -581,6 +641,29 @@ router
             })
       })
 
+      .post('/getEventsFilterByDates',function(req,res){
+            
+            console.log(req.body);
+            let fecha_ini=req.body.fecha_ini;
+            let fecha_fin=req.body.fecha_fin;
+            let userId=req.body.identity._id;
+
+            db.users.findOne({_id:userId},function(err,user){
+                  let sucursal=user.offices;
+                  db.events.find({offices:sucursal,date_start:{$gt:fecha_ini},date_start:{$lt:fecha_fin}},function(err,listEvents){
+                        if (err) return res.status(400).send(err);
+                        return res.status(200).send(listEvents);                  
+                        
+                  })
+            })
+
+      })
+
+
+
+
+
+
       //post person event 
       .post('/:id', function (req, res) {
             db.events.findOne({ _id: req.params.id }, function (err, event) {
@@ -645,6 +728,7 @@ router
       })
 
       .post('/', function (req, res) {
+            console.log(req.body);
             var event = new db.events(req.body);
             var d = new Date();
             console.log(event);
@@ -675,6 +759,8 @@ router
             }
       })
 
+    
+      
       .post('/edit', function (req, res) {
             // console.log('test')
             console.log('ESTE ES EL BODY DE QUERY');

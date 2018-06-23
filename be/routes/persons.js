@@ -541,6 +541,8 @@ router
                     }
                         
                 })
+            }else{
+                return res.status(404).send('la persona ya existe');
             }
 
         })
