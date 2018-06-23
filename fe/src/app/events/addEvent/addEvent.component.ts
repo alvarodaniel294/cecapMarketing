@@ -2,7 +2,6 @@ import { Component, OnInit, ElementRef, ViewChild, Output, EventEmitter } from '
 import { PeticionesService } from '../../services/peticiones.service';
 import { Event } from '../../modelo/event';
 import { ActivatedRoute, Router } from "@angular/router";
-//import { AlertsService } from 'angular-alert-module';
 
 @Component({
    selector: 'app-addEvent',
@@ -14,18 +13,12 @@ export class AddEventComponent implements OnInit {
    public programs;
    public sucursales;
    public sucursal;
-   //@ViewChild('description') descriptionRef: ElementRef;
-   //@ViewChild('date') dateRef: ElementRef;
-   //@ViewChild('total') totalRef: ElementRef;
-   //@ViewChild('program') programRef: ElementRef;
-   //@ViewChild("close", { read: ElementRef }) close: ElementRef;
-   //@Output() messageEvent = new EventEmitter();
+   
    public model: Event;
    constructor(
       private _peticionesService: PeticionesService,
       private route: ActivatedRoute,
       private router: Router
-      //,private alerts: AlertsService
    ) {
       this.model = new Event("", "", null, null, "","");
    }
@@ -38,7 +31,7 @@ export class AddEventComponent implements OnInit {
          this.programs = response;
          this._peticionesService.getSucursales().subscribe(response=>{
             this.sucursales=response;
-            console.log(this.sucursales)
+            // console.log(this.sucursales)
           });
          //console.log(this.programs);
       },
@@ -52,21 +45,18 @@ export class AddEventComponent implements OnInit {
       this.router.navigate(['home/events']);
    }
    onSubmit() {
-      console.log(this.model);
+      // console.log(this.model);
    }
    save() {
       if ((this.model.description == '') || (this.model.total == 0)) {
          window.alert("Asegurese de llenar todos los campos")
       } else {
-         // if(this.dateRef.nativeElement.value <new Date()){
          if (this.model.date_start < new Date()) {
             window.alert("Asegurese que la fecha sea mayor a la de hoy")
 
          } else {
-            console.log(this.model);
+            // console.log(this.model);
             this._peticionesService.addEvent(this.model).subscribe(response => {
-               //this.messageEvent.emit();
-               //this.close.nativeElement.click();
                this.router.navigate(['/home/events']);
                alert("El evento se creo con exito");
             });

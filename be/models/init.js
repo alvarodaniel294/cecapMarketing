@@ -103,104 +103,7 @@ var _facilitator_2 = {
    record_date: new Date()
 };
 var _facilitators = [_facilitator_1, _facilitator_2];
-/////////////////CashFlowUser//////////////////////////
-var _cashFlowUser1 = {
-   date_start: '2018-03-25',
-   date_end: '2018-04-25',
-   amount: 1000,
-   amount_delivered: 1000,
-      details: [{
-         receipt: 1,
-         description: 'ingresos por inscripcion',
-         amount: 1000,
-         input:true,
-         date_detail:'2018-03-25',
-         events:_event_seg
-      }],
-      active:false,
-      state:-1,
-      user: _user_ejecutivo1,
-      _id: new mongoose.Types.ObjectId,
-    record_date: new Date()
-};
-var _cashFlowUser2 = {
-    date_start: '2018-05-25',
-      date_end: '',
-      amount: 500,
-      amount_delivered: 0,
-      details: [{
-         receipt: 1,
-         description: 'ingresos por inscripcion',
-         amount: 200,
-         input:true,
-         date_detail:'2018-05-25',
-         title:'inscripcion',
-         events:_event_seg
-      },
-      {
-        receipt: 2,
-        description: 'ingresos por inscripcion',
-        amount: 300,
-        input:true,
-        date_detail:'2018-05-25',
-        title:'inscripcion'
-     }
-    ],
-      active:true,
-      state:-1,
-      user: _user_ejecutivo2,
 
-   _id: new mongoose.Types.ObjectId,
-   record_date: new Date()
-};
-var _cashFlowUserAdmin = {
-  date_start: '2018-03-25',
-  date_end: '',
-  amount: 1000,
-  amount_delivered: 0,
-     details: [{
-        receipt: 1,
-        description: 'ingresos por inscripcion',
-        amount: 1000,
-        input:true,
-        date_detail:'2018-03-25',
-        events:_event_seg
-     }],
-     active:true,
-     state:-1,
-     user: _user_admin,
-     _id: new mongoose.Types.ObjectId,
-   record_date: new Date()
-};
-var _cashFlowUser = [_cashFlowUser1, _cashFlowUser2,_cashFlowUserAdmin];
-
-///////////////////////////////////////////
-
-var _cashFlowOffices_stc={
-
-  date_start: '2018-03-10',
-  date_end: '',
-  amount: 0,
-  amount_delivered: 0,
-  input:0,
-  output:0,
-  details:[{
-            cashFlowUsers:_cashFlowUser1,
-            dateCloseCash:'2018-04-25',
-
-           },
-  ],
-  offices: _offices_stc,
-  users:_user_admin,
-  active:true,
-  state:-1,
-  
-
-  _id: new mongoose.Types.ObjectId,
-  record_date: new Date()
-};
-
-var _cashFlowOffices=[_cashFlowOffices_stc];
 /////////////////////////////////////////////////////////
 
 var _correlative1 = {
@@ -756,12 +659,10 @@ module.exports = {
      saveData(_programs, db.programs);
      saveData(_modulos, db.modules);
      saveData(_facilitators, db.facilitators);
-     saveData(_cashFlowUser, db.cashFlowUsers);
      saveData(_offices, db.offices);
      saveData(_events, db.events);
      saveData(_persons, db.persons);
      saveData(_lists, db.lists);
-     saveData(_cashFlowOffices,db.cashFlowOffices);
 
   },
 
@@ -773,12 +674,9 @@ module.exports = {
      clearCollections(db.events);
      clearCollections(db.persons);
      clearCollections(db.modules);
-     clearCollections(db.offices);
-     clearCollections(db.cashFlowUsers);
      clearCollections(db.company);
      clearCollections(db.facilitators);
      clearCollections(db.correlatives);
      clearCollections(db.lists);
-     clearCollections(db.cashFlowOffices);
   }
 };

@@ -1,98 +1,95 @@
 <div class="content-wrapper">
-   
-    <section class="content">
- 
- 
-       <!-- <app-addPerson (messageEvent)="receiveMessage()"></app-addPerson> -->
- 
- 
-      <!-- <section>
-             <div class="col-lg-1">Buscar:</div>
-             <div class="col-lg-5">
-                   <input type="text" [(ngModel)]="busqueda"></div>
-       </section>-->
-       <section>
-        <div class="row user-infos cyruxx">
-            <div class="col-xs-12 col-sm-12 col-md-10 col-lg-10 col-xs-offset-0 col-sm-offset-0 col-md-offset-1 col-lg-offset-1">
-                <div class="panel panel-primary">
-                    <div class="panel-heading">
-                        <h3 class="panel-title">Informacion de {{userName}}</h3>
-                    </div>
-                    <div class="panel-body">
-                        <div class="row">
-                           
-                            <div class="col-xs-10 col-sm-10 hidden-md hidden-lg">
-                                <strong>{{userName}}</strong><br>
-                                <dl>
-                                    <!-- <dt>Nivel de Usuario</dt>
-                                    <dd>Administrator</dd> -->
-                                    <dt>Propietario de Cartera</dt>
-                                    <dd>{{userName}}</dd>
-                                    <dt>Registrado desde:</dt>
-                                    <dd>{{user?.record_date | date }}</dd>
-                                    <dt>Personas Registradas</dt>
-                                    <dd>{{persons?.length}}</dd>
-                                    <!-- <dt>Warnings</dt>
-                                    <dd>0</dd> -->
-                                </dl>
-                            </div>
-                            <div class=" col-md-9 col-lg-9 hidden-xs hidden-sm">
-                                <strong>{{userName}}</strong><br>
-                                <table class="table table-user-information">
-                                    <tbody>
-                                    <!-- <tr>
-                                        <td>Nivel de Usuario</td>
-                                        <td>Administrator</td>
-                                    </tr> -->
-                                    <tr>
-                                        <td>Propietario de Cartera</td>
-                                        <td>{{userName}}</td>
-                                    </tr>
+        <div class="content">
 
-                                    <tr>
-                                        <td>Registrado desde:</td>
-                                        <td>{{user?.record_date | date}}</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Personas Registradas</td>
-                                        <td>{{persons?.length}}</td>
-                                    </tr>
-                                    <!-- <tr>
-                                        <td>Warnings</td>
-                                        <td>0</td>
-                                    </tr> -->
-                                    </tbody>
+                <div class="box box-primary">
+                        <section class="content">
+                                <section>
+                                 <div class="row user-infos cyruxx">
+                                     <div class="col-xs-12 col-sm-12 col-md-10 col-lg-10 col-xs-offset-0 col-sm-offset-0 col-md-offset-1 col-lg-offset-1">
+                                         <div class="panel panel-primary">
+                                             <div class="panel-heading">
+                                                 <h3 class="panel-title">Informacion de {{userName}}</h3>
+                                             </div>
+                                             <div class="panel-body">
+                                                 <div class="row">
+                                                    
+                                                     <div class="col-xs-10 col-sm-10 hidden-md hidden-lg">
+                                                         <strong>{{userName}}</strong><br>
+                                                         <dl>
+                                                             <!-- <dt>Nivel de Usuario</dt>
+                                                             <dd>Administrator</dd> -->
+                                                             <dt>Propietario de Cartera</dt>
+                                                             <dd>{{userName}}</dd>
+                                                             <dt>Registrado desde:</dt>
+                                                             <dd>{{user?.record_date | date }}</dd>
+                                                             <dt>Personas Registradas</dt>
+                                                             <dd>{{persons?.length}}</dd>
+                                                             <!-- <dt>Warnings</dt>
+                                                             <dd>0</dd> -->
+                                                         </dl>
+                                                     </div>
+                                                     <div class=" col-md-9 col-lg-9 hidden-xs hidden-sm">
+                                                         <strong>{{userName}}</strong><br>
+                                                         <table class="table table-user-information">
+                                                             <tbody>
+                                                             <!-- <tr>
+                                                                 <td>Nivel de Usuario</td>
+                                                                 <td>Administrator</td>
+                                                             </tr> -->
+                                                             <tr>
+                                                                 <td>Propietario de Cartera</td>
+                                                                 <td>{{userName}}</td>
+                                                             </tr>
+                         
+                                                             <tr>
+                                                                 <td>Registrado desde:</td>
+                                                                 <td>{{user?.record_date | date}}</td>
+                                                             </tr>
+                                                             <tr>
+                                                                 <td>Personas Registradas</td>
+                                                                 <td>{{persons?.length}}</td>
+                                                             </tr>
+                                                             <!-- <tr>
+                                                                 <td>Warnings</td>
+                                                                 <td>0</td>
+                                                             </tr> -->
+                                                             </tbody>
+                                                         </table>
+                                                     </div>
+                                                 </div>
+                                             </div>
+                                             
+                                         </div>
+                                     </div>
+                                 </div>
+                                </section>
+                                <table class="table table-hover" >
+                                   <thead>
+                                      <tr>
+                                         <th>Nombre</th>
+                                         <th>Carnet</th>
+                                         <th>Celular</th>
+                                         <th>Email</th>
+                                         <th>Ocupacion</th>
+                                      </tr>
+                                   </thead>
+                                   <tbody>
+                                      <!--<tr *ngFor="let i of inscriptions | buscarPersona: busqueda">-->
+                                      <tr *ngFor="let person of persons">
+                                         <td>{{ person.first_name }} {{person.last_name}}</td>
+                                         <td>{{ person.ci }}</td>
+                                         <td>{{ person.cellphone }}</td>
+                                         <td>{{ person.email }}</td>
+                                         <td>{{ person.ocupation }}</td>
+                                      </tr>
+                                   </tbody>
                                 </table>
-                            </div>
-                        </div>
-                    </div>
-                    
+                                
+                             </section>
+        
                 </div>
-            </div>
         </div>
-       </section>
-       <table class="table table-hover" >
-          <thead>
-             <tr>
-                <th>Nombre</th>
-                <th>Carnet</th>
-                <th>Celular</th>
-                <th>Email</th>
-                <th>Ocupacion</th>
-             </tr>
-          </thead>
-          <tbody>
-             <!--<tr *ngFor="let i of inscriptions | buscarPersona: busqueda">-->
-             <tr *ngFor="let person of persons">
-                <td>{{ person.first_name }} {{person.last_name}}</td>
-                <td>{{ person.ci }}</td>
-                <td>{{ person.cellphone }}</td>
-                <td>{{ person.email }}</td>
-                <td>{{ person.ocupation }}</td>
-             </tr>
-          </tbody>
-       </table>
-       
-    </section>
+   
+    
     <router-outlet></router-outlet>
  </div>

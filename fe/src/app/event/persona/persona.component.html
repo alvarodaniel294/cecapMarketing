@@ -1,82 +1,67 @@
 <div class="content-wrapper">
-  <section class="content">
-      <div>     
-          <ol class="breadcrumb">
-              <li><a class="btn btn-primary" [routerLink]="['/home/persons/add']"><i class="fa fa-book"></i>Registrar Persona</a></li>
-              <!-- <app-addPerson (messageEvent)="receiveMessage()"></app-addPerson> -->
-              <!-- <li><app-control-asistance></app-control-asistance></li> -->
-          </ol>
-      </div> 
-     <div *ngIf='rol?.name=="Admin"'>
-       <label for="text">{{this.textoAdmin}}</label>
-     </div>
-     <!-- <app-persona></app-persona> -->
-     <table class="table">
-           <th>Filtros Personas</th> 
-     </table>
-     <!-- <section>
-        <div class="col-lg-1">Buscar:</div>
-        <div class="col-lg-5">
-              <input type="text" [(ngModel)]="busqueda"></div>
-     </section> -->
-       <div>
-      <div class="filter-wrap">
-        <div class="col-lg-1">Buscar:</div>
-        <input [(ngModel)]="searchText" placeholder="Nombre Persona" class="filter-input">
-        <span class="filter-clear" *ngIf="searchText.length>0" (click)="clearFilter()">X</span>
-        <!-- <a class="btn btn-primary filter-clear" *ngIf="searchText.length>0" (clic)="clearFilter()">Cancelar</a> -->
-      </div>
+  <div class="content">
+
+    <div class="box box-primary">
+
+        <section class="content">
+            <div>     
+                <ol class="breadcrumb">
+                    <li><a class="btn btn-primary" [routerLink]="['/home/persons/add']"><i class="fa fa-book"></i>Registrar Persona</a></li>
+                </ol>
+            </div> 
+           <div *ngIf='rol?.name=="Admin"'>
+             <label for="text">{{this.textoAdmin}}</label>
+           </div>
+           <table class="table">
+                 <th>Filtros Personas</th> 
+           </table>
+          
+             <div>
+            <div class="filter-wrap">
+              <div class="col-lg-1">Buscar:</div>
+              <input [(ngModel)]="searchText" placeholder="Nombre Persona" class="filter-input">
+              <span class="filter-clear" *ngIf="searchText.length>0" (click)="clearFilter()">X</span>
+              <!-- <a class="btn btn-primary filter-clear" *ngIf="searchText.length>0" (clic)="clearFilter()">Cancelar</a> -->
+            </div>
+          </div>
+           <table class="table table-hover" >
+              <thead >
+                 <tr>
+                    <th>Nombre</th>
+                    <th>Apellido</th>
+                    <th>Telefono</th>
+                    <th>Whatsapp Group</th>
+                    <th>Ciudad</th>
+                    <th>Ocupacion</th>
+                    <th>Perfil</th>
+                    <!-- <th>Asistencia</th> -->
+                    <th colspan="2">Opciones</th>
+                 </tr>
+              </thead>
+              <tbody> 
+                 <!--<tr *ngFor="let i of inscriptions | buscarPersona: busqueda">-->
+                 <tr *ngFor="let i of listado_personas  | filter : searchText">
+                    <td>{{ i.first_name }}</td>
+                    <th>{{i.last_name}}</th>
+                    <td>{{ i.cellphone }}</td>
+                    <td>{{i.whatsapp_group}}</td>
+                    <td>{{i.city}}</td>
+                    <td>{{ i.ocupation }}</td>
+                   
+                    <td>
+                      <a class="btn btn-info" (click)="viewProfile(i._id)">VER</a>
+                    </td>
+                    <td>
+                       <a class="btn btn-primary" (click)="edit(i._id)">EDITAR</a>
+                      
+                    </td>
+                 </tr>
+              </tbody>
+           </table>
+           
+        </section>
+
     </div>
-     <table class="table table-hover" >
-        <thead >
-           <tr>
-              <th>Nombre</th>
-              <th>Apellido</th>
-              <th>Telefono</th>
-              <th>Whatsapp Group</th>
-              <th>Ciudad</th>
-              <th>Ocupacion</th>
-              <th>Perfil</th>
-              <!-- <th>Asistencia</th> -->
-              <th colspan="2">Opciones</th>
-           </tr>
-        </thead>
-        <tbody> 
-           <!--<tr *ngFor="let i of inscriptions | buscarPersona: busqueda">-->
-           <tr *ngFor="let i of listado_personas  | filter : searchText">
-              <td>{{ i.first_name }}</td>
-              <th>{{i.last_name}}</th>
-              <td>{{ i.cellphone }}</td>
-              <td>{{i.whatsapp_group}}</td>
-              <td>{{i.city}}</td>
-              <td>{{ i.ocupation }}</td>
-              <!-- <td>
-                  <p *ngIf="color == 'verde'">
-                    <a class=" btn btn-success" (click)="butonv(i._id)">ok</a>
-                  </p>
-                  <p *ngIf="color == 'rojo'">
-                    <a class=" btn btn-danger" (click)="butonv(i._id)">not</a>
-                  </p>
-              </td>  -->
-              <!-- <td>
-                  <p *ngIf="color == 'verde'">
-                    <a class=" btn btn-success" (click)="butonv(i._id)">ok</a>
-                  </p>
-                  <p *ngIf="color == 'rojo'">
-                    <a class=" btn btn-danger" (click)="butonv(i._id)">not</a>
-                  </p>
-              </td>  -->
-              <td>
-                <a class="btn btn-info" (click)="viewProfile(i._id)">VER</a>
-              </td>
-              <td>
-                 <a class="btn btn-primary" (click)="edit(i._id)">EDITAR</a>
-                 <!-- <a class="btn btn-warning" (click)="asistence(i._id)">asist</a> -->
-                 <!-- <app-control-asistance></app-control-asistance> -->
-              </td>
-           </tr>
-        </tbody>
-     </table>
-     
-  </section>
+  </div>
+ 
 </div>

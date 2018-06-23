@@ -64,7 +64,7 @@ export class PersonsOfEventsComponent implements OnInit {
       this._peticionesService.getPersonasInteresWithEventByCartera(eventIdPersonId).subscribe(res => {
         this.listaReturned = res;
         this.lista_personasPorInteres = this.listaReturned;
-        console.log(this.lista_personasPorInteres)
+        // console.log(this.lista_personasPorInteres)
       })
 
     })
@@ -136,10 +136,7 @@ export class PersonsOfEventsComponent implements OnInit {
       showLabels: false,
       showTitle: false,
       useBom: true,
-      // noDownload: true,
-      // headers: ["NOMBRES", "APELLIDOS", "CIUDAD", "CELULAR", "Móvil"]
       headers: [
-        // (<HTMLInputElement>document.getElementById(elementId)).value,
         (<HTMLInputElement>document.getElementById('grupo')).value,
         (<HTMLInputElement>document.getElementById('PrimerNombre')).value,
         (<HTMLInputElement>document.getElementById('SegundoNombre')).value,
@@ -167,9 +164,7 @@ function nPersons(i, lista_personasPorInteres, listaToExport, name) {
   // }
   return nPersons(i + 1, lista_personasPorInteres, listaToExport, name);
 }
-// function nPerson(lista, lista_personas) {
-//   if(i)
-// }
+
 export interface EventInteres {
   event: Object,
   interes: number,
