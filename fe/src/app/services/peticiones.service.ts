@@ -291,8 +291,16 @@ export class PeticionesService {
         return this._http.post(this.url + 'persons/personsOfProgramByUserId/', body, { headers: headers }).map((res: Response) => res);
 
     }
-    getAllEvents() {
-        return this._http.get(this.url + 'events/all').map((res: Response) => res);
+    getAllEvents(id) {
+        var headers = new HttpHeaders().set('Content-Type', 'application/json; charset=utf-8');
+        return this._http.get(this.url + 'events/all/' + id, { headers: headers }).map((res: Response) => res);
+
+        // return this._http.get(this.url + 'events/all').map((res: Response) => res);
+    }
+    getAllEventsActive(id){
+        var headers = new HttpHeaders().set('Content-Type', 'application/json; charset=utf-8');
+        return this._http.get(this.url + 'events/getAllEventsActive/' + id, { headers: headers }).map((res: Response) => res);
+
     }
 
     setInteresOfPersonFromEvent(ObjId) {
@@ -499,5 +507,9 @@ export class PeticionesService {
     return this._http.get(this.url + 'events/getReportEvent/' + eventId, { headers: headers }).map((res: Response) => res);
   }
 
+  cerrarEvento(id){
+    return this._http.get(this.url + 'events/cerrarEvento/' + id).map((res: Response) => res);
+    
+  }
 
 }

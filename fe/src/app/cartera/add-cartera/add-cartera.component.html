@@ -13,7 +13,7 @@
           <!-- <form #addCartera="ngForm" > -->
         <div class="form-group">
           <label for="name">Nombre Cartera</label>
-          <input type="text" pattern="[a-zA-Z0-9]{3,20}[ ]{0,1}[a-zA-Z0-9]{0,20}" class="form-control" id="name"
+          <input type="text" pattern="[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ]{3,20}([ ]{0,1}[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ]{0,20}){0,2}" class="form-control" id="name"
                  required
                  [(ngModel)]="carteraName" name="name"
                 #name="ngModel"
