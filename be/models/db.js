@@ -243,6 +243,8 @@ module.exports = {
 
             ],
             offices: ObjectId,
+            date_end:Date,
+            active:Boolean,
             //modulo: [ObjectId],
 
             _id: { type: ObjectId, default: function () { return new mongoose.Types.ObjectId } },

@@ -136,7 +136,7 @@ export class DividirCarteraComponent implements OnInit {
     
   }
   queryEvents() {
-    this._peticionesService.getAllEvents().subscribe(
+    this._peticionesService.getAllEvents(Identity._id).subscribe(
        result => {
            console.log('hola')
           this.events = result;

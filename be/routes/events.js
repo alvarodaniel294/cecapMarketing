@@ -250,14 +250,33 @@ router
             })
       })
 
-      .get('/all', function (req, res) {
+      .get('/all/:id', function (req, res) {
 
-            db.events.find({}, function (err, events) {
-                  if (err) return res.status(400).send(err);
-                  return res.status(200).send(events);
-
+            db.users.findOne({_id:req.params.id},function(err,user){
+                  if (err) return res.status(400).send(err);                  
+                  db.events.find({offices:user.offices}, function (err, events) {
+                        if (err) return res.status(400).send(err);
+                        return res.status(200).send(events);
+      
+      
+                  })
 
             })
+           
+      })
+      .get('/getAllEventsActive/:id', function (req, res) {
+
+            db.users.findOne({_id:req.params.id},function(err,user){
+                  if (err) return res.status(400).send(err);                  
+                  db.events.find({offices:user.offices,active:true}, function (err, events) {
+                        if (err) return res.status(400).send(err);
+                        return res.status(200).send(events);
+      
+      
+                  })
+
+            })
+           
       })
       .get('/lists', function (req, res) {
             db.lists.find({}, function (err, lists) {
@@ -464,13 +483,27 @@ router
                   })
             })
       })
+      /////////////////////////////////////////
+        ////////////////////////
+      .get('/cerrarEvento/:id',function(req,res){
+            db.events.findOne({_id:req.params.id},function(err,event){
+                  if (err) return res.status(400).send(err);
+                  
+                  event.date_end=new Date();
+                  event.active=false;
+                  event.save(function(err,event){
+                        if (err) return res.status(400).send(err);
+                        return res.status(200).send(event);                  
+                  })
+            })
+      })
       //////////////evetns of suicursal//////
       .get('/getEventsOfSucursal/:id',function(req,res){
 
             db.users.findOne({_id:req.params.id},function(err,user){
                   if (err) return res.status(400).send(err);                  
                   let userOffice=user.offices;
-                  db.events.find({offices:userOffice},function(err,eventos){
+                  db.events.find({offices:userOffice,active:true},function(err,eventos){
                         if (err) return res.status(400).send(err);
                         return res.status(200).send(eventos);                  
                   })
