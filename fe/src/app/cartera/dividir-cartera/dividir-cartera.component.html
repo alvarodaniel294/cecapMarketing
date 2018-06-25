@@ -39,14 +39,14 @@
 
 
                     <div class="form-group">
-                        <label for="numToDivide">Cantidad en la que se dividira</label>
+                        <label for="numToDivide">Cantidad en la que se dividirá</label>
                         <input type="number" pattern="[1-9]" class="form-control" id="numToDivide"
                                required
                                [(ngModel)]="numeroParaDividir" name="cell"
                                #numToDivide="ngModel">
                         <div [hidden]="numToDivide?.valid || numToDivide?.pristine"
                         class="text-alert">
-                        *Numero es invalido
+                        *Número es inválido
                         </div>
                       </div>
 
@@ -59,7 +59,7 @@
 
                       <div class="form-group" *ngIf='numeroParaDividir!=undefined'>
                             <label for="">
-                                <h5>La lista se dividira en {{numeroParaDividir}} partes  
+                                <h5>La lista se dividirá en {{numeroParaDividir}} partes  
                                     <button class="btn btn-primary margin-left" (click)="dividir()">Dividir</button>
                                     <button class="btn btn-primary margin-left" (click)="deshacerDividir()">Deshacer Dividir</button></h5>
                             </label>
@@ -78,13 +78,13 @@
                         <table class="table table-hover" >
                                 <thead >
                                    <tr>
-                                       <th>Numero</th>
+                                       <th>Número</th>
                                       <th>Nombre</th>
                                       <th>Apellido</th>
-                                      <th>Telefono</th>
-                                      <th>Whatsapp Group</th>
+                                      <th>Teléfono</th>
+                                      <th>Grupo de Whatsapp</th>
                                       <th>Ciudad</th>
-                                      <th>Ocupacion</th>
+                                      <th>Ocupación</th>
                                       <!-- <th colspan="2">Opciones</th> -->
                                    </tr>
                                 </thead>
@@ -118,13 +118,13 @@
                                 <table class="table table-hover" >
                                         <thead >
                                            <tr>
-                                               <th>Numero</th>
+                                               <th>Número</th>
                                               <th>Nombre</th>
                                               <th>Apellido</th>
-                                              <th>Telefono</th>
-                                              <th>Whatsapp Group</th>
+                                              <th>Teléfono</th>
+                                              <th>Grupo de Whatsapp</th>
                                               <th>Ciudad</th>
-                                              <th>Ocupacion</th>
+                                              <th>Ocupación</th>
                                               <!-- <th colspan="2">Opciones</th> -->
                                            </tr>
                                         </thead>
