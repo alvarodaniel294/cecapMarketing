@@ -5,7 +5,7 @@ var mongoose = require('mongoose');
 
 router
    .get('/', function (req, res) {
-      db.programs.find({}, function (err, programs) {
+      db.mkt_programs.find({}, function (err, programs) {
          if (err) return res.status(400).send(err);
 
          return res.status(200).send(programs);
@@ -13,7 +13,7 @@ router
    })
 
    .get('/:id', function (req, res) {
-      db.programs.findOne({ _id: req.params.id }, function (err, program) {
+      db.mkt_programs.findOne({ _id: req.params.id }, function (err, program) {
          if (err) return res.status(400).send(err);
          if (program == null) return res.status(404).send();
 
@@ -22,15 +22,15 @@ router
    })
    .post('/add', function(req, res){
         console.log(req.body);
-        var program = new db.programs(req.body);
+        var program = new db.mkt_programs(req.body);
         program.save(function (err, program) {
             if (err){return res.status(400).send(err);} 
             return res.status(200).send(program);
         });
    })
    .post('/', function (req, res) {
-      var program = new db.programs(req.body);
-      db.programs.findOne({name: req.body.name}, function(err, exiteNom){
+      var program = new db.mkt_programs(req.body);
+      db.mkt_programs.findOne({name: req.body.name}, function(err, exiteNom){
             if(exiteNom == null){
                 if (program.name == '' || program.details == '' || program.modules == []) return res.status(400).send();
                 program.save(function (err, program) {
@@ -47,7 +47,7 @@ router
 //    .post('/id', function(req, res){
 //        var nombre = req.body;
 //        console.log(req.body);
-//        db.programs.findOne({name: req.body}, function(err, program){
+//        db.mkt_programs.findOne({name: req.body}, function(err, program){
 //         if (err) return res.status(400).send(err);
 //         if (program == null) return res.status(404).send();
 //         return res.status(200).send(program);
@@ -56,7 +56,7 @@ router
     .put('/:id', function (req, res) { 
        console.log(req.body)
        console.log(req.params.id)
-      db.programs.findOne({ _id: req.params.id }, function (err, program) {
+      db.mkt_programs.findOne({ _id: req.params.id }, function (err, program) {
          if (err) return res.status(400).send(err);
          if (program == null) return res.status(404).send();
 
@@ -73,7 +73,7 @@ router
    .put('/edit/:id', function(req, res){
     console.log(req.body)
     console.log(req.params.id)
-     db.programs.update({_id: req.params.id},
+     db.mkt_programs.update({_id: req.params.id},
         {
             $set: {'name': req.body.name,
                    'details': req.body.details}
@@ -82,7 +82,7 @@ router
       })
    })
    .delete('/:id', function (req, res) {
-      db.programs.remove({ _id: req.params.id }, function (err, program) {
+      db.mkt_programs.remove({ _id: req.params.id }, function (err, program) {
          if (err) return res.status(400).send(err);
 
          return res.status(200).send(program);

@@ -3,20 +3,20 @@ var db = require('./db');
 
 ///////////////////////////////////////
 
-var _offices_stc = {
+var _mkt_offices_stc = {
    name: 'cecap Santa Cruz',
    //nit:'7012323123424',
    ubicacion: 'Beni',
    caja: 1000,
    departament: 'Sta. Cruz',
-   company_id: _company,
+   company_id: _mkt_company,
    _id: new mongoose.Types.ObjectId,
    record_date: new Date()
 };
-var _offices = [_offices_stc];
+var _mkt_offices = [_mkt_offices_stc];
 //////////////////////////////////////////////////////////
 
-var _company0 = {
+var _mkt_company0 = {
    name: 'CECAP Company',
    nit: 71231901020,
    caja: 200000,
@@ -28,87 +28,87 @@ var _company0 = {
    _id: new mongoose.Types.ObjectId,
    record_date: new Date()
 };
-var _company = [_company0];
+var _mkt_company = [_mkt_company0];
 ///////////////////////////////////////////////////////////
 
 //Accounts
-var _rol_admin = {
+var _mkt_rol_admin = {
    name: 'Admin',
 
    _id: new mongoose.Types.ObjectId
 };
-var _rol_ejecutivo = {
+var _mkt_rol_ejecutivo = {
    name: 'Ejecutivo',
 
    _id: new mongoose.Types.ObjectId
 };
-var _rol_gerente = {
+var _mkt_rol_gerente = {
    name: 'Gerente',
    _id: new mongoose.Types.ObjectId
 }
-var _roles = [_rol_admin, _rol_ejecutivo, _rol_gerente];
+var _mkt_roles = [_mkt_rol_admin, _mkt_rol_ejecutivo, _mkt_rol_gerente];
 
 /////////////////////////////////////////////////////////
-var _user_admin = {
+var _mkt_user_admin = {
    name: 'a',
    active: true,
    password_hash: 'a',
    token: 'ASD@!C$$#Q@34234C$#CR$#C344354',
-   rol: _rol_admin._id,
-   offices: _offices_stc,
+   rol: _mkt_rol_admin._id,
+   offices: _mkt_offices_stc,
    amount: 1000,
 
    _id: new mongoose.Types.ObjectId,
    record_date: new Date()
 };
-var _user_ejecutivo1 = {
+var _mkt_user_ejecutivo1 = {
    name: 'e',
    salary: 123,
    active: true,
    password_hash: 'e',
    token: 'ASDWQ#$VHTHEE^EVW324213123c21#2',
-   rol: _rol_ejecutivo._id,
-   offices: _offices_stc,
+   rol: _mkt_rol_ejecutivo._id,
+   offices: _mkt_offices_stc,
    amount: 2000,
 
    _id: new mongoose.Types.ObjectId,
    record_date: new Date()
 };
-var _user_ejecutivo2 = {
+var _mkt_user_ejecutivo2 = {
    name: 'i',
    salary: 123,
    active: true,
    password_hash: 'i',
    token: 'ASDWQ#$VHTHEE^EVW324213123c21#2',
-   rol: _rol_ejecutivo._id,
-   offices: _offices_stc,
+   rol: _mkt_rol_ejecutivo._id,
+   offices: _mkt_offices_stc,
    amount: 1500,
 
    _id: new mongoose.Types.ObjectId,
    record_date: new Date()
 };
-var _users = [_user_admin, _user_ejecutivo1, _user_ejecutivo2];
+var _mkt_users = [_mkt_user_admin, _mkt_user_ejecutivo1, _mkt_user_ejecutivo2];
 
 //////////////////////////////////////////////////////////////////////////
-var _facilitator_1 = {
+var _mkt_facilitator_1 = {
    name: 'Paola Quintanilla',
    job: 'rrhh',
    _id: new mongoose.Types.ObjectId,
    record_date: new Date()
 };
-var _facilitator_2 = {
+var _mkt_facilitator_2 = {
    name: 'Alvaro Garcia',
    job: 'Seguridad',
    _id: new mongoose.Types.ObjectId,
    record_date: new Date()
 };
-var _facilitators = [_facilitator_1, _facilitator_2];
+var _mkt_facilitators = [_mkt_facilitator_1, _mkt_facilitator_2];
 
 /////////////////////////////////////////////////////////
 
-var _correlative1 = {
+var _mkt_correlative1 = {
    year: '2018-03-04',
-   company_id: _company._id, //ObjectId
+   company_id: _mkt_company._id, //ObjectId
    receipts: [{
       receipt: 010,   //numero recivo
       amount: 1000,      //catidad
@@ -117,9 +117,9 @@ var _correlative1 = {
    _id: new mongoose.Types.ObjectId,
    record_date: new Date()
 };
-var _correlative2 = {
+var _mkt_correlative2 = {
    year: '2018-04-01',
-   company_id: _company._id, //ObjectId
+   company_id: _mkt_company._id, //ObjectId
    receipts: [{
       receipt: 011,   //numero recivo
       amount: 1000,      //catidad
@@ -128,43 +128,43 @@ var _correlative2 = {
    _id: new mongoose.Types.ObjectId,
    record_date: new Date()
 };
-var _correlatives = [_correlative1, _correlative2];
+var _mkt_correlatives = [_mkt_correlative1, _mkt_correlative2];
 ////////////////////////CARTERA USER//////////////////////
-var _cartera_user_1 = {
+var _mkt_cartera_user_1 = {
    name: 'cartera1',
-   user: _user_admin,
+   user: _mkt_user_admin,
    _id: new mongoose.Types.ObjectId,
    record_date: new Date()
 }
-var _cartera_user_2 = {
+var _mkt_cartera_user_2 = {
    name: 'cartera2',
-   user: _user_ejecutivo1,
+   user: _mkt_user_ejecutivo1,
    _id: new mongoose.Types.ObjectId,
    record_date: new Date()
 }
-var _cartera_user_3 = {
+var _mkt_cartera_user_3 = {
    name: 'cartera3',
-   user: _user_ejecutivo2,
+   user: _mkt_user_ejecutivo2,
    _id: new mongoose.Types.ObjectId,
    record_date: new Date()
 }
-var _carteras = [_cartera_user_1, _cartera_user_2, _cartera_user_3];
+var _mkt_carteras = [_mkt_cartera_user_1, _mkt_cartera_user_2, _mkt_cartera_user_3];
 //////////////////////////////////////////////////////
-var _program_seguridad = {
+var _mkt_program_seguridad = {
    name: 'seguridad industrial',
    details: 'para industrias.',
    _id: new mongoose.Types.ObjectId,
    record_date: new Date()
 }
-var _program_rrhh = {
+var _mkt_program_rrhh = {
    name: 'recursos humanos',
    details: 'para empresas.',
    _id: new mongoose.Types.ObjectId,
    record_date: new Date()
 }
-var _programs = [_program_seguridad, _program_rrhh];
+var _mkt_programs = [_mkt_program_seguridad, _mkt_program_rrhh];
 ////////////////////////////////////////////
-var _modulo_1_seguridad = {
+var _mkt_modulo_1_seguridad = {
    number: 1,
    name: 'modulo 1',
    content: [
@@ -172,12 +172,12 @@ var _modulo_1_seguridad = {
       '2. induccion',
       '3. capacitacion'
    ],
-   programs: _program_seguridad,
+   programs: _mkt_program_seguridad,
 
    _id: new mongoose.Types.ObjectId,
    record_date: new Date()
 }
-var _modulo_2_seguridad = {
+var _mkt_modulo_2_seguridad = {
    number: 2,
    name: 'modulo 2',
    content: [
@@ -185,13 +185,13 @@ var _modulo_2_seguridad = {
       '2. motivacion',
       '3. clima laboral'
    ],
-   programs: _program_seguridad,
+   programs: _mkt_program_seguridad,
 
    _id: new mongoose.Types.ObjectId,
    record_date: new Date()
 }
 
-var _modulo_1_rrhh = {
+var _mkt_modulo_1_rrhh = {
    number: 1,
    name: 'modulo 1',
    content: [
@@ -199,12 +199,12 @@ var _modulo_1_rrhh = {
       '2. motivacion2',
       '3. clima laboral3'
    ],
-   programs: _program_rrhh,
+   programs: _mkt_program_rrhh,
 
    _id: new mongoose.Types.ObjectId,
    record_date: new Date()
 }
-var _modulo_2_rrhh = {
+var _mkt_modulo_2_rrhh = {
    number: 2,
    name: 'modulo 2',
    content: [
@@ -212,12 +212,12 @@ var _modulo_2_rrhh = {
       '2. motivacion2',
       '3. clima laboral3'
    ],
-   programs: _program_rrhh,
+   programs: _mkt_program_rrhh,
 
    _id: new mongoose.Types.ObjectId,
    record_date: new Date()
 }
-var _modulo_3_rrhh = {
+var _mkt_modulo_3_rrhh = {
    number: 3,
    name: 'modulo 3',
    content: [
@@ -225,12 +225,12 @@ var _modulo_3_rrhh = {
       '2. motivacion2',
       '3. clima laboral3'
    ],
-   programs: _program_rrhh,
+   programs: _mkt_program_rrhh,
 
    _id: new mongoose.Types.ObjectId,
    record_date: new Date()
 }
-var _modulo_4_rrhh = {
+var _mkt_modulo_4_rrhh = {
    number: 4,
    name: 'modulo 4',
    content: [
@@ -238,12 +238,12 @@ var _modulo_4_rrhh = {
       '2. motivacion2',
       '3. clima laboral3'
    ],
-   programs: _program_rrhh,
+   programs: _mkt_program_rrhh,
 
    _id: new mongoose.Types.ObjectId,
    record_date: new Date()
 }
-var _modulo_5_rrhh = {
+var _mkt_modulo_5_rrhh = {
    number: 5,
    name: 'modulo 5',
    content: [
@@ -251,12 +251,12 @@ var _modulo_5_rrhh = {
       '2. motivacion2',
       '3. clima laboral3'
    ],
-   programs: _program_rrhh,
+   programs: _mkt_program_rrhh,
 
    _id: new mongoose.Types.ObjectId,
    record_date: new Date()
 }
-var _modulo_6_rrhh = {
+var _mkt_modulo_6_rrhh = {
    number: 6,
    name: 'modulo 6',
    content: [
@@ -264,12 +264,12 @@ var _modulo_6_rrhh = {
       '2. motivacion2',
       '3. clima laboral3'
    ],
-   programs: _program_rrhh,
+   programs: _mkt_program_rrhh,
 
    _id: new mongoose.Types.ObjectId,
    record_date: new Date()
 }
-var _modulo_7_rrhh = {
+var _mkt_modulo_7_rrhh = {
    number: 7,
    name: 'modulo 7',
    content: [
@@ -277,12 +277,12 @@ var _modulo_7_rrhh = {
       '2. motivacion2',
       '3. clima laboral3'
    ],
-   programs: _program_rrhh,
+   programs: _mkt_program_rrhh,
 
    _id: new mongoose.Types.ObjectId,
    record_date: new Date()
 }
-var _modulo_8_rrhh = {
+var _mkt_modulo_8_rrhh = {
    number: 8,
    name: 'modulo 8',
    content: [
@@ -290,15 +290,15 @@ var _modulo_8_rrhh = {
       '2. motivacion2',
       '3. clima laboral3'
    ],
-   programs: _program_rrhh,
+   programs: _mkt_program_rrhh,
 
    _id: new mongoose.Types.ObjectId,
    record_date: new Date()
 }
-var _modulos = [_modulo_1_seguridad, _modulo_2_seguridad, _modulo_1_rrhh, _modulo_2_rrhh, _modulo_3_rrhh, _modulo_4_rrhh, _modulo_5_rrhh, _modulo_6_rrhh, _modulo_7_rrhh, _modulo_8_rrhh];
+var _mkt_modulos = [_mkt_modulo_1_seguridad, _mkt_modulo_2_seguridad, _mkt_modulo_1_rrhh, _mkt_modulo_2_rrhh, _mkt_modulo_3_rrhh, _mkt_modulo_4_rrhh, _mkt_modulo_5_rrhh, _mkt_modulo_6_rrhh, _mkt_modulo_7_rrhh, _mkt_modulo_8_rrhh];
 
 /////////////////////////////////////////////////////////7
-var _person_1 = {
+var _mkt_person_1 = {
    first_name: 'Jose',
    last_name: 'Gallardo',
    ci: 1234567,
@@ -319,10 +319,10 @@ var _person_1 = {
       cargo: '',
    },
    //////////////
-   carteras: _cartera_user_2,
+   carteras: _mkt_cartera_user_2,
    /////////////
    profile: [{
-         programs: _program_rrhh,
+         programs: _mkt_program_rrhh,
          modulars: [{
             amount: {
                detail: 'String',
@@ -332,9 +332,9 @@ var _person_1 = {
             },
             //debt: 150,
             assist: true,
-            events: _event_seg,////////////////////duda???????
+            events: _mkt_event_seg,////////////////////duda???????
             //inscriptions: '',////////////////////duda??????
-            modules: _modulo_1_rrhh,
+            modules: _mkt_modulo_1_rrhh,
             print_certificate: false,
          }],
          final_work: {
@@ -354,7 +354,7 @@ var _person_1 = {
    _id: new mongoose.Types.ObjectId,
    record_date: new Date()
 };
-var _person_2 = {
+var _mkt_person_2 = {
    first_name: 'laura',
    last_name: 'estrada',
    ci: 1234566,
@@ -375,11 +375,11 @@ var _person_2 = {
       cargo: 'rrhh',
    },
    //////////////
-   carteras: _cartera_user_2,
+   carteras: _mkt_cartera_user_2,
    /////////////
    profile: {
       programs: [{
-         program: _program_rrhh,
+         program: _mkt_program_rrhh,
          modulars: [{
             amount: {
                detail: 'modulo 1 rrhh',
@@ -389,9 +389,9 @@ var _person_2 = {
             },
             //debt: 150,
             assist: true,
-            events: _event_seg,////////////////////duda???????
+            events: _mkt_event_seg,////////////////////duda???????
             //inscriptions: '',////////////////////duda??????
-            modules: _modulo_1_rrhh,
+            modules: _mkt_modulo_1_rrhh,
             print_certificate: false,
          }],
          final_work: {
@@ -412,7 +412,7 @@ var _person_2 = {
    _id: new mongoose.Types.ObjectId,
    record_date: new Date()
 };
-var _person_3 = {
+var _mkt_person_3 = {
    first_name: 'juan',
    last_name: 'perez',
    ci: 712337757,
@@ -433,11 +433,11 @@ var _person_3 = {
       cargo: '',
    },
    //////////////
-   carteras: _cartera_user_2,
+   carteras: _mkt_cartera_user_2,
    /////////////
    profile: {
       programs: [{
-         programs: _program_rrhh,
+         programs: _mkt_program_rrhh,
          modulars: [{
             amount: {
                detail: 'modulo 1 rrhh',
@@ -447,9 +447,9 @@ var _person_3 = {
             },
             //debt: 150,
             assist: true,
-            events: _event_seg,////////////////////duad???????
+            events: _mkt_event_seg,////////////////////duad???????
             //inscriptions: '',////////////////////dudaÇ??????
-            modules: _modulo_1_rrhh,
+            modules: _mkt_modulo_1_rrhh,
             print_certificate: false,
          }],
          final_work: {
@@ -470,7 +470,7 @@ var _person_3 = {
    _id: new mongoose.Types.ObjectId,
    record_date: new Date()
 }
-var _person_4 = {
+var _mkt_person_4 = {
    first_name: 'lucia',
    last_name: 'galarza',
    //birthday: new Date(1992, 1, 1),
@@ -492,11 +492,11 @@ var _person_4 = {
       cargo: '',
    },
    //////////////
-   carteras: _cartera_user_2,
+   carteras: _mkt_cartera_user_2,
    /////////////
    profile: {
       programs: [{
-         programs: _program_rrhh,//modificado de program a programs
+         programs: _mkt_program_rrhh,//modificado de program a programs
          modulars: [{
             amount: {
                detail: 'modulo 1 rrhh',
@@ -506,9 +506,9 @@ var _person_4 = {
             },
             //debt: 150,
             assist: true,
-            events: _event_seg,////////////////////duad???????
+            events: _mkt_event_seg,////////////////////duad???????
             //inscriptions: '',////////////////////dudaÇ??????
-            modules: _modulo_1_rrhh,
+            modules: _mkt_modulo_1_rrhh,
             print_certificate: false,
          }],
          final_work: {
@@ -529,9 +529,9 @@ var _person_4 = {
    _id: new mongoose.Types.ObjectId,
    record_date: new Date()
 }; 
-var _persons = [_person_1, _person_2, _person_3, _person_4];
+var _mkt_persons = [_mkt_person_1, _mkt_person_2, _mkt_person_3, _mkt_person_4];
 ////////////////////////////////////////////
-var _event_seg = {
+var _mkt_event_seg = {
    name: 'seguridad imformatica y redes sociales',
    description: 'solo para ejecutivos',
    date_start: '2018-03-25',
@@ -542,8 +542,8 @@ var _event_seg = {
    modulars: [{
       date_start: '2018-03-25',
       date_end: '2018-04-25',
-      facilitators: _facilitator_1._id,
-      modules: _modulo_1_seguridad._id,
+      facilitators: _mkt_facilitator_1._id,
+      modules: _mkt_modulo_1_seguridad._id,
       lists: [],
       _id: new mongoose.Types.ObjectId()
    }],
@@ -556,11 +556,11 @@ var _event_seg = {
          canceled_price: 300,
          price_event: 2000,
          receipt: '4567',
-         name: _person_1.name,
-         ci: _person_1.ci,
-         cellphone: _person_1.cellphone,
-         persons: _person_1._id,
-         users: _user_admin._id
+         name: _mkt_person_1.name,
+         ci: _mkt_person_1.ci,
+         cellphone: _mkt_person_1.cellphone,
+         persons: _mkt_person_1._id,
+         users: _mkt_user_admin._id
       },
       {
          total_price: 600,
@@ -570,11 +570,11 @@ var _event_seg = {
          canceled_price: 300,
          price_event: 1400,
          receipt: '4568',
-         name: _person_2.name,
-         ci: _person_2.ci,
-         cellphone: _person_2.cellphone,
-         persons: _person_2._id,
-         users: _user_ejecutivo1._id
+         name: _mkt_person_2.name,
+         ci: _mkt_person_2.ci,
+         cellphone: _mkt_person_2.cellphone,
+         persons: _mkt_person_2._id,
+         users: _mkt_user_ejecutivo1._id
       },
       {
          total_price: 600,
@@ -584,16 +584,16 @@ var _event_seg = {
          canceled_price: 300,
          price_event: 2000,
          receipt: '4569',
-         name: _person_3.name,
-         ci: _person_3.ci,
-         cellphone: _person_3.cellphone,
-         persons: _person_3._id,
-         users: _user_admin._id
+         name: _mkt_person_3.name,
+         ci: _mkt_person_3.ci,
+         cellphone: _mkt_person_3.cellphone,
+         persons: _mkt_person_3._id,
+         users: _mkt_user_admin._id
       }
    ],
    total: 30,
-   programs: _program_seguridad._id,
-   offices:_offices_stc,
+   programs: _mkt_program_seguridad._id,
+   offices:_mkt_offices_stc,
    interes:[{}],
    date_end:'',
    active:true,
@@ -602,40 +602,40 @@ var _event_seg = {
    record_date: new Date()
 };
 
-var _events = [_event_seg];
+var _mkt_events = [_mkt_event_seg];
 
 ////////////////////////////////////////////////////////////////////////////////
 
-var _list_1 = {
+var _mkt_list_1 = {
    amount: 300,
    receipt: 101,
    assist: true,
    type: 1, //nuevo // nivelacion
-   persons: _person_1._id,
-   events: _event_seg._id,
-   modulars: _event_seg.modulars[0]._id,
+   persons: _mkt_person_1._id,
+   events: _mkt_event_seg._id,
+   modulars: _mkt_event_seg.modulars[0]._id,
    
    _id: new mongoose.Types.ObjectId,
    record_date: new Date()
 }
-var _list_2 = {
+var _mkt_list_2 = {
    amount: 300,
    receipt: 102,
    assist: true,
    type: 1, //nuevo // nivelacion
-   person: _person_2._id,
-   events: _event_seg._id,
-   modulars: _event_seg.modulars[0]._id,
+   person: _mkt_person_2._id,
+   events: _mkt_event_seg._id,
+   modulars: _mkt_event_seg.modulars[0]._id,
    
    _id: new mongoose.Types.ObjectId,
    record_date: new Date()
 }
 
-var _lists = [_list_1, _list_2];
-_event_seg.modulars[0].lists.push(_list_1);
-_event_seg.modulars[0].lists.push(_list_2);
+var _mkt_lists = [_mkt_list_1, _mkt_list_2];
+_mkt_event_seg.modulars[0].lists.push(_mkt_list_1);
+_mkt_event_seg.modulars[0].lists.push(_mkt_list_2);
 ////////////////////////////////////////////////////////////////////////////////
-var _listExtra1 = [{
+var _mkt_listExtra1 = [{
   university:[{
     nombre: 'universidad mayor de san simon'
   }],
@@ -664,36 +664,36 @@ function clearCollections(schema) {
 
 module.exports = {
   initializer: function () {
-     saveData(_roles, db.roles);
-     saveData(_users, db.users);
-     saveData(_company, db.company);
-     saveData(_correlatives, db.correlatives);
-     saveData(_carteras, db.carteras);
-     saveData(_programs, db.programs);
-     saveData(_modulos, db.modules);
-     saveData(_facilitators, db.facilitators);
-     saveData(_offices, db.offices);
-     saveData(_events, db.events);
-     saveData(_persons, db.persons);
-     saveData(_lists, db.lists);
-    //  saveData(_cashFlowOffices,db.cashFlowOffices);
-     saveData(_listExtra1, db.listExtra);
+     saveData(_mkt_roles, db.mkt_roles);
+     saveData(_mkt_users, db.mkt_users);
+     saveData(_mkt_company, db.mkt_company);
+     saveData(_mkt_correlatives, db.mkt_correlatives);
+     saveData(_mkt_carteras, db.mkt_carteras);
+     saveData(_mkt_programs, db.mkt_programs);
+     saveData(_mkt_modulos, db.mkt_modules);
+     saveData(_mkt_facilitators, db.mkt_facilitators);
+     saveData(_mkt_offices, db.mkt_offices);
+     saveData(_mkt_events, db.mkt_events);
+     saveData(_mkt_persons, db.mkt_persons);
+     saveData(_mkt_lists, db.mkt_lists);
+    //  saveData(_mkt_cashFlowOffices,db.mkt_cashFlowOffices);
+     saveData(_mkt_listExtra1, db.mkt_listExtra);
 
   },
 
   clearCollections: function () {
-     clearCollections(db.roles);
-     clearCollections(db.users);
-     clearCollections(db.carteras);
-     clearCollections(db.programs);
-     clearCollections(db.events);
-     clearCollections(db.persons);
-     clearCollections(db.modules);
-     clearCollections(db.company);
-     clearCollections(db.facilitators);
-     clearCollections(db.correlatives);
-     clearCollections(db.lists);
-    //  clearCollections(db.cashFlowOffices);
-     clearCollections(db.listExtra);
+     clearCollections(db.mkt_roles);
+     clearCollections(db.mkt_users);
+     clearCollections(db.mkt_carteras);
+     clearCollections(db.mkt_programs);
+     clearCollections(db.mkt_events);
+     clearCollections(db.mkt_persons);
+     clearCollections(db.mkt_modules);
+     clearCollections(db.mkt_company);
+     clearCollections(db.mkt_facilitators);
+     clearCollections(db.mkt_correlatives);
+     clearCollections(db.mkt_lists);
+    //  clearCollections(db.mkt_cashFlowOffices);
+     clearCollections(db.mkt_listExtra);
   }
 };

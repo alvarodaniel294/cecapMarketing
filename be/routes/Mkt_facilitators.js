@@ -8,14 +8,14 @@ var router = express.Router();
  
 router
 .get('/', function (req, res) {
-    db.facilitators.find({}, function (err, facilitators) {
+    db.mkt_facilitators.find({}, function (err, facilitators) {
        if (err) return res.status(400).send(err);
 
        return res.status(200).send(facilitators);
     });
  })
  .get('/:id',  function (req, res) {
-      db.facilitators.findOne({ _id: req.params.id }, function (err, facilitador) {
+      db.mkt_facilitators.findOne({ _id: req.params.id }, function (err, facilitador) {
          if (err) return res.status(400).send(err);
          if (facilitador == null) return res.status(404).send();
 
@@ -23,7 +23,7 @@ router
       });
    })
  .put('update/:id', function (req, res) {
-    db.facilitators.findOne({ _id: req.params.id }, function (err, facilitador) {
+    db.mkt_facilitators.findOne({ _id: req.params.id }, function (err, facilitador) {
        if (err) return res.status(400).send(err);
        if (facilitador == null) return res.status(404).send();
 
@@ -31,7 +31,7 @@ router
         facilitador[i] = req.body[i];
          //  console.log(cartera[i]);  
        }
-       db.facilitators.update({_id: req.params.id},
+       db.mkt_facilitators.update({_id: req.params.id},
         {
               $set:{'descOcupation.carrera':req.body.carrera,
                     'descOcupation.universidad':req.body.universidad,
@@ -54,7 +54,7 @@ router
     });
  })
 .post('/register', function (req, res) {
-    var cartera=new db.facilitators(req.body);
+    var cartera=new db.mkt_facilitators(req.body);
    //  console.log(cartera);
     if(cartera.name=='')return res.status(400)
     cartera.save(function(err,cartera){
