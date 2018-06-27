@@ -8,7 +8,7 @@ var router = express.Router();
  
 router
    .get('/', function (req, res) {
-      db.offices.find({}, function (err, offices) {
+      db.mkt_offices.find({}, function (err, offices) {
         if (err) return res.status(400).send(err);
 
         return res.status(200).send(offices);
@@ -16,7 +16,7 @@ router
     }) 
    .get('/:id', function (req, res) {
       console.log(req.params);
-      db.offices.findOne({ _id: req.params.id }, function (err, office) {
+      db.mkt_offices.findOne({ _id: req.params.id }, function (err, office) {
          if (err) return res.status(400).send(err);
          if (office == null) return res.status(404).send();
          return res.status(200).send(office);
@@ -24,7 +24,7 @@ router
    })
    .post('/add', function(req, res){
       console.log(req.body);
-      var office = new db.offices(req.body);
+      var office = new db.mkt_offices(req.body);
       office.save(function (err, office) {
         if (err){return res.status(400).send(err);} 
         return res.status(200).send(office);

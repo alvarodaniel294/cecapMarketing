@@ -18,7 +18,7 @@ var XLSX = require('xlsx')
 
 router
     .get('/', function (req, res) {
-        db.persons.find({}, function (err, persons) {
+        db.mkt_persons.find({}, function (err, persons) {
             if (err) return res.status(400).send(err);
 
             return res.status(200).send(persons);
@@ -26,7 +26,7 @@ router
     })
 
     .get('/:id', function (req, res) {
-        db.persons.findOne({ _id: req.params.id }, function (err, person) {
+        db.mkt_persons.findOne({ _id: req.params.id }, function (err, person) {
             if (err) return res.status(400).send(err);
             if (person == null) return res.status(404).send();
 
@@ -35,7 +35,7 @@ router
     })
     .get('/personsOfCartera/:cartera', function (req, res) {
         var cartera = req.params.cartera;
-        db.persons.find({ carteras: cartera }, function (err, listaPersonas) {
+        db.mkt_persons.find({ carteras: cartera }, function (err, listaPersonas) {
             if (err) return res.status(400).send(err);
 
             return res.status(200).send(listaPersonas);
@@ -51,9 +51,9 @@ router
     //     var ver=req.params.body.body;
     //     console.log(ver);
     //     // var userId=req.params.userId;
-    //     // db.carteras.findOne({user:userId},function(err,cartera){
+    //     // db.mkt_carteras.findOne({user:userId},function(err,cartera){
     //     //     if (err) return res.status(400).send(err);
-    //     //     db.persons.find({carteras})
+    //     //     db.mkt_persons.find({carteras})
 
 
     //     // })
@@ -66,9 +66,9 @@ router
         let programId = req.body.programId;
         let interesState = req.body.state;
         let personasIntersadasPorPrograma = [];
-        db.carteras.findOne({ user: userId }, function (err, cartera) {
+        db.mkt_carteras.findOne({ user: userId }, function (err, cartera) {
             if (err) return res.status(400).send(err);
-            db.persons.find({ carteras: cartera }, function (err, personas) {
+            db.mkt_persons.find({ carteras: cartera }, function (err, personas) {
                 if (err) return res.status(400).send(err);
                 for (let p of personas) {
                     let interes = p.interes;
@@ -90,7 +90,7 @@ router
 
         let personId = req.body.personId;
         let eventId = req.body.eventId;
-        db.events.findOne({ _id: eventId }, function (err, event) {
+        db.mkt_events.findOne({ _id: eventId }, function (err, event) {
             for (let i of event.interes) {
                 if (i.persons == personId) {
                     return res.status(200).send(i);
@@ -108,7 +108,7 @@ router
         let personId = req.body.personId;
         let eventId = req.body.eventId;
         let programId;
-        db.events.update({ _id: eventId, 'interes.persons': personId }, {
+        db.mkt_events.update({ _id: eventId, 'interes.persons': personId }, {
             $set: {
                 'interes.$.state': state,
                 'interes.$.details': details,
@@ -118,8 +118,8 @@ router
             }
         }).exec(function (err, event) {
             // console.log(programId);
-            db.events.findOne({ _id: eventId }, { programs: 1 }, function (err, event) {
-                db.persons.update({
+            db.mkt_events.findOne({ _id: eventId }, { programs: 1 }, function (err, event) {
+                db.mkt_persons.update({
                     _id: personId,
                     'interes.programId': event.programs,
                     date_state:new Date(),
@@ -161,7 +161,7 @@ router
             let newId = new mongoose.mongo.ObjectId(carteraIdMongoose);
 
             for (let contact of xlData) {
-                let newPerson = new db.persons(req.body);
+                let newPerson = new db.mkt_persons(req.body);
                 newPerson.carteras = carteraId;
                 newPerson.whatsapp_group = 'Importados del Celular';
                 newPerson.city = '';
@@ -238,7 +238,7 @@ router
                     savePerson();
                 }
                 function savePerson() {
-                    db.persons.findOne({ cellphone: newPerson.cellphone }, function (err, person) {
+                    db.mkt_persons.findOne({ cellphone: newPerson.cellphone }, function (err, person) {
                         if (person == null) {
                             newPerson.save(function (err, p) {
                                 if (err) console.log(err);
@@ -268,9 +268,9 @@ router
 
 
     .post('/addFromWhatsapp', function (req, res) {/////////////////////////////NO SE ESETA USANDO///////////////////
-        var person = new db.persons(req.body);
+        var person = new db.mkt_persons(req.body);
         console.log(person);
-        db.persons.findOne({ cellphone: person.cellphone }, function (err, existe) {
+        db.mkt_persons.findOne({ cellphone: person.cellphone }, function (err, existe) {
 
             if (err) {
                 return res.status(400).send(err);
@@ -288,7 +288,7 @@ router
                             let interesPersona = persona.interes;
                             for (let pi of interesPersona) {
 
-                                db.events.find({ programs: pi.programId }, function (err, eventos) {
+                                db.mkt_events.find({ programs: pi.programId }, function (err, eventos) {
                                     if (err) return res.status(400).send(err);
                                     for (let e of eventos) {
                                         let int = {
@@ -341,9 +341,9 @@ router
         var i = 0;
         for (let num of listaNumeros) {
 
-            db.persons.findOne({ cellphone: num }, function (err, person) {
+            db.mkt_persons.findOne({ cellphone: num }, function (err, person) {
                 if (person == null) {
-                    let newPerson = new db.persons(req.body);
+                    let newPerson = new db.mkt_persons(req.body);
                     newPerson.descOcupation = {};
                     newPerson.first_name = whatsapp_group + ' ' + i;
                     newPerson.last_name = '';
@@ -365,14 +365,14 @@ router
                         cargao: ''
                     };
                     // console.log(newPerson);
-                    // db.persons.findOne({ cellphone: newPerson.cellphone }, function (err, person) {
+                    // db.mkt_persons.findOne({ cellphone: newPerson.cellphone }, function (err, person) {
 
                     // if (person == null) {
                     newPerson.save(function (err, np) {
                         if (err) console.log(err);
                         for (let program of interes) {
                             // console.log(program);
-                            db.events.find({ programs: program.programId }, function (err, eventos) {
+                            db.mkt_events.find({ programs: program.programId }, function (err, eventos) {
                                 for (let e of eventos) {
                                     let inte = {};
                                     inte.persons = np;
@@ -410,14 +410,14 @@ router
 
 
         console.log('aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa')
-        db.users.findOne({ _id: identity._id }, function (err, user) {
+        db.mkt_users.findOne({ _id: identity._id }, function (err, user) {
             if (err) return res.status(200).send(err)
-            db.users.find({ offices: user.offices }, { _id: 1 }, function (err, users) {
+            db.mkt_users.find({ offices: user.offices }, { _id: 1 }, function (err, users) {
                 // console.log(users);
-                db.carteras.find({ user: { $in: users } }, { _id: 1 }, function (err, carteraslist) {
+                db.mkt_carteras.find({ user: { $in: users } }, { _id: 1 }, function (err, carteraslist) {
                     if (err) return res.status(200).send(err)
                     listaCarteras = carteraslist;
-                    db.persons.find({ carteras: { $in: carteraslist } }, function (err, personas) {
+                    db.mkt_persons.find({ carteras: { $in: carteraslist } }, function (err, personas) {
                         // console.log(personas)
                         for (let p of personas) {
                             for (let ItemUnivers of listaUniversidades) {
@@ -487,20 +487,20 @@ router
 
         if ((listaEjecutivos.length > 0) && (listaEventos.length > 0)) {
 
-            db.persons.find({ _id: { $in: listaPersonasDeEventos }, carteras: { $in: listaCarteras } }, function (err, personas) {
+            db.mkt_persons.find({ _id: { $in: listaPersonasDeEventos }, carteras: { $in: listaCarteras } }, function (err, personas) {
                 if (err) return res.status(400).send(err);
                 return res.status(200).send(personas);
             })
         } else {
             if ((listaEjecutivos.length > 0) && (listaEventos.length == 0)) {
-                db.persons.find({ carteras: { $in: listaCarteras } }, function (err, personas) {
+                db.mkt_persons.find({ carteras: { $in: listaCarteras } }, function (err, personas) {
                     if (err) return res.status(400).send(err);
                     return res.status(200).send(personas);
                 })
             } else {
                 if ((listaEjecutivos.length == 0) && (listaEventos.length > 0)) {
 
-                    db.persons.find({ _id: { $in: listaPersonasDeEventos } }, function (err, personas) {
+                    db.mkt_persons.find({ _id: { $in: listaPersonasDeEventos } }, function (err, personas) {
                         if (err) return res.status(400).send(err);
                         return res.status(200).send(personas);
                     })
@@ -515,17 +515,17 @@ router
     .post('/addNewPerson',function(req,res){
         console.log(req.body);
         let interes=req.body.persona.interes;
-        db.persons.findOne({cellphone:req.body.persona.cellphone},function(err,celExist){
+        db.mkt_persons.findOne({cellphone:req.body.persona.cellphone},function(err,celExist){
             if (err) return res.status(400).send(err);
             if(celExist==null){
-                var person=new db.persons(req.body.persona);
+                var person=new db.mkt_persons(req.body.persona);
                 person.save(function(err,pers){
                     if (err){
                         return res.status(200).send(err)
                     }else{
                         for (let program of interes) {
                             // console.log(program);
-                            db.events.find({ programs: program.programId }, function (err, eventos) {
+                            db.mkt_events.find({ programs: program.programId }, function (err, eventos) {
                                 for (let e of eventos) {
                                     let inte = {};
                                     inte.persons = pers;
@@ -549,13 +549,13 @@ router
     })
 
     .post('/', function (req, res, next) {
-        db.persons.findOne({ ci: req.body.persona.ci }, function (err, ciExist) {
+        db.mkt_persons.findOne({ ci: req.body.persona.ci }, function (err, ciExist) {
             if (err) return res.status(400).send(err);
             if (ciExist == null) { req.body.found = false; validCell(); }
             else { req.body.found = true; req.body.persona = ciExist; next(); }
         })
         function validCell() {
-            db.persons.findOne({ cellphone: req.body.persona.cellphone }, function (err, celExist) {
+            db.mkt_persons.findOne({ cellphone: req.body.persona.cellphone }, function (err, celExist) {
                 if (err) return res.status(400).send(err);
                 if (celExist == null) { req.body.found = false; next(); }
                 else { req.body.found = true; req.body.persona = celExist; next(); }
@@ -564,7 +564,7 @@ router
     })
     .post('/', function (req, res) {
         if (req.body.found) return res.status(404).send('Persona Existente');
-        var person = new db.persons(req.body.persona);
+        var person = new db.mkt_persons(req.body.persona);
         person.save(function (err, person) {
             if (err) { return res.status(400).send(err); }
             return res.status(200).send(person);
@@ -573,16 +573,16 @@ router
     })
 
     .get('/existCi/:id', function (req, res) {
-        db.persons.findOne({ ci: req.params.id }, { first_name: 1, last_name: 1 }, function (err, user) {
+        db.mkt_persons.findOne({ ci: req.params.id }, { first_name: 1, last_name: 1 }, function (err, user) {
             if (err) return console.log(err);
             if (user == null) return res.sendStatus(404);
             return res.status(200).send(user);
         });
     })
     //    .post('/', function (req, res) {
-    //       var person = new db.persons(req.body.persona);
+    //       var person = new db.mkt_persons(req.body.persona);
     //       console.log(req.body);
-    //       db.persons.findOne({ ci: req.body.persona.ci, cellphone: req.body.persona.cellphone }, function (err, existeCellphone) {
+    //       db.mkt_persons.findOne({ ci: req.body.persona.ci, cellphone: req.body.persona.cellphone }, function (err, existeCellphone) {
     //          if (existeCellphone == null) {
     //             console.log('llegue aqui');
     //             //if(person.first_name == '' || person.last_name == '' || person.ci == '' || person.carteras == '') 
@@ -594,9 +594,9 @@ router
     //                addInscription(person, req.body.inscription, req.body.eventId);
     //             });
     //             function addInscription(person, inscri, idEvent) {
-    //                db.events.findOne({ _id: idEvent }, function (err, events) {
+    //                db.mkt_events.findOne({ _id: idEvent }, function (err, events) {
     //                   console.log(events);
-    //                   db.modules.find({ programs: events.programs }).count().exec(function (err, moduls) {
+    //                   db.mkt_modules.find({ programs: events.programs }).count().exec(function (err, moduls) {
     //                      console.log(moduls);
     //                      console.log('llegue al la cantidad de modulos');
     //                      var modulPrice = inscri.price_event / moduls;///////DIVISION
@@ -618,19 +618,19 @@ router
     //                      };
     //                      var d = new Date();
     //                      //////////////////////
-    //                      // db.events.update({ _id: idEvent, 'inscriptions.person': req.body.person },
+    //                      // db.mkt_events.update({ _id: idEvent, 'inscriptions.person': req.body.person },
     //                      //       {
     //                      //             $set: { 'inscriptions.$.state': req.body.state, 'inscriptions.$.description': req.body.description }
     //                      //       }).exec(function (err, off) {
     //                      //             if (err) return res.status(400).send(err);
-    //                      //             //db.events.find({ _id: req.body.name, _id: { $in: req.body.person } }, function (err, event) {
-    //                      //             db.events.find({ _id: req.body.name }, function (err, event) {
+    //                      //             //db.mkt_events.find({ _id: req.body.name, _id: { $in: req.body.person } }, function (err, event) {
+    //                      //             db.mkt_events.find({ _id: req.body.name }, function (err, event) {
     //                      //                   if (err) return res.status(401).send(err);
     //                      //             return res.status(201).send(event);
     //                      //             });
     //                      //             //	if (off.nModified == 0) return res.status(406).send();
     //                      //       });
-    //                      db.events.update({ _id: idEvent },
+    //                      db.mkt_events.update({ _id: idEvent },
     //                         {
     //                            $push: {
     //                               inscriptions: inscription
@@ -661,7 +661,7 @@ router
     .put('/:id', function (req, res) {
         console.log("exito");
         console.log(req.params.id);
-        db.persons.findOne({ _id: req.params.id }, function (err, person) {
+        db.mkt_persons.findOne({ _id: req.params.id }, function (err, person) {
             if (err) return res.status(400).send(err);
             if (person == null) return res.status(404).send();
 
@@ -677,7 +677,7 @@ router
     })
     .put('/ocupation/:id', function (req, res) {
         console.log(req.body);
-        db.persons.update({ _id: req.params.id },
+        db.mkt_persons.update({ _id: req.params.id },
             {
                 $set: {//Universitario
                     'descOcupation.carrera': req.body.carrera,
@@ -693,12 +693,12 @@ router
             }).exec(function (err, off) {
                 if (err) return res.status(400).send(err);
             })
-        // db.events.update({ _id: req.body.name, 'inscriptions.person': req.body.person },
+        // db.mkt_events.update({ _id: req.body.name, 'inscriptions.person': req.body.person },
         //    {
         //       $set: { 'inscriptions.$.state': req.body.state, 'inscriptions.$.description': req.body.description }
         //    }).exec(function (err, off) {
         //       if (err) return res.status(400).send(err);
-        //       db.events.find({ _id: req.body.name, _id: { $in: req.body.person } }, function (err, event) {
+        //       db.mkt_events.find({ _id: req.body.name, _id: { $in: req.body.person } }, function (err, event) {
         //          if (err) return res.status(401).send(err);
         //          return res.status(201).send(event);
         //       });
@@ -709,7 +709,7 @@ router
     ////////////////////////////////////////////////////////////////////////////////
 
     // .put('/tracing/:id', function (req, res) {
-    //     db.persons.update({ _id: req.params.id},
+    //     db.mkt_persons.update({ _id: req.params.id},
     //       {
     //         $push: {
     //           'profile.tracing': req.body,
@@ -728,14 +728,14 @@ router
 
     //     let eventId = req.body.eventId;
     //     let programId;
-    //     // db.events.update({ _id: eventId, 'tracing.persons': req.params.id }, {
+    //     // db.mkt_events.update({ _id: eventId, 'tracing.persons': req.params.id }, {
     //     //     $push: {
     //     //         'tracing': req.body,
     //     //     }
     //     // }).exec(function (err, event) {
     //         // console.log(programId);
-    //         db.events.findOne({ _id: eventId }, { programs: 1 }, function (err, event) {
-    //             db.persons.update({
+    //         db.mkt_events.findOne({ _id: eventId }, { programs: 1 }, function (err, event) {
+    //             db.mkt_persons.update({
     //                 _id: req.params.id,
     //                 'tracing.programId': event.programs
     //             }, {
@@ -754,7 +754,7 @@ router
     ///////////////////////////////////////////////////////////////////////////////////
 
     .delete('/:id', function (req, res) {
-        db.persons.remove({ _id: req.params.id }, function (err, person) {
+        db.mkt_persons.remove({ _id: req.params.id }, function (err, person) {
             if (err) return res.status(400).send(err);
 
             return res.status(200).send(person);

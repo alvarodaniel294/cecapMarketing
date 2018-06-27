@@ -20,17 +20,17 @@ export class SucursalService {
       private _http: HttpClient
    ) { }
    getSucursales(){
-        return this._http.get(this.url + 'offices').map((res: Response) => res);
+        return this._http.get(this.url + 'Mkt_offices').map((res: Response) => res);
     }
     getSucursal(id){
-        return this._http.get(this.url + 'offices/' + id).map((res: Response) => res);
+        return this._http.get(this.url + 'Mkt_offices/' + id).map((res: Response) => res);
     }
    addOffice(office) {
     let body = JSON.stringify(office);
     var headers = new HttpHeaders().set('Content-Type', 'application/json; charset=utf-8');
-    return this._http.post(this.url + 'offices/add', body, { headers: headers }).map((res: Response) => res);
+    return this._http.post(this.url + 'Mkt_offices/add', body, { headers: headers }).map((res: Response) => res);
    }
    getCompanys(){
-     return this._http.get(this.url + 'company').map((res: Response) => res);
+     return this._http.get(this.url + 'Mkt_company').map((res: Response) => res);
    }
 }

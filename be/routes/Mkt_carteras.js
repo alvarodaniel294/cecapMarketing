@@ -9,7 +9,7 @@ var router = express.Router();
 
 router
    .get('/', function (req, res) {
-      db.carteras.find({}, function (err, carteras) {
+      db.mkt_carteras.find({}, function (err, carteras) {
          if (err) return res.status(400).send(err);
 
          return res.status(200).send(carteras);
@@ -17,7 +17,7 @@ router
    })
 
    .get('/libres/', function (req, res) {
-    db.carteras.find({active:false}, function (err, carteras) {
+    db.mkt_carteras.find({active:false}, function (err, carteras) {
        if (err) return res.status(400).send(err);
 
        return res.status(200).send(carteras);
@@ -25,10 +25,10 @@ router
  })
   
 //    .post('/', function (req, res) {
-//     var cartera = new db.carteras(req.body);
+//     var cartera = new db.mkt_carteras(req.body);
 //     var d = new Date();
 //     // if ((event.date_start == undefined || event.date_start < d) ||event.description == '' || event.total == '' || event.program == '') return res.status(400).send();
-//     db.carteras.find({}, function (err, persons) {
+//     db.mkt_carteras.find({}, function (err, persons) {
 //        if (err) return res.status(400).send(err);
 //        saveCartera(cartera);
 //     });
@@ -44,7 +44,7 @@ router
 
 .post('/reasignarCartera',function(req,res){
     console.log(req.body)
-    db.carteras.findOne({_id:req.body.cartera},function(err,cart){
+    db.mkt_carteras.findOne({_id:req.body.cartera},function(err,cart){
         if (err) return res.status(400).send(err);
 
         if(req.body.cartera!=req.body.carteraAntigua){
@@ -53,7 +53,7 @@ router
             cart.active=true;
             cart.save();
                 
-            db.carteras.findOne({_id:req.body.carteraAntigua},function(err,carter){
+            db.mkt_carteras.findOne({_id:req.body.carteraAntigua},function(err,carter){
                 if (err) return res.status(400).send(err);
                 carter.user=undefined;
                 carter.active=false;
@@ -78,7 +78,7 @@ router
 .get('/persons/:_id', function (req, res) {
     
     
-    db.carteras.findOne({_id: req.params._id},function(err,cartera){
+    db.mkt_carteras.findOne({_id: req.params._id},function(err,cartera){
         if(err)return res.status().send(err);
         if(cartera==null)return res.status(404).send();
         // console.log(cartera);
@@ -91,7 +91,7 @@ router
 
     function getPersonas(cartera){
         // let carteraObj=moongose.Types.ObjectId(cartera);
-        db.persons.find({carteras:cartera},function(err,persons){
+        db.mkt_persons.find({carteras:cartera},function(err,persons){
             if(err)return res.status(400).send(err);
             // console.log(persons);
             if (persons == null) return res.status(404).send();
@@ -102,7 +102,7 @@ router
     
  })
 .get('/otro/:id', function (req, res) {
-    db.carteras.findOne({user: req.params.id},function(err,cartera){
+    db.mkt_carteras.findOne({user: req.params.id},function(err,cartera){
         if(err)return res.status().send(err);
         if(cartera==null)return res.status(404).send();
       //   console.log('hola desde get cartera user');
@@ -114,7 +114,7 @@ router
    
  })
  .get('/:id', function (req, res) {
-    db.carteras.findOne({ _id: req.params.id }, function (err, cartera) {
+    db.mkt_carteras.findOne({ _id: req.params.id }, function (err, cartera) {
        if (err) return res.status(400).send(err);
        if (cartera == null) return res.status(404).send();
 
@@ -143,7 +143,7 @@ router
 //  })
 
 .put('/:id', function (req, res) {
-    db.carteras.findOne({ _id: req.params.id }, function (err, cartera) {
+    db.mkt_carteras.findOne({ _id: req.params.id }, function (err, cartera) {
        if (err) return res.status(400).send(err);
        if (cartera == null) return res.status(404).send();
 
@@ -160,13 +160,13 @@ router
     });
  })
  .post('/guardar',function(req,res){
-    var cartera = new db.carteras(req.body);
+    var cartera = new db.mkt_carteras(req.body);
     cartera.active=false;
      console.log(cartera);
      cartera.save();
  })
  .post('/register', function (req, res) {
-    var cartera=new db.carteras(req.body);
+    var cartera=new db.mkt_carteras(req.body);
    //  console.log(cartera);
     if(cartera.name=='')return res.status(400)
         cartera.active=false;
@@ -189,7 +189,7 @@ router
 //function PUT
 //  .put('/:id', function (req, res) {
 //     console.log(req.body);
-//     db.carteras.find({user: req.params.id},function(err,cartera){
+//     db.mkt_carteras.find({user: req.params.id},function(err,cartera){
 //         if(err)return res.status().send(err);
 //         if(cartera==null)return res.status(404).send();
 //         console.log(cartera);
