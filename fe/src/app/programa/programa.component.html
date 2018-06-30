@@ -21,7 +21,7 @@
                </tr>
             </thead>
             <tbody> 
-               <tr *ngFor="let program of programs">
+               <tr *ngFor="let program of mostrar">
                   <td>{{ program.name }}</td>
                   <td>{{ program.details }}</td>
                   <td>
@@ -32,6 +32,10 @@
                   </td>
                </tr>
             </tbody>
+            <tfoot>
+              <button (click)="dis()" [disabled]="page == 1">Anterior</button>
+              <button (click)="aum()" [disabled]="page == totalPag">Siguiente</button>
+            </tfoot>
          </table>
          
         </section>

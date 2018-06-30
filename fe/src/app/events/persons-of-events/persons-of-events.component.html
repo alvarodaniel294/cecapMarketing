@@ -61,7 +61,7 @@
                 </tr>
               </thead>
               <tbody>
-                <tr *ngFor="let i of lista_personasPorInteres">
+                <tr *ngFor="let i of mostrar">
                   <td>{{ i.first_name }} {{i.last_name}}</td>
                   <!-- <th>{{i.last_name}}</th> -->
                   <td>{{ i.cellphone }}</td>
@@ -99,6 +99,10 @@
                   </td>
                 </tr>
               </tbody>
+              <tfoot>
+                <button (click)="dis()" [disabled]="page == 1">Anterior</button>
+                <button (click)="aum()" [disabled]="page == totalPag">Siguiente</button>
+              </tfoot>
             </table>
             <br>
             <div align="center">
