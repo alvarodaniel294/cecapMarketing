@@ -19,7 +19,7 @@
              <div>
             <div class="filter-wrap">
               <div class="col-lg-1">Buscar:</div>
-              <input [(ngModel)]="searchText" placeholder="Nombre Persona" class="filter-input">
+              <input [(ngModel)]="searchText" placeholder="Nombre Persona" class="filter-input" (ngModelChange)="cambiarLista()">
               <span class="filter-clear" *ngIf="searchText.length>0" (click)="clearFilter()">X</span>
               <!-- <a class="btn btn-primary filter-clear" *ngIf="searchText.length>0" (clic)="clearFilter()">Cancelar</a> -->
             </div>
@@ -92,7 +92,7 @@
           anterior
         </a> -->
         <button (click)="dis()" [disabled]="page == 1">Anterior</button>
-        <button (click)="aum()" [disabled]="page == 4">Siguiente</button>
+        <button (click)="aum()" [disabled]="page == totalPag">Siguiente</button>
          <!-- <a class="previousLabel" (click)="aum()" disabled=" page == totalPag">
            siguiente
          </a> -->

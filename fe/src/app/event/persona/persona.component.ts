@@ -47,6 +47,17 @@ export class PersonaComponent implements OnInit {
     
     
   }
+  // clearFilter() {
+  //   this.searchText = "";
+  //   this.mostrarPer();
+  // }
+  cambiarLista(){
+    if(this.searchText != ""){
+    this.mostrar = this.listado_personas;
+  }else{
+    this.mostrarPer();
+  }
+  }
   listarPersonasPorRol(){
 
     this._peticionesService.getPersonsOfCartera(this.cartera._id).subscribe(response=>{
@@ -85,7 +96,7 @@ export class PersonaComponent implements OnInit {
     this.page = 1;
     this.total = this.listado_personas.length;
     this.totalPag = Math.ceil(this.total/8);
-    console.log(this.totalPag)
+    this.mostrar = []
     if(this.totalPag > 1){
       for(var a = 0 ; a < 8 ; a++){
       this.mostrar.push(this.listado_personas[a]) ;}

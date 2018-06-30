@@ -28,6 +28,12 @@ export class PersonsOfEventsComponent implements OnInit {
   public listaReturned;
   private listaToExport = [];
   public rol;
+  //////////////////////////////////////////////////////////////
+  public page;
+  public total;
+  public totalPag;
+  public mostrar = [];
+  //////////////////////////////////////////////////////////////
 
   // public listaToExport=[];
   public toExport;
@@ -51,7 +57,44 @@ export class PersonsOfEventsComponent implements OnInit {
 
 
   }
-
+  dis(){
+    this.page = this.page-1;
+    var inicio = (7*(this.page-1));
+    var final = (7*(this.page-1))+7;
+    this.mostrar = [];
+    for(var a = inicio  ; a < final ; a++ ){
+      this.mostrar.push(this.lista_personasPorInteres[a]);
+  }
+  }
+  aum(){
+    this.page = this.page+1;
+    console.log(this.page)
+    var inicio = (7*(this.page-1));
+    console.log(inicio)
+    var final = (7*(this.page-1))+7;
+    if(final > this.total){
+      final = this.total;
+    }
+    console.log(final)
+    this.mostrar = [];
+    for(var a = inicio  ; a < final ; a++ ){
+        this.mostrar.push(this.lista_personasPorInteres[a]);
+    }
+  }
+  mostrarPer(){
+    this.page = 1;
+    this.total = this.lista_personasPorInteres.length;
+    this.totalPag = Math.ceil(this.total/7);
+    this.mostrar = []
+    console.log(this.totalPag)
+    if(this.totalPag > 1){
+      for(var a = 0 ; a < 7 ; a++){
+      this.mostrar.push(this.lista_personasPorInteres[a]) ;}
+    } else{
+      this.mostrar = this.lista_personasPorInteres;
+    }
+    
+  }
   loadPersonsByCartera() {
 
     this.lista_personasPorInteres = [];
@@ -64,6 +107,7 @@ export class PersonsOfEventsComponent implements OnInit {
       this._peticionesService.getPersonasInteresWithEventByCartera(eventIdPersonId).subscribe(res => {
         this.listaReturned = res;
         this.lista_personasPorInteres = this.listaReturned;
+        this.mostrarPer();
         // console.log(this.lista_personasPorInteres)
       })
 
