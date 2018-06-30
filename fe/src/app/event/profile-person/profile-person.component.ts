@@ -17,7 +17,7 @@ export class ProfilePersonComponent implements OnInit {
   public ocupation;
   public ocupations;
   public programs;
-  public tracing;
+  // public tracing;
 
   constructor(
     private route: ActivatedRoute,
@@ -46,7 +46,7 @@ export class ProfilePersonComponent implements OnInit {
         //  console.log(this.ocupation)
         this.ocupations = this.person.descOcupation;
         //  console.log(this.ocupations)
-        this.tracing = this.person.profile.tracing;
+        // this.tracing = this.person.profile.tracing;
         // console.log(this.tracing)
 
         // for (let i = 0; i < this.person.profile.length; i++) {
@@ -73,9 +73,9 @@ export class ProfilePersonComponent implements OnInit {
         console.log(<any>error);
       });
   }
-  addTracing(){
-    this.router.navigate(['/home/tracing/add', this.personId]);
-  }
+  // addTracing(){
+  //   this.router.navigate(['/home/tracing/add', this.personId]);
+  // }
   cancelar(){
     window.history.back();
   }

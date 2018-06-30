@@ -26,7 +26,8 @@
                                              <th><h4 class="text-center">Fecha de Inicio</h4></th>
                                              <th><h4 class="text-center">Cupos</h4></th>
                                              <th><h4 class="text-center">Programa</h4></th>
-                                             <th colspan="2"><h4 class="text-center">Estado</h4></th>
+                                             <th><h4 class="text-center">Estado</h4></th>
+                                             <th> <h4 class="text-center">Activo</h4></th>
                                              
                                           </tr>
                                        </thead>
@@ -41,6 +42,7 @@
                                              <td>
                                                 <a class="btn btn-primary" (click)="personsOfEvents(event._id)">Personas</a>
                                              </td>
+                                             <td > <button class="btn btn-danger" (click)="cerrarEvento(event?._id)" [disabled]="!event.active">Cerrar Evento</button></td>
                                           </tr>
                                        </tbody>
                                     </table>

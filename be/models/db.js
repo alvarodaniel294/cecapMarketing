@@ -10,7 +10,7 @@ process.env.TZ = 'America/La_Paz';
 
 module.exports = {
       ///Account
-      roles: mongoose.model('roles', new Schema({
+      mkt_roles: mongoose.model('mkt_roles', new Schema({
             name: String,
 
             _id: { type: ObjectId, default: function () { return new mongoose.Types.ObjectId } },
@@ -18,7 +18,7 @@ module.exports = {
 
       ////////////////////////////////////////////////////////////////////////////
 
-      users: mongoose.model('users', new Schema({
+      mkt_users: mongoose.model('mkt_users', new Schema({
             name: String,
             lastname: String,
             cell: Number,
@@ -40,7 +40,7 @@ module.exports = {
 
 
     
-      carteras: mongoose.model('carteras', new Schema({
+      mkt_carteras: mongoose.model('mkt_carteras', new Schema({
             name: String,
             user: ObjectId,
             active: Boolean,
@@ -53,7 +53,7 @@ module.exports = {
 
       //////////////////////////////////////////////////
 
-      persons: mongoose.model('persons', new Schema({
+      mkt_persons: mongoose.model('mkt_persons', new Schema({
             first_name: String,
             last_name: String,
             ci: Number,
@@ -160,7 +160,7 @@ module.exports = {
 
       ////////////////////////////////////////////////////////////////////////////
 
-      facilitators: mongoose.model('facilitators', new Schema({
+      mkt_facilitators: mongoose.model('mkt_facilitators', new Schema({
             name: String,
             job: String,
 
@@ -169,7 +169,7 @@ module.exports = {
             record_date: { type: Date, default: function () { return new Date() } },
       })),
       ////////////////////////////////////////////////////////////////////////////
-      listExtra: mongoose.model('listExtra', new Schema({
+      mkt_listExtra: mongoose.model('mkt_listExtra', new Schema({
             university: [{nombre:String
                         }],
             carrera: [{nombre:String}],
@@ -182,7 +182,7 @@ module.exports = {
 
       ////////////////////////////////////////////////////////////////////////////
 
-      events: mongoose.model('events', new Schema({
+      mkt_events: mongoose.model('mkt_events', new Schema({
             name: String,
             description: String,
             date_start: Date,
@@ -243,6 +243,8 @@ module.exports = {
 
             ],
             offices: ObjectId,
+            date_end:Date,
+            active:Boolean,
             //modulo: [ObjectId],
 
             _id: { type: ObjectId, default: function () { return new mongoose.Types.ObjectId } },
@@ -250,7 +252,7 @@ module.exports = {
       })),
 
       ////////////////////////////////////////////////////////
-      lists: mongoose.model('lists', new Schema({
+      mkt_lists: mongoose.model('mkt_lists', new Schema({
             bolivianos: Number,
             dolares: Number,
             receipt: String, // varios recibos
@@ -266,7 +268,7 @@ module.exports = {
 
       ////////////////////////////////////////////////////////
 
-      programs: mongoose.model('programs', new Schema({
+      mkt_programs: mongoose.model('mkt_programs', new Schema({
             name: String,
             //modules: [String],
             details: String,
@@ -275,7 +277,7 @@ module.exports = {
             record_date: { type: Date, default: function () { return new Date() } },
       })),
 
-      modules: mongoose.model('modules', new Schema({
+      mkt_modules: mongoose.model('mkt_modules', new Schema({
             number: Number,
             name: String,
             content: [String],
@@ -287,7 +289,7 @@ module.exports = {
 
       //////////////////////////////////////////////////////////////////
 
-      offices: mongoose.model('offices', new Schema({
+      mkt_offices: mongoose.model('mkt_offices', new Schema({
             name: String,
             // nit:String,
             ubicacion: String,
@@ -301,7 +303,7 @@ module.exports = {
 
       //////////////////////////////////////////////////////////////////
 
-      company: mongoose.model('company', new Schema({
+      mkt_company: mongoose.model('mkt_company', new Schema({
             name: String,
             nit: String,
             caja: Number,
@@ -316,7 +318,7 @@ module.exports = {
 
       //////////////////////////////////////////////////////////////////
 
-      correlatives: mongoose.model('correlatives', new Schema({
+      mkt_correlatives: mongoose.model('mkt_correlatives', new Schema({
             year: Date,
             company_id: ObjectId,
             //user_id: ObjectId,
@@ -330,7 +332,7 @@ module.exports = {
             record_date: { type: Date, default: function () { return new Date() } }
       })),
 
-      // registers: mongoose.model('registers', new Schema({
+      // registers: mongoose.model('mkt_registers', new Schema({
       //    name: String,
       //    datails: String,
       //    state: Number,

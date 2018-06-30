@@ -22,8 +22,8 @@ export class EventsComponent implements OnInit {
       private _peticionesService: PeticionesService
    ) { }
    ngOnInit() {
-     
-       this.queryEvents2();
+     this.queryRol();
+    //    this.queryEventsOfSucursal();
     }
     
     addPerson(){
@@ -37,7 +37,7 @@ export class EventsComponent implements OnInit {
     this.router.navigate(['home/events/persons', _id]);
  }
 
-    queryEvents2(){
+    queryEventsOfSucursal(){
         this._peticionesService.getEventsOfSucursal(Identity._id).subscribe(
             result => {
                 this.events = result;
@@ -59,6 +59,7 @@ export class EventsComponent implements OnInit {
                     eventoItem.cupos=e.total;
                     eventoItem._id=e._id;
                     eventoItem.programaId=e.programs;
+                    eventoItem.active=e.active;
                     this._peticionesService.getProgram(e.programs).subscribe(result=>{
                         this.program=result;
                         eventoItem.programa=this.program.name;
@@ -77,8 +78,8 @@ export class EventsComponent implements OnInit {
         )
     }
    
-   queryEvents() {
-      this._peticionesService.getAllEvents().subscribe(
+   queryEventsAdmin() {
+      this._peticionesService.getAllEventsActive(Identity._id).subscribe(
          result => {
             this.events = result;
            console.log(this.events)
@@ -99,6 +100,7 @@ export class EventsComponent implements OnInit {
                 eventoItem.cupos=e.total;
                 eventoItem._id=e._id;
                 eventoItem.programaId=e.programs;
+                eventoItem.active=e.active;
                 this._peticionesService.getProgram(e.programs).subscribe(result=>{
                     this.program=result;
                     eventoItem.programa=this.program.name;
@@ -117,6 +119,38 @@ export class EventsComponent implements OnInit {
       );
    }
 
+   queryRol(){
+    //console.log(Identity.rol)
+        this._peticionesService.getRole(Identity.rol).subscribe(
+            result => {
+            this.role = result;
+
+                if(this.role.name=='Admin'){
+                    this.queryEventsAdmin();
+                }else{
+                    this.queryEventsOfSucursal();
+                }
+
+            },
+            error=>{
+            var errorMessage = <any>error;
+            console.log(errorMessage);
+            }
+        );
+    }
+    cerrarEvento(eventId:string){
+
+        this._peticionesService.cerrarEvento(eventId).subscribe(response=>{
+
+              let eventocerrado=response;
+              // this.router.navigate(['home/events']);
+            //   window.history.back();
+            this.events=null;
+            this.lista_eventos=[];
+            this.queryRol();
+        })
+  }
+
 }
 
 
@@ -127,5 +161,6 @@ export interface EventoItem{
     cupos:number,
     programa:string,
     programaId:string,
+    active:boolean,
 }
 

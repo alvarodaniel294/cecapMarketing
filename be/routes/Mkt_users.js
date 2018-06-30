@@ -11,7 +11,7 @@ router
    // 	f.validation(res, req.body.token, next);
    //   })
    .get('/', function (req, res) {
-      db.users.find({}, { name: 1, active: 1, password_hash: 1, rol: 1 }, function (err, users) {
+      db.mkt_users.find({}, { name: 1, active: 1, password_hash: 1, rol: 1 }, function (err, users) {
          if (err) return res.status(400).send(err);
          return res.status(200).send(users);
          //console.log(res.status(200).send(users))
@@ -21,10 +21,10 @@ router
    .post('/getAllEjecutivosOfSucursal',function(req,res){
        let identity=req.body;
        let listToSend=[];
-       db.users.findOne({_id:identity._id},function(err,user){
+       db.mkt_users.findOne({_id:identity._id},function(err,user){
             if(err) return res.status(200).send(err)            
-            db.users.find({offices:user.offices},function(err,users){
-                db.carteras.find({user:{$in :users}},function(err,carteraslist){
+            db.mkt_users.find({offices:user.offices},function(err,users){
+                db.mkt_carteras.find({user:{$in :users}},function(err,carteraslist){
                         if(err) return res.status(200).send(err)
                         for(let u of users){
                             for(let c of carteraslist){
@@ -63,11 +63,11 @@ router
         let fechaFin=new Date();
         let fechaInicio=new Date(fechaFin.getFullYear(),fechaFin.getMonth()-3,fechaFin.getDay());
         let listaPersonasToReport=[];
-        db.persons.find({carteras:req.body.carteraId},{_id:1},function(err,personsOfCartera){
+        db.mkt_persons.find({carteras:req.body.carteraId},{_id:1},function(err,personsOfCartera){
              if (err) return res.status(400).send(err); 
             //  console.log(personsOfCartera)       
             let personasDeEjecutivo=personsOfCartera;
-            db.events.find({},function(err,listaEventos){
+            db.mkt_events.find({},function(err,listaEventos){
                 if (err) return res.status(400).send(err);
                 // console.log(listaEventos)
                 for(let event of listaEventos){
@@ -104,11 +104,11 @@ router
     let fechaFin=new Date();
     let fechaInicio=new Date(fechaFin.getFullYear(),fechaFin.getMonth()-3,fechaFin.getDay());
     let listaPersonasToReport=[];
-    db.persons.find({carteras:req.body.carteraId},{_id:1},function(err,personsOfCartera){
+    db.mkt_persons.find({carteras:req.body.carteraId},{_id:1},function(err,personsOfCartera){
          if (err) return res.status(400).send(err); 
         //  console.log(personsOfCartera)       
         let personasDeEjecutivo=personsOfCartera;
-        db.events.find({},function(err,listaEventos){
+        db.mkt_events.find({},function(err,listaEventos){
             if (err) return res.status(400).send(err);
             // console.log(listaEventos)
             for(let event of listaEventos){
@@ -140,7 +140,7 @@ router
 })
 
 .get('/getEjecutivoToEdit/:id', function (req, res) {
-    db.users.findOne({ _id: req.params.id }, function (err, user) {
+    db.mkt_users.findOne({ _id: req.params.id }, function (err, user) {
        if (err) return res.status(400).send(err);
        if (user == null) return res.status(404).send();
           let eje={};
@@ -153,7 +153,7 @@ router
           eje.correo=user.correo;
           eje.rol=user.rol;
           eje.offices=user.offices;
-          db.carteras.findOne({user:user._id},function(err,cart){
+          db.mkt_carteras.findOne({user:user._id},function(err,cart){
               if (err) return res.status(400).send(err);
               eje.cartera=cart;
               console.log(cart);
@@ -166,14 +166,14 @@ router
  })
 
    .get('/roles', function (req, res) {
-      db.roles.find({}, function (err, users) {
+      db.mkt_roles.find({}, function (err, users) {
          if (err) return res.status(400).send(err);
 
          return res.status(200).send(users);
       });
    })
    .get('/:id', function (req, res) {
-      db.users.findOne({ _id: req.params.id }, function (err, user) {
+      db.mkt_users.findOne({ _id: req.params.id }, function (err, user) {
          if (err) return res.status(400).send(err);
          if (user == null) return res.status(404).send();
          return res.status(200).send(user);
@@ -182,7 +182,7 @@ router
 
    .delete('/:id', function (req, res) {
 
-      db.users.deleteOne({ _id: req.params.id }, function (err, user) {
+      db.mkt_users.deleteOne({ _id: req.params.id }, function (err, user) {
 
          if (err) return res.status(400).send(err);
          if (user == null) return res.status(404).send();
@@ -192,7 +192,7 @@ router
 
    .get('/rolName/:id', function (req, res) {
 
-      db.roles.findOne({ _id: req.params.id }, function (err, roleName) {
+      db.mkt_roles.findOne({ _id: req.params.id }, function (err, roleName) {
          if (err) return res.status(400).send(err);
          if (roleName == null) return res.sendStatus(404);
 
@@ -201,14 +201,14 @@ router
    })
    .post('/auth', function (req, res) {
       if (typeof req.body._id == null) res.send(403);
-      db.users.findOne({ _id: req.body._id, active: true }, { password_hash: 0 }, function (err, user) {
+      db.mkt_users.findOne({ _id: req.body._id, active: true }, { password_hash: 0 }, function (err, user) {
          if (err) return console.log(err);
          if (user == null) return res.sendStatus(404);
          return res.status(200).send(user);
       });
    })
    .post('/exist', function (req, res) {
-      db.users.findOne({ _id: req.body._id }, { rol: 1, name: 1, active: 1 }, function (err, user) {
+      db.mkt_users.findOne({ _id: req.body._id }, { rol: 1, name: 1, active: 1 }, function (err, user) {
          if (err) return console.log(err);
          if (user == null) return res.sendStatus(404);
 
@@ -217,7 +217,7 @@ router
    })
 
    .get('/existName/:id', function (req, res) {
-      db.users.findOne({ name: req.params.id }, { name: 1 }, function (err, user) {
+      db.mkt_users.findOne({ name: req.params.id }, { name: 1 }, function (err, user) {
          if (err) return console.log(err);
          if (user == null) return res.sendStatus(404);
          return res.status(200).send(true);
@@ -227,7 +227,7 @@ router
    .post('/token', function (req, res) {
       //MORE data
       if (typeof req.body.toke == null) res.send(403);
-      db.users.findOne({ token: req.body.toke, active: true }, function (err, user) {
+      db.mkt_users.findOne({ token: req.body.toke, active: true }, function (err, user) {
          if (err) return console.log(err);
          if (user == null) return res.sendStatus(404);
 
@@ -237,7 +237,7 @@ router
 
    .post('/register', function (req, res, next) {
       var role_id;
-      db.roles.findOne({ name: 'Admin' }, function (err, role) {
+      db.mkt_roles.findOne({ name: 'Admin' }, function (err, role) {
          if (err) return res.status(400).send(err);
          if (role == null) return res.sendStatus(404);
          role_id = role._id;
@@ -245,7 +245,7 @@ router
          validating();
       })
       function validating() {
-         db.users.findOne({ _id: req.body._id, rol: role_id }, function (err, user) {
+         db.mkt_users.findOne({ _id: req.body._id, rol: role_id }, function (err, user) {
             if (err) return console.log(err);
             if (user == null) return res.sendStatus(405);
             // console.log(user);
@@ -261,7 +261,7 @@ router
       _user.active = true;
       _user.password_hash = _user.name;
 
-      var user_model = new db.users(_user);
+      var user_model = new db.mkt_users(_user);
       user_model.token = jwt.sign(user_model._id + '' + user_model.record_date, 'AltaPrecision'); //FIX
       user_model.tokens = [user_model.token];
       user_model.save(function (err, user) {
@@ -275,7 +275,7 @@ router
 
    .post('/login', function (req, res) {
       //modificar active
-      db.users.findOne({ name: req.body.name, password_hash: req.body.password_hash, active: true }, { rol: 1, _id: 1 }, function (err, user) {
+      db.mkt_users.findOne({ name: req.body.name, password_hash: req.body.password_hash, active: true }, { rol: 1, _id: 1 }, function (err, user) {
          console.log(user)
          if (err) return console.log(err);
          console.log(user);
@@ -288,20 +288,20 @@ router
    //       // console.log('test')
    //       console.log(req.body);
    //       //modificar active
-   //       db.users.findOne({ name: req.body.name, password_hash: req.body.password_hash}, 
+   //       db.mkt_users.findOne({ name: req.body.name, password_hash: req.body.password_hash}, 
    //             { rol: 1, _id: 1 },//nos devuelve el rol y id de este user
    //            function (err, user) {
    //          if (err) return console.log(err);
    //          if (user == null) return res.sendStatus(404);
    //          res.status(200).send(user);
-   //          db.users.update({ _id: req.body._id },
+   //          db.mkt_users.update({ _id: req.body._id },
    //             {$set:{ active: true }}
    //          );
    //       });
    //    })
 
    // .post('/logout', function (req, res) {
-   // 	db.users.findOne({phone: req.body.phone, password_hash: req.body.password_hash}, function (err, user_model) {
+   // 	db.mkt_users.findOne({phone: req.body.phone, password_hash: req.body.password_hash}, function (err, user_model) {
    // 		if (err) return console.log(err);
    // 		if (user_model == null) return res.sendStatus(404);
 
@@ -318,7 +318,7 @@ router
 
 
    .post('/', function (req, res) {
-      var users = new db.users(req.body);
+      var users = new db.mkt_users(req.body);
       console.log(users);
       // if (person.first_name == '' || person.last_name == '' || person.ci == '' || person.user == '') return res.status(400).send();
       // save person
@@ -333,7 +333,7 @@ router
    .put('/:id', function (req, res) {
 
       // console.log(req.body.user);
-      // db.users.update(
+      // db.mkt_users.update(
       //    { _id: req.params.id },
       //    {
       //       $set: {
@@ -353,7 +353,7 @@ router
       //       return res.status(200).send();
       //    });
 
-      db.users.findOne({ _id: req.params.id }, function (err, user) {
+      db.mkt_users.findOne({ _id: req.params.id }, function (err, user) {
          if (err) return res.status(400).send(err);
          if (user == null) return res.status(404).send();
 

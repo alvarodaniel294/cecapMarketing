@@ -13,48 +13,56 @@
         <form (ngSubmit)="onSubmit()" #addEjecutivo="ngForm" >
           <div class="form-group col-sm-8">
             <label for="name">Nombres</label>
-            <input type="text" pattern="[a-zA-Z]{3,10}[ ]{0,1}[a-zA-Z]{0,10}" class="form-control" id="name"
+            <!-- <input type="text" pattern="[a-zA-Z]{3,10}[ ]{0,1}[a-zA-Z]{0,10}" class="form-control" id="name" -->
+            <input type="text" pattern="[a-zA-ZñÑáéíóúÁÉÍÓÚ]{3,20}[ ]{0,1}[a-zA-ZñÑáéíóúÁÉÍÓÚ]{0,20}" class="form-control" id="name"
+
                    required
                    [(ngModel)]="model.name" name="name"
                    #name="ngModel"
                    >
             <div [hidden]="name?.valid || name?.pristine"
                  class="text-alert">
-              Nombre es invalido
+              *Nombre es invalido
             </div>
           </div>
           <div class="form-group col-sm-8">
             <label for="lastname">Apellidos</label>
-            <input type="text" pattern="[a-zA-Z]{3,20}[ ]{0,1}[a-zA-Z]{0,20}" class="form-control" id="lastname"
-                   required
+            <!-- <input type="text" pattern="[a-zA-Z]{3,20}[ ]{0,1}[a-zA-Z]{0,20}" class="form-control" id="lastname" -->
+            <input type="text" pattern="[a-zA-ZñÑáéíóúÁÉÍÓÚ]{3,20}[ ]{0,1}[a-zA-ZñÑáéíóúÁÉÍÓÚ]{0,20}" class="form-control" id="lastname"
+
+                    required
                    [(ngModel)]="model.lastname" name="lastname"
                    #lastname="ngModel">
             <div [hidden]="lastname?.valid || lastname?.pristine"
             class="text-alert">
-            Apellido es invalido
+            *Apellido es invalido
             </div>
           </div>
           <div class="form-group col-sm-8">
             <label for="cell">Celular</label>
+            <!-- <input type="number" pattern="[6-7][0-9]{7}" class="form-control" id="cell" -->
             <input type="number" pattern="[6-7][0-9]{7}" class="form-control" id="cell"
+
                    required
                    [(ngModel)]="model.cell" name="cell"
                    #cell="ngModel">
             <div [hidden]="cell?.valid || cell?.pristine"
             class="text-alert">
-            Celular es invalido
+            *Celular es invalido
             </div>
           </div>
   
           <div class="form-group col-sm-8">
               <label for="correo">Correo</label>
-              <input type="correo" pattern="[a-zA-Z.0-9]*[@][a-z]{3,15}[.][a-z]{3,15}" class="form-control" id="correo"
-                     required
+              <!-- <input type="correo" pattern="[a-zA-Z.0-9]*[@][a-z]{3,15}[.][a-z]{3,15}" class="form-control" id="correo" -->
+              <input type="correo" pattern="[a-zA-Z.0-9_-]{1,30}[@][a-z]{3,15}[.][a-zA-Z]{2,15}" class="form-control" id="correo"
+
+                    required
                      [(ngModel)]="model.correo" name="correo"
                      #correo="ngModel">
               <div [hidden]="correo?.valid || correo?.pristine"
               class="text-alert">
-              email es invalido
+              *email es invalido
               </div>
             </div>
         
@@ -68,13 +76,13 @@
                       <option *ngFor="let ro of roles" [value]="ro._id">{{ro.name}}</option>
                     </select>
                     <div [hidden]="rol.valid || rol.pristine" class="text-alert">
-                      rol is required
+                      *Rol es requerido
                     </div>
             </div>
            
 
             <div class="form-group col-sm-8">
-                    <label for="offices">sucursal</label>
+                    <label for="offices">Sucursal</label>
                     <select class="form-control" id="offices"
                             required
                             [(ngModel)]="model.offices" name="offices"
@@ -82,12 +90,12 @@
                       <option *ngFor="let sucur of sucursales" [value]="sucur._id">{{sucur.name}}</option>
                     </select>
                     <div [hidden]="offices.valid || offices.pristine" class="text-alert">
-                            sucursal is required
+                            *Sucursal es requerido
                     </div>
             </div>
 
             <div class="form-group col-sm-8">
-                    <label for="cartera">carteras libres</label>
+                    <label for="cartera">Carteras libres</label>
                     <select class="form-control" id="cartera"
                             required
                             [(ngModel)]="model.cartera" name="cartera"
@@ -95,7 +103,7 @@
                       <option *ngFor="let carte of carteras" [value]="carte._id">{{carte.name}}</option>
                     </select>
                     <div [hidden]="cartera.valid || cartera.pristine" class="text-alert">
-                            cartera is required
+                           *Cartera es requerido
                     </div>
             </div>
             

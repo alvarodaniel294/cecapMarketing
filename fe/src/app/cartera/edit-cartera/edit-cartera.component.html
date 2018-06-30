@@ -12,21 +12,23 @@
           <h1>Editar Cartera</h1>
           <form (ngSubmit)=" editCartera()" #addCartera="ngForm" >
               <!-- <form #addCartera="ngForm" > -->
-            <div class="form-group">
-              <label for="name">Nombre Cartera</label>
-              <input type="text" pattern="[a-zA-Z0-9]{3,20}[ ]{0,1}[a-zA-Z0-9]{0,20}" class="form-control" id="name"
+            <div class="form-group col-sm-8">
+              <label for="name">Nombre de la Cartera</label>
+              <input type="text" pattern="[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ]{3,20}([ ]{0,1}[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ]{0,20}){0,2}" class="form-control" id="name"
                      required
                      [(ngModel)]="carteraName" name="name"
                     #name="ngModel"
                      >
               <div [hidden]="name?.valid || name?.pristine"
                    class="text-alert">
-                first name is required
+                   *El Nombre de la Cartera es OBLIGATORIO
               </div>
               <!-- <input type="text" id="name" class="form-control validate" value="{{carteraName}}" #name> -->
             </div>
-            <button  type="submit" class="btn btn-success"  (click)=" editCartera()">Guardar</button>
-            <button type="button" class="btn btn-danger" (click)="cancel()">Cancelar</button>
+            <div class="form-group col-sm-8" style="text-align:center ">
+                <button  type="submit" class="btn btn-success"  (click)=" editCartera()">Guardar</button>
+                <button type="button" class="btn btn-danger" (click)="cancel()">Cancelar</button>
+            </div>
           </form>
         </div>
        

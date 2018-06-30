@@ -9,14 +9,14 @@ router
 
     .post('/add/university', function (req, res) {
         console.log(req.body);
-        // db.listExtra.find({}, function (err, lista) {
+        // db.mkt_listExtra.find({}, function (err, lista) {
         //     if (err) return res.status(400).send();
         //     console.log(lista)
         //     update(lista[0]._id);
         // })
         // function update(id) {
         //     console.log(req.body.university, req.body.carrera)
-        //     db.listExtra.update({ _id: id }, {
+        //     db.mkt_listExtra.update({ _id: id }, {
         //         $push: {
         //             'university': req.body.university,
         //             'carrera': req.body.carrera
@@ -32,7 +32,7 @@ router
         // car.nombre = req.body.carrera;
         console.log(uni.name)
         
-        db.listExtra.findOne({}, function (err, lista) {
+        db.mkt_listExtra.findOne({}, function (err, lista) {
             if (err) { return res.status(400).send(err); }
             console.log(lista)
                 lista.university.push(uni),
@@ -47,14 +47,14 @@ router
     })
     .post('/add/carrera', function (req, res) {
         console.log(req.body);
-        // db.listExtra.find({}, function (err, lista) {
+        // db.mkt_listExtra.find({}, function (err, lista) {
         //     if (err) return res.status(400).send();
         //     console.log(lista)
         //     update(lista[0]._id);
         // })
         // function update(id) {
         //     console.log(req.body.university, req.body.carrera)
-        //     db.listExtra.update({ _id: id }, {
+        //     db.mkt_listExtra.update({ _id: id }, {
         //         $push: {
         //             'university': req.body.university,
         //             'carrera': req.body.carrera
@@ -67,7 +67,7 @@ router
         let car = {}
         car.nombre = req.body.carrera;
         
-        db.listExtra.findOne({}, function (err, lista) {
+        db.mkt_listExtra.findOne({}, function (err, lista) {
             if (err) { return res.status(400).send(err); }
             console.log(lista)
                 lista.carrera.push(car)

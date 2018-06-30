@@ -20,7 +20,7 @@ export class AddEventComponent implements OnInit {
       private route: ActivatedRoute,
       private router: Router
    ) {
-      this.model = new Event("", "", null, null, "","");
+      this.model = new Event("", "", null, null, "","",null,true);
    }
    submitted = false;
    ngOnInit() {
@@ -48,11 +48,11 @@ export class AddEventComponent implements OnInit {
       // console.log(this.model);
    }
    save() {
-      if ((this.model.description == '') || (this.model.total == 0)) {
-         window.alert("Asegurese de llenar todos los campos")
-      } else {
-         if (this.model.date_start < new Date()) {
-            window.alert("Asegurese que la fecha sea mayor a la de hoy")
+          var fechaActual=new Date;
+
+
+         if (this.model.date_start < fechaActual) {
+            alert("Asegurese que la fecha sea mayor a la de hoy");
 
          } else {
             // console.log(this.model);
@@ -64,7 +64,7 @@ export class AddEventComponent implements OnInit {
          }
 
 
-      }
+      
 
    }
 

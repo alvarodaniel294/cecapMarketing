@@ -38,11 +38,11 @@ export class UserService {
       let body = JSON.stringify(user_to_login);//get interface
       let headers = new Headers();
       headers.append('Content-Type', 'application/json');
-      return this._http.post(this.url + 'users/login', body, { headers: headers })
+      return this._http.post(this.url + 'Mkt_users/login', body, { headers: headers })
          .map(res => res.json() );
    }
    initApp() {
-      this._http.get(this.url + 'users/roles')
+      this._http.get(this.url + 'Mkt_users/roles')
          .map((response: Response) => response.json())
          .subscribe(
             response => {
@@ -59,7 +59,7 @@ export class UserService {
             let body = JSON.stringify(id)
             let headers = new Headers();
             headers.append('Content-Type', 'application/json');
-            this._http.post(this.url + 'users/auth', body, { headers: headers })
+            this._http.post(this.url + 'Mkt_users/auth', body, { headers: headers })
                .map((response: Response) => response.json())
                .subscribe(
                   response => {

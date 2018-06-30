@@ -13,5 +13,7 @@ export class Event {
       public programs: string,
       //public modulo: string
       public offices:string,
+      public date_end:Date,
+      public active:boolean,
    ) { }
 }

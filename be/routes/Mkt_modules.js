@@ -7,14 +7,14 @@ var router = express.Router();
 
 router
    .get('/', function (req, res) {
-      db.modules.find({}, function (err, modules) {
+      db.mkt_modules.find({}, function (err, modules) {
          if (err) return res.status(400).send(err);
 
          return res.status(200).send(modules);
       });
    })
    .get('/:id', function (req, res) {
-      db.modules.findOne({ _id: req.params.id }, function (err, modulo) {
+      db.mkt_modules.findOne({ _id: req.params.id }, function (err, modulo) {
          if (err) return res.status(400).send(err);
          if (modulo == null) return res.status(404).send();
          return res.status(200).send(modulo);
@@ -22,17 +22,17 @@ router
    })
    .get('/lista/:id', function (req, res) {
       console.log('hola')
-      db.modules.find({ programs: req.params.id }, function (err, modules) {
+      db.mkt_modules.find({ programs: req.params.id }, function (err, modules) {
         if (err) return res.status(400).send(err);
         return res.status(200).send(modules);
       });
    })
    .get('/eventoModuls/:id', function (req, res) {
     console.log(req.params.id);
-    db.events.findOne({_id: req.params.id}, function(err, events){
+    db.mkt_events.findOne({_id: req.params.id}, function(err, events){
       //console.log(events);
       if(err){return res.status(400).send(err);}
-      db.modules.find({programs: events.programs},function(err, moduls){
+      db.mkt_modules.find({programs: events.programs},function(err, moduls){
           if(err){return res.status(400).send(err);}
           console.log(moduls);
           return res.status(200).send(moduls);
@@ -43,14 +43,14 @@ router
    
    .post('/add', function(req, res){
       console.log(req.body);
-      var modulo = new db.modules(req.body);
+      var modulo = new db.mkt_modules(req.body);
       modulo.save(function (err, modulo) {
         if (err){return res.status(400).send(err);} 
         return res.status(200).send(modulo);
       });
    })
    .put('/:id', function (req, res) {
-      db.modules.findOne({ _id: req.params.id }, function (err, modulo) {
+      db.mkt_modules.findOne({ _id: req.params.id }, function (err, modulo) {
          if (err) return res.status(400).send(err);
          if (modulo == null) return res.status(404).send();
          for (i in req.body) {
@@ -65,7 +65,7 @@ router
    .put('/edit/:id', function(req, res){
     console.log(req.body)
     console.log(req.params.id)
-    db.modules.update({_id: req.params.id},
+    db.mkt_modules.update({_id: req.params.id},
         {
             $set: {'number': req.body.number,
                    'name': req.body.name,
@@ -75,7 +75,7 @@ router
       })
    })
    .delete('/:id', function (req, res) {
-      db.modules.remove({ _id: req.params.id }, function (err, modulo) {
+      db.mkt_modules.remove({ _id: req.params.id }, function (err, modulo) {
          if (err) return res.status(400).send(err);
 
          return res.status(200).send(modulo);

@@ -5,18 +5,19 @@
 
         <section class="content-header">
             <h1>
-               Cartera
+               Carteras
                <small>Vigentes</small>
             </h1>
            
          </section>
          <section class="content">
-             <a class="btn btn-primary a" (click)="addCartera()">registrar cartera</a>
+             <a class="btn btn-primary a" (click)="addCartera()"><i class="fa fa-book"></i> Registrar Cartera</a>
             <table class="table table-hover">
                <thead>
                   <tr>
-                     <th>Nombre de carteras</th>
-                     <th>Informacion</th>
+                     <th>Nombre de la Cartera</th>
+                     <th>Estado</th>
+                     <th>Información</th>
                      <th *ngIf='role?.name == "Admin"'>Editar Cartera</th>
                   </tr>
                </thead>
@@ -27,7 +28,7 @@
                      <td>{{ cartera?.name }}</td>
                      <td *ngIf="cartera?.active==true; else inactivo "> Activa</td>
                      <td>  
-                       <a class="btn btn-primary a" (click)="send(cartera._id)">INFORMACION</a>
+                       <a class="btn btn-primary a" (click)="send(cartera._id)">INFORMACIÓN</a>
                      </td>
                      <td *ngIf='role?.name == "Admin"'>
                         <button class="btn btn-warning" (click)="editCartera(cartera._id)">EDITAR</button>
